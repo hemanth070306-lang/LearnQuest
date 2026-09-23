@@ -1,0 +1,2728 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>LearnQuest - Choose Language</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color: white;
+
+            background:
+                #02040b;
+
+            overflow: hidden;
+
+        }
+
+
+        /* =====================================================
+           NIGHT SKY
+           ===================================================== */
+
+        .sky {
+
+            position: fixed;
+
+            inset: 0;
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 50% 15%,
+                    rgba(
+                        80,
+                        100,
+                        220,
+                        0.18
+                    ),
+                    transparent 36%
+                ),
+                radial-gradient(
+                    circle at 15% 75%,
+                    rgba(
+                        40,
+                        130,
+                        240,
+                        0.10
+                    ),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 70%,
+                    rgba(
+                        145,
+                        70,
+                        230,
+                        0.10
+                    ),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    180deg,
+                    #02030a,
+                    #070a17,
+                    #020309
+                );
+
+            z-index:
+                0;
+
+        }
+
+
+        /* =====================================================
+           STARS
+           ===================================================== */
+
+        .stars {
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+        }
+
+
+        .star {
+
+            position:
+                absolute;
+
+            width:
+                3px;
+
+            height:
+                3px;
+
+            border-radius:
+                50%;
+
+            background:
+                white;
+
+            box-shadow:
+                0 0 7px white,
+                0 0 15px
+                rgba(
+                    130,
+                    180,
+                    255,
+                    0.8
+                );
+
+            animation:
+                twinkle
+                var(--speed)
+                ease-in-out
+                infinite;
+
+            animation-delay:
+                var(--delay);
+
+            opacity:
+                var(--opacity);
+
+        }
+
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+
+                opacity:
+                    0.15;
+
+                transform:
+                    scale(
+                        0.7
+                    );
+
+            }
+
+            50% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(
+                        1.4
+                    );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           CLOUDS
+           ===================================================== */
+
+        .clouds {
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+            overflow:
+                hidden;
+
+            pointer-events:
+                none;
+
+        }
+
+
+        .cloud {
+
+            position:
+                absolute;
+
+            width:
+                260px;
+
+            height:
+                70px;
+
+            border-radius:
+                80px;
+
+            background:
+                rgba(
+                    155,
+                    165,
+                    195,
+                    0.09
+                );
+
+            filter:
+                blur(3px);
+
+            animation:
+                cloudMove
+                var(--duration)
+                linear
+                infinite;
+
+            animation-delay:
+                var(--delay);
+
+        }
+
+
+        .cloud::before,
+        .cloud::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            border-radius:
+                50%;
+
+            background:
+                inherit;
+
+        }
+
+
+        .cloud::before {
+
+            width:
+                120px;
+
+            height:
+                120px;
+
+            left:
+                35px;
+
+            bottom:
+                15px;
+
+        }
+
+
+        .cloud::after {
+
+            width:
+                145px;
+
+            height:
+                145px;
+
+            right:
+                28px;
+
+            bottom:
+                8px;
+
+        }
+
+
+        @keyframes cloudMove {
+
+            from {
+
+                transform:
+                    translateX(
+                        -450px
+                    );
+
+            }
+
+            to {
+
+                transform:
+                    translateX(
+                        calc(
+                            100vw +
+                            500px
+                        )
+                    );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           FLOATING TECH SYMBOLS
+           ===================================================== */
+
+        .tech {
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+            pointer-events:
+                none;
+
+        }
+
+
+        .tech-item {
+
+            position:
+                absolute;
+
+            font-family:
+                Consolas,
+                "Courier New",
+                monospace;
+
+            font-weight:
+                800;
+
+            color:
+                var(--color);
+
+            font-size:
+                var(--size);
+
+            opacity:
+                0.20;
+
+            text-shadow:
+                0 0 8px currentColor,
+                0 0 18px currentColor;
+
+            animation:
+                techFloat
+                var(--duration)
+                linear
+                infinite;
+
+            animation-delay:
+                var(--delay);
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        @keyframes techFloat {
+
+            0% {
+
+                transform:
+                    translateY(
+                        110vh
+                    )
+                    translateX(0)
+                    rotate(-5deg);
+
+                opacity:
+                    0;
+
+            }
+
+            12% {
+
+                opacity:
+                    0.2;
+
+            }
+
+            50% {
+
+                transform:
+                    translateY(
+                        45vh
+                    )
+                    translateX(35px)
+                    rotate(4deg);
+
+            }
+
+            90% {
+
+                opacity:
+                    0.15;
+
+            }
+
+            100% {
+
+                transform:
+                    translateY(
+                        -20vh
+                    )
+                    translateX(-30px)
+                    rotate(9deg);
+
+                opacity:
+                    0;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           TOP
+           ===================================================== */
+
+        .top {
+
+            position:
+                absolute;
+
+            top:
+                20px;
+
+            left:
+                20px;
+
+            right:
+                20px;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            z-index:
+                30;
+
+        }
+
+
+        .logo {
+
+            font-size:
+                24px;
+
+            font-weight:
+                900;
+
+            text-shadow:
+                0 0 14px
+                rgba(
+                    128,
+                    108,
+                    255,
+                    0.5
+                );
+
+        }
+
+
+        .settings-btn {
+
+            width:
+                40px;
+
+            height:
+                40px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
+
+            border-radius:
+                11px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            color:
+                white;
+
+            font-size:
+                18px;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        .settings-panel {
+
+            position:
+                absolute;
+
+            top:
+                66px;
+
+            right:
+                20px;
+
+            width:
+                275px;
+
+            padding:
+                18px;
+
+            border-radius:
+                16px;
+
+            background:
+                rgba(
+                    7,
+                    10,
+                    20,
+                    0.96
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
+
+            box-shadow:
+                0 20px 50px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.5
+                );
+
+            z-index:
+                60;
+
+            display:
+                none;
+
+        }
+
+
+        .settings-panel.show {
+
+            display:
+                block;
+
+        }
+
+
+        .settings-panel h3 {
+
+            margin-bottom:
+                13px;
+
+        }
+
+
+        .setting-row {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            padding:
+                12px 0;
+
+            border-top:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+        }
+
+
+        .setting-name {
+
+            font-size:
+                13px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .setting-description {
+
+            color:
+                #777f97;
+
+            font-size:
+                10px;
+
+            margin-top:
+                3px;
+
+        }
+
+
+        .toggle {
+
+            position:
+                relative;
+
+            width:
+                48px;
+
+            height:
+                26px;
+
+            flex-shrink:
+                0;
+
+        }
+
+
+        .toggle input {
+
+            display:
+                none;
+
+        }
+
+
+        .slider {
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+            border-radius:
+                20px;
+
+            background:
+                #464c5c;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        .slider::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                20px;
+
+            height:
+                20px;
+
+            left:
+                3px;
+
+            top:
+                3px;
+
+            background:
+                white;
+
+            border-radius:
+                50%;
+
+            transition:
+                0.2s;
+
+        }
+
+
+        .toggle input:checked
+        + .slider {
+
+            background:
+                #2ed573;
+
+        }
+
+
+        .toggle input:checked
+        + .slider::before {
+
+            transform:
+                translateX(
+                    22px
+                );
+
+        }
+
+
+        /* =====================================================
+           MAIN
+           ===================================================== */
+
+        .page {
+
+            position:
+                relative;
+
+            z-index:
+                10;
+
+            min-height:
+                100vh;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                20px;
+
+        }
+
+
+        .card {
+
+            width:
+                min(
+                    470px,
+                    94vw
+                );
+
+            padding:
+                38px 32px;
+
+            border-radius:
+                28px;
+
+            background:
+                rgba(
+                    7,
+                    10,
+                    22,
+                    0.83
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
+
+            backdrop-filter:
+                blur(
+                    22px
+                );
+
+            box-shadow:
+                0 30px 90px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.55
+                );
+
+            text-align:
+                center;
+
+            animation:
+                cardIn
+                0.8s
+                ease-out;
+
+        }
+
+
+        @keyframes cardIn {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(
+                        28px
+                    )
+                    scale(
+                        0.97
+                    );
+
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+            }
+
+        }
+
+
+        .card-logo {
+
+            font-size:
+                38px;
+
+            font-weight:
+                900;
+
+            margin-bottom:
+                8px;
+
+        }
+
+
+        .line {
+
+            width:
+                80px;
+
+            height:
+                3px;
+
+            margin:
+                0 auto 24px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    #7d68ff,
+                    transparent
+                );
+
+            box-shadow:
+                0 0 12px
+                rgba(
+                    125,
+                    104,
+                    255,
+                    0.7
+                );
+
+        }
+
+
+        h2 {
+
+            margin:
+                0 0 10px;
+
+            font-size:
+                27px;
+
+        }
+
+
+        .subtitle {
+
+            color:
+                #9ca3ba;
+
+            font-size:
+                14px;
+
+            line-height:
+                1.6;
+
+            margin-bottom:
+                28px;
+
+        }
+
+
+        /* =====================================================
+           LANGUAGE BUTTONS
+           ===================================================== */
+
+        .language-buttons {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                13px;
+
+        }
+
+
+        .language-btn {
+
+            width:
+                100%;
+
+            min-height:
+                62px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                14px;
+
+            padding:
+                0 18px;
+
+            border-radius:
+                15px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.10
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.045
+                );
+
+            color:
+                white;
+
+            font-size:
+                17px;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            transition:
+                0.25s ease;
+
+        }
+
+
+        .language-btn:hover {
+
+            transform:
+                translateX(
+                    5px
+                );
+
+            border-color:
+                rgba(
+                    143,
+                    126,
+                    255,
+                    0.55
+                );
+
+            background:
+                rgba(
+                    125,
+                    104,
+                    255,
+                    0.10
+                );
+
+            box-shadow:
+                0 0 24px
+                rgba(
+                    110,
+                    90,
+                    255,
+                    0.12
+                );
+
+        }
+
+
+        .language-icon {
+
+            width:
+                42px;
+
+            font-size:
+                25px;
+
+        }
+
+
+        .language-text {
+
+            flex:
+                1;
+
+            text-align:
+                left;
+
+        }
+
+
+        .language-arrow {
+
+            color:
+                #686f89;
+
+            font-size:
+                20px;
+
+        }
+
+
+        #message {
+
+            min-height:
+                24px;
+
+            margin-top:
+                14px;
+
+            font-size:
+                13px;
+
+        }
+
+
+        .voice-note {
+
+            margin-top:
+                20px;
+
+            color:
+                #626a80;
+
+            font-size:
+                10px;
+
+        }
+
+
+        .music-status {
+
+            position:
+                fixed;
+
+            left:
+                15px;
+
+            bottom:
+                15px;
+
+            padding:
+                7px 11px;
+
+            border-radius:
+                20px;
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.45
+                );
+
+            color:
+                #aeb5c9;
+
+            font-size:
+                10px;
+
+            z-index:
+                100;
+
+        }
+
+
+        @media (
+            max-width: 600px
+        ) {
+
+            .card {
+
+                padding:
+                    30px 20px;
+
+                border-radius:
+                    22px;
+
+            }
+
+
+            .card-logo {
+
+                font-size:
+                    31px;
+
+            }
+
+
+            h2 {
+
+                font-size:
+                    23px;
+
+            }
+
+
+            .language-btn {
+
+                min-height:
+                    58px;
+
+                font-size:
+                    15px;
+
+            }
+
+        }
+
+
+        @media (
+            prefers-reduced-motion: reduce
+        ) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration:
+                    0.01ms
+                    !important;
+
+                animation-iteration-count:
+                    1
+                    !important;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     SKY
+     ========================================================= -->
+
+<div class="sky">
+
+
+    <div
+        class="stars"
+        id="stars"
+    ></div>
+
+
+    <div class="clouds">
+
+
+        <div
+            class="cloud"
+            style="
+                top:12%;
+                --duration:42s;
+                --delay:-18s;
+            "
+        ></div>
+
+
+        <div
+            class="cloud"
+            style="
+                top:38%;
+                --duration:55s;
+                --delay:-35s;
+            "
+        ></div>
+
+
+        <div
+            class="cloud"
+            style="
+                top:67%;
+                --duration:48s;
+                --delay:-8s;
+            "
+        ></div>
+
+
+    </div>
+
+
+    <div
+        class="tech"
+        id="tech"
+    ></div>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     MUSIC STATUS
+     ========================================================= -->
+
+<div
+    class="music-status"
+    id="musicStatus"
+>
+    🎵 Music ready
+</div>
+
+
+
+<!-- =========================================================
+     TOP
+     ========================================================= -->
+
+<div class="top">
+
+
+    <div class="logo">
+        🎮 LearnQuest
+    </div>
+
+
+    <button
+        class="settings-btn"
+        id="settingsBtn"
+        type="button"
+    >
+        ⚙️
+    </button>
+
+
+</div>
+
+
+
+<div
+    class="settings-panel"
+    id="settingsPanel"
+>
+
+
+    <h3>
+        ⚙️ Settings
+    </h3>
+
+
+    <div class="setting-row">
+
+        <div>
+
+            <div class="setting-name">
+                🎵 Background Music
+            </div>
+
+            <div class="setting-description">
+                Game music
+            </div>
+
+        </div>
+
+
+        <label class="toggle">
+
+            <input
+                type="checkbox"
+                id="musicToggle"
+                checked
+            >
+
+            <span class="slider"></span>
+
+        </label>
+
+    </div>
+
+
+    <div class="setting-row">
+
+        <div>
+
+            <div class="setting-name">
+                🔔 Click Sound
+            </div>
+
+            <div class="setting-description">
+                Sound on every click
+            </div>
+
+        </div>
+
+
+        <label class="toggle">
+
+            <input
+                type="checkbox"
+                id="clickToggle"
+                checked
+            >
+
+            <span class="slider"></span>
+
+        </label>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     LANGUAGE PAGE
+     ========================================================= -->
+
+<div class="page">
+
+
+    <div class="card">
+
+
+        <div class="card-logo">
+            🎮 LearnQuest
+        </div>
+
+
+        <div class="line"></div>
+
+
+        <h2>
+            Choose Your Language
+        </h2>
+
+
+        <p class="subtitle">
+
+            Select your language for
+            the entire learning adventure.
+
+        </p>
+
+
+        <div class="language-buttons">
+
+
+            <button
+                type="button"
+                class="language-btn"
+                data-language="en"
+            >
+
+                <span class="language-icon">
+                    🇬🇧
+                </span>
+
+
+                <span class="language-text">
+                    English
+                </span>
+
+
+                <span class="language-arrow">
+                    →
+                </span>
+
+            </button>
+
+
+
+            <button
+                type="button"
+                class="language-btn"
+                data-language="hi"
+            >
+
+                <span class="language-icon">
+                    🇮🇳
+                </span>
+
+
+                <span class="language-text">
+                    हिन्दी
+                </span>
+
+
+                <span class="language-arrow">
+                    →
+                </span>
+
+            </button>
+
+
+
+            <button
+                type="button"
+                class="language-btn"
+                data-language="te"
+            >
+
+                <span class="language-icon">
+                    🇮🇳
+                </span>
+
+
+                <span class="language-text">
+                    తెలుగు
+                </span>
+
+
+                <span class="language-arrow">
+                    →
+                </span>
+
+            </button>
+
+
+        </div>
+
+
+        <p
+            id="message"
+        ></p>
+
+
+        <div class="voice-note">
+
+            🔊 Welcome voice follows your selected language.
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+    /* =========================================================
+       KEYS
+       ========================================================= */
+
+    const MUSIC_KEY =
+        "learnquest_music";
+
+    const CLICK_KEY =
+        "learnquest_click_sound";
+
+
+    let audioContext =
+        null;
+
+    let musicTimer =
+        null;
+
+    let musicIndex =
+        0;
+
+
+    /* =========================================================
+       SAME GAME SONG
+       ========================================================= */
+
+    const melody = [
+
+        261.63,
+        329.63,
+        392.00,
+        523.25,
+        392.00,
+        329.63,
+        293.66,
+        261.63,
+
+        293.66,
+        349.23,
+        440.00,
+        523.25,
+        440.00,
+        349.23,
+        329.63,
+        261.63
+
+    ];
+
+
+    /* =========================================================
+       AUDIO
+       ========================================================= */
+
+    function ensureAudioContext() {
+
+        if (!audioContext) {
+
+            const AudioContextClass =
+                window.AudioContext ||
+                window.webkitAudioContext;
+
+
+            if (!AudioContextClass) {
+
+                return null;
+
+            }
+
+
+            audioContext =
+                new AudioContextClass();
+
+        }
+
+
+        return audioContext;
+
+    }
+
+
+    function isMusicEnabled() {
+
+        return (
+            localStorage.getItem(
+                MUSIC_KEY
+            ) !== "off"
+        );
+
+    }
+
+
+    function isClickSoundEnabled() {
+
+        return (
+            localStorage.getItem(
+                CLICK_KEY
+            ) !== "off"
+        );
+
+    }
+
+
+    function playMusicNote() {
+
+        if (
+            !isMusicEnabled()
+        ) {
+
+            return;
+
+        }
+
+
+        const ctx =
+            ensureAudioContext();
+
+
+        if (!ctx) {
+
+            return;
+
+        }
+
+
+        if (
+            ctx.state ===
+            "suspended"
+        ) {
+
+            ctx.resume();
+
+        }
+
+
+        const now =
+            ctx.currentTime;
+
+
+        const osc =
+            ctx.createOscillator();
+
+
+        const gain =
+            ctx.createGain();
+
+
+        osc.type =
+            "triangle";
+
+
+        osc.frequency.value =
+            melody[
+                musicIndex %
+                melody.length
+            ];
+
+
+        gain.gain.setValueAtTime(
+            0.0001,
+            now
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.06,
+            now + 0.03
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.0001,
+            now + 0.43
+        );
+
+
+        osc.connect(
+            gain
+        );
+
+
+        gain.connect(
+            ctx.destination
+        );
+
+
+        osc.start(
+            now
+        );
+
+
+        osc.stop(
+            now + 0.45
+        );
+
+
+        musicIndex++;
+
+    }
+
+
+    function startMusic() {
+
+        if (
+            !isMusicEnabled()
+        ) {
+
+            updateMusicStatus();
+
+            return;
+
+        }
+
+
+        const ctx =
+            ensureAudioContext();
+
+
+        if (!ctx) {
+
+            return;
+
+        }
+
+
+        if (
+            ctx.state ===
+            "suspended"
+        ) {
+
+            ctx.resume();
+
+        }
+
+
+        if (
+            musicTimer
+        ) {
+
+            return;
+
+        }
+
+
+        playMusicNote();
+
+
+        musicTimer =
+            setInterval(
+                playMusicNote,
+                520
+            );
+
+
+        updateMusicStatus();
+
+    }
+
+
+    function stopMusic() {
+
+        if (
+            musicTimer
+        ) {
+
+            clearInterval(
+                musicTimer
+            );
+
+
+            musicTimer =
+                null;
+
+        }
+
+
+        if (
+            audioContext &&
+            audioContext.state ===
+            "running"
+        ) {
+
+            audioContext.suspend();
+
+        }
+
+
+        updateMusicStatus();
+
+    }
+
+
+    function updateMusicStatus() {
+
+        const status =
+            document.getElementById(
+                "musicStatus"
+            );
+
+
+        status.textContent =
+            isMusicEnabled()
+                ? "🎵 Music ON"
+                : "🔇 Music OFF";
+
+    }
+
+
+    function playClickSound() {
+
+        if (
+            !isClickSoundEnabled()
+        ) {
+
+            return;
+
+        }
+
+
+        const ctx =
+            ensureAudioContext();
+
+
+        if (!ctx) {
+
+            return;
+
+        }
+
+
+        if (
+            ctx.state ===
+            "suspended"
+        ) {
+
+            ctx.resume();
+
+        }
+
+
+        const now =
+            ctx.currentTime;
+
+
+        const osc =
+            ctx.createOscillator();
+
+
+        const gain =
+            ctx.createGain();
+
+
+        osc.type =
+            "sine";
+
+
+        osc.frequency.setValueAtTime(
+            720,
+            now
+        );
+
+
+        osc.frequency.exponentialRampToValueAtTime(
+            1200,
+            now + 0.08
+        );
+
+
+        gain.gain.setValueAtTime(
+            0.0001,
+            now
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.15,
+            now + 0.01
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.0001,
+            now + 0.12
+        );
+
+
+        osc.connect(
+            gain
+        );
+
+
+        gain.connect(
+            ctx.destination
+        );
+
+
+        osc.start(
+            now
+        );
+
+
+        osc.stop(
+            now + 0.13
+        );
+
+    }
+
+
+    document.addEventListener(
+        "click",
+        function () {
+
+            playClickSound();
+
+            if (
+                isMusicEnabled()
+            ) {
+
+                startMusic();
+
+            }
+
+        },
+        true
+    );
+
+
+    /* =========================================================
+       SETTINGS
+       ========================================================= */
+
+    document
+        .getElementById(
+            "settingsBtn"
+        )
+        .addEventListener(
+            "click",
+            function (
+                event
+            ) {
+
+                event.stopPropagation();
+
+                document
+                    .getElementById(
+                        "settingsPanel"
+                    )
+                    .classList
+                    .toggle(
+                        "show"
+                    );
+
+            }
+        );
+
+
+    const musicToggle =
+        document.getElementById(
+            "musicToggle"
+        );
+
+
+    const clickToggle =
+        document.getElementById(
+            "clickToggle"
+        );
+
+
+    musicToggle.checked =
+        isMusicEnabled();
+
+
+    clickToggle.checked =
+        isClickSoundEnabled();
+
+
+    musicToggle.addEventListener(
+        "change",
+        function () {
+
+            localStorage.setItem(
+                MUSIC_KEY,
+                this.checked
+                    ? "on"
+                    : "off"
+            );
+
+
+            if (
+                this.checked
+            ) {
+
+                startMusic();
+
+            }
+
+            else {
+
+                stopMusic();
+
+            }
+
+        }
+    );
+
+
+    clickToggle.addEventListener(
+        "change",
+        function () {
+
+            localStorage.setItem(
+                CLICK_KEY,
+                this.checked
+                    ? "on"
+                    : "off"
+            );
+
+        }
+    );
+
+
+    document.addEventListener(
+        "click",
+        function (
+            event
+        ) {
+
+            const panel =
+                document.getElementById(
+                    "settingsPanel"
+                );
+
+
+            const button =
+                document.getElementById(
+                    "settingsBtn"
+                );
+
+
+            if (
+                panel.classList.contains(
+                    "show"
+                ) &&
+                !panel.contains(
+                    event.target
+                ) &&
+                event.target !==
+                    button
+            ) {
+
+                panel.classList.remove(
+                    "show"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       STARS
+       ========================================================= */
+
+    function createStars() {
+
+        const container =
+            document.getElementById(
+                "stars"
+            );
+
+
+        container.innerHTML =
+            "";
+
+
+        const count =
+            window.innerWidth <
+            600
+                ? 55
+                : 95;
+
+
+        for (
+            let i = 0;
+            i < count;
+            i++
+        ) {
+
+            const star =
+                document.createElement(
+                    "div"
+                );
+
+
+            star.className =
+                "star";
+
+
+            star.style.left =
+                Math.random() *
+                100 +
+                "%";
+
+
+            star.style.top =
+                Math.random() *
+                90 +
+                "%";
+
+
+            star.style.setProperty(
+                "--speed",
+                (
+                    1.5 +
+                    Math.random() *
+                    3
+                ) +
+                "s"
+            );
+
+
+            star.style.setProperty(
+                "--delay",
+                -(
+                    Math.random() *
+                    4
+                ) +
+                "s"
+            );
+
+
+            star.style.setProperty(
+                "--opacity",
+                (
+                    0.25 +
+                    Math.random() *
+                    0.75
+                )
+            );
+
+
+            container.appendChild(
+                star
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       TECH SYMBOLS
+       ========================================================= */
+
+    const techItems = [
+
+        {
+            text: "🐍",
+            color: "#4dc9ff"
+        },
+
+        {
+            text: "Python",
+            color: "#4dc9ff"
+        },
+
+        {
+            text: "def()",
+            color: "#4dc9ff"
+        },
+
+        {
+            text: "☕",
+            color: "#ff7969"
+        },
+
+        {
+            text: "Java",
+            color: "#ff7969"
+        },
+
+        {
+            text: "class",
+            color: "#ff7969"
+        },
+
+        {
+            text: "🤖",
+            color: "#b67cff"
+        },
+
+        {
+            text: "ML",
+            color: "#b67cff"
+        },
+
+        {
+            text: "AI",
+            color: "#b67cff"
+        },
+
+        {
+            text: "model",
+            color: "#b67cff"
+        },
+
+        {
+            text: "🧠",
+            color: "#43e7b4"
+        },
+
+        {
+            text: "NLP",
+            color: "#43e7b4"
+        },
+
+        {
+            text: "token",
+            color: "#43e7b4"
+        },
+
+        {
+            text: "TF-IDF",
+            color: "#43e7b4"
+        },
+
+        {
+            text: "{ }",
+            color: "#cfd3df"
+        },
+
+        {
+            text: "[ ]",
+            color: "#cfd3df"
+        },
+
+        {
+            text: "< />",
+            color: "#cfd3df"
+        }
+
+    ];
+
+
+    function createTechSymbols() {
+
+        const container =
+            document.getElementById(
+                "tech"
+            );
+
+
+        container.innerHTML =
+            "";
+
+
+        const count =
+            window.innerWidth <
+            600
+                ? 18
+                : 30;
+
+
+        for (
+            let i = 0;
+            i < count;
+            i++
+        ) {
+
+            const item =
+                techItems[
+                    Math.floor(
+                        Math.random() *
+                        techItems.length
+                    )
+                ];
+
+
+            const el =
+                document.createElement(
+                    "div"
+                );
+
+
+            el.className =
+                "tech-item";
+
+
+            el.textContent =
+                item.text;
+
+
+            el.style.setProperty(
+                "--color",
+                item.color
+            );
+
+
+            el.style.setProperty(
+                "--size",
+                (
+                    13 +
+                    Math.random() *
+                    20
+                ) +
+                "px"
+            );
+
+
+            const duration =
+                15 +
+                Math.random() *
+                23;
+
+
+            el.style.setProperty(
+                "--duration",
+                duration +
+                "s"
+            );
+
+
+            el.style.setProperty(
+                "--delay",
+                -(
+                    Math.random() *
+                    duration
+                ) +
+                "s"
+            );
+
+
+            el.style.left =
+                Math.random() *
+                100 +
+                "%";
+
+
+            el.style.top =
+                100 +
+                Math.random() *
+                15 +
+                "%";
+
+
+            container.appendChild(
+                el
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       VOICE
+       ========================================================= */
+
+    const welcomeText = {
+
+        en:
+            "Welcome to LearnQuest. Choose your language.",
+
+        hi:
+            "LearnQuest में आपका स्वागत है। अपनी भाषा चुनें।",
+
+        te:
+            "LearnQuest కి స్వాగతం. మీ భాషను ఎంచుకోండి."
+
+    };
+
+
+    function speakWelcome(
+        language
+    ) {
+
+        if (
+            !(
+                "speechSynthesis"
+                in window
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        window.speechSynthesis.cancel();
+
+
+        const utterance =
+            new SpeechSynthesisUtterance(
+                welcomeText[
+                    language
+                ] ||
+                welcomeText.en
+            );
+
+
+        utterance.lang =
+            language === "hi"
+                ? "hi-IN"
+                : language === "te"
+                    ? "te-IN"
+                    : "en-US";
+
+
+        utterance.rate =
+            0.9;
+
+
+        utterance.pitch =
+            1;
+
+
+        const voices =
+            window.speechSynthesis
+                .getVoices();
+
+
+        const preferred =
+            voices.find(
+                function (
+                    voice
+                ) {
+
+                    return voice.lang
+                        .toLowerCase()
+                        .startsWith(
+                            language
+                        );
+
+                }
+            );
+
+
+        if (
+            preferred
+        ) {
+
+            utterance.voice =
+                preferred;
+
+        }
+
+
+        window.speechSynthesis.speak(
+            utterance
+        );
+
+    }
+
+
+    /* =========================================================
+       LANGUAGE SELECTION
+       ========================================================= */
+
+    async function selectLanguage(
+        language
+    ) {
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+
+        playClickSound();
+
+
+        /*
+         * Save browser language immediately.
+         */
+
+        localStorage.setItem(
+            "selected_language",
+            language
+        );
+
+
+        /*
+         * Speak in the language selected.
+         */
+
+        speakWelcome(
+            language
+        );
+
+
+        message.style.color =
+            "#9d91ff";
+
+
+        message.textContent =
+            language === "hi"
+                ? "LearnQuest में प्रवेश किया जा रहा है..."
+                : language === "te"
+                    ? "LearnQuest లోకి ప్రవేశిస్తోంది..."
+                    : "Entering LearnQuest...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "http://127.0.0.1:5000/set-language",
+                    {
+                        method:
+                            "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        credentials:
+                            "include",
+
+                        body:
+                            JSON.stringify({
+                                preferred_language:
+                                    language
+                            })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (
+                !response.ok
+            ) {
+
+                message.textContent =
+                    data.message ||
+                    "Unable to save language.";
+
+                message.style.color =
+                    "#ff6b6b";
+
+                return;
+
+            }
+
+
+            setTimeout(
+                function () {
+
+                    window.location.href =
+                        "dashboard.html";
+
+                },
+                950
+            );
+
+        }
+
+        catch (
+            error
+        ) {
+
+            console.error(
+                error
+            );
+
+
+            /*
+             * Browser language is already saved,
+             * but server could not be reached.
+             */
+
+            message.textContent =
+                "Cannot connect to LearnQuest server.";
+
+            message.style.color =
+                "#ff6b6b";
+
+        }
+
+    }
+
+
+    document
+        .querySelectorAll(
+            ".language-btn"
+        )
+        .forEach(
+            function (
+                button
+            ) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        selectLanguage(
+                            this.dataset.language
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* =========================================================
+       VOICE WHEN PAGE OPENS
+       ========================================================= */
+
+    function speakSavedLanguage() {
+
+        const language =
+            localStorage.getItem(
+                "selected_language"
+            ) || "en";
+
+
+        setTimeout(
+            function () {
+
+                speakWelcome(
+                    language
+                );
+
+            },
+            500
+        );
+
+    }
+
+
+    /* =========================================================
+       INIT
+       ========================================================= */
+
+    createStars();
+
+    createTechSymbols();
+
+    updateMusicStatus();
+
+    startMusic();
+
+    speakSavedLanguage();
+
+
+    window.addEventListener(
+        "resize",
+        function () {
+
+            createStars();
+
+            createTechSymbols();
+
+        }
+    );
+
+
+    /*
+     * Some browsers load voices slightly later.
+     */
+
+    if (
+        "speechSynthesis"
+        in window
+    ) {
+
+        window.speechSynthesis
+            .addEventListener(
+                "voiceschanged",
+                function () {
+
+                    const language =
+                        localStorage.getItem(
+                            "selected_language"
+                        ) || "en";
+
+
+                    speakWelcome(
+                        language
+                    );
+
+                }
+            );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

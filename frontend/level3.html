@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LearnQuest - Loop Land</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #42275a, #734b6d);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: auto;
+            padding: 30px 0 60px;
+        }
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            background: white;
+            color: #222;
+        }
+
+        .hero {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .hero-icon {
+            font-size: 75px;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            margin: 10px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.12);
+            padding: 30px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+        }
+
+        .code {
+            background: #111;
+            color: #00ff88;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .question {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .option {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background: white;
+            color: #222;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .option:hover {
+            background: #eee;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .complete {
+            display: none;
+            margin: 20px auto 0;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 10px;
+            background: #00c853;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .reward {
+            text-align: center;
+            color: #00ff88;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <div class="top">
+
+        <h2>🎮 LearnQuest</h2>
+
+        <button
+            class="back"
+            onclick="goBack()">
+
+            ← Python World
+
+        </button>
+
+    </div>
+
+
+    <div class="hero">
+
+        <div class="hero-icon">
+            🔄
+        </div>
+
+        <h1>
+            Loop Land
+        </h1>
+
+        <p>
+            Python Level 3
+        </p>
+
+    </div>
+
+
+    <!-- LESSON -->
+
+    <div class="card">
+
+        <h2>
+            📖 Mission 3: Python Loops
+        </h2>
+
+        <p>
+            Loops allow us to repeat a block of code
+            multiple times.
+        </p>
+
+        <p>
+            A <b>for loop</b> is commonly used when we
+            know how many times we want to repeat something.
+        </p>
+
+        <div class="code">
+
+            for i in range(5):<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;print(i)
+
+        </div>
+
+        <p>
+            This prints the numbers from 0 to 4.
+        </p>
+
+        <p>
+            Python also has a <b>while loop</b>, which
+            continues while a condition is true.
+        </p>
+
+    </div>
+
+
+    <!-- QUIZ -->
+
+    <div class="card">
+
+        <h2>
+            🎯 Challenge
+        </h2>
+
+        <p class="question">
+            Which keyword is used to create a loop
+            that iterates over a sequence in Python?
+        </p>
+
+
+        <button
+            class="option"
+            onclick="checkAnswer(this, false)">
+
+            A. repeat
+
+        </button>
+
+
+        <button
+            class="option"
+            onclick="checkAnswer(this, true)">
+
+            B. for
+
+        </button>
+
+
+        <button
+            class="option"
+            onclick="checkAnswer(this, false)">
+
+            C. loop
+
+        </button>
+
+
+        <button
+            class="option"
+            onclick="checkAnswer(this, false)">
+
+            D. iterate
+
+        </button>
+
+
+        <div
+            id="result"
+            class="result">
+        </div>
+
+
+        <button
+            id="completeButton"
+            class="complete"
+            onclick="completeLevel()">
+
+            🎉 Complete Level
+
+        </button>
+
+    </div>
+
+
+    <div
+        id="reward"
+        class="reward">
+    </div>
+
+
+</div>
+
+
+<script>
+
+let answered = false;
+
+
+function checkAnswer(button, correct) {
+
+    if (answered) {
+        return;
+    }
+
+    const result =
+        document.getElementById("result");
+
+
+    if (correct) {
+
+        answered = true;
+
+        result.textContent =
+            "🎉 Correct! Now complete the level.";
+
+        result.style.color =
+            "#00ff88";
+
+        button.style.background =
+            "#00c853";
+
+        button.style.color =
+            "white";
+
+        document.getElementById(
+            "completeButton"
+        ).style.display = "block";
+
+    }
+
+    else {
+
+        result.textContent =
+            "❌ Incorrect. Try again!";
+
+        result.style.color =
+            "#ff5252";
+
+        button.style.background =
+            "#ff4757";
+
+        button.style.color =
+            "white";
+
+    }
+
+}
+
+
+async function completeLevel() {
+
+    const button =
+        document.getElementById(
+            "completeButton"
+        );
+
+    const reward =
+        document.getElementById("reward");
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Saving progress...";
+
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:5000/complete-level",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                credentials: "include",
+
+                body: JSON.stringify({
+                    level: 3,
+                    subject: "Python"
+                })
+            }
+        );
+
+
+        const data =
+            await response.json();
+
+
+        if (response.ok) {
+
+            reward.innerHTML =
+                "🎉 Level 3 Completed!<br><br>" +
+                "⭐ +" + data.reward.xp + " XP<br>" +
+                "🪙 +" + data.reward.coins + " Coins<br><br>" +
+                "🚀 Level 4 is now unlocked!";
+
+
+            button.textContent =
+                "🏙️ Go to Python World";
+
+
+            button.disabled = false;
+
+
+            button.onclick = function() {
+
+                window.location.href =
+                    "world.html";
+
+            };
+
+        }
+
+        else {
+
+            reward.textContent =
+                "❌ " + data.message;
+
+            reward.style.color =
+                "#ff5252";
+
+            button.disabled = false;
+
+            button.textContent =
+                "🎉 Complete Level";
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        reward.textContent =
+            "❌ Cannot connect to LearnQuest server.";
+
+        reward.style.color =
+            "#ff5252";
+
+        button.disabled = false;
+
+        button.textContent =
+            "🎉 Complete Level";
+
+    }
+
+}
+
+
+function goBack() {
+
+    window.location.href =
+        "world.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

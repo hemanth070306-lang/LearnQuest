@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LearnQuest - Functions City</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #141e30, #243b55);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: auto;
+            padding: 30px 0 60px;
+        }
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            background: white;
+            color: #222;
+        }
+
+        .hero {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .hero-icon {
+            font-size: 75px;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            margin: 10px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.12);
+            padding: 30px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+        }
+
+        .code {
+            background: #111;
+            color: #00ff88;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .question {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .option {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background: white;
+            color: #222;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .option:hover {
+            background: #eeeeee;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .complete {
+            display: none;
+            margin: 20px auto 0;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 10px;
+            background: #00c853;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .reward {
+            text-align: center;
+            color: #00ff88;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <div class="top">
+
+        <h2>🎮 LearnQuest</h2>
+
+        <button
+            class="back"
+            onclick="goBack()">
+
+            ← Python World
+
+        </button>
+
+    </div>
+
+
+    <div class="hero">
+
+        <div class="hero-icon">
+            🏙️
+        </div>
+
+        <h1>
+            Functions City
+        </h1>
+
+        <p>
+            Python Level 4
+        </p>
+
+    </div>
+
+
+    <!-- LESSON -->
+
+    <div class="card">
+
+        <h2>
+            📖 Mission 4: Python Functions
+        </h2>
+
+        <p>
+            A function is a reusable block of code.
+        </p>
+
+        <p>
+            We create a function using the
+            <b>def</b> keyword.
+        </p>
+
+        <div class="code">
+
+            def greet():<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;print("Hello!")<br><br>
+
+            greet()
+
+        </div>
+
+        <p>
+            The function runs when we call its name.
+        </p>
+
+        <p>
+            Functions help us keep our programs
+            organized and reusable.
+        </p>
+
+    </div>
+
+
+    <!-- QUIZ -->
+
+    <div class="card">
+
+        <h2>
+            🎯 Challenge
+        </h2>
+
+        <p class="question">
+            Which keyword is used to define a function
+            in Python?
+        </p>
+
+
+        <button
+            class="option"
+            onclick="checkAnswer(this, false)">
+
+            A. function
+
+        </button>
+
+
+        <button
+            class="option"
+            onclick="checkAnswer(this, true)">
+
+            B. def
+
+        </button>
+
+
+        <button
+            class="option"
+            onclick="checkAnswer(this, false)">
+
+            C. func
+
+        </button>
+
+
+        <button
+            class="option"
+            onclick="checkAnswer(this, false)">
+
+            D. define
+
+        </button>
+
+
+        <div
+            id="result"
+            class="result">
+        </div>
+
+
+        <button
+            id="completeButton"
+            class="complete"
+            onclick="completeLevel()">
+
+            🎉 Complete Level
+
+        </button>
+
+    </div>
+
+
+    <div
+        id="reward"
+        class="reward">
+    </div>
+
+
+</div>
+
+
+<script>
+
+let answered = false;
+
+
+function checkAnswer(button, correct) {
+
+    if (answered) {
+        return;
+    }
+
+    const result =
+        document.getElementById("result");
+
+
+    if (correct) {
+
+        answered = true;
+
+        result.textContent =
+            "🎉 Correct! Now complete the level.";
+
+        result.style.color =
+            "#00ff88";
+
+        button.style.background =
+            "#00c853";
+
+        button.style.color =
+            "white";
+
+        document.getElementById(
+            "completeButton"
+        ).style.display = "block";
+
+    }
+
+    else {
+
+        result.textContent =
+            "❌ Incorrect. Try again!";
+
+        result.style.color =
+            "#ff5252";
+
+        button.style.background =
+            "#ff4757";
+
+        button.style.color =
+            "white";
+
+    }
+
+}
+
+
+async function completeLevel() {
+
+    const button =
+        document.getElementById(
+            "completeButton"
+        );
+
+    const reward =
+        document.getElementById("reward");
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Saving progress...";
+
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:5000/complete-level",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                credentials: "include",
+
+                body: JSON.stringify({
+                    level: 4,
+                    subject: "Python"
+                })
+            }
+        );
+
+
+        const data =
+            await response.json();
+
+
+        if (response.ok) {
+
+            reward.innerHTML =
+                "🎉 Level 4 Completed!<br><br>" +
+                "⭐ +" + data.reward.xp + " XP<br>" +
+                "🪙 +" + data.reward.coins + " Coins<br><br>" +
+                "🚀 Level 5 is now unlocked!";
+
+
+            button.textContent =
+                "🏰 Go to Python World";
+
+
+            button.disabled = false;
+
+
+            button.onclick = function() {
+
+                window.location.href =
+                    "world.html";
+
+            };
+
+        }
+
+        else {
+
+            reward.textContent =
+                "❌ " + data.message;
+
+            reward.style.color =
+                "#ff5252";
+
+            button.disabled = false;
+
+            button.textContent =
+                "🎉 Complete Level";
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        reward.textContent =
+            "❌ Cannot connect to LearnQuest server.";
+
+        reward.style.color =
+            "#ff5252";
+
+        button.disabled = false;
+
+        button.textContent =
+            "🎉 Complete Level";
+
+    }
+
+}
+
+
+function goBack() {
+
+    window.location.href =
+        "world.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

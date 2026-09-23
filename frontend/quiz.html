@@ -1,0 +1,4377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>LearnQuest - Quiz</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(
+                135deg,
+                #f7f7ff,
+                #ffffff
+            );
+            color: #222;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1100px;
+            margin: auto;
+            padding: 25px 0 50px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            color: #5b45c9;
+            margin: 0 0 5px;
+        }
+
+        .header p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .settings {
+            text-align: center;
+            background: #f5f4ff;
+        }
+
+        .settings h2 {
+            margin-top: 0;
+        }
+
+        select,
+        input {
+            padding: 13px 16px;
+            border: 1px solid #bbb;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        select {
+            min-width: 175px;
+        }
+
+        button {
+            border: none;
+            border-radius: 10px;
+            padding: 13px 22px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+        }
+
+        button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .primary-btn {
+            background: #5b45c9;
+            color: white;
+        }
+
+        .secondary-btn {
+            background: #eee;
+            color: #333;
+        }
+
+        .success-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .start-btn {
+            margin-top: 25px;
+            font-size: 18px;
+            padding: 15px 30px;
+        }
+
+        .status {
+            text-align: center;
+            padding: 12px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .status.error {
+            color: red;
+            background: #fff0f0;
+        }
+
+        .status.success {
+            color: #16833b;
+            background: #ecfff2;
+        }
+
+        .status.info {
+            color: #4d3ab3;
+            background: #f2efff;
+        }
+
+        .hints-bar {
+            background: #fff7d6;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .quiz-top {
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: white;
+        }
+
+        .timer {
+            font-size: 28px;
+            font-weight: bold;
+            color: #d9534f;
+        }
+
+        .timer.safe {
+            color: #238636;
+        }
+
+        .timer.warning {
+            color: #e68a00;
+        }
+
+        .camera-box {
+            display: none;
+            text-align: center;
+        }
+
+        .camera {
+            width: 220px;
+            height: 165px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 4px solid #5b45c9;
+            background: #111;
+        }
+
+        .question-card {
+            display: none;
+            border-left: 6px solid #5b45c9;
+        }
+
+        .question-number {
+            color: #5b45c9;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .question-text {
+            font-size: 22px;
+            line-height: 1.5;
+            margin: 15px 0 25px;
+        }
+
+        .options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            cursor: pointer;
+            background: white;
+            font-size: 17px;
+            transition: 0.2s;
+        }
+
+        .option:hover {
+            border-color: #806bd9;
+            background: #f8f6ff;
+        }
+
+        .option.selected {
+            border-color: #5b45c9;
+            background: #eeeaff;
+        }
+
+        .option input {
+            width: 18px;
+            height: 18px;
+            padding: 0;
+            border: 0;
+        }
+
+        .question-controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .question-progress {
+            text-align: center;
+            color: #666;
+            margin-top: 15px;
+        }
+
+        .submit-section {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(
+                20,
+                15,
+                45,
+                0.94
+            );
+            color: white;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .overlay-box {
+            max-width: 600px;
+            width: 95%;
+            background: white;
+            color: #222;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow:
+                0 10px 40px rgba(
+                    0,
+                    0,
+                    0,
+                    0.3
+                );
+        }
+
+        .overlay-box h2 {
+            color: #5b45c9;
+            margin-top: 0;
+        }
+
+        .score {
+            font-size: 50px;
+            font-weight: bold;
+            color: #5b45c9;
+        }
+
+        .pause-time {
+            font-size: 40px;
+            font-weight: bold;
+            color: #5b45c9;
+            margin: 20px;
+        }
+
+        .completion-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .video-note {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 700px) {
+
+            .header h1 {
+                font-size: 32px;
+            }
+
+            .question-text {
+                font-size: 19px;
+            }
+
+            .timer {
+                font-size: 23px;
+            }
+
+            .quiz-top {
+                position: static;
+            }
+
+            .question-controls {
+                flex-direction: column;
+            }
+
+            .question-controls button {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>🎮 LearnQuest</h1>
+
+        <p id="subtitle">
+            Prove your knowledge and complete the level!
+        </p>
+
+    </div>
+
+
+    <!-- QUIZ SETTINGS -->
+
+    <div
+        class="card settings"
+        id="setupCard"
+    >
+
+        <h2>⚙️ Quiz Settings</h2>
+
+        <p>
+            Choose how much time you want for this quiz.
+        </p>
+
+        <select id="timeSelect">
+
+            <option value="3">
+                3 Minutes
+            </option>
+
+            <option value="5">
+                5 Minutes
+            </option>
+
+            <option
+                value="7"
+                selected
+            >
+                7 Minutes
+            </option>
+
+            <option value="10">
+                10 Minutes
+            </option>
+
+            <option value="15">
+                15 Minutes
+            </option>
+
+            <option value="custom">
+                Custom
+            </option>
+
+        </select>
+
+
+        <div
+            id="customTimeBox"
+            class="hidden"
+            style="margin-top:15px"
+        >
+
+            <input
+                type="number"
+                id="customTime"
+                min="1"
+                max="60"
+                placeholder="Minutes"
+            >
+
+        </div>
+
+
+        <br>
+
+
+        <button
+            id="startBtn"
+            class="primary-btn start-btn"
+        >
+            🚀 Start Quiz
+        </button>
+
+    </div>
+
+
+    <!-- HINT BAR -->
+
+    <div
+        class="card hints-bar"
+        id="hintsBar"
+        style="display:none"
+    >
+
+        💡 Hints remaining:
+
+        <span id="hintsRemaining">
+            2
+        </span>
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div id="statusMessage"></div>
+
+
+    <!-- CAMERA -->
+
+    <div
+        class="card camera-box"
+        id="cameraBox"
+    >
+
+        <h3>
+            📷 Camera Security
+        </h3>
+
+
+        <video
+            id="camera"
+            class="camera"
+            autoplay
+            muted
+            playsinline
+        ></video>
+
+
+        <p class="video-note">
+            Camera must remain enabled while taking the quiz.
+        </p>
+
+    </div>
+
+
+    <!-- QUIZ TOP -->
+
+    <div
+        class="card quiz-top"
+        id="quizTop"
+    >
+
+        <div>
+
+            <strong id="levelTitle">
+                LearnQuest Quiz
+            </strong>
+
+
+            <div id="topicText">
+                Topic
+            </div>
+
+        </div>
+
+
+        <div
+            class="timer"
+            id="timer"
+        >
+            07:00
+        </div>
+
+    </div>
+
+
+    <!-- QUESTIONS -->
+
+    <div id="questionsContainer"></div>
+
+
+    <!-- NAVIGATION -->
+
+    <div
+        class="card"
+        id="navigationCard"
+        style="display:none"
+    >
+
+        <div class="question-controls">
+
+            <button
+                id="previousBtn"
+                class="secondary-btn"
+            >
+                ⬅️ Previous
+            </button>
+
+
+            <button
+                id="nextBtn"
+                class="primary-btn"
+            >
+                Next ➡️
+            </button>
+
+        </div>
+
+
+        <div class="question-progress">
+
+            Question
+
+            <span id="currentQuestionNumber">
+                1
+            </span>
+
+            /
+
+            <span id="totalQuestions">
+                0
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- HINT -->
+
+    <div
+        class="card"
+        id="hintCard"
+        style="display:none"
+    >
+
+        <h3>
+            💡 Hint
+        </h3>
+
+
+        <div id="hintText"></div>
+
+
+        <div
+            style="
+                margin-top:15px;
+                text-align:center;
+            "
+        >
+
+            <button
+                id="hintBtn"
+                class="secondary-btn"
+            >
+                💡 Use Hint
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUBMIT -->
+
+    <div
+        class="card submit-section"
+        id="submitSection"
+        style="display:none"
+    >
+
+        <p id="answeredText">
+            Answer all questions before submitting.
+        </p>
+
+
+        <button
+            id="submitBtn"
+            class="success-btn"
+            disabled
+        >
+            🚀 Submit Quiz
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- CAMERA PERMISSION OVERLAY -->
+
+<div
+    class="overlay"
+    id="cameraPermissionOverlay"
+>
+
+    <div class="overlay-box">
+
+        <div
+            style="
+                font-size:55px;
+            "
+        >
+            📷
+        </div>
+
+
+        <h2>
+            Camera Access Required
+        </h2>
+
+
+        <p>
+            LearnQuest needs camera access before starting the quiz.
+        </p>
+
+
+        <p>
+            Your camera must remain enabled during the quiz for security.
+        </p>
+
+
+        <div class="completion-buttons">
+
+            <button
+                id="allowCameraBtn"
+                class="primary-btn"
+            >
+                📷 Allow Camera &amp; Start
+            </button>
+
+
+            <button
+                id="cancelCameraBtn"
+                class="secondary-btn"
+            >
+                Cancel
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PAUSE OVERLAY -->
+
+<div
+    class="overlay"
+    id="pauseOverlay"
+>
+
+    <div class="overlay-box">
+
+        <h2>
+            ⏸️ Quiz Paused
+        </h2>
+
+
+        <p>
+            You have used both hints.
+            Your quiz is paused for 5 minutes.
+        </p>
+
+
+        <div
+            class="pause-time"
+            id="pauseTime"
+        >
+            05:00
+        </div>
+
+
+        <p>
+            Please wait until the pause ends.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- SECURITY OVERLAY -->
+
+<div
+    class="overlay"
+    id="securityOverlay"
+>
+
+    <div class="overlay-box">
+
+        <h2>
+            🔒 Quiz Locked
+        </h2>
+
+
+        <p id="securityMessage">
+            Security requirements were not satisfied.
+        </p>
+
+
+        <button
+            id="recoverBtn"
+            class="primary-btn"
+        >
+            🔓 Continue Quiz
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- COMPLETION OVERLAY -->
+
+<div
+    class="overlay"
+    id="completionOverlay"
+>
+
+    <div class="overlay-box">
+
+        <h2 id="completionTitle">
+            🎉 Level Complete!
+        </h2>
+
+
+        <div
+            class="score"
+            id="finalScore"
+        >
+            0%
+        </div>
+
+
+        <p id="scoreText">
+            Your score
+        </p>
+
+
+        <p>
+            ⭐ XP Earned:
+
+            <strong id="xpEarned">
+                0
+            </strong>
+
+        </p>
+
+
+        <p>
+            🪙 Coins Earned:
+
+            <strong id="coinsEarned">
+                0
+            </strong>
+
+        </p>
+
+
+        <div class="completion-buttons">
+
+            <button
+                id="nextLevelBtn"
+                class="primary-btn"
+                style="display:none"
+            >
+                🔓 Next Level Unlocked
+            </button>
+
+
+            <button
+                id="worldBtn"
+                class="secondary-btn"
+            >
+                🌍 Learning World
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* =========================================================
+       CONFIG
+       ========================================================= */
+
+    const API_BASE =
+        "http://127.0.0.1:5000";
+
+
+    const urlParams =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const levelId =
+        urlParams.get(
+            "level_id"
+        );
+
+
+    /* =========================================================
+       VARIABLES
+       ========================================================= */
+
+    let quizzes = [];
+
+    let selectedAnswers = {};
+
+    let currentQuestionIndex = 0;
+
+    let currentLevel = null;
+
+    let nextLevel = null;
+
+    let currentSubjectId = null;
+
+
+    let language =
+        localStorage.getItem(
+            "selected_language"
+        ) || "en";
+
+
+    let quizStarted = false;
+
+    let quizSubmitted = false;
+
+    let isSubmitting = false;
+
+
+    let cameraStream = null;
+
+    let cameraReady = false;
+
+    let securityLocked = false;
+
+    let allowNavigation = false;
+
+
+    let quizEndTime = null;
+
+    let timerInterval = null;
+
+
+    let pauseInterval = null;
+
+    let quizPaused = false;
+
+    let pauseEndTime = null;
+
+
+    let hintsUsed = 0;
+
+    let securityMonitorInterval = null;
+
+
+    const MAX_HINTS = 2;
+
+    const PAUSE_DURATION =
+        5 * 60 * 1000;
+
+
+    /* =========================================================
+       HELPER
+       ========================================================= */
+
+    function $(id) {
+
+        return document.getElementById(id);
+
+    }
+
+
+    /* =========================================================
+       STATUS
+       ========================================================= */
+
+    function showStatus(
+        message,
+        type = "info"
+    ) {
+
+        const box =
+            $("statusMessage");
+
+
+        box.className =
+            "status " + type;
+
+
+        box.textContent =
+            message;
+
+    }
+
+
+    function clearStatus() {
+
+        const box =
+            $("statusMessage");
+
+
+        box.className =
+            "";
+
+
+        box.textContent =
+            "";
+
+    }
+
+
+    /* =========================================================
+       STORAGE KEY
+       ========================================================= */
+
+    function storageKey(name) {
+
+        return (
+            `learnquest_quiz_${levelId}_${name}`
+        );
+
+    }
+
+
+    /* =========================================================
+       ESCAPE HTML
+       ========================================================= */
+
+    function escapeHTML(value) {
+
+        return String(value ?? "")
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+    /* =========================================================
+       LANGUAGE UI
+       ========================================================= */
+
+    function updateLanguageUI() {
+
+        language =
+            localStorage.getItem(
+                "selected_language"
+            ) || "en";
+
+
+        document.documentElement.lang =
+            language;
+
+
+        if (language === "hi") {
+
+            $("subtitle").textContent =
+                "अपने ज्ञान को साबित करें और स्तर पूरा करें!";
+
+        }
+
+        else if (language === "te") {
+
+            $("subtitle").textContent =
+                "మీ జ్ఞానాన్ని నిరూపించుకుని లెవెల్ పూర్తి చేయండి!";
+
+        }
+
+        else {
+
+            $("subtitle").textContent =
+                "Prove your knowledge and complete the level!";
+
+        }
+
+    }
+
+
+    /* =========================================================
+       QUESTION TEXT
+       ========================================================= */
+
+    function getQuestionText(
+        quiz
+    ) {
+
+        if (
+            language === "hi" &&
+            quiz.question_hi
+        ) {
+
+            return quiz.question_hi;
+
+        }
+
+
+        if (
+            language === "te" &&
+            quiz.question_te
+        ) {
+
+            return quiz.question_te;
+
+        }
+
+
+        return (
+            quiz.question_en ||
+            quiz.question ||
+            ""
+        );
+
+    }
+
+
+    /* =========================================================
+       OPTIONS
+       ========================================================= */
+
+    function getOptions(
+        quiz
+    ) {
+
+        if (
+            language === "hi"
+        ) {
+
+            return [
+
+                quiz.option_a_hi || "",
+                quiz.option_b_hi || "",
+                quiz.option_c_hi || "",
+                quiz.option_d_hi || ""
+
+            ];
+
+        }
+
+
+        if (
+            language === "te"
+        ) {
+
+            return [
+
+                quiz.option_a_te || "",
+                quiz.option_b_te || "",
+                quiz.option_c_te || "",
+                quiz.option_d_te || ""
+
+            ];
+
+        }
+
+
+        return [
+
+            quiz.option_a_en || "",
+            quiz.option_b_en || "",
+            quiz.option_c_en || "",
+            quiz.option_d_en || ""
+
+        ];
+
+    }
+
+
+    /* =========================================================
+       LOAD QUIZ
+       ========================================================= */
+
+    async function loadQuiz() {
+
+        try {
+
+            clearStatus();
+
+
+            if (!levelId) {
+
+                showStatus(
+                    "No level selected. Please return to the Learning World.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /* ---------------------------------------------
+               LOAD LEVEL
+               --------------------------------------------- */
+
+            const levelResponse =
+                await fetch(
+                    `${API_BASE}/level/${encodeURIComponent(levelId)}`,
+                    {
+                        method: "GET",
+                        credentials: "include"
+                    }
+                );
+
+
+            if (!levelResponse.ok) {
+
+                throw new Error(
+                    `Level request failed: HTTP ${levelResponse.status}`
+                );
+
+            }
+
+
+            const levelData =
+                await levelResponse.json();
+
+
+            currentLevel =
+                levelData.level ||
+                levelData;
+
+
+            currentSubjectId =
+                currentLevel.subject_id ||
+                levelData.subject_id ||
+                null;
+
+
+            displayLevelInfo();
+
+
+            /* ---------------------------------------------
+               LOAD QUIZZES
+               --------------------------------------------- */
+
+            const quizResponse =
+                await fetch(
+                    `${API_BASE}/quizzes/${encodeURIComponent(levelId)}`,
+                    {
+                        method: "GET",
+                        credentials: "include"
+                    }
+                );
+
+
+            if (!quizResponse.ok) {
+
+                throw new Error(
+                    `Quiz request failed: HTTP ${quizResponse.status}`
+                );
+
+            }
+
+
+            const quizData =
+                await quizResponse.json();
+
+
+            quizzes =
+                Array.isArray(
+                    quizData
+                )
+                    ? quizData
+                    : (
+                        quizData.quizzes ||
+                        quizData.questions ||
+                        []
+                    );
+
+
+            if (
+                !Array.isArray(quizzes) ||
+                quizzes.length === 0
+            ) {
+
+                throw new Error(
+                    "No quiz questions were returned by the server."
+                );
+
+            }
+
+
+            selectedAnswers = {};
+
+            currentQuestionIndex = 0;
+
+
+            $("totalQuestions").textContent =
+                quizzes.length;
+
+
+            /* ---------------------------------------------
+               RESTORE PREVIOUS QUIZ
+               --------------------------------------------- */
+
+            const restored =
+                restoreQuizState();
+
+
+            if (restored) {
+
+                renderQuestions();
+
+                await restoreSecureSession();
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Quiz loading error:",
+                error
+            );
+
+
+            showStatus(
+                error.message ||
+                "Cannot connect to LearnQuest server.",
+                "error"
+            );
+
+
+            $("startBtn").disabled =
+                true;
+
+        }
+
+    }
+
+
+    /* =========================================================
+       LEVEL INFO
+       ========================================================= */
+
+    function displayLevelInfo() {
+
+        if (!currentLevel) {
+
+            return;
+
+        }
+
+
+        const levelNumber =
+            currentLevel.level_number ||
+            currentLevel.level ||
+            "";
+
+
+        $("levelTitle").textContent =
+            `Level ${levelNumber} - ${currentLevel.level_name || ""}`;
+
+
+        $("topicText").textContent =
+            currentLevel.topic
+                ? `📚 ${currentLevel.topic}`
+                : "";
+
+    }
+
+
+    /* =========================================================
+       RENDER QUESTIONS
+       ========================================================= */
+
+    function renderQuestions() {
+
+        const container =
+            $("questionsContainer");
+
+
+        container.innerHTML =
+            "";
+
+
+        quizzes.forEach(
+            function (
+                quiz,
+                index
+            ) {
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                card.className =
+                    "card question-card";
+
+
+                card.id =
+                    `question-${index}`;
+
+
+                const options =
+                    getOptions(
+                        quiz
+                    );
+
+
+                let optionsHTML =
+                    "";
+
+
+                options.forEach(
+                    function (
+                        option,
+                        optionIndex
+                    ) {
+
+                        if (
+                            option === null ||
+                            option === undefined ||
+                            option === ""
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        const letter =
+                            String.fromCharCode(
+                                65 +
+                                optionIndex
+                            );
+
+
+                        optionsHTML += `
+
+                            <label
+                                class="option"
+                                data-q="${index}"
+                                data-letter="${letter}"
+                            >
+
+                                <input
+                                    type="radio"
+                                    name="q-${index}"
+                                    value="${letter}"
+                                >
+
+                                <strong>
+                                    ${letter}.
+                                </strong>
+
+                                <span>
+                                    ${escapeHTML(option)}
+                                </span>
+
+                            </label>
+
+                        `;
+
+                    }
+                );
+
+
+                card.innerHTML = `
+
+                    <div class="question-number">
+
+                        Question
+                        ${index + 1}
+
+                    </div>
+
+
+                    <div class="question-text">
+
+                        ${escapeHTML(
+                            getQuestionText(
+                                quiz
+                            )
+                        )}
+
+                    </div>
+
+
+                    <div class="options">
+
+                        ${optionsHTML}
+
+                    </div>
+
+                `;
+
+
+                container.appendChild(
+                    card
+                );
+
+            }
+        );
+
+
+        container
+            .querySelectorAll(
+                ".option"
+            )
+            .forEach(
+                function (element) {
+
+                    element.addEventListener(
+                        "click",
+                        function () {
+
+                            selectAnswer(
+                                Number(
+                                    element.dataset.q
+                                ),
+                                element.dataset.letter
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+        showQuestion(
+            currentQuestionIndex
+        );
+
+    }
+
+
+    /* =========================================================
+       SHOW QUESTION
+       ========================================================= */
+
+    function showQuestion(
+        index
+    ) {
+
+        if (!quizzes.length) {
+
+            return;
+
+        }
+
+
+        if (index < 0) {
+
+            index = 0;
+
+        }
+
+
+        if (
+            index >= quizzes.length
+        ) {
+
+            index =
+                quizzes.length - 1;
+
+        }
+
+
+        currentQuestionIndex =
+            index;
+
+
+        document
+            .querySelectorAll(
+                ".question-card"
+            )
+            .forEach(
+                function (card) {
+
+                    card.style.display =
+                        "none";
+
+                }
+            );
+
+
+        const current =
+            document.getElementById(
+                `question-${index}`
+            );
+
+
+        if (current) {
+
+            current.style.display =
+                "block";
+
+        }
+
+
+        $("currentQuestionNumber").textContent =
+            index + 1;
+
+
+        $("previousBtn").disabled =
+            index === 0;
+
+
+        $("nextBtn").disabled =
+            index === quizzes.length - 1;
+
+
+        updateSelectedOptionUI();
+
+        updateHintUI();
+
+        checkSubmitButton();
+
+    }
+
+
+    /* =========================================================
+       SELECT ANSWER
+       ========================================================= */
+
+    function selectAnswer(
+        questionIndex,
+        letter
+    ) {
+
+        if (
+            !quizStarted ||
+            quizPaused ||
+            securityLocked ||
+            quizSubmitted
+        ) {
+
+            return;
+
+        }
+
+
+        selectedAnswers[
+            questionIndex
+        ] = letter;
+
+
+        updateSelectedOptionUI();
+
+        saveQuizState();
+
+        checkSubmitButton();
+
+    }
+
+
+    /* =========================================================
+       UPDATE SELECTED OPTION
+       ========================================================= */
+
+    function updateSelectedOptionUI() {
+
+        document
+            .querySelectorAll(
+                ".option"
+            )
+            .forEach(
+                function (element) {
+
+                    element.classList.remove(
+                        "selected"
+                    );
+
+
+                    const questionIndex =
+                        Number(
+                            element.dataset.q
+                        );
+
+
+                    const letter =
+                        element.dataset.letter;
+
+
+                    if (
+                        selectedAnswers[
+                            questionIndex
+                        ] === letter
+                    ) {
+
+                        element.classList.add(
+                            "selected"
+                        );
+
+
+                        const radio =
+                            element.querySelector(
+                                "input"
+                            );
+
+
+                        if (radio) {
+
+                            radio.checked =
+                                true;
+
+                        }
+
+                    }
+
+                }
+            );
+
+    }
+
+
+    /* =========================================================
+       NEXT
+       ========================================================= */
+
+    function nextQuestion() {
+
+        console.log(
+            "NEXT clicked"
+        );
+
+
+        console.log({
+            quizStarted:
+                quizStarted,
+
+            quizPaused:
+                quizPaused,
+
+            securityLocked:
+                securityLocked,
+
+            currentQuestionIndex:
+                currentQuestionIndex
+
+        });
+
+
+        if (!quizStarted) {
+
+            console.log(
+                "NEXT blocked because quiz has not started."
+            );
+
+            return;
+
+        }
+
+
+        if (quizPaused) {
+
+            console.log(
+                "NEXT blocked because quiz is paused."
+            );
+
+            return;
+
+        }
+
+
+        if (securityLocked) {
+
+            console.log(
+                "NEXT blocked because quiz is security locked."
+            );
+
+            return;
+
+        }
+
+
+        if (
+            currentQuestionIndex <
+            quizzes.length - 1
+        ) {
+
+            currentQuestionIndex++;
+
+            console.log(
+                "Moving to question:",
+                currentQuestionIndex + 1
+            );
+
+
+            showQuestion(
+                currentQuestionIndex
+            );
+
+
+            saveQuizState();
+
+
+            window.scrollTo(
+                {
+                    top: 0,
+                    behavior: "smooth"
+                }
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       PREVIOUS
+       ========================================================= */
+
+    function previousQuestion() {
+
+        if (
+            !quizStarted ||
+            quizPaused ||
+            securityLocked
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            currentQuestionIndex > 0
+        ) {
+
+            currentQuestionIndex--;
+
+
+            showQuestion(
+                currentQuestionIndex
+            );
+
+
+            saveQuizState();
+
+        }
+
+    }
+
+
+    /* =========================================================
+       CHECK SUBMIT BUTTON
+       ========================================================= */
+
+    function checkSubmitButton() {
+
+        const answered =
+            quizzes.length > 0 &&
+            quizzes.every(
+                function (
+                    _,
+                    index
+                ) {
+
+                    return !!selectedAnswers[
+                        index
+                    ];
+
+                }
+            );
+
+
+        $("submitBtn").disabled =
+            !quizStarted ||
+            quizPaused ||
+            securityLocked ||
+            isSubmitting ||
+            !answered;
+
+
+        const answeredCount =
+            Object.keys(
+                selectedAnswers
+            ).length;
+
+
+        $("answeredText").textContent =
+            `${answeredCount} / ${quizzes.length} questions answered.`;
+
+    }
+
+
+    /* =========================================================
+       GET SELECTED MINUTES
+       ========================================================= */
+
+    function getSelectedMinutes() {
+
+        const value =
+            $("timeSelect").value;
+
+
+        if (
+            value === "custom"
+        ) {
+
+            const custom =
+                parseInt(
+                    $("customTime").value,
+                    10
+                );
+
+
+            if (
+                !custom ||
+                custom < 1 ||
+                custom > 60
+            ) {
+
+                showStatus(
+                    "Please enter a time between 1 and 60 minutes.",
+                    "error"
+                );
+
+
+                return null;
+
+            }
+
+
+            return custom;
+
+        }
+
+
+        return parseInt(
+            value,
+            10
+        );
+
+    }
+
+
+    /* =========================================================
+       START QUIZ
+       ========================================================= */
+
+    async function startSecureQuiz() {
+
+        if (
+            !quizzes.length
+        ) {
+
+            showStatus(
+                "Quiz questions are not loaded yet.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if (quizStarted) {
+
+            return;
+
+        }
+
+
+        $("cameraPermissionOverlay").style.display =
+            "flex";
+
+    }
+
+
+    /* =========================================================
+       CANCEL CAMERA
+       ========================================================= */
+
+    function cancelCameraStart() {
+
+        $("cameraPermissionOverlay").style.display =
+            "none";
+
+    }
+
+
+    /* =========================================================
+       CAMERA + START
+       ========================================================= */
+
+    async function allowCameraAndStart() {
+
+        $("cameraPermissionOverlay").style.display =
+            "none";
+
+
+        try {
+
+            if (
+                !document.fullscreenElement
+            ) {
+
+                await document
+                    .documentElement
+                    .requestFullscreen();
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.log(
+                "Fullscreen request:",
+                error
+            );
+
+        }
+
+
+        const granted =
+            await requestCameraPermission();
+
+
+        if (!granted) {
+
+            showStatus(
+                "Camera permission is required to start the quiz.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const minutes =
+            getSelectedMinutes();
+
+
+        if (!minutes) {
+
+            return;
+
+        }
+
+
+        quizEndTime =
+            Date.now() +
+            minutes * 60 * 1000;
+
+
+        quizStarted =
+            true;
+
+
+        quizSubmitted =
+            false;
+
+
+        securityLocked =
+            false;
+
+
+        quizPaused =
+            false;
+
+
+        allowNavigation =
+            false;
+
+
+        localStorage.setItem(
+            storageKey(
+                "started"
+            ),
+            "true"
+        );
+
+
+        localStorage.setItem(
+            storageKey(
+                "end_time"
+            ),
+            String(
+                quizEndTime
+            )
+        );
+
+
+        $("setupCard").style.display =
+            "none";
+
+
+        $("hintsBar").style.display =
+            "block";
+
+
+        $("cameraBox").style.display =
+            "block";
+
+
+        $("quizTop").style.display =
+            "flex";
+
+
+        $("navigationCard").style.display =
+            "block";
+
+
+        $("hintCard").style.display =
+            "block";
+
+
+        $("submitSection").style.display =
+            "block";
+
+
+        renderQuestions();
+
+
+        clearStatus();
+
+
+        startQuizTimer();
+
+        monitorCamera();
+
+        enableQuizControls();
+
+        saveQuizState();
+
+    }
+
+
+    /* =========================================================
+       CAMERA PERMISSION
+       ========================================================= */
+
+    async function requestCameraPermission() {
+
+        try {
+
+            if (
+                cameraStream &&
+                cameraStream
+                    .getVideoTracks()
+                    .some(
+                        function (track) {
+
+                            return (
+                                track.readyState ===
+                                "live"
+                            );
+
+                        }
+                    )
+            ) {
+
+                cameraReady =
+                    true;
+
+
+                return true;
+
+            }
+
+
+            cameraStream =
+                await navigator
+                    .mediaDevices
+                    .getUserMedia(
+                        {
+                            video: {
+                                facingMode:
+                                    "user"
+                            },
+
+                            audio: false
+                        }
+                    );
+
+
+            $("camera").srcObject =
+                cameraStream;
+
+
+            cameraReady =
+                true;
+
+
+            return true;
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Camera error:",
+                error
+            );
+
+
+            cameraReady =
+                false;
+
+
+            return false;
+
+        }
+
+    }
+
+
+    /* =========================================================
+       RESTORE SESSION
+       ========================================================= */
+
+    async function restoreSecureSession() {
+
+        if (!quizStarted) {
+
+            return;
+
+        }
+
+
+        const granted =
+            await requestCameraPermission();
+
+
+        if (!granted) {
+
+            lockQuiz(
+                "Camera permission is required to continue the quiz."
+            );
+
+
+            startQuizTimer();
+
+
+            return;
+
+        }
+
+
+        monitorCamera();
+
+        enableQuizControls();
+
+        startQuizTimer();
+
+        checkPauseOnLoad();
+
+    }
+
+
+    /* =========================================================
+       CAMERA MONITOR
+       ========================================================= */
+
+    function monitorCamera() {
+
+        if (
+            securityMonitorInterval
+        ) {
+
+            clearInterval(
+                securityMonitorInterval
+            );
+
+        }
+
+
+        securityMonitorInterval =
+            setInterval(
+                function () {
+
+                    if (
+                        !quizStarted ||
+                        quizSubmitted
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    if (
+                        !cameraStream ||
+                        !cameraStream
+                            .getVideoTracks()
+                            .length
+                    ) {
+
+                        lockQuiz(
+                            "Camera connection was lost. Please enable the camera to continue."
+                        );
+
+
+                        return;
+
+                    }
+
+
+                    const track =
+                        cameraStream
+                            .getVideoTracks()[0];
+
+
+                    if (
+                        track.readyState ===
+                        "ended"
+                    ) {
+
+                        lockQuiz(
+                            "Camera was disconnected. Please reconnect it."
+                        );
+
+                    }
+
+                },
+                3000
+            );
+
+    }
+
+
+    /* =========================================================
+       SECURITY LISTENERS
+       ========================================================= */
+
+    function setupSecurityListeners() {
+
+        document.addEventListener(
+            "fullscreenchange",
+            function () {
+
+                if (
+                    quizStarted &&
+                    !quizSubmitted &&
+                    !allowNavigation &&
+                    !document.fullscreenElement
+                ) {
+
+                    lockQuiz(
+                        "Fullscreen mode was exited. Re-enter fullscreen to continue."
+                    );
+
+                }
+
+            }
+        );
+
+
+        document.addEventListener(
+            "visibilitychange",
+            function () {
+
+                if (
+                    quizStarted &&
+                    !quizSubmitted &&
+                    document.hidden
+                ) {
+
+                    lockQuiz(
+                        "Please return to the LearnQuest quiz window."
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       LOCK QUIZ
+       ========================================================= */
+
+    function lockQuiz(
+        message
+    ) {
+
+        if (
+            quizSubmitted
+        ) {
+
+            return;
+
+        }
+
+
+        securityLocked =
+            true;
+
+
+        $("securityMessage").textContent =
+            message;
+
+
+        $("securityOverlay").style.display =
+            "flex";
+
+
+        disableQuizControls();
+
+    }
+
+
+    /* =========================================================
+       RECOVER
+       ========================================================= */
+
+    async function recoverSecurity() {
+
+        const granted =
+            await requestCameraPermission();
+
+
+        if (!granted) {
+
+            alert(
+                "Camera permission is required."
+            );
+
+
+            return;
+
+        }
+
+
+        try {
+
+            if (
+                !document.fullscreenElement
+            ) {
+
+                await document
+                    .documentElement
+                    .requestFullscreen();
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.log(
+                "Fullscreen recovery:",
+                error
+            );
+
+        }
+
+
+        securityLocked =
+            false;
+
+
+        $("securityOverlay").style.display =
+            "none";
+
+
+        enableQuizControls();
+
+        startQuizTimer();
+
+    }
+
+
+    /* =========================================================
+       ENABLE CONTROLS
+       ========================================================= */
+
+    function enableQuizControls() {
+
+        document
+            .querySelectorAll(
+                ".option"
+            )
+            .forEach(
+                function (element) {
+
+                    element.style.pointerEvents =
+                        "auto";
+
+                }
+            );
+
+
+        $("previousBtn").disabled =
+            currentQuestionIndex === 0;
+
+
+        $("nextBtn").disabled =
+            currentQuestionIndex ===
+            quizzes.length - 1;
+
+
+        updateHintUI();
+
+        checkSubmitButton();
+
+    }
+
+
+    /* =========================================================
+       DISABLE CONTROLS
+       ========================================================= */
+
+    function disableQuizControls() {
+
+        document
+            .querySelectorAll(
+                ".option"
+            )
+            .forEach(
+                function (element) {
+
+                    element.style.pointerEvents =
+                        "none";
+
+                }
+            );
+
+
+        $("nextBtn").disabled =
+            true;
+
+
+        $("previousBtn").disabled =
+            true;
+
+
+        $("submitBtn").disabled =
+            true;
+
+
+        $("hintBtn").disabled =
+            true;
+
+    }
+
+
+    /* =========================================================
+       TIMER
+       ========================================================= */
+
+    function startQuizTimer() {
+
+        if (
+            timerInterval
+        ) {
+
+            clearInterval(
+                timerInterval
+            );
+
+        }
+
+
+        if (!quizEndTime) {
+
+            return;
+
+        }
+
+
+        updateTimerDisplay(
+            Math.max(
+                0,
+                quizEndTime -
+                Date.now()
+            )
+        );
+
+
+        timerInterval =
+            setInterval(
+                function () {
+
+                    if (
+                        !quizStarted ||
+                        quizSubmitted ||
+                        quizPaused
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const remaining =
+                        quizEndTime -
+                        Date.now();
+
+
+                    if (
+                        remaining <= 0
+                    ) {
+
+                        clearInterval(
+                            timerInterval
+                        );
+
+
+                        timerInterval =
+                            null;
+
+
+                        $("timer").textContent =
+                            "00:00";
+
+
+                        autoSubmitQuiz();
+
+
+                        return;
+
+                    }
+
+
+                    updateTimerDisplay(
+                        remaining
+                    );
+
+                },
+                1000
+            );
+
+    }
+
+
+    function updateTimerDisplay(
+        milliseconds
+    ) {
+
+        const totalSeconds =
+            Math.max(
+                0,
+                Math.floor(
+                    milliseconds /
+                    1000
+                )
+            );
+
+
+        const minutes =
+            Math.floor(
+                totalSeconds /
+                60
+            );
+
+
+        const seconds =
+            totalSeconds %
+            60;
+
+
+        $("timer").textContent =
+            `${String(
+                minutes
+            ).padStart(2, "0")}:${String(
+                seconds
+            ).padStart(2, "0")}`;
+
+
+        $("timer").classList.remove(
+            "safe",
+            "warning"
+        );
+
+
+        if (
+            totalSeconds <= 60
+        ) {
+
+            $("timer").classList.add(
+                "warning"
+            );
+
+        }
+
+        else {
+
+            $("timer").classList.add(
+                "safe"
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       AUTO SUBMIT
+       ========================================================= */
+
+    async function autoSubmitQuiz() {
+
+        if (
+            quizSubmitted ||
+            isSubmitting
+        ) {
+
+            return;
+
+        }
+
+
+        showStatus(
+            "⏰ Time is over. Submitting your quiz...",
+            "info"
+        );
+
+
+        await submitQuiz(
+            true
+        );
+
+    }
+
+
+    /* =========================================================
+       SUBMIT QUIZ
+       ========================================================= */
+
+    async function submitQuiz(
+        autoSubmit = false
+    ) {
+
+        if (
+            quizSubmitted ||
+            isSubmitting
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            !autoSubmit
+        ) {
+
+            const allAnswered =
+                quizzes.every(
+                    function (
+                        _,
+                        index
+                    ) {
+
+                        return !!selectedAnswers[
+                            index
+                        ];
+
+                    }
+                );
+
+
+            if (!allAnswered) {
+
+                alert(
+                    "Please answer all questions before submitting."
+                );
+
+
+                return;
+
+            }
+
+        }
+
+
+        isSubmitting =
+            true;
+
+
+        disableQuizControls();
+
+
+        try {
+
+            showStatus(
+                autoSubmit
+                    ? "⏰ Time is over. Submitting..."
+                    : "Submitting your quiz...",
+                "info"
+            );
+
+
+            const answers = {};
+
+
+            for (
+                let i = 0;
+                i < quizzes.length;
+                i++
+            ) {
+
+                answers[
+                    String(i)
+                ] =
+                    selectedAnswers[i] ||
+                    "";
+
+            }
+
+
+            const response =
+                await fetch(
+                    `${API_BASE}/submit-quiz`,
+                    {
+                        method:
+                            "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        credentials:
+                            "include",
+
+                        body:
+                            JSON.stringify(
+                                {
+                                    level_id:
+                                        parseInt(
+                                            levelId,
+                                            10
+                                        ),
+
+                                    answers:
+                                        answers
+                                }
+                            )
+                    }
+                );
+
+
+            let result = {};
+
+
+            try {
+
+                result =
+                    await response.json();
+
+            }
+
+            catch (error) {
+
+                result =
+                    {};
+
+            }
+
+
+            if (
+                !response.ok
+            ) {
+
+                throw new Error(
+                    result.message ||
+                    `Server rejected quiz submission. HTTP ${response.status}`
+                );
+
+            }
+
+
+            const total =
+                Number(
+                    result.total ||
+                    result.total_questions ||
+                    quizzes.length
+                ) ||
+                quizzes.length;
+
+
+            const rawScore =
+                Number(
+                    result.score ||
+                    0
+                );
+
+
+            let correctCount;
+
+
+            if (
+                rawScore <= total
+            ) {
+
+                correctCount =
+                    rawScore;
+
+            }
+
+            else {
+
+                correctCount =
+                    Math.round(
+                        (
+                            rawScore /
+                            100
+                        ) *
+                        total
+                    );
+
+            }
+
+
+            correctCount =
+                Math.max(
+                    0,
+                    Math.min(
+                        total,
+                        correctCount
+                    )
+                );
+
+
+            const scorePercent =
+                total > 0
+                    ? Math.round(
+                        (
+                            correctCount /
+                            total
+                        ) * 100
+                    )
+                    : 0;
+
+
+            const xp =
+                Number(
+                    result.xp_earned ??
+                    result.xp ??
+                    0
+                );
+
+
+            const coins =
+                Number(
+                    result.coins_earned ??
+                    result.coins ??
+                    0
+                );
+
+
+            quizSubmitted =
+                true;
+
+
+            isSubmitting =
+                false;
+
+
+            allowNavigation =
+                true;
+
+
+            if (
+                timerInterval
+            ) {
+
+                clearInterval(
+                    timerInterval
+                );
+
+
+                timerInterval =
+                    null;
+
+            }
+
+
+            if (
+                correctCount ===
+                total &&
+                total > 0
+            ) {
+
+                await findNextLevel();
+
+            }
+
+            else {
+
+                nextLevel =
+                    null;
+
+            }
+
+
+            showCompletion(
+                scorePercent,
+                correctCount,
+                total,
+                xp,
+                coins
+            );
+
+        }
+
+
+        catch (error) {
+
+            console.error(
+                "Quiz submission error:",
+                error
+            );
+
+
+            isSubmitting =
+                false;
+
+
+            quizSubmitted =
+                false;
+
+
+            allowNavigation =
+                false;
+
+
+            enableQuizControls();
+
+
+            showStatus(
+                "Cannot connect to LearnQuest server. Make sure Flask is running on port 5000.",
+                "error"
+            );
+
+
+            if (
+                autoSubmit
+            ) {
+
+                alert(
+                    "Time ended, but the quiz could not be submitted because the LearnQuest server could not be reached."
+                );
+
+            }
+
+        }
+
+    }
+
+
+    /* =========================================================
+       FIND NEXT LEVEL
+       ========================================================= */
+
+    async function findNextLevel() {
+
+        nextLevel =
+            null;
+
+
+        if (
+            !currentSubjectId
+        ) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_BASE}/levels/${currentSubjectId}`,
+                    {
+                        method:
+                            "GET",
+
+                        credentials:
+                            "include"
+                    }
+                );
+
+
+            if (
+                !response.ok
+            ) {
+
+                return;
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            const levels =
+                data.levels ||
+                [];
+
+
+            const currentNumber =
+                Number(
+                    currentLevel.level_number ||
+                    currentLevel.level ||
+                    0
+                );
+
+
+            nextLevel =
+                levels.find(
+                    function (
+                        level
+                    ) {
+
+                        return (
+                            Number(
+                                level.level_number
+                            ) ===
+                            currentNumber + 1 &&
+                            Boolean(
+                                level.unlocked
+                            )
+                        );
+
+                    }
+                ) ||
+                null;
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Next level lookup error:",
+                error
+            );
+
+
+            nextLevel =
+                null;
+
+        }
+
+    }
+
+
+    /* =========================================================
+       COMPLETION
+       ========================================================= */
+
+    function showCompletion(
+        scorePercent,
+        correctCount,
+        totalQuestions,
+        xp,
+        coins
+    ) {
+
+        const perfectScore =
+            correctCount ===
+            totalQuestions &&
+            totalQuestions > 0;
+
+
+        $("finalScore").textContent =
+            `${scorePercent}%`;
+
+
+        $("xpEarned").textContent =
+            xp;
+
+
+        $("coinsEarned").textContent =
+            coins;
+
+
+        if (
+            perfectScore &&
+            nextLevel
+        ) {
+
+            $("completionTitle").textContent =
+                "🎉 Level Completed!";
+
+
+            $("scoreText").textContent =
+                `${correctCount}/${totalQuestions} correct!`;
+
+
+            $("nextLevelBtn").style.display =
+                "inline-block";
+
+
+            $("nextLevelBtn").textContent =
+                "🔓 Next Level Unlocked";
+
+
+            speakCompletion(
+                true,
+                correctCount,
+                totalQuestions
+            );
+
+        }
+
+        else {
+
+            $("completionTitle").textContent =
+                "🎉 Quiz Completed!";
+
+
+            $("scoreText").textContent =
+                `${correctCount}/${totalQuestions} correct.`;
+
+
+            $("nextLevelBtn").style.display =
+                "none";
+
+
+            speakCompletion(
+                false,
+                correctCount,
+                totalQuestions
+            );
+
+        }
+
+
+        $("completionOverlay").style.display =
+            "flex";
+
+
+        clearQuizStorage();
+
+    }
+
+
+    /* =========================================================
+       VOICE
+       ========================================================= */
+
+    function speakCompletion(
+        perfectScore,
+        correctCount,
+        totalQuestions
+    ) {
+
+        if (
+            !(
+                "speechSynthesis"
+                in window
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        window.speechSynthesis.cancel();
+
+
+        let message;
+
+
+        if (
+            perfectScore
+        ) {
+
+            if (
+                language ===
+                "hi"
+            ) {
+
+                message =
+                    `लेवल पूरा हो गया। ${correctCount} में से ${totalQuestions} सही उत्तर। अगला लेवल अनलॉक हो गया है।`;
+
+            }
+
+            else if (
+                language ===
+                "te"
+            ) {
+
+                message =
+                    `లెవెల్ పూర్తి అయింది. ${totalQuestions} లో ${correctCount} సరైన సమాధానాలు. నెక్స్ట్ లెవెల్ అన్‌లాక్ అయింది.`;
+
+            }
+
+            else {
+
+                message =
+                    `Level completed. ${correctCount} out of ${totalQuestions} correct. Next level unlocked.`;
+
+            }
+
+        }
+
+        else {
+
+            if (
+                language ===
+                "hi"
+            ) {
+
+                message =
+                    `क्विज़ पूरा हुआ। ${correctCount} में से ${totalQuestions} सही उत्तर।`;
+
+            }
+
+            else if (
+                language ===
+                "te"
+            ) {
+
+                message =
+                    `క్విజ్ పూర్తి అయింది. ${totalQuestions} లో ${correctCount} సరైన సమాధానాలు.`;
+
+            }
+
+            else {
+
+                message =
+                    `Quiz completed. ${correctCount} out of ${totalQuestions} correct.`;
+
+            }
+
+        }
+
+
+        const speech =
+            new SpeechSynthesisUtterance(
+                message
+            );
+
+
+        speech.rate =
+            0.9;
+
+
+        speech.pitch =
+            1;
+
+
+        speech.volume =
+            1;
+
+
+        speech.lang =
+            language === "hi"
+                ? "hi-IN"
+                : language === "te"
+                    ? "te-IN"
+                    : "en-US";
+
+
+        window.speechSynthesis.speak(
+            speech
+        );
+
+    }
+
+
+    /* =========================================================
+       NEXT LEVEL
+       ========================================================= */
+
+    function goToNextLevel() {
+
+        if (
+            !nextLevel
+        ) {
+
+            goBackToWorld();
+
+            return;
+
+        }
+
+
+        allowNavigation =
+            true;
+
+
+        const nextId =
+            nextLevel.id ||
+            nextLevel.level_id;
+
+
+        if (!nextId) {
+
+            goBackToWorld();
+
+            return;
+
+        }
+
+
+        if (
+            currentSubjectId
+        ) {
+
+            localStorage.setItem(
+                "current_subject_id",
+                String(
+                    currentSubjectId
+                )
+            );
+
+        }
+
+
+        window.location.assign(
+            `level.html?level_id=${encodeURIComponent(
+                nextId
+            )}`
+        );
+
+    }
+
+
+    /* =========================================================
+       WORLD
+       ========================================================= */
+
+    function goBackToWorld() {
+
+        allowNavigation =
+            true;
+
+
+        if (
+            cameraStream
+        ) {
+
+            cameraStream
+                .getTracks()
+                .forEach(
+                    function (
+                        track
+                    ) {
+
+                        track.stop();
+
+                    }
+                );
+
+        }
+
+
+        if (
+            currentSubjectId
+        ) {
+
+            window.location.assign(
+                `world.html?subject_id=${encodeURIComponent(
+                    currentSubjectId
+                )}`
+            );
+
+        }
+
+        else {
+
+            window.location.assign(
+                "world.html"
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       HINT UI
+       ========================================================= */
+
+    function updateHintUI() {
+
+        const remaining =
+            Math.max(
+                0,
+                MAX_HINTS -
+                hintsUsed
+            );
+
+
+        $("hintsRemaining").textContent =
+            remaining;
+
+
+        $("hintBtn").disabled =
+            !quizStarted ||
+            quizPaused ||
+            securityLocked ||
+            hintsUsed >= MAX_HINTS;
+
+    }
+
+
+    /* =========================================================
+       HINT
+       ========================================================= */
+
+    function showHint() {
+
+        if (
+            !quizStarted ||
+            quizPaused ||
+            securityLocked ||
+            hintsUsed >= MAX_HINTS
+        ) {
+
+            return;
+
+        }
+
+
+        const quiz =
+            quizzes[
+                currentQuestionIndex
+            ];
+
+
+        if (!quiz) {
+
+            return;
+
+        }
+
+
+        let hint;
+
+
+        if (
+            hintsUsed === 0
+        ) {
+
+            hint =
+                quiz.hint_1 ||
+                quiz.hint ||
+                getGenericHint();
+
+        }
+
+        else {
+
+            hint =
+                quiz.hint_2 ||
+                getGenericHint();
+
+        }
+
+
+        hintsUsed++;
+
+
+        $("hintText").textContent =
+            hint;
+
+
+        $("hintCard").style.display =
+            "block";
+
+
+        updateHintUI();
+
+        saveQuizState();
+
+
+        if (
+            hintsUsed >= MAX_HINTS
+        ) {
+
+            triggerPause();
+
+        }
+
+    }
+
+
+    /* =========================================================
+       GENERIC HINT
+       ========================================================= */
+
+    function getGenericHint() {
+
+        if (
+            language === "hi"
+        ) {
+
+            return "प्रश्न में दिए गए शब्दों और शर्तों को ध्यान से देखें और विकल्पों की तुलना करें।";
+
+        }
+
+
+        if (
+            language === "te"
+        ) {
+
+            return "ప్రశ్నలో ఇచ్చిన పదాలు మరియు షరతులను జాగ్రత్తగా చూసి ప్రతి ఆప్షన్‌ను పోల్చండి.";
+
+        }
+
+
+        return (
+            "Read the question carefully and compare each option with the conditions given."
+        );
+
+    }
+
+
+    /* =========================================================
+       PAUSE
+       ========================================================= */
+
+    function triggerPause() {
+
+        quizPaused =
+            true;
+
+
+        if (
+            quizEndTime
+        ) {
+
+            quizEndTime +=
+                PAUSE_DURATION;
+
+        }
+
+
+        pauseEndTime =
+            Date.now() +
+            PAUSE_DURATION;
+
+
+        localStorage.setItem(
+            storageKey(
+                "pause_end"
+            ),
+            String(
+                pauseEndTime
+            )
+        );
+
+
+        $("pauseOverlay").style.display =
+            "flex";
+
+
+        disableQuizControls();
+
+
+        if (
+            pauseInterval
+        ) {
+
+            clearInterval(
+                pauseInterval
+            );
+
+        }
+
+
+        pauseInterval =
+            setInterval(
+                function () {
+
+                    const remaining =
+                        pauseEndTime -
+                        Date.now();
+
+
+                    if (
+                        remaining <= 0
+                    ) {
+
+                        clearInterval(
+                            pauseInterval
+                        );
+
+
+                        pauseInterval =
+                            null;
+
+
+                        localStorage.removeItem(
+                            storageKey(
+                                "pause_end"
+                            )
+                        );
+
+
+                        finishPause();
+
+
+                        return;
+
+                    }
+
+
+                    updatePauseDisplay(
+                        remaining
+                    );
+
+                },
+                1000
+            );
+
+
+        updatePauseDisplay(
+            PAUSE_DURATION
+        );
+
+    }
+
+
+    function updatePauseDisplay(
+        milliseconds
+    ) {
+
+        const totalSeconds =
+            Math.max(
+                0,
+                Math.floor(
+                    milliseconds /
+                    1000
+                )
+            );
+
+
+        const minutes =
+            Math.floor(
+                totalSeconds /
+                60
+            );
+
+
+        const seconds =
+            totalSeconds %
+            60;
+
+
+        $("pauseTime").textContent =
+            `${String(
+                minutes
+            ).padStart(2, "0")}:${String(
+                seconds
+            ).padStart(2, "0")}`;
+
+    }
+
+
+    function finishPause() {
+
+        quizPaused =
+            false;
+
+
+        hintsUsed =
+            0;
+
+
+        $("pauseOverlay").style.display =
+            "none";
+
+
+        $("hintText").textContent =
+            "";
+
+
+        updateHintUI();
+
+        enableQuizControls();
+
+        saveQuizState();
+
+    }
+
+
+    /* =========================================================
+       RESTORE PAUSE
+       ========================================================= */
+
+    function checkPauseOnLoad() {
+
+        const savedPause =
+            localStorage.getItem(
+                storageKey(
+                    "pause_end"
+                )
+            );
+
+
+        if (
+            !savedPause
+        ) {
+
+            return;
+
+        }
+
+
+        const end =
+            Number(
+                savedPause
+            );
+
+
+        if (
+            !end ||
+            end <= Date.now()
+        ) {
+
+            localStorage.removeItem(
+                storageKey(
+                    "pause_end"
+                )
+            );
+
+
+            quizPaused =
+                false;
+
+
+            hintsUsed =
+                0;
+
+
+            return;
+
+        }
+
+
+        quizPaused =
+            true;
+
+
+        pauseEndTime =
+            end;
+
+
+        $("pauseOverlay").style.display =
+            "flex";
+
+
+        disableQuizControls();
+
+
+        pauseInterval =
+            setInterval(
+                function () {
+
+                    const remaining =
+                        pauseEndTime -
+                        Date.now();
+
+
+                    if (
+                        remaining <= 0
+                    ) {
+
+                        clearInterval(
+                            pauseInterval
+                        );
+
+
+                        pauseInterval =
+                            null;
+
+
+                        localStorage.removeItem(
+                            storageKey(
+                                "pause_end"
+                            )
+                        );
+
+
+                        finishPause();
+
+
+                        return;
+
+                    }
+
+
+                    updatePauseDisplay(
+                        remaining
+                    );
+
+                },
+                1000
+            );
+
+
+        updatePauseDisplay(
+            end -
+            Date.now()
+        );
+
+    }
+
+
+    /* =========================================================
+       SAVE QUIZ STATE
+       ========================================================= */
+
+    function saveQuizState() {
+
+        localStorage.setItem(
+            storageKey(
+                "answers"
+            ),
+            JSON.stringify(
+                selectedAnswers
+            )
+        );
+
+
+        localStorage.setItem(
+            storageKey(
+                "question"
+            ),
+            String(
+                currentQuestionIndex
+            )
+        );
+
+
+        localStorage.setItem(
+            storageKey(
+                "hints"
+            ),
+            String(
+                hintsUsed
+            )
+        );
+
+
+        if (
+            quizEndTime
+        ) {
+
+            localStorage.setItem(
+                storageKey(
+                    "end_time"
+                ),
+                String(
+                    quizEndTime
+                )
+            );
+
+        }
+
+
+        if (
+            quizStarted
+        ) {
+
+            localStorage.setItem(
+                storageKey(
+                    "started"
+                ),
+                "true"
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       RESTORE QUIZ STATE
+       ========================================================= */
+
+    function restoreQuizState() {
+
+        const savedStarted =
+            localStorage.getItem(
+                storageKey(
+                    "started"
+                )
+            );
+
+
+        const savedEndTime =
+            localStorage.getItem(
+                storageKey(
+                    "end_time"
+                )
+            );
+
+
+        const savedAnswers =
+            localStorage.getItem(
+                storageKey(
+                    "answers"
+                )
+            );
+
+
+        const savedQuestion =
+            localStorage.getItem(
+                storageKey(
+                    "question"
+                )
+            );
+
+
+        const savedHints =
+            localStorage.getItem(
+                storageKey(
+                    "hints"
+                )
+            );
+
+
+        if (
+            savedStarted !==
+                "true" ||
+            !savedEndTime
+        ) {
+
+            return false;
+
+        }
+
+
+        const end =
+            Number(
+                savedEndTime
+            );
+
+
+        if (
+            !end ||
+            end <= Date.now()
+        ) {
+
+            clearQuizStorage();
+
+            return false;
+
+        }
+
+
+        quizStarted =
+            true;
+
+
+        quizEndTime =
+            end;
+
+
+        try {
+
+            selectedAnswers =
+                JSON.parse(
+                    savedAnswers ||
+                    "{}"
+                );
+
+        }
+
+        catch (error) {
+
+            selectedAnswers =
+                {};
+
+        }
+
+
+        currentQuestionIndex =
+            Number(
+                savedQuestion ||
+                0
+            );
+
+
+        currentQuestionIndex =
+            Math.max(
+                0,
+                Math.min(
+                    quizzes.length -
+                    1,
+                    currentQuestionIndex
+                )
+            );
+
+
+        hintsUsed =
+            Number(
+                savedHints ||
+                0
+            );
+
+
+        hintsUsed =
+            Math.max(
+                0,
+                Math.min(
+                    MAX_HINTS,
+                    hintsUsed
+                )
+            );
+
+
+        $("setupCard").style.display =
+            "none";
+
+
+        $("hintsBar").style.display =
+            "block";
+
+
+        $("cameraBox").style.display =
+            "block";
+
+
+        $("quizTop").style.display =
+            "flex";
+
+
+        $("navigationCard").style.display =
+            "block";
+
+
+        $("hintCard").style.display =
+            "block";
+
+
+        $("submitSection").style.display =
+            "block";
+
+
+        return true;
+
+    }
+
+
+    /* =========================================================
+       CLEAR STORAGE
+       ========================================================= */
+
+    function clearQuizStorage() {
+
+        [
+            "answers",
+            "question",
+            "hints",
+            "end_time",
+            "started",
+            "pause_end"
+        ].forEach(
+            function (
+                key
+            ) {
+
+                localStorage.removeItem(
+                    storageKey(
+                        key
+                    )
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       BUTTON EVENTS
+       ========================================================= */
+
+    $("timeSelect")
+        .addEventListener(
+            "change",
+            function () {
+
+                $("customTimeBox")
+                    .classList
+                    .toggle(
+                        "hidden",
+                        this.value !==
+                        "custom"
+                    );
+
+            }
+        );
+
+
+    $("startBtn")
+        .addEventListener(
+            "click",
+            startSecureQuiz
+        );
+
+
+    $("allowCameraBtn")
+        .addEventListener(
+            "click",
+            allowCameraAndStart
+        );
+
+
+    $("cancelCameraBtn")
+        .addEventListener(
+            "click",
+            cancelCameraStart
+        );
+
+
+    $("previousBtn")
+        .addEventListener(
+            "click",
+            previousQuestion
+        );
+
+
+    $("nextBtn")
+        .addEventListener(
+            "click",
+            nextQuestion
+        );
+
+
+    $("hintBtn")
+        .addEventListener(
+            "click",
+            showHint
+        );
+
+
+    $("submitBtn")
+        .addEventListener(
+            "click",
+            function () {
+
+                submitQuiz(
+                    false
+                );
+
+            }
+        );
+
+
+    $("recoverBtn")
+        .addEventListener(
+            "click",
+            recoverSecurity
+        );
+
+
+    $("nextLevelBtn")
+        .addEventListener(
+            "click",
+            goToNextLevel
+        );
+
+
+    $("worldBtn")
+        .addEventListener(
+            "click",
+            goBackToWorld
+        );
+
+
+    /* =========================================================
+       SECURITY SETUP
+       ========================================================= */
+
+    setupSecurityListeners();
+
+
+    updateLanguageUI();
+
+
+    /* =========================================================
+       GLOBAL FUNCTIONS
+       ========================================================= */
+
+    window.startSecureQuiz =
+        startSecureQuiz;
+
+    window.cancelCameraStart =
+        cancelCameraStart;
+
+    window.allowCameraAndStart =
+        allowCameraAndStart;
+
+    window.recoverSecurity =
+        recoverSecurity;
+
+    window.showHint =
+        showHint;
+
+    window.previousQuestion =
+        previousQuestion;
+
+    window.nextQuestion =
+        nextQuestion;
+
+    window.submitQuiz =
+        submitQuiz;
+
+    window.goToNextLevel =
+        goToNextLevel;
+
+    window.goBackToWorld =
+        goBackToWorld;
+
+
+    /* =========================================================
+       BEFORE UNLOAD
+       ========================================================= */
+
+    window.addEventListener(
+        "beforeunload",
+        function (event) {
+
+            if (
+                quizStarted &&
+                !quizSubmitted &&
+                !allowNavigation
+            ) {
+
+                saveQuizState();
+
+                event.preventDefault();
+
+                event.returnValue =
+                    "";
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       PAGE HIDE
+       ========================================================= */
+
+    window.addEventListener(
+        "pagehide",
+        function () {
+
+            if (
+                cameraStream
+            ) {
+
+                cameraStream
+                    .getTracks()
+                    .forEach(
+                        function (
+                            track
+                        ) {
+
+                            track.stop();
+
+                        }
+                    );
+
+            }
+
+
+            if (
+                securityMonitorInterval
+            ) {
+
+                clearInterval(
+                    securityMonitorInterval
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       START LOADING
+       ========================================================= */
+
+    loadQuiz();
+
+</script>
+<script src="js/sounds.js"></script>
+</body>
+
+</html>

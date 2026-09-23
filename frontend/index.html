@@ -1,0 +1,4675 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>LearnQuest</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                #02040a;
+
+            color:
+                #ffffff;
+
+            overflow:
+                hidden;
+
+        }
+
+
+        /* =====================================================
+           BACKGROUND
+           ===================================================== */
+
+        .page-background {
+
+            position: fixed;
+
+            inset: 0;
+
+            overflow: hidden;
+
+            background:
+
+                radial-gradient(
+                    circle at 18% 18%,
+                    rgba(55, 95, 255, 0.13),
+                    transparent 28%
+                ),
+
+                radial-gradient(
+                    circle at 78% 20%,
+                    rgba(150, 70, 255, 0.11),
+                    transparent 28%
+                ),
+
+                radial-gradient(
+                    circle at 45% 85%,
+                    rgba(0, 220, 180, 0.07),
+                    transparent 30%
+                ),
+
+                linear-gradient(
+                    180deg,
+                    #02030a 0%,
+                    #050813 52%,
+                    #010207 100%
+                );
+
+            z-index: 0;
+
+        }
+
+
+        /* =====================================================
+           STARS
+           ===================================================== */
+
+        .stars {
+
+            position: absolute;
+
+            inset: 0;
+
+        }
+
+
+        .star {
+
+            position: absolute;
+
+            width: 3px;
+
+            height: 3px;
+
+            border-radius: 50%;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 0 6px #ffffff,
+                0 0 14px rgba(130, 170, 255, 0.8);
+
+            animation:
+                starBlink
+                var(--star-speed)
+                ease-in-out
+                infinite;
+
+            animation-delay:
+                var(--star-delay);
+
+            opacity:
+                var(--star-opacity);
+
+        }
+
+
+        @keyframes starBlink {
+
+            0%,
+            100% {
+                opacity: 0.15;
+                transform: scale(0.7);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.45);
+            }
+
+        }
+
+
+        /* =====================================================
+           FLOATING CODE
+           ===================================================== */
+
+        .floating-code {
+
+            position: absolute;
+
+            inset: 0;
+
+            pointer-events: none;
+
+        }
+
+
+        .code {
+
+            position: absolute;
+
+            font-family:
+                Consolas,
+                "Courier New",
+                monospace;
+
+            font-weight: 800;
+
+            font-size:
+                var(--code-size);
+
+            color:
+                var(--code-color);
+
+            opacity: 0.22;
+
+            text-shadow:
+                0 0 8px currentColor,
+                0 0 18px currentColor;
+
+            animation:
+                codeRise
+                var(--code-speed)
+                linear
+                infinite;
+
+            animation-delay:
+                var(--code-delay);
+
+            white-space: nowrap;
+
+        }
+
+
+        @keyframes codeRise {
+
+            0% {
+
+                transform:
+                    translateY(110vh)
+                    translateX(0)
+                    rotate(-5deg);
+
+                opacity: 0;
+
+            }
+
+            12% {
+                opacity: 0.22;
+            }
+
+            50% {
+
+                transform:
+                    translateY(45vh)
+                    translateX(32px)
+                    rotate(4deg);
+
+            }
+
+            90% {
+                opacity: 0.18;
+            }
+
+            100% {
+
+                transform:
+                    translateY(-20vh)
+                    translateX(-28px)
+                    rotate(9deg);
+
+                opacity: 0;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           PAGE
+           ===================================================== */
+
+        .page {
+
+            position: relative;
+
+            z-index: 2;
+
+            min-height: 100vh;
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 18px;
+
+        }
+
+
+        /* =====================================================
+           GAME BOARD
+           ===================================================== */
+
+        .game-board {
+
+            position: relative;
+
+            width:
+                min(1280px, 97vw);
+
+            height:
+                min(720px, 94vh);
+
+            min-height: 600px;
+
+            overflow: hidden;
+
+            border-radius: 30px;
+
+            background:
+                rgba(5, 8, 17, 0.88);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.10);
+
+            box-shadow:
+                0 30px 90px
+                rgba(0, 0, 0, 0.60);
+
+        }
+
+
+        /* =====================================================
+           TOP BAR
+           ===================================================== */
+
+        .topbar {
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 68px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            padding:
+                0 22px;
+
+            background:
+                rgba(2, 4, 10, 0.78);
+
+            border-bottom:
+                1px solid
+                rgba(255, 255, 255, 0.07);
+
+            backdrop-filter:
+                blur(15px);
+
+            z-index: 100;
+
+        }
+
+
+        .logo {
+
+            font-size: 24px;
+
+            font-weight: 900;
+
+        }
+
+
+        .top-right {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap: 9px;
+
+        }
+
+
+        .top-tag {
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            color:
+                #8c93ab;
+
+        }
+
+
+        .settings-btn {
+
+            width: 40px;
+
+            height: 40px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            border-radius: 11px;
+
+            background:
+                rgba(255,255,255,0.05);
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 19px;
+
+        }
+
+
+        .settings-btn:hover {
+
+            background:
+                rgba(117, 92, 255, 0.14);
+
+            border-color:
+                rgba(117, 92, 255, 0.45);
+
+        }
+
+
+        /* =====================================================
+           SETTINGS PANEL
+           ===================================================== */
+
+        .settings-panel {
+
+            position: absolute;
+
+            top: 56px;
+
+            right: 20px;
+
+            width: 245px;
+
+            padding: 16px;
+
+            border-radius: 16px;
+
+            background:
+                rgba(8, 11, 22, 0.97);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            box-shadow:
+                0 18px 45px
+                rgba(0,0,0,0.50);
+
+            backdrop-filter:
+                blur(18px);
+
+            z-index: 200;
+
+            display: none;
+
+        }
+
+
+        .settings-panel.show {
+
+            display: block;
+
+        }
+
+
+        .settings-panel h3 {
+
+            margin-bottom: 14px;
+
+            font-size: 15px;
+
+        }
+
+
+        .setting-row {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap: 10px;
+
+            padding: 10px 0;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.06);
+
+        }
+
+
+        .setting-row:last-child {
+            border-bottom: none;
+        }
+
+
+        .setting-text strong {
+
+            display: block;
+
+            font-size: 12px;
+
+        }
+
+
+        .setting-text span {
+
+            display: block;
+
+            margin-top: 3px;
+
+            color: #737b94;
+
+            font-size: 10px;
+
+        }
+
+
+        .toggle {
+
+            position: relative;
+
+            width: 43px;
+
+            height: 24px;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .toggle input {
+
+            opacity: 0;
+
+            width: 0;
+            height: 0;
+
+        }
+
+
+        .slider {
+
+            position: absolute;
+
+            inset: 0;
+
+            border-radius: 30px;
+
+            background: #282d3e;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+        }
+
+
+        .slider::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 18px;
+
+            height: 18px;
+
+            left: 3px;
+
+            top: 3px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            transition: 0.25s;
+
+        }
+
+
+        .toggle input:checked + .slider {
+
+            background:
+                #6652e8;
+
+        }
+
+
+        .toggle input:checked + .slider::before {
+
+            transform:
+                translateX(19px);
+
+        }
+
+
+        /* =====================================================
+           SCENE
+           ===================================================== */
+
+        .scene {
+
+            position: absolute;
+
+            left: 0;
+
+            top: 68px;
+
+            bottom: 0;
+
+            width:
+                calc(100% - 390px);
+
+            overflow: hidden;
+
+        }
+
+
+        .scene::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    transparent,
+                    rgba(0,0,0,0.30)
+                );
+
+            pointer-events: none;
+
+            z-index: 1;
+
+        }
+
+
+        /* =====================================================
+           GROUND
+           ===================================================== */
+
+        .ground {
+
+            position: absolute;
+
+            left: 0;
+
+            right: 0;
+
+            bottom: 0;
+
+            height: 44%;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #0a0e18,
+                    #04060c
+                );
+
+        }
+
+
+        /* =====================================================
+           STRAIGHT ROAD
+           ===================================================== */
+
+        .road {
+
+            position: absolute;
+
+            left: 0;
+
+            right: 0;
+
+            top: 57%;
+
+            height: 160px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #171c28 0%,
+                    #0c1019 100%
+                );
+
+            border-top:
+                2px solid
+                rgba(255,255,255,0.10);
+
+            border-bottom:
+                2px solid
+                rgba(255,255,255,0.08);
+
+            z-index: 3;
+
+        }
+
+
+        .road-line {
+
+            position: absolute;
+
+            left: 0;
+
+            right: 0;
+
+            top: 50%;
+
+            height: 6px;
+
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    #e6bb43 0,
+                    #e6bb43 55px,
+                    transparent 55px,
+                    transparent 105px
+                );
+
+            transform:
+                translateY(-50%);
+
+            animation:
+                roadMotion
+                1.1s
+                linear
+                infinite;
+
+        }
+
+
+        @keyframes roadMotion {
+
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: -105px 0;
+            }
+
+        }
+
+
+        /* =====================================================
+           ROAD LIGHTS
+           ===================================================== */
+
+        .road-light {
+
+            position: absolute;
+
+            top: 15px;
+
+            width: 8px;
+
+            height: 8px;
+
+            border-radius: 50%;
+
+            background:
+                #59c7ff;
+
+            box-shadow:
+                0 0 10px #59c7ff,
+                0 0 20px
+                rgba(89,199,255,0.7);
+
+        }
+
+
+        .road-light.l1 { left: 7%; }
+        .road-light.l2 { left: 22%; }
+        .road-light.l3 { left: 37%; }
+        .road-light.l4 { left: 52%; }
+
+        .road-light.r1 { right: 7%; }
+        .road-light.r2 { right: 22%; }
+        .road-light.r3 { right: 37%; }
+        .road-light.r4 { right: 52%; }
+
+
+        /* =====================================================
+           STORY TITLE
+           ===================================================== */
+
+        .scene-title {
+
+            position: absolute;
+
+            top: 11%;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            color:
+                #aeb5ca;
+
+            font-size: 10px;
+
+            letter-spacing: 4px;
+
+            white-space: nowrap;
+
+            z-index: 7;
+
+        }
+
+
+        /* =====================================================
+           STORY MESSAGE
+           ===================================================== */
+
+        .story-message {
+
+            position: absolute;
+
+            top: 18%;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            min-width: 245px;
+
+            max-width: 88%;
+
+            padding:
+                11px 17px;
+
+            border-radius: 13px;
+
+            background:
+                rgba(3,7,17,0.79);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            backdrop-filter:
+                blur(12px);
+
+            text-align: center;
+
+            z-index: 15;
+
+        }
+
+
+        .story-main {
+
+            font-size:
+                13px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .story-sub {
+
+            margin-top:
+                4px;
+
+            color:
+                #858da7;
+
+            font-size:
+                10px;
+
+        }
+
+
+        /* =====================================================
+           CHARACTERS
+           ===================================================== */
+
+        .character {
+
+            position: absolute;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            user-select:
+                none;
+
+        }
+
+
+        .character-label {
+
+            margin-top:
+                7px;
+
+            padding:
+                5px 9px;
+
+            border-radius:
+                8px;
+
+            background:
+                rgba(1,3,9,0.82);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            font-size:
+                9px;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                0.7px;
+
+        }
+
+
+        /* =====================================================
+           HUMAN / NLP
+           ===================================================== */
+
+        .human {
+
+            left:
+                31%;
+
+            top:
+                46%;
+
+            color:
+                #51e6b6;
+
+            z-index:
+                11;
+
+            animation:
+                humanStory
+                12s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .human-figure {
+
+            position:
+                relative;
+
+            width:
+                125px;
+
+            height:
+                132px;
+
+        }
+
+
+        .human-icon {
+
+            position:
+                absolute;
+
+            left:
+                0;
+
+            top:
+                0;
+
+            font-size:
+                110px;
+
+            filter:
+                drop-shadow(
+                    0 0 16px
+                    rgba(67,235,180,0.65)
+                );
+
+        }
+
+
+        .human-cup {
+
+            position:
+                absolute;
+
+            left:
+                80px;
+
+            top:
+                50px;
+
+            font-size:
+                45px;
+
+            z-index:
+                3;
+
+            filter:
+                drop-shadow(
+                    0 0 10px
+                    rgba(255,125,100,0.7)
+                );
+
+            transform:
+                rotate(-12deg);
+
+        }
+
+
+        .human .character-label {
+
+            color:
+                #51e6b6;
+
+        }
+
+
+        @keyframes humanStory {
+
+            0%,
+            19% {
+
+                transform:
+                    translateY(0);
+
+            }
+
+            22% {
+
+                transform:
+                    translateY(8px)
+                    rotate(-8deg);
+
+            }
+
+            26% {
+
+                transform:
+                    translateY(13px)
+                    rotate(8deg);
+
+            }
+
+            31% {
+
+                transform:
+                    translateY(0)
+                    rotate(0);
+
+            }
+
+            64% {
+
+                transform:
+                    translateY(0);
+
+            }
+
+            70% {
+
+                transform:
+                    translateY(-8px);
+
+            }
+
+            77% {
+
+                transform:
+                    translateY(0);
+
+            }
+
+            100% {
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           PYTHON SNAKE
+           ===================================================== */
+
+        .snake {
+
+            left:
+                -13%;
+
+            top:
+                50%;
+
+            color:
+                #53caff;
+
+            z-index:
+                18;
+
+            animation:
+                snakeBattle
+                12s
+                linear
+                infinite;
+
+        }
+
+
+        .snake .character-icon {
+
+            font-size:
+                82px;
+
+            filter:
+                drop-shadow(
+                    0 0 14px
+                    rgba(70,200,255,0.65)
+                );
+
+            transform:
+                scaleX(-1);
+
+        }
+
+
+        .snake .character-label {
+
+            color:
+                #53caff;
+
+        }
+
+
+        @keyframes snakeBattle {
+
+            0% {
+
+                left:
+                    -13%;
+
+                top:
+                    50%;
+
+                opacity:
+                    1;
+
+                transform:
+                    rotate(0);
+
+            }
+
+            14% {
+
+                left:
+                    11%;
+
+                top:
+                    50%;
+
+            }
+
+            20% {
+
+                left:
+                    23%;
+
+                top:
+                    50%;
+
+            }
+
+            23% {
+
+                left:
+                    28%;
+
+                top:
+                    50%;
+
+                transform:
+                    rotate(-6deg);
+
+            }
+
+            27% {
+
+                left:
+                    31%;
+
+                top:
+                    50%;
+
+            }
+
+            34% {
+
+                left:
+                    50%;
+
+                top:
+                    50%;
+
+            }
+
+            40% {
+
+                left:
+                    61%;
+
+                top:
+                    50%;
+
+            }
+
+            45% {
+
+                left:
+                    67%;
+
+                top:
+                    50%;
+
+            }
+
+            50% {
+
+                left:
+                    72%;
+
+                top:
+                    50%;
+
+                transform:
+                    rotate(-8deg);
+
+            }
+
+            55% {
+
+                left:
+                    73%;
+
+                top:
+                    55%;
+
+                transform:
+                    rotate(25deg);
+
+            }
+
+            60% {
+
+                left:
+                    71%;
+
+                top:
+                    65%;
+
+                transform:
+                    rotate(80deg);
+
+            }
+
+            65% {
+
+                left:
+                    69%;
+
+                top:
+                    68%;
+
+                transform:
+                    rotate(105deg);
+
+                opacity:
+                    0.82;
+
+            }
+
+            70% {
+
+                left:
+                    68%;
+
+                top:
+                    69%;
+
+                transform:
+                    rotate(120deg)
+                    scale(0.82);
+
+                opacity:
+                    0.42;
+
+            }
+
+            76%,
+            100% {
+
+                left:
+                    67%;
+
+                top:
+                    70%;
+
+                transform:
+                    rotate(125deg)
+                    scale(0.7);
+
+                opacity:
+                    0;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           ML ROBOT
+           ===================================================== */
+
+        .robot {
+
+            left:
+                67%;
+
+            top:
+                48%;
+
+            color:
+                #b47dff;
+
+            z-index:
+                12;
+
+            animation:
+                robotStory
+                12s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .robot .character-icon {
+
+            font-size:
+                80px;
+
+            filter:
+                drop-shadow(
+                    0 0 15px
+                    rgba(180,110,255,0.7)
+                );
+
+        }
+
+
+        .robot .character-label {
+
+            color:
+                #b47dff;
+
+        }
+
+
+        @keyframes robotStory {
+
+            0%,
+            32% {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateX(65px);
+
+            }
+
+            37% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateX(0);
+
+            }
+
+            54% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateX(0);
+
+            }
+
+            62% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateX(0)
+                    rotate(0);
+
+            }
+
+            /* robot moves to human */
+
+            71% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateX(-185px);
+
+            }
+
+            75% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateX(-205px);
+
+            }
+
+            80% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateX(-205px);
+
+            }
+
+            /* battery removed */
+
+            84% {
+
+                opacity:
+                    0.8;
+
+                transform:
+                    translateX(-205px)
+                    translateY(18px)
+                    rotate(12deg);
+
+            }
+
+            /* dead */
+
+            89% {
+
+                opacity:
+                    0.55;
+
+                transform:
+                    translateX(-205px)
+                    translateY(28px)
+                    rotate(82deg)
+                    scale(0.82);
+
+            }
+
+            94%,
+            100% {
+
+                opacity:
+                    0.30;
+
+                transform:
+                    translateX(-205px)
+                    translateY(30px)
+                    rotate(90deg)
+                    scale(0.78);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           ROBOT DEAD
+           ===================================================== */
+
+        .robot::after {
+
+            content:
+                "💀";
+
+            position:
+                absolute;
+
+            top:
+                62px;
+
+            left:
+                42px;
+
+            font-size:
+                27px;
+
+            opacity:
+                0;
+
+            transform:
+                scale(0.4);
+
+            animation:
+                robotDeadSkull
+                12s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        @keyframes robotDeadSkull {
+
+            0%,
+            84% {
+
+                opacity:
+                    0;
+
+                transform:
+                    scale(0.4);
+
+            }
+
+            88% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(1.15);
+
+            }
+
+            93%,
+            100% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(1);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           BITE EFFECT
+           ===================================================== */
+
+        .bite {
+
+            position:
+                absolute;
+
+            font-size:
+                29px;
+
+            z-index:
+                25;
+
+            opacity:
+                0;
+
+            animation:
+                biteEffect
+                12s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .human-bite {
+
+            left:
+                29%;
+
+            top:
+                47%;
+
+        }
+
+
+        .robot-bite {
+
+            left:
+                70%;
+
+            top:
+                47%;
+
+            animation-delay:
+                0s;
+
+        }
+
+
+        @keyframes biteEffect {
+
+            0%,
+            22% {
+
+                opacity:
+                    0;
+
+                transform:
+                    scale(0.4);
+
+            }
+
+            24% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(1.35);
+
+            }
+
+            27% {
+
+                opacity:
+                    0;
+
+                transform:
+                    scale(1);
+
+            }
+
+            47% {
+
+                opacity:
+                    0;
+
+            }
+
+            49% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(1.35)
+                    rotate(12deg);
+
+            }
+
+            53% {
+
+                opacity:
+                    0;
+
+                transform:
+                    scale(1);
+
+            }
+
+            100% {
+
+                opacity:
+                    0;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           REVIVE EFFECT
+           ===================================================== */
+
+        .revive {
+
+            position:
+                absolute;
+
+            left:
+                39%;
+
+            top:
+                42%;
+
+            z-index:
+                23;
+
+            text-align:
+                center;
+
+            opacity:
+                0;
+
+            animation:
+                reviveEffect
+                12s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .revive-effect {
+
+            font-size:
+                44px;
+
+            filter:
+                drop-shadow(
+                    0 0 12px
+                    rgba(40,255,170,0.8)
+                );
+
+            animation:
+                revivePulse
+                0.8s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .revive-text {
+
+            margin-top:
+                3px;
+
+            font-size:
+                10px;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                2px;
+
+            color:
+                #54efb8;
+
+        }
+
+
+        @keyframes reviveEffect {
+
+            0%,
+            66% {
+
+                opacity:
+                    0;
+
+                transform:
+                    scale(0.3);
+
+            }
+
+            70% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(1.25);
+
+            }
+
+            76% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(1);
+
+            }
+
+            82%,
+            100% {
+
+                opacity:
+                    0;
+
+            }
+
+        }
+
+
+        @keyframes revivePulse {
+
+            0%,
+            100% {
+
+                transform:
+                    scale(1);
+
+            }
+
+            50% {
+
+                transform:
+                    scale(1.18);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           BATTERY
+           ===================================================== */
+
+        .battery {
+
+            position:
+                absolute;
+
+            left:
+                72%;
+
+            top:
+                60%;
+
+            z-index:
+                20;
+
+            font-size:
+                30px;
+
+            opacity:
+                0;
+
+            animation:
+                batteryStory
+                12s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        @keyframes batteryStory {
+
+            0%,
+            74% {
+
+                opacity:
+                    0;
+
+                transform:
+                    translate(0,0);
+
+            }
+
+            78% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translate(0,0);
+
+            }
+
+            84% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translate(-75px,-65px)
+                    rotate(18deg);
+
+            }
+
+            91%,
+            100% {
+
+                opacity:
+                    0;
+
+                transform:
+                    translate(-120px,-90px)
+                    rotate(45deg);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           WIN
+           ===================================================== */
+
+        .win-message {
+
+            position:
+                absolute;
+
+            left:
+                50%;
+
+            bottom:
+                15%;
+
+            transform:
+                translateX(-50%)
+                scale(0.85);
+
+            z-index:
+                25;
+
+            padding:
+                12px
+                23px;
+
+            border-radius:
+                14px;
+
+            background:
+                rgba(10,105,75,0.22);
+
+            border:
+                1px solid
+                rgba(67,235,180,0.55);
+
+            color:
+                #62efc0;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                2px;
+
+            font-size:
+                17px;
+
+            opacity:
+                0;
+
+            animation:
+                winStory
+                12s
+                ease-in-out
+                infinite;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        @keyframes winStory {
+
+            0%,
+            82% {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateX(-50%)
+                    scale(0.85);
+
+            }
+
+            88% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateX(-50%)
+                    scale(1.1);
+
+            }
+
+            94%,
+            100% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateX(-50%)
+                    scale(1);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           LOGIN PANEL
+           ===================================================== */
+
+        .login-panel {
+
+            position:
+                absolute;
+
+            right:
+                24px;
+
+            top:
+                50%;
+
+            transform:
+                translateY(-50%);
+
+            width:
+                350px;
+
+            padding:
+                30px;
+
+            border-radius:
+                24px;
+
+            background:
+                rgba(5,8,18,0.95);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+
+            backdrop-filter:
+                blur(20px);
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,0.52);
+
+            z-index:
+                50;
+
+        }
+
+
+        .form-panel {
+
+            display:
+                block;
+
+        }
+
+
+        .form-panel.hidden {
+
+            display:
+                none;
+
+        }
+
+
+        .login-panel h1 {
+
+            margin:
+                0 0 6px;
+
+            font-size:
+                31px;
+
+        }
+
+
+        .login-panel h2 {
+
+            margin:
+                0 0 20px;
+
+            font-size:
+                17px;
+
+            font-weight:
+                500;
+
+            color:
+                #b7bdd0;
+
+        }
+
+
+        .login-description {
+
+            margin:
+                0 0 20px;
+
+            color:
+                #7d849b;
+
+            font-size:
+                12px;
+
+            line-height:
+                1.55;
+
+        }
+
+
+        /* =====================================================
+           INPUT
+           ===================================================== */
+
+        .input-group {
+
+            margin-bottom:
+                14px;
+
+        }
+
+
+        .input-group label {
+
+            display:
+                block;
+
+            margin-bottom:
+                6px;
+
+            font-size:
+                12px;
+
+            color:
+                #aeb5ca;
+
+        }
+
+
+        .input-group input {
+
+            width:
+                100%;
+
+            height:
+                54px;
+
+            padding:
+                0 15px;
+
+            border-radius:
+                12px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.11);
+
+            outline:
+                none;
+
+            background:
+                rgba(255,255,255,0.045);
+
+            color:
+                white;
+
+            font-size:
+                15px;
+
+            transition:
+                0.25s ease;
+
+        }
+
+
+        .input-group input:focus {
+
+            border-color:
+                #7562ff;
+
+            background:
+                rgba(117,98,255,0.08);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(117,98,255,0.10);
+
+        }
+
+
+        .input-group input::placeholder {
+
+            color:
+                #626a80;
+
+        }
+
+
+        /* =====================================================
+           MAIN BUTTON
+           ===================================================== */
+
+        .main-btn {
+
+            width:
+                100%;
+
+            height:
+                54px;
+
+            border:
+                none;
+
+            border-radius:
+                12px;
+
+            margin-top:
+                4px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #755cff,
+                    #5036ca
+                );
+
+            color:
+                white;
+
+            font-size:
+                16px;
+
+            font-weight:
+                900;
+
+            cursor:
+                pointer;
+
+            box-shadow:
+                0 13px 32px
+                rgba(89,65,220,0.28);
+
+            transition:
+                0.25s ease;
+
+        }
+
+
+        .main-btn:hover {
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        .switch-text {
+
+            text-align:
+                center;
+
+            margin-top:
+                17px;
+
+            font-size:
+                12px;
+
+            color:
+                #788097;
+
+        }
+
+
+        .switch-btn {
+
+            border:
+                none;
+
+            background:
+                transparent;
+
+            color:
+                #9c8cff;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            font-size:
+                12px;
+
+        }
+
+
+        .switch-btn:hover {
+
+            color:
+                #c1b8ff;
+
+            text-decoration:
+                underline;
+
+        }
+
+
+        .form-message {
+
+            min-height:
+                21px;
+
+            margin-top:
+                13px;
+
+            text-align:
+                center;
+
+            font-size:
+                13px;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (
+            max-width: 980px
+        ) {
+
+            body {
+
+                overflow:
+                    auto;
+
+            }
+
+
+            .page {
+
+                align-items:
+                    flex-start;
+
+                padding:
+                    12px;
+
+            }
+
+
+            .game-board {
+
+                width:
+                    100%;
+
+                height:
+                    auto;
+
+                min-height:
+                    1000px;
+
+            }
+
+
+            .scene {
+
+                width:
+                    100%;
+
+                height:
+                    610px;
+
+                bottom:
+                    auto;
+
+            }
+
+
+            .login-panel {
+
+                top:
+                    auto;
+
+                bottom:
+                    28px;
+
+                right:
+                    50%;
+
+                transform:
+                    translateX(50%);
+
+                width:
+                    min(370px,90%);
+
+            }
+
+        }
+
+
+        @media (
+            max-width: 600px
+        ) {
+
+            .game-board {
+
+                min-height:
+                    980px;
+
+            }
+
+
+            .topbar {
+
+                padding:
+                    0 14px;
+
+            }
+
+
+            .logo {
+
+                font-size:
+                    20px;
+
+            }
+
+
+            .top-tag {
+
+                display:
+                    none;
+
+            }
+
+
+            .scene {
+
+                height:
+                    545px;
+
+            }
+
+
+            .scene-title {
+
+                font-size:
+                    8px;
+
+                letter-spacing:
+                    2px;
+
+            }
+
+
+            .story-message {
+
+                min-width:
+                    200px;
+
+            }
+
+
+            .road {
+
+                top:
+                    58%;
+
+                height:
+                    130px;
+
+            }
+
+
+            .human-icon {
+
+                font-size:
+                    80px;
+
+            }
+
+
+            .human-cup {
+
+                left:
+                    61px;
+
+                top:
+                    37px;
+
+                font-size:
+                    34px;
+
+            }
+
+
+            .snake .character-icon,
+            .robot .character-icon {
+
+                font-size:
+                    58px;
+
+            }
+
+
+            .human {
+
+                left:
+                    26%;
+
+            }
+
+
+            .robot {
+
+                left:
+                    64%;
+
+            }
+
+
+            .login-panel {
+
+                padding:
+                    22px;
+
+            }
+
+
+            .login-panel h1 {
+
+                font-size:
+                    27px;
+
+            }
+
+        }
+
+
+        @media (
+            prefers-reduced-motion: reduce
+        ) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration:
+                    0.01ms
+                    !important;
+
+                animation-iteration-count:
+                    1
+                    !important;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     BACKGROUND
+     ========================================================= -->
+
+<div class="page-background">
+
+    <div
+        class="stars"
+        id="stars"
+    ></div>
+
+
+    <div
+        class="floating-code"
+        id="floatingCode"
+    ></div>
+
+</div>
+
+
+
+<!-- =========================================================
+     PAGE
+     ========================================================= -->
+
+<div class="page">
+
+
+    <div class="game-board">
+
+
+        <!-- =================================================
+             TOP BAR
+             ================================================= -->
+
+        <div class="topbar">
+
+            <div class="logo">
+                🎮 LearnQuest
+            </div>
+
+
+            <div class="top-right">
+
+                <div class="top-tag">
+                    LEARNING BATTLEFIELD
+                </div>
+
+
+                <button
+                    class="settings-btn"
+                    id="settingsBtn"
+                    type="button"
+                    title="Settings"
+                >
+                    ⚙️
+                </button>
+
+            </div>
+
+
+            <!-- SETTINGS -->
+
+            <div
+                class="settings-panel"
+                id="settingsPanel"
+            >
+
+                <h3>
+                    ⚙️ Settings
+                </h3>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-text">
+
+                        <strong>
+                            🎵 Background Music
+                        </strong>
+
+                        <span id="musicStatus">
+                            Music ON
+                        </span>
+
+                    </div>
+
+
+                    <label class="toggle">
+
+                        <input
+                            type="checkbox"
+                            id="musicToggle"
+                            checked
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-text">
+
+                        <strong>
+                            🔔 Click Sound
+                        </strong>
+
+                        <span id="soundStatus">
+                            Click sound ON
+                        </span>
+
+                    </div>
+
+
+                    <label class="toggle">
+
+                        <input
+                            type="checkbox"
+                            id="soundToggle"
+                            checked
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SCENE
+             ================================================= -->
+
+        <div class="scene">
+
+
+            <div class="ground"></div>
+
+
+            <!-- STRAIGHT ROAD -->
+
+            <div class="road">
+
+                <div class="road-line"></div>
+
+                <div class="road-light l1"></div>
+                <div class="road-light l2"></div>
+                <div class="road-light l3"></div>
+                <div class="road-light l4"></div>
+
+                <div class="road-light r1"></div>
+                <div class="road-light r2"></div>
+                <div class="road-light r3"></div>
+                <div class="road-light r4"></div>
+
+            </div>
+
+
+
+            <div class="scene-title">
+                NLP × JAVA × ML × PYTHON
+            </div>
+
+
+
+            <!-- STORY -->
+
+            <div class="story-message">
+
+                <div
+                    class="story-main"
+                    id="storyMain"
+                >
+                    🧍 NLP Human is enjoying Java ☕
+                </div>
+
+
+                <div
+                    class="story-sub"
+                    id="storySub"
+                >
+                    The learning battle is about to begin...
+                </div>
+
+            </div>
+
+
+
+            <!-- HUMAN + JAVA CUP -->
+
+            <div class="character human">
+
+                <div class="human-figure">
+
+                    <div class="human-icon">
+                        🧍
+                    </div>
+
+
+                    <div class="human-cup">
+                        ☕
+                    </div>
+
+                </div>
+
+
+                <div class="character-label">
+                    NLP • HUMAN
+                </div>
+
+            </div>
+
+
+
+            <!-- PYTHON -->
+
+            <div class="character snake">
+
+                <div class="character-icon">
+                    🐍
+                </div>
+
+
+                <div class="character-label">
+                    PYTHON
+                </div>
+
+            </div>
+
+
+
+            <!-- MACHINE LEARNING -->
+
+            <div class="character robot">
+
+                <div class="character-icon">
+                    🤖
+                </div>
+
+
+                <div class="character-label">
+                    ML • ROBOT
+                </div>
+
+            </div>
+
+
+
+            <!-- BITE HUMAN -->
+
+            <div class="bite human-bite">
+                ⚡🩸
+            </div>
+
+
+
+            <!-- BITE ROBOT -->
+
+            <div class="bite robot-bite">
+                ⚡💥
+            </div>
+
+
+
+            <!-- REVIVE -->
+
+            <div class="revive">
+
+                <div class="revive-effect">
+                    💚✨
+                </div>
+
+
+                <div class="revive-text">
+                    REVIVE
+                </div>
+
+            </div>
+
+
+
+            <!-- BATTERY -->
+
+            <div class="battery">
+                🔋
+            </div>
+
+
+
+            <!-- WIN -->
+
+            <div class="win-message">
+                🏆 NLP HUMAN WINS
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             LOGIN / CREATE ACCOUNT PANEL
+             ================================================= -->
+
+        <div class="login-panel">
+
+
+            <!-- =================================================
+                 LOGIN FORM
+                 ================================================= -->
+
+            <div
+                class="form-panel"
+                id="loginPanel"
+            >
+
+                <h1>
+                    Welcome Back
+                </h1>
+
+
+                <h2>
+                    Continue your learning race 🚀
+                </h2>
+
+
+                <p class="login-description">
+
+                    Login to enter your Learning World,
+                    complete levels and reach the finish line.
+
+                </p>
+
+
+                <form id="loginForm">
+
+
+                    <div class="input-group">
+
+                        <label for="loginEmail">
+                            Email
+                        </label>
+
+
+                        <input
+                            type="email"
+                            id="loginEmail"
+                            placeholder="Enter your email"
+                            required
+                            autocomplete="email"
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="loginPassword">
+                            Password
+                        </label>
+
+
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            placeholder="Enter your password"
+                            required
+                            autocomplete="current-password"
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="main-btn"
+                    >
+                        Login 🚀
+                    </button>
+
+
+                </form>
+
+
+                <p
+                    class="form-message"
+                    id="loginMessage"
+                ></p>
+
+
+                <div class="switch-text">
+
+                    New to LearnQuest?
+
+                    <button
+                        type="button"
+                        class="switch-btn"
+                        id="showRegisterBtn"
+                    >
+                        Create Account
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 REGISTER FORM
+                 ================================================= -->
+
+            <div
+                class="form-panel hidden"
+                id="registerPanel"
+            >
+
+                <h1>
+                    Create Account
+                </h1>
+
+
+                <h2>
+                    Start your learning adventure 🚀
+                </h2>
+
+
+                <p class="login-description">
+
+                    Create your LearnQuest account
+                    and begin your learning race.
+
+                </p>
+
+
+                <form id="registerForm">
+
+
+                    <div class="input-group">
+
+                        <label for="registerName">
+                            Name
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="registerName"
+                            placeholder="Enter your name"
+                            required
+                            autocomplete="name"
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="registerEmail">
+                            Email
+                        </label>
+
+
+                        <input
+                            type="email"
+                            id="registerEmail"
+                            placeholder="Enter your email"
+                            required
+                            autocomplete="email"
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="registerPassword">
+                            Password
+                        </label>
+
+
+                        <input
+                            type="password"
+                            id="registerPassword"
+                            placeholder="Create a password"
+                            required
+                            autocomplete="new-password"
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="confirmPassword">
+                            Confirm Password
+                        </label>
+
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm your password"
+                            required
+                            autocomplete="new-password"
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="main-btn"
+                    >
+                        Create Account 🎮
+                    </button>
+
+
+                </form>
+
+
+                <p
+                    class="form-message"
+                    id="registerMessage"
+                ></p>
+
+
+                <div class="switch-text">
+
+                    Already have an account?
+
+                    <button
+                        type="button"
+                        class="switch-btn"
+                        id="showLoginBtn"
+                    >
+                        Login
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+    /* =========================================================
+       CONFIG
+       ========================================================= */
+
+    const API_BASE =
+        "http://127.0.0.1:5000";
+
+
+    /* =========================================================
+       AUDIO SETTINGS
+       ========================================================= */
+
+    const MUSIC_KEY =
+        "learnquest_music";
+
+
+    const SOUND_KEY =
+        "learnquest_sound";
+
+
+    let audioContext =
+        null;
+
+
+    let musicTimer =
+        null;
+
+
+    let musicStarted =
+        false;
+
+
+    /* =========================================================
+       AUDIO HELPERS
+       ========================================================= */
+
+    function musicEnabled() {
+
+        return (
+            localStorage.getItem(
+                MUSIC_KEY
+            ) !== "off"
+        );
+
+    }
+
+
+    function clickSoundEnabled() {
+
+        return (
+            localStorage.getItem(
+                SOUND_KEY
+            ) !== "off"
+        );
+
+    }
+
+
+    function getAudioContext() {
+
+        if (
+            !audioContext
+        ) {
+
+            const AudioContext =
+                window.AudioContext ||
+                window.webkitAudioContext;
+
+
+            if (!AudioContext) {
+
+                return null;
+
+            }
+
+
+            audioContext =
+                new AudioContext();
+
+        }
+
+
+        return audioContext;
+
+    }
+
+
+    /* =========================================================
+       CLICK SOUND
+       ========================================================= */
+
+    function playClickSound() {
+
+        if (
+            !clickSoundEnabled()
+        ) {
+
+            return;
+
+        }
+
+
+        const ctx =
+            getAudioContext();
+
+
+        if (!ctx) {
+
+            return;
+
+        }
+
+
+        if (
+            ctx.state === "suspended"
+        ) {
+
+            ctx.resume();
+
+        }
+
+
+        const oscillator =
+            ctx.createOscillator();
+
+
+        const gain =
+            ctx.createGain();
+
+
+        oscillator.type =
+            "sine";
+
+
+        oscillator.frequency.setValueAtTime(
+            620,
+            ctx.currentTime
+        );
+
+
+        oscillator.frequency.exponentialRampToValueAtTime(
+            920,
+            ctx.currentTime + 0.08
+        );
+
+
+        gain.gain.setValueAtTime(
+            0.0001,
+            ctx.currentTime
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.10,
+            ctx.currentTime + 0.015
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.0001,
+            ctx.currentTime + 0.12
+        );
+
+
+        oscillator.connect(
+            gain
+        );
+
+
+        gain.connect(
+            ctx.destination
+        );
+
+
+        oscillator.start();
+
+
+        oscillator.stop(
+            ctx.currentTime + 0.13
+        );
+
+    }
+
+
+    /* =========================================================
+       BACKGROUND MUSIC
+       ========================================================= */
+
+    function startMusic() {
+
+        if (
+            !musicEnabled() ||
+            musicStarted
+        ) {
+
+            return;
+
+        }
+
+
+        const ctx =
+            getAudioContext();
+
+
+        if (!ctx) {
+
+            return;
+
+        }
+
+
+        if (
+            ctx.state === "suspended"
+        ) {
+
+            ctx.resume();
+
+        }
+
+
+        musicStarted =
+            true;
+
+
+        const notes = [
+            261.63,
+            329.63,
+            392.00,
+            329.63
+        ];
+
+
+        let index =
+            0;
+
+
+        function playMusicNote() {
+
+            if (
+                !musicEnabled()
+            ) {
+
+                return;
+
+            }
+
+
+            const oscillator =
+                ctx.createOscillator();
+
+
+            const gain =
+                ctx.createGain();
+
+
+            oscillator.type =
+                "sine";
+
+
+            oscillator.frequency.value =
+                notes[
+                    index %
+                    notes.length
+                ];
+
+
+            gain.gain.setValueAtTime(
+                0.0001,
+                ctx.currentTime
+            );
+
+
+            gain.gain.exponentialRampToValueAtTime(
+                0.025,
+                ctx.currentTime + 0.05
+            );
+
+
+            gain.gain.exponentialRampToValueAtTime(
+                0.0001,
+                ctx.currentTime + 0.85
+            );
+
+
+            oscillator.connect(
+                gain
+            );
+
+
+            gain.connect(
+                ctx.destination
+            );
+
+
+            oscillator.start();
+
+
+            oscillator.stop(
+                ctx.currentTime + 0.9
+            );
+
+
+            index++;
+
+        }
+
+
+        playMusicNote();
+
+
+        musicTimer =
+            setInterval(
+                playMusicNote,
+                950
+            );
+
+    }
+
+
+    function stopMusic() {
+
+        if (
+            musicTimer
+        ) {
+
+            clearInterval(
+                musicTimer
+            );
+
+            musicTimer =
+                null;
+
+        }
+
+
+        musicStarted =
+            false;
+
+    }
+
+
+    /* =========================================================
+       AUTO START AUDIO AFTER FIRST CLICK
+       ========================================================= */
+
+    document.addEventListener(
+        "click",
+        function () {
+
+            startMusic();
+
+        },
+        {
+            once: true
+        }
+    );
+
+
+    /* =========================================================
+       SETTINGS
+       ========================================================= */
+
+    const settingsBtn =
+        document.getElementById(
+            "settingsBtn"
+        );
+
+
+    const settingsPanel =
+        document.getElementById(
+            "settingsPanel"
+        );
+
+
+    const musicToggle =
+        document.getElementById(
+            "musicToggle"
+        );
+
+
+    const soundToggle =
+        document.getElementById(
+            "soundToggle"
+        );
+
+
+    const musicStatus =
+        document.getElementById(
+            "musicStatus"
+        );
+
+
+    const soundStatus =
+        document.getElementById(
+            "soundStatus"
+        );
+
+
+    musicToggle.checked =
+        musicEnabled();
+
+
+    soundToggle.checked =
+        clickSoundEnabled();
+
+
+    musicStatus.textContent =
+        musicToggle.checked
+            ? "Music ON"
+            : "Music OFF";
+
+
+    soundStatus.textContent =
+        soundToggle.checked
+            ? "Click sound ON"
+            : "Click sound OFF";
+
+
+    settingsBtn.addEventListener(
+        "click",
+        function (
+            event
+        ) {
+
+            event.stopPropagation();
+
+            playClickSound();
+
+            settingsPanel.classList.toggle(
+                "show"
+            );
+
+            startMusic();
+
+        }
+    );
+
+
+    settingsPanel.addEventListener(
+        "click",
+        function (
+            event
+        ) {
+
+            event.stopPropagation();
+
+        }
+    );
+
+
+    document.addEventListener(
+        "click",
+        function () {
+
+            settingsPanel.classList.remove(
+                "show"
+            );
+
+        }
+    );
+
+
+    musicToggle.addEventListener(
+        "change",
+        function () {
+
+            playClickSound();
+
+
+            if (
+                this.checked
+            ) {
+
+                localStorage.setItem(
+                    MUSIC_KEY,
+                    "on"
+                );
+
+
+                musicStatus.textContent =
+                    "Music ON";
+
+
+                startMusic();
+
+            }
+
+            else {
+
+                localStorage.setItem(
+                    MUSIC_KEY,
+                    "off"
+                );
+
+
+                musicStatus.textContent =
+                    "Music OFF";
+
+
+                stopMusic();
+
+            }
+
+        }
+    );
+
+
+    soundToggle.addEventListener(
+        "change",
+        function () {
+
+            localStorage.setItem(
+                SOUND_KEY,
+                this.checked
+                    ? "on"
+                    : "off"
+            );
+
+
+            soundStatus.textContent =
+                this.checked
+                    ? "Click sound ON"
+                    : "Click sound OFF";
+
+
+            if (
+                this.checked
+            ) {
+
+                playClickSound();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       FORM SWITCH
+       ========================================================= */
+
+    const loginPanel =
+        document.getElementById(
+            "loginPanel"
+        );
+
+
+    const registerPanel =
+        document.getElementById(
+            "registerPanel"
+        );
+
+
+    document.getElementById(
+        "showRegisterBtn"
+    ).addEventListener(
+        "click",
+        function () {
+
+            playClickSound();
+
+
+            loginPanel.classList.add(
+                "hidden"
+            );
+
+
+            registerPanel.classList.remove(
+                "hidden"
+            );
+
+
+            document.getElementById(
+                "registerName"
+            ).focus();
+
+        }
+    );
+
+
+    document.getElementById(
+        "showLoginBtn"
+    ).addEventListener(
+        "click",
+        function () {
+
+            playClickSound();
+
+
+            registerPanel.classList.add(
+                "hidden"
+            );
+
+
+            loginPanel.classList.remove(
+                "hidden"
+            );
+
+
+            document.getElementById(
+                "loginEmail"
+            ).focus();
+
+        }
+    );
+
+
+    /* =========================================================
+       LOGIN
+       ========================================================= */
+
+    document.getElementById(
+        "loginForm"
+    ).addEventListener(
+        "submit",
+        async function (
+            event
+        ) {
+
+            event.preventDefault();
+
+
+            playClickSound();
+
+
+            const email =
+                document.getElementById(
+                    "loginEmail"
+                ).value.trim();
+
+
+            const password =
+                document.getElementById(
+                    "loginPassword"
+                ).value;
+
+
+            const message =
+                document.getElementById(
+                    "loginMessage"
+                );
+
+
+            message.textContent =
+                "Checking your account...";
+
+
+            message.style.color =
+                "#9c8cff";
+
+
+            try {
+
+
+                const response =
+                    await fetch(
+                        `${API_BASE}/login`,
+                        {
+                            method:
+                                "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            credentials:
+                                "include",
+
+                            body:
+                                JSON.stringify({
+                                    email:
+                                        email,
+
+                                    password:
+                                        password
+                                })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    response.ok
+                ) {
+
+
+                    /* SAVE USER DETAILS */
+
+                    if (
+                        data.user
+                    ) {
+
+                        localStorage.setItem(
+                            "user_name",
+                            data.user.name || ""
+                        );
+
+
+                        localStorage.setItem(
+                            "user_email",
+                            data.user.email || ""
+                        );
+
+                    }
+
+
+                    message.textContent =
+                        "Login successful! 🚀";
+
+
+                    message.style.color =
+                        "#50e3a4";
+
+
+                    playClickSound();
+
+
+                    /*
+                     * Go to language selection.
+                     * Existing language page then sends
+                     * the user to dashboard.html.
+                     */
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "language.html";
+
+                        },
+                        500
+                    );
+
+                }
+
+                else {
+
+                    message.textContent =
+                        data.message ||
+                        "Invalid email or password.";
+
+                    message.style.color =
+                        "#ff6b6b";
+
+                }
+
+            }
+
+
+            catch (
+                error
+            ) {
+
+                console.error(
+                    "Login error:",
+                    error
+                );
+
+
+                message.textContent =
+                    "Cannot connect to LearnQuest server.";
+
+                message.style.color =
+                    "#ff6b6b";
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       REGISTER
+       ========================================================= */
+
+    document.getElementById(
+        "registerForm"
+    ).addEventListener(
+        "submit",
+        async function (
+            event
+        ) {
+
+            event.preventDefault();
+
+
+            playClickSound();
+
+
+            const name =
+                document.getElementById(
+                    "registerName"
+                ).value.trim();
+
+
+            const email =
+                document.getElementById(
+                    "registerEmail"
+                ).value.trim();
+
+
+            const password =
+                document.getElementById(
+                    "registerPassword"
+                ).value;
+
+
+            const confirmPassword =
+                document.getElementById(
+                    "confirmPassword"
+                ).value;
+
+
+            const message =
+                document.getElementById(
+                    "registerMessage"
+                );
+
+
+            if (
+                password !==
+                confirmPassword
+            ) {
+
+                message.textContent =
+                    "Passwords do not match.";
+
+                message.style.color =
+                    "#ff6b6b";
+
+                return;
+
+            }
+
+
+            if (
+                password.length < 1
+            ) {
+
+                message.textContent =
+                    "Please enter a password.";
+
+                message.style.color =
+                    "#ff6b6b";
+
+                return;
+
+            }
+
+
+            message.textContent =
+                "Creating your account...";
+
+
+            message.style.color =
+                "#9c8cff";
+
+
+            try {
+
+
+                const response =
+                    await fetch(
+                        `${API_BASE}/register`,
+                        {
+                            method:
+                                "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            credentials:
+                                "include",
+
+                            body:
+                                JSON.stringify({
+
+                                    name:
+                                        name,
+
+                                    email:
+                                        email,
+
+                                    password:
+                                        password,
+
+                                    preferred_language:
+                                        "en"
+
+                                })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    response.ok
+                ) {
+
+
+                    message.textContent =
+                        "Account created successfully! 🎉";
+
+                    message.style.color =
+                        "#50e3a4";
+
+
+                    /*
+                     * Put the newly registered email
+                     * into the login form.
+                     */
+
+                    document.getElementById(
+                        "loginEmail"
+                    ).value =
+                        email;
+
+
+                    document.getElementById(
+                        "loginPassword"
+                    ).value =
+                        "";
+
+
+                    playClickSound();
+
+
+                    setTimeout(
+                        function () {
+
+                            registerPanel.classList.add(
+                                "hidden"
+                            );
+
+
+                            loginPanel.classList.remove(
+                                "hidden"
+                            );
+
+
+                            document.getElementById(
+                                "loginPassword"
+                            ).focus();
+
+
+                            message.textContent =
+                                "";
+
+                        },
+                        700
+                    );
+
+                }
+
+                else {
+
+                    message.textContent =
+                        data.message ||
+                        "Unable to create account.";
+
+                    message.style.color =
+                        "#ff6b6b";
+
+                }
+
+            }
+
+
+            catch (
+                error
+            ) {
+
+                console.error(
+                    "Registration error:",
+                    error
+                );
+
+
+                message.textContent =
+                    "Cannot connect to LearnQuest server.";
+
+                message.style.color =
+                    "#ff6b6b";
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       STARS
+       ========================================================= */
+
+    function createStars() {
+
+        const container =
+            document.getElementById(
+                "stars"
+            );
+
+
+        container.innerHTML =
+            "";
+
+
+        const count =
+            window.innerWidth < 600
+                ? 45
+                : 80;
+
+
+        for (
+            let i = 0;
+            i < count;
+            i++
+        ) {
+
+            const star =
+                document.createElement(
+                    "div"
+                );
+
+
+            star.className =
+                "star";
+
+
+            star.style.left =
+                Math.random() *
+                100 +
+                "%";
+
+
+            star.style.top =
+                Math.random() *
+                88 +
+                "%";
+
+
+            star.style.setProperty(
+                "--star-speed",
+                (
+                    1.5 +
+                    Math.random() *
+                    3
+                ) +
+                "s"
+            );
+
+
+            star.style.setProperty(
+                "--star-delay",
+                -(
+                    Math.random() *
+                    4
+                ) +
+                "s"
+            );
+
+
+            star.style.setProperty(
+                "--star-opacity",
+                (
+                    0.25 +
+                    Math.random() *
+                    0.75
+                )
+            );
+
+
+            container.appendChild(
+                star
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       FLOATING CODE
+       ========================================================= */
+
+    const codeItems = [
+
+        {
+            text: "🐍",
+            color: "#4dcaff"
+        },
+
+        {
+            text: "Python",
+            color: "#4dcaff"
+        },
+
+        {
+            text: "def",
+            color: "#4dcaff"
+        },
+
+        {
+            text: "print()",
+            color: "#4dcaff"
+        },
+
+        {
+            text: "☕",
+            color: "#ff7969"
+        },
+
+        {
+            text: "Java",
+            color: "#ff7969"
+        },
+
+        {
+            text: "class",
+            color: "#ff7969"
+        },
+
+        {
+            text: "public",
+            color: "#ff7969"
+        },
+
+        {
+            text: "🤖",
+            color: "#b67cff"
+        },
+
+        {
+            text: "ML",
+            color: "#b67cff"
+        },
+
+        {
+            text: "AI",
+            color: "#b67cff"
+        },
+
+        {
+            text: "model",
+            color: "#b67cff"
+        },
+
+        {
+            text: "🧠",
+            color: "#43e7b4"
+        },
+
+        {
+            text: "NLP",
+            color: "#43e7b4"
+        },
+
+        {
+            text: "token",
+            color: "#43e7b4"
+        },
+
+        {
+            text: "TF-IDF",
+            color: "#43e7b4"
+        },
+
+        {
+            text: "{ }",
+            color: "#cfd3df"
+        },
+
+        {
+            text: "[ ]",
+            color: "#cfd3df"
+        },
+
+        {
+            text: "< />",
+            color: "#cfd3df"
+        },
+
+        {
+            text: "1010",
+            color: "#8d94aa"
+        }
+
+    ];
+
+
+    function createFloatingCode() {
+
+        const container =
+            document.getElementById(
+                "floatingCode"
+            );
+
+
+        container.innerHTML =
+            "";
+
+
+        const count =
+            window.innerWidth < 600
+                ? 15
+                : 24;
+
+
+        for (
+            let i = 0;
+            i < count;
+            i++
+        ) {
+
+            const item =
+                codeItems[
+                    Math.floor(
+                        Math.random() *
+                        codeItems.length
+                    )
+                ];
+
+
+            const element =
+                document.createElement(
+                    "div"
+                );
+
+
+            element.className =
+                "code";
+
+
+            element.textContent =
+                item.text;
+
+
+            element.style.setProperty(
+                "--code-color",
+                item.color
+            );
+
+
+            element.style.setProperty(
+                "--code-size",
+                (
+                    14 +
+                    Math.random() *
+                    20
+                ) +
+                "px"
+            );
+
+
+            const speed =
+                15 +
+                Math.random() *
+                22;
+
+
+            element.style.setProperty(
+                "--code-speed",
+                speed +
+                "s"
+            );
+
+
+            element.style.setProperty(
+                "--code-delay",
+                -(
+                    Math.random() *
+                    speed
+                ) +
+                "s"
+            );
+
+
+            element.style.left =
+                Math.random() *
+                100 +
+                "%";
+
+
+            element.style.top =
+                100 +
+                Math.random() *
+                15 +
+                "%";
+
+
+            container.appendChild(
+                element
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       STORY TEXT
+       ========================================================= */
+
+    function updateStory() {
+
+        const main =
+            document.getElementById(
+                "storyMain"
+            );
+
+
+        const sub =
+            document.getElementById(
+                "storySub"
+            );
+
+
+        const time =
+            (
+                Date.now()
+                % 12000
+            ) / 1000;
+
+
+        if (
+            time < 2
+        ) {
+
+            main.textContent =
+                "🧍 NLP Human is enjoying Java ☕";
+
+            sub.textContent =
+                "Everything looks peaceful...";
+
+        }
+
+        else if (
+            time < 3.6
+        ) {
+
+            main.textContent =
+                "⚠️ Python is approaching";
+
+            sub.textContent =
+                "The snake has entered the road.";
+
+        }
+
+        else if (
+            time < 5.1
+        ) {
+
+            main.textContent =
+                "🐍 Python bites the Human!";
+
+            sub.textContent =
+                "NLP Human needs help.";
+
+        }
+
+        else if (
+            time < 6.6
+        ) {
+
+            main.textContent =
+                "🤖 Machine Learning arrives!";
+
+            sub.textContent =
+                "The robot moves toward the human.";
+
+        }
+
+        else if (
+            time < 8
+        ) {
+
+            main.textContent =
+                "🐍 Python bites the ML Robot!";
+
+            sub.textContent =
+                "The snake is defeated and falls.";
+
+        }
+
+        else if (
+            time < 9.7
+        ) {
+
+            main.textContent =
+                "💚 ML Robot revives NLP Human";
+
+            sub.textContent =
+                "The human gets back up.";
+
+        }
+
+        else if (
+            time < 11
+        ) {
+
+            main.textContent =
+                "🔋 Human removes the Robot battery";
+
+            sub.textContent =
+                "Machine Learning shuts down.";
+
+        }
+
+        else {
+
+            main.textContent =
+                "🏆 NLP HUMAN WINS!";
+
+            sub.textContent =
+                "LearnQuest battle completed.";
+
+        }
+
+    }
+
+
+    /* =========================================================
+       ADD CLICK SOUND TO BUTTONS
+       ========================================================= */
+
+    document
+        .querySelectorAll(
+            "button"
+        )
+        .forEach(
+            function (
+                button
+            ) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        /*
+                         * Settings controls already play
+                         * their own sound, so avoid
+                         * duplicate sound there.
+                         */
+
+                        if (
+                            button.id !==
+                            "settingsBtn"
+                            &&
+                            button.id !==
+                            "musicToggle"
+                            &&
+                            button.id !==
+                            "soundToggle"
+                        ) {
+
+                            playClickSound();
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* =========================================================
+       INITIALIZE
+       ========================================================= */
+
+    createStars();
+
+
+    createFloatingCode();
+
+
+    updateStory();
+
+
+    setInterval(
+        updateStory,
+        250
+    );
+
+
+    window.addEventListener(
+        "resize",
+        function () {
+
+            createStars();
+
+            createFloatingCode();
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>

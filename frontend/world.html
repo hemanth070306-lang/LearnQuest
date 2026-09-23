@@ -1,0 +1,4388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>LearnQuest - Learning Race</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        /* =====================================================
+           BODY
+           ===================================================== */
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            min-height: 100vh;
+
+            color: #ffffff;
+
+            background:
+                #020204;
+
+            overflow-x: hidden;
+
+            position: relative;
+
+        }
+
+
+        /* =====================================================
+           PREMIUM ANIMATED BACKGROUND
+           ===================================================== */
+
+        .background-symbols {
+
+            position: fixed;
+
+            inset: 0;
+
+            overflow: hidden;
+
+            pointer-events: none;
+
+            z-index: 0;
+
+            background:
+                radial-gradient(
+                    circle at 18% 20%,
+                    rgba(
+                        50,
+                        80,
+                        255,
+                        0.12
+                    ),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 82% 25%,
+                    rgba(
+                        0,
+                        220,
+                        255,
+                        0.09
+                    ),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 50% 82%,
+                    rgba(
+                        180,
+                        60,
+                        255,
+                        0.10
+                    ),
+                    transparent 30%
+                );
+
+        }
+
+
+        /* =====================================================
+           MOVING SYMBOL
+           ===================================================== */
+
+        .symbol {
+
+            position: absolute;
+
+            left: 0;
+
+            top: 0;
+
+            font-family:
+                Consolas,
+                "Courier New",
+                monospace;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+
+            user-select: none;
+
+            will-change:
+                transform,
+                opacity;
+
+            opacity:
+                var(
+                    --symbol-opacity,
+                    0.7
+                );
+
+            filter:
+                drop-shadow(
+                    0 0 5px currentColor
+                )
+                drop-shadow(
+                    0 0 15px currentColor
+                );
+
+            animation:
+                symbolDrift
+                var(
+                    --symbol-speed,
+                    18s
+                )
+                linear
+                infinite;
+
+        }
+
+
+        /* PYTHON */
+
+        .symbol.python {
+
+            color:
+                #4dc9ff;
+
+            text-shadow:
+                0 0 6px #4dc9ff,
+                0 0 15px #4dc9ff,
+                0 0 30px
+                rgba(
+                    77,
+                    201,
+                    255,
+                    0.8
+                );
+
+        }
+
+
+        /* JAVA */
+
+        .symbol.java {
+
+            color:
+                #ff6b57;
+
+            text-shadow:
+                0 0 6px #ff6b57,
+                0 0 15px #ff6b57,
+                0 0 30px
+                rgba(
+                    255,
+                    107,
+                    87,
+                    0.8
+                );
+
+        }
+
+
+        /* MACHINE LEARNING */
+
+        .symbol.ml {
+
+            color:
+                #b56cff;
+
+            text-shadow:
+                0 0 6px #b56cff,
+                0 0 15px #b56cff,
+                0 0 30px
+                rgba(
+                    181,
+                    108,
+                    255,
+                    0.8
+                );
+
+        }
+
+
+        /* NLP */
+
+        .symbol.nlp {
+
+            color:
+                #35e6b1;
+
+            text-shadow:
+                0 0 6px #35e6b1,
+                0 0 15px #35e6b1,
+                0 0 30px
+                rgba(
+                    53,
+                    230,
+                    177,
+                    0.8
+                );
+
+        }
+
+
+        /* GENERAL */
+
+        .symbol:not(.python):not(.java):not(.ml):not(.nlp) {
+
+            color:
+                #d5d7df;
+
+            text-shadow:
+                0 0 5px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.5
+                ),
+                0 0 14px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.25
+                );
+
+        }
+
+
+        /* =====================================================
+           BACKGROUND ANIMATION
+           ===================================================== */
+
+        @keyframes symbolDrift {
+
+            0% {
+
+                transform:
+                    translate3d(
+                        0,
+                        110vh,
+                        0
+                    )
+                    rotate(
+                        -8deg
+                    )
+                    scale(
+                        0.9
+                    );
+
+                opacity: 0;
+
+            }
+
+
+            10% {
+
+                opacity:
+                    var(
+                        --symbol-opacity,
+                        0.7
+                    );
+
+            }
+
+
+            35% {
+
+                transform:
+                    translate3d(
+                        45px,
+                        55vh,
+                        0
+                    )
+                    rotate(
+                        5deg
+                    )
+                    scale(
+                        1
+                    );
+
+            }
+
+
+            60% {
+
+                transform:
+                    translate3d(
+                        -35px,
+                        10vh,
+                        0
+                    )
+                    rotate(
+                        -4deg
+                    )
+                    scale(
+                        1.04
+                    );
+
+            }
+
+
+            85% {
+
+                opacity:
+                    var(
+                        --symbol-opacity,
+                        0.7
+                    );
+
+            }
+
+
+            100% {
+
+                transform:
+                    translate3d(
+                        60px,
+                        -130vh,
+                        0
+                    )
+                    rotate(
+                        10deg
+                    )
+                    scale(
+                        0.92
+                    );
+
+                opacity: 0;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           PAGE CONTENT
+           ===================================================== */
+
+        .page-content {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+        }
+
+
+        /* =====================================================
+           HEADER
+           ===================================================== */
+
+        .header {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                20px;
+
+            padding:
+                18px
+                35px;
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.72
+                );
+
+            border-bottom:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+            backdrop-filter:
+                blur(
+                    14px
+                );
+
+            position:
+                sticky;
+
+            top:
+                0;
+
+            z-index:
+                100;
+
+        }
+
+
+        .logo {
+
+            font-size:
+                27px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                0.5px;
+
+        }
+
+
+        .back-btn {
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.13
+                );
+
+            padding:
+                11px
+                18px;
+
+            border-radius:
+                12px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.07
+                );
+
+            color:
+                white;
+
+            font-size:
+                15px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+
+            transition:
+                0.25s ease;
+
+        }
+
+
+        .back-btn:hover {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.14
+                );
+
+            transform:
+                translateY(
+                    -2px
+                );
+
+        }
+
+
+        /* =====================================================
+           MAIN
+           ===================================================== */
+
+        .container {
+
+            width:
+                94%;
+
+            max-width:
+                1180px;
+
+            margin:
+                auto;
+
+            padding:
+                30px
+                0
+                70px;
+
+        }
+
+
+        /* =====================================================
+           HERO
+           ===================================================== */
+
+        .hero {
+
+            text-align:
+                center;
+
+            margin-bottom:
+                28px;
+
+        }
+
+
+        .title {
+
+            font-size:
+                clamp(
+                    32px,
+                    5vw,
+                    55px
+                );
+
+            font-weight:
+                900;
+
+            margin-bottom:
+                10px;
+
+            letter-spacing:
+                -1px;
+
+        }
+
+
+        .subtitle {
+
+            color:
+                #989db4;
+
+            font-size:
+                16px;
+
+            line-height:
+                1.6;
+
+            max-width:
+                700px;
+
+            margin:
+                auto;
+
+        }
+
+
+        /* =====================================================
+           SUBJECT TOPIC PATH
+           ===================================================== */
+
+        .topic-path-wrapper {
+
+            margin-bottom:
+                30px;
+
+            padding:
+                20px;
+
+            border-radius:
+                22px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.045
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.09
+                );
+
+            backdrop-filter:
+                blur(
+                    14px
+                );
+
+        }
+
+
+        .topic-path-heading {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                15px;
+
+            margin-bottom:
+                17px;
+
+        }
+
+
+        .topic-path-heading h2 {
+
+            font-size:
+                19px;
+
+        }
+
+
+        .topic-path-heading p {
+
+            color:
+                #7f859a;
+
+            font-size:
+                12px;
+
+            margin-top:
+                4px;
+
+        }
+
+
+        .subject-badge {
+
+            padding:
+                7px
+                12px;
+
+            border-radius:
+                9px;
+
+            background:
+                rgba(
+                    112,
+                    87,
+                    255,
+                    0.12
+                );
+
+            border:
+                1px solid
+                rgba(
+                    125,
+                    108,
+                    255,
+                    0.3
+                );
+
+            color:
+                #c0b8ff;
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        .topic-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    5,
+                    1fr
+                );
+
+            gap:
+                12px;
+
+        }
+
+
+        .topic-card {
+
+            position:
+                relative;
+
+            min-height:
+                120px;
+
+            padding:
+                15px
+                12px;
+
+            border-radius:
+                16px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.035
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            justify-content:
+                space-between;
+
+            overflow:
+                hidden;
+
+            animation:
+                topicCardEnter
+                0.65s
+                ease both;
+
+            animation-delay:
+                var(
+                    --topic-delay
+                );
+
+        }
+
+
+        .topic-card::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            left:
+                -40%;
+
+            top:
+                0;
+
+            width:
+                80%;
+
+            height:
+                100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        0.06
+                    ),
+                    transparent
+                );
+
+            transform:
+                skewX(
+                    -20deg
+                );
+
+            animation:
+                topicShine
+                3.8s
+                ease-in-out
+                infinite;
+
+            animation-delay:
+                calc(
+                    var(--topic-delay) + 1s
+                );
+
+        }
+
+
+        @keyframes topicCardEnter {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(
+                        16px
+                    )
+                    scale(
+                        0.97
+                    );
+
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(
+                        0
+                    )
+                    scale(
+                        1
+                    );
+
+            }
+
+        }
+
+
+        @keyframes topicShine {
+
+            0% {
+
+                left:
+                    -60%;
+
+            }
+
+            45%,
+            100% {
+
+                left:
+                    150%;
+
+            }
+
+        }
+
+
+        .topic-number {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            width:
+                34px;
+
+            height:
+                34px;
+
+            border-radius:
+                10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #745bff,
+                    #4e38c8
+                );
+
+            box-shadow:
+                0 0 18px
+                rgba(
+                    100,
+                    80,
+                    255,
+                    0.18
+                );
+
+            font-size:
+                13px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        .topic-level {
+
+            font-size:
+                10px;
+
+            color:
+                #7f869c;
+
+            margin-top:
+                10px;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                0.8px;
+
+        }
+
+
+        .topic-name {
+
+            font-size:
+                14px;
+
+            line-height:
+                1.35;
+
+            font-weight:
+                800;
+
+            color:
+                #eceefe;
+
+            margin-top:
+                4px;
+
+        }
+
+
+        .topic-status {
+
+            margin-top:
+                12px;
+
+            font-size:
+                10px;
+
+            color:
+                #858ca2;
+
+        }
+
+
+        .topic-card.active {
+
+            border-color:
+                rgba(
+                    126,
+                    106,
+                    255,
+                    0.55
+                );
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(
+                        112,
+                        88,
+                        255,
+                        0.17
+                    ),
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        0.035
+                    )
+                );
+
+            box-shadow:
+                0 0 25px
+                rgba(
+                    100,
+                    80,
+                    255,
+                    0.13
+                );
+
+        }
+
+
+        .topic-card.completed {
+
+            border-color:
+                rgba(
+                    28,
+                    205,
+                    125,
+                    0.45
+                );
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(
+                        25,
+                        185,
+                        115,
+                        0.13
+                    ),
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        0.03
+                    )
+                );
+
+        }
+
+
+        .topic-card.locked {
+
+            opacity:
+                0.45;
+
+        }
+
+
+        .topic-card.completed
+        .topic-number {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #20ca7c,
+                    #0a8d57
+                );
+
+        }
+
+
+        /* =====================================================
+           RACE STATUS
+           ===================================================== */
+
+        .race-status {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    1fr
+                );
+
+            gap:
+                15px;
+
+            margin-bottom:
+                30px;
+
+        }
+
+
+        .status-box {
+
+            padding:
+                17px
+                18px;
+
+            border-radius:
+                17px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.045
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+            text-align:
+                center;
+
+            backdrop-filter:
+                blur(
+                    12px
+                );
+
+        }
+
+
+        .status-label {
+
+            color:
+                #777d95;
+
+            font-size:
+                12px;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                1px;
+
+            margin-bottom:
+                6px;
+
+        }
+
+
+        .status-value {
+
+            font-size:
+                23px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        /* =====================================================
+           RACE AREA
+           ===================================================== */
+
+        .race-wrapper {
+
+            position:
+                relative;
+
+            border-radius:
+                28px;
+
+            padding:
+                25px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.045
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.085
+                );
+
+            box-shadow:
+                0 20px 70px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.4
+                );
+
+            overflow:
+                hidden;
+
+        }
+
+
+        .race-heading {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                15px;
+
+            margin-bottom:
+                25px;
+
+        }
+
+
+        .race-heading h2 {
+
+            font-size:
+                22px;
+
+        }
+
+
+        .race-heading p {
+
+            color:
+                #7e849c;
+
+            font-size:
+                13px;
+
+            margin-top:
+                5px;
+
+        }
+
+
+        /* =====================================================
+           TRACK
+           ===================================================== */
+
+        .track {
+
+            position:
+                relative;
+
+            min-height:
+                610px;
+
+            border-radius:
+                25px;
+
+            padding:
+                35px
+                15px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #20243a 0%,
+                    #111422 100%
+                );
+
+            overflow:
+                hidden;
+
+        }
+
+
+        .track::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            inset:
+                18px;
+
+            border-radius:
+                20px;
+
+            border:
+                3px dashed
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.13
+                );
+
+            pointer-events:
+                none;
+
+        }
+
+
+        .start-line {
+
+            position:
+                absolute;
+
+            left:
+                28px;
+
+            top:
+                28px;
+
+            bottom:
+                28px;
+
+            width:
+                8px;
+
+            background:
+                repeating-linear-gradient(
+                    to bottom,
+                    #ffffff
+                    0px,
+                    #ffffff
+                    12px,
+                    #171b2c
+                    12px,
+                    #171b2c
+                    24px
+                );
+
+            border-radius:
+                5px;
+
+        }
+
+
+        .finish-line {
+
+            position:
+                absolute;
+
+            right:
+                28px;
+
+            top:
+                28px;
+
+            bottom:
+                28px;
+
+            width:
+                8px;
+
+            background:
+                repeating-linear-gradient(
+                    to bottom,
+                    #ffffff
+                    0px,
+                    #ffffff
+                    12px,
+                    #171b2c
+                    12px,
+                    #171b2c
+                    24px
+                );
+
+            border-radius:
+                5px;
+
+        }
+
+
+        .finish-label {
+
+            position:
+                absolute;
+
+            top:
+                42px;
+
+            right:
+                48px;
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                1px;
+
+            color:
+                #ffffff;
+
+            transform:
+                rotate(
+                    90deg
+                );
+
+            transform-origin:
+                center;
+
+        }
+
+
+        /* =====================================================
+           LANES
+           ===================================================== */
+
+        .race-lanes {
+
+            position:
+                relative;
+
+            height:
+                100%;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            justify-content:
+                space-around;
+
+            gap:
+                18px;
+
+            padding:
+                40px
+                35px;
+
+        }
+
+
+        .lane {
+
+            position:
+                relative;
+
+            height:
+                82px;
+
+            border-radius:
+                20px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        0.055
+                    ),
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        0.018
+                    )
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.065
+                );
+
+        }
+
+
+        .lane-road {
+
+            position:
+                absolute;
+
+            left:
+                30px;
+
+            right:
+                30px;
+
+            top:
+                50%;
+
+            height:
+                5px;
+
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        0.22
+                    )
+                    0px,
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        0.22
+                    )
+                    22px,
+                    transparent
+                    22px,
+                    transparent
+                    42px
+                );
+
+            transform:
+                translateY(
+                    -50%
+                );
+
+        }
+
+
+        /* =====================================================
+           CHECKPOINT
+           ===================================================== */
+
+        .checkpoint {
+
+            position:
+                absolute;
+
+            top:
+                50%;
+
+            transform:
+                translateY(
+                    -50%
+                );
+
+            width:
+                76px;
+
+            height:
+                76px;
+
+            border-radius:
+                50%;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                25px;
+
+            font-weight:
+                900;
+
+            color:
+                #ffffff;
+
+            z-index:
+                4;
+
+            transition:
+                0.3s ease;
+
+        }
+
+
+        .checkpoint span {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+        }
+
+
+        .checkpoint.completed {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #18c77c,
+                    #0a8f58
+                );
+
+            box-shadow:
+                0 0 0 7px
+                rgba(
+                    24,
+                    199,
+                    124,
+                    0.12
+                ),
+                0 10px 28px
+                rgba(
+                    24,
+                    199,
+                    124,
+                    0.25
+                );
+
+        }
+
+
+        .checkpoint.unlocked {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7057ff,
+                    #4a34c5
+                );
+
+            box-shadow:
+                0 0 0 7px
+                rgba(
+                    112,
+                    87,
+                    255,
+                    0.12
+                ),
+                0 10px 28px
+                rgba(
+                    112,
+                    87,
+                    255,
+                    0.25
+                );
+
+            animation:
+                pulseCheckpoint
+                2s
+                infinite;
+
+        }
+
+
+        .checkpoint.locked {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #34394d,
+                    #24283a
+                );
+
+            color:
+                #777c92;
+
+        }
+
+
+        @keyframes pulseCheckpoint {
+
+            0%,
+            100% {
+
+                transform:
+                    translateY(
+                        -50%
+                    )
+                    scale(
+                        1
+                    );
+
+            }
+
+
+            50% {
+
+                transform:
+                    translateY(
+                        -50%
+                    )
+                    scale(
+                        1.07
+                    );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           RUNNER
+           ===================================================== */
+
+        .runner {
+
+            position:
+                absolute;
+
+            top:
+                50%;
+
+            width:
+                58px;
+
+            height:
+                58px;
+
+            border-radius:
+                18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff9f43,
+                    #ff5d38
+                );
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                31px;
+
+            z-index:
+                8;
+
+            box-shadow:
+                0 12px 30px
+                rgba(
+                    255,
+                    100,
+                    50,
+                    0.32
+                );
+
+            transform:
+                translate(
+                    -50%,
+                    -50%
+                );
+
+            transition:
+                left
+                0.9s
+                cubic-bezier(
+                    0.22,
+                    1,
+                    0.36,
+                    1
+                );
+
+        }
+
+
+        .runner::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            right:
+                -22px;
+
+            top:
+                50%;
+
+            width:
+                24px;
+
+            height:
+                4px;
+
+            background:
+                rgba(
+                    255,
+                    179,
+                    130,
+                    0.7
+                );
+
+            border-radius:
+                10px;
+
+            transform:
+                translateY(
+                    -50%
+                );
+
+        }
+
+
+        /* =====================================================
+           LEVEL INFO
+           ===================================================== */
+
+        .level-info {
+
+            position:
+                absolute;
+
+            top:
+                50%;
+
+            transform:
+                translateY(
+                    -50%
+                );
+
+            width:
+                185px;
+
+            padding:
+                10px
+                14px;
+
+            border-radius:
+                13px;
+
+            background:
+                rgba(
+                    4,
+                    7,
+                    17,
+                    0.78
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+            backdrop-filter:
+                blur(
+                    10px
+                );
+
+            z-index:
+                5;
+
+            text-align:
+                left;
+
+        }
+
+
+        .level-info h3 {
+
+            font-size:
+                15px;
+
+            margin-bottom:
+                4px;
+
+        }
+
+
+        .level-info p {
+
+            font-size:
+                12px;
+
+            color:
+                #969bb0;
+
+            line-height:
+                1.4;
+
+        }
+
+
+        .level-info .reward {
+
+            margin-top:
+                6px;
+
+            font-size:
+                11px;
+
+            color:
+                #ffd45b;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .level-info.right {
+
+            right:
+                95px;
+
+        }
+
+
+        .level-info.left {
+
+            left:
+                95px;
+
+        }
+
+
+        /* =====================================================
+           CLICKABLE
+           ===================================================== */
+
+        .lane.clickable {
+
+            cursor:
+                pointer;
+
+        }
+
+
+        .lane.clickable:hover {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(
+                        112,
+                        87,
+                        255,
+                        0.1
+                    ),
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        0.03
+                    )
+                );
+
+            border-color:
+                rgba(
+                    112,
+                    87,
+                    255,
+                    0.3
+                );
+
+        }
+
+
+        .lane.locked {
+
+            cursor:
+                not-allowed;
+
+        }
+
+
+        /* =====================================================
+           FINISH
+           ===================================================== */
+
+        .finish-card {
+
+            margin-top:
+                24px;
+
+            padding:
+                18px
+                20px;
+
+            border-radius:
+                17px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(
+                        255,
+                        194,
+                        59,
+                        0.09
+                    ),
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        0.025
+                    )
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    194,
+                    59,
+                    0.17
+                );
+
+            text-align:
+                center;
+
+            color:
+                #9fa4b8;
+
+        }
+
+
+        .finish-card strong {
+
+            color:
+                #ffd45b;
+
+        }
+
+
+        /* =====================================================
+           LOADING
+           ===================================================== */
+
+        .loading {
+
+            text-align:
+                center;
+
+            padding:
+                45px
+                20px;
+
+            color:
+                #a7acc2;
+
+        }
+
+
+        .spinner {
+
+            width:
+                35px;
+
+            height:
+                35px;
+
+            margin:
+                0
+                auto
+                15px;
+
+            border:
+                4px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.10
+                );
+
+            border-top-color:
+                #745cff;
+
+            border-radius:
+                50%;
+
+            animation:
+                spin
+                0.8s
+                linear
+                infinite;
+
+        }
+
+
+        @keyframes spin {
+
+            to {
+
+                transform:
+                    rotate(
+                        360deg
+                    );
+
+            }
+
+        }
+
+
+        .error {
+
+            text-align:
+                center;
+
+            background:
+                rgba(
+                    255,
+                    71,
+                    87,
+                    0.10
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    71,
+                    87,
+                    0.35
+                );
+
+            padding:
+                22px;
+
+            border-radius:
+                15px;
+
+            color:
+                #ffadb4;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (
+            max-width: 1000px
+        ) {
+
+            .topic-grid {
+
+                grid-template-columns:
+                    repeat(
+                        3,
+                        1fr
+                    );
+
+            }
+
+        }
+
+
+        @media (
+            max-width: 900px
+        ) {
+
+            .race-status {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .track {
+
+                min-height:
+                    690px;
+
+            }
+
+
+            .topic-grid {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        1fr
+                    );
+
+            }
+
+
+            .race-lanes {
+
+                padding:
+                    35px
+                    25px;
+
+            }
+
+
+            .level-info {
+
+                width:
+                    145px;
+
+            }
+
+
+            .level-info.left {
+
+                left:
+                    84px;
+
+            }
+
+
+            .level-info.right {
+
+                right:
+                    84px;
+
+            }
+
+        }
+
+
+        @media (
+            max-width: 620px
+        ) {
+
+            .header {
+
+                padding:
+                    15px;
+
+            }
+
+
+            .logo {
+
+                font-size:
+                    21px;
+
+            }
+
+
+            .back-btn {
+
+                padding:
+                    9px
+                    12px;
+
+                font-size:
+                    13px;
+
+            }
+
+
+            .container {
+
+                width:
+                    96%;
+
+                padding-top:
+                    23px;
+
+            }
+
+
+            .topic-path-wrapper {
+
+                padding:
+                    13px;
+
+            }
+
+
+            .topic-path-heading {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+
+            }
+
+
+            .topic-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .topic-card {
+
+                min-height:
+                    95px;
+
+            }
+
+
+            .topic-name {
+
+                font-size:
+                    13px;
+
+            }
+
+
+            .race-wrapper {
+
+                padding:
+                    12px;
+
+                border-radius:
+                    20px;
+
+            }
+
+
+            .race-heading {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+
+            }
+
+
+            .track {
+
+                min-height:
+                    760px;
+
+                padding:
+                    18px
+                    10px;
+
+            }
+
+
+            .track::before {
+
+                inset:
+                    10px;
+
+            }
+
+
+            .start-line {
+
+                left:
+                    18px;
+
+                top:
+                    20px;
+
+                bottom:
+                    20px;
+
+            }
+
+
+            .finish-line {
+
+                right:
+                    18px;
+
+                top:
+                    20px;
+
+                bottom:
+                    20px;
+
+            }
+
+
+            .race-lanes {
+
+                gap:
+                    22px;
+
+                padding:
+                    32px
+                    20px;
+
+            }
+
+
+            .lane {
+
+                height:
+                    90px;
+
+            }
+
+
+            .lane-road {
+
+                left:
+                    20px;
+
+                right:
+                    20px;
+
+            }
+
+
+            .checkpoint {
+
+                width:
+                    62px;
+
+                height:
+                    62px;
+
+                font-size:
+                    21px;
+
+            }
+
+
+            .runner {
+
+                width:
+                    48px;
+
+                height:
+                    48px;
+
+                font-size:
+                    25px;
+
+            }
+
+
+            .level-info {
+
+                width:
+                    120px;
+
+                padding:
+                    8px
+                    10px;
+
+            }
+
+
+            .level-info h3 {
+
+                font-size:
+                    12px;
+
+            }
+
+
+            .level-info p {
+
+                font-size:
+                    10px;
+
+            }
+
+
+            .level-info .reward {
+
+                font-size:
+                    9px;
+
+            }
+
+
+            .level-info.left {
+
+                left:
+                    75px;
+
+            }
+
+
+            .level-info.right {
+
+                right:
+                    75px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     MOVING BACKGROUND
+     ========================================================= -->
+
+<div
+    class="background-symbols"
+    id="backgroundSymbols"
+></div>
+
+
+
+<div class="page-content">
+
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="header">
+
+        <div class="logo">
+
+            🎮 LearnQuest
+
+        </div>
+
+
+        <button
+            id="backBtn"
+            class="back-btn"
+            type="button"
+        >
+
+            ← Dashboard
+
+        </button>
+
+    </header>
+
+
+
+    <main class="container">
+
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
+        <section class="hero">
+
+            <h1
+                class="title"
+                id="worldTitle"
+            >
+
+                🏁 Learning Race
+
+            </h1>
+
+
+            <p class="subtitle">
+
+                Learn each topic,
+                complete its challenge,
+                and move your runner toward the finish line.
+
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             LEVEL TOPIC PATH
+             ================================================= -->
+
+        <section
+            class="topic-path-wrapper"
+            id="topicPathWrapper"
+        >
+
+            <div class="topic-path-heading">
+
+                <div>
+
+                    <h2>
+                        📚 Your Learning Path
+                    </h2>
+
+                    <p>
+                        Five levels. Five topics. One race.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="subject-badge"
+                    id="subjectBadge"
+                >
+                    Loading subject...
+                </div>
+
+            </div>
+
+
+            <div
+                class="topic-grid"
+                id="topicGrid"
+            >
+
+                <div class="loading">
+
+                    <div class="spinner"></div>
+
+                    Loading topics...
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             STATUS
+             ================================================= -->
+
+        <section class="race-status">
+
+
+            <div class="status-box">
+
+                <div class="status-label">
+                    Progress
+                </div>
+
+                <div
+                    class="status-value"
+                    id="progressValue"
+                >
+                    0 / 5
+                </div>
+
+            </div>
+
+
+            <div class="status-box">
+
+                <div class="status-label">
+                    Current Stage
+                </div>
+
+                <div
+                    class="status-value"
+                    id="currentStage"
+                >
+                    Level 1
+                </div>
+
+            </div>
+
+
+            <div class="status-box">
+
+                <div class="status-label">
+                    Race Status
+                </div>
+
+                <div
+                    class="status-value"
+                    id="raceStatusValue"
+                >
+                    Ready
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             RACE
+             ================================================= -->
+
+        <section class="race-wrapper">
+
+
+            <div class="race-heading">
+
+                <div>
+
+                    <h2>
+                        🏎️ Your Learning Race
+                    </h2>
+
+                    <p>
+                        Complete a level to unlock the next checkpoint.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="track"
+                id="raceTrack"
+            >
+
+                <div class="start-line"></div>
+
+                <div class="finish-line"></div>
+
+                <div class="finish-label">
+                    FINISH
+                </div>
+
+
+                <div
+                    class="race-lanes"
+                    id="raceLanes"
+                >
+
+                    <div class="loading">
+
+                        <div class="spinner"></div>
+
+                        Loading your race...
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="runner"
+                    id="runner"
+                    style="
+                        left:10%;
+                        display:none;
+                    "
+                >
+
+                    🏃
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="finish-card"
+                id="finishCard"
+            >
+
+                🏁
+
+                Complete the current challenge
+                to move your runner forward.
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<script>
+
+
+    /* =========================================================
+       API
+       ========================================================= */
+
+    const API_BASE =
+        "http://127.0.0.1:5000";
+
+
+    /* =========================================================
+       URL
+       ========================================================= */
+
+    const urlParams =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    let subjectId =
+        urlParams.get(
+            "subject_id"
+        );
+
+
+    /* =========================================================
+       ICONS
+       ========================================================= */
+
+    const subjectIcons = {
+
+        "Python":
+            "🐍",
+
+        "Java":
+            "☕",
+
+        "C Programming":
+            "💻",
+
+        "Data Structures":
+            "🗄️",
+
+        "Machine Learning":
+            "🤖",
+
+        "NLP":
+            "🧠",
+
+        "Aptitude":
+            "📐",
+
+        "Reasoning":
+            "🧩",
+
+        "English":
+            "🇬🇧",
+
+        "Data Science":
+            "📊",
+
+        "Web Development":
+            "🌐"
+
+    };
+
+
+    const levelIcons = [
+
+        "🏁",
+        "🔥",
+        "⚡",
+        "🚀",
+        "🏆"
+
+    ];
+
+
+    const runnerPositions = [
+
+        10,
+        30,
+        50,
+        70,
+        90
+
+    ];
+
+
+    /* =========================================================
+       BACKGROUND SYMBOLS
+       ========================================================= */
+
+    const movingSymbols = [
+
+        {
+            text: "🐍",
+            type: "python"
+        },
+
+        {
+            text: "def()",
+            type: "python"
+        },
+
+        {
+            text: "print()",
+            type: "python"
+        },
+
+        {
+            text: "import",
+            type: "python"
+        },
+
+        {
+            text: "lambda",
+            type: "python"
+        },
+
+        {
+            text: "[]",
+            type: "python"
+        },
+
+        {
+            text: "{}",
+            type: "python"
+        },
+
+
+        {
+            text: "☕",
+            type: "java"
+        },
+
+        {
+            text: "class",
+            type: "java"
+        },
+
+        {
+            text: "public",
+            type: "java"
+        },
+
+        {
+            text: "static",
+            type: "java"
+        },
+
+        {
+            text: "System.out",
+            type: "java"
+        },
+
+        {
+            text: "new",
+            type: "java"
+        },
+
+        {
+            text: "interface",
+            type: "java"
+        },
+
+
+        {
+            text: "🤖",
+            type: "ml"
+        },
+
+        {
+            text: "ML",
+            type: "ml"
+        },
+
+        {
+            text: "AI",
+            type: "ml"
+        },
+
+        {
+            text: "model",
+            type: "ml"
+        },
+
+        {
+            text: "train()",
+            type: "ml"
+        },
+
+        {
+            text: "predict()",
+            type: "ml"
+        },
+
+        {
+            text: "data",
+            type: "ml"
+        },
+
+
+        {
+            text: "🧠",
+            type: "nlp"
+        },
+
+        {
+            text: "NLP",
+            type: "nlp"
+        },
+
+        {
+            text: "token",
+            type: "nlp"
+        },
+
+        {
+            text: "text",
+            type: "nlp"
+        },
+
+        {
+            text: "POS",
+            type: "nlp"
+        },
+
+        {
+            text: "NER",
+            type: "nlp"
+        },
+
+        {
+            text: "TF-IDF",
+            type: "nlp"
+        },
+
+
+        {
+            text: "< />",
+            type: ""
+        },
+
+        {
+            text: "{ }",
+            type: ""
+        },
+
+        {
+            text: "[ ]",
+            type: ""
+        },
+
+        {
+            text: "0101",
+            type: ""
+        },
+
+        {
+            text: "1010",
+            type: ""
+        },
+
+        {
+            text: ">>",
+            type: ""
+        },
+
+        {
+            text: "==",
+            type: ""
+        },
+
+        {
+            text: "&&",
+            type: ""
+        }
+
+    ];
+
+
+    /* =========================================================
+       CREATE BACKGROUND
+       ========================================================= */
+
+    function createBackgroundSymbols() {
+
+        const container =
+            document.getElementById(
+                "backgroundSymbols"
+            );
+
+
+        container.innerHTML =
+            "";
+
+
+        const width =
+            window.innerWidth;
+
+
+        const count =
+            width < 500
+                ? 22
+                : width < 900
+                    ? 32
+                    : 44;
+
+
+        for (
+            let i = 0;
+            i < count;
+            i++
+        ) {
+
+            const item =
+                movingSymbols[
+                    Math.floor(
+                        Math.random() *
+                        movingSymbols.length
+                    )
+                ];
+
+
+            const symbol =
+                document.createElement(
+                    "div"
+                );
+
+
+            symbol.className =
+                "symbol";
+
+
+            if (
+                item.type
+            ) {
+
+                symbol.classList.add(
+                    item.type
+                );
+
+            }
+
+
+            symbol.textContent =
+                item.text;
+
+
+            symbol.style.left =
+                `${Math.random() * 100}%`;
+
+
+            symbol.style.top =
+                `${100 + Math.random() * 20}%`;
+
+
+            const size =
+                15 +
+                Math.random() *
+                28;
+
+
+            symbol.style.fontSize =
+                `${size}px`;
+
+
+            const speed =
+                14 +
+                Math.random() *
+                24;
+
+
+            symbol.style.setProperty(
+                "--symbol-speed",
+                `${speed}s`
+            );
+
+
+            const opacity =
+                0.28 +
+                Math.random() *
+                0.52;
+
+
+            symbol.style.setProperty(
+                "--symbol-opacity",
+                opacity.toFixed(
+                    2
+                )
+            );
+
+
+            symbol.style.animationDelay =
+                `${-(
+                    Math.random() *
+                    speed
+                )}s`;
+
+
+            symbol.style.letterSpacing =
+                `${Math.random() * 2}px`;
+
+
+            container.appendChild(
+                symbol
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       LOAD WORLD
+       ========================================================= */
+
+    async function loadWorld() {
+
+        try {
+
+
+            if (
+                !subjectId
+            ) {
+
+                /*
+                 * Use dashboard-selected subject
+                 * when query parameter is missing.
+                 */
+
+                subjectId =
+                    localStorage.getItem(
+                        "current_subject_id"
+                    );
+
+            }
+
+
+            if (
+                !subjectId
+            ) {
+
+                showWorldError(
+                    "No subject selected. Please return to Dashboard."
+                );
+
+
+                return;
+
+            }
+
+
+            /* ===============================================
+               GET SUBJECTS
+               =============================================== */
+
+            const subjectResponse =
+                await fetch(
+                    `${API_BASE}/subjects`,
+                    {
+                        method:
+                            "GET",
+
+                        credentials:
+                            "include"
+                    }
+                );
+
+
+            const subjectData =
+                await subjectResponse.json();
+
+
+            if (
+                !subjectResponse.ok
+            ) {
+
+                alert(
+                    subjectData.message ||
+                    "Please login first."
+                );
+
+
+                window.location.href =
+                    "login.html";
+
+
+                return;
+
+            }
+
+
+            const subjects =
+                subjectData.subjects ||
+                [];
+
+
+            const selectedSubject =
+                subjects.find(
+                    function (
+                        subject
+                    ) {
+
+                        return (
+                            String(
+                                subject.id
+                            ) ===
+                            String(
+                                subjectId
+                            )
+                        );
+
+                    }
+                );
+
+
+            if (
+                !selectedSubject
+            ) {
+
+                showWorldError(
+                    "Selected subject was not found."
+                );
+
+
+                return;
+
+            }
+
+
+            localStorage.setItem(
+                "current_subject_id",
+                String(
+                    selectedSubject.id
+                )
+            );
+
+
+            /* ===============================================
+               SUBJECT TITLE
+               =============================================== */
+
+            const icon =
+                subjectIcons[
+                    selectedSubject.subject_name
+                ] || "📚";
+
+
+            document.getElementById(
+                "worldTitle"
+            ).textContent =
+                `${icon} ${selectedSubject.subject_name} Learning Race`;
+
+
+            document.getElementById(
+                "subjectBadge"
+            ).textContent =
+                `${icon} ${selectedSubject.subject_name}`;
+
+
+            /* ===============================================
+               GET LEVELS
+               =============================================== */
+
+            const levelResponse =
+                await fetch(
+                    `${API_BASE}/levels/${selectedSubject.id}`,
+                    {
+                        method:
+                            "GET",
+
+                        credentials:
+                            "include"
+                    }
+                );
+
+
+            const levelData =
+                await levelResponse.json();
+
+
+            if (
+                !levelResponse.ok
+            ) {
+
+                showWorldError(
+                    levelData.message ||
+                    "Unable to load levels."
+                );
+
+
+                return;
+
+            }
+
+
+            const levels =
+                levelData.levels ||
+                [];
+
+
+            displayTopicPath(
+                levels
+            );
+
+
+            displayRace(
+                levels
+            );
+
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "World loading error:",
+                error
+            );
+
+
+            showWorldError(
+                "Cannot connect to LearnQuest server."
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       SHOW ERROR
+       ========================================================= */
+
+    function showWorldError(
+        message
+    ) {
+
+        document.getElementById(
+            "topicGrid"
+        ).innerHTML = `
+
+            <div
+                class="error"
+                style="
+                    grid-column:1 / -1;
+                "
+            >
+
+                ${message}
+
+            </div>
+
+        `;
+
+
+        document.getElementById(
+            "raceLanes"
+        ).innerHTML = `
+
+            <div class="error">
+
+                ${message}
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =========================================================
+       DISPLAY TOPIC PATH
+       ========================================================= */
+
+    function displayTopicPath(
+        levels
+    ) {
+
+        const grid =
+            document.getElementById(
+                "topicGrid"
+            );
+
+
+        grid.innerHTML =
+            "";
+
+
+        if (
+            !levels ||
+            levels.length === 0
+        ) {
+
+            grid.innerHTML = `
+
+                <div
+                    class="error"
+                    style="
+                        grid-column:1 / -1;
+                    "
+                >
+
+                    No level topics found.
+
+                </div>
+
+            `;
+
+
+            return;
+
+        }
+
+
+        const topicLevels =
+            levels.slice(
+                0,
+                5
+            );
+
+
+        topicLevels.forEach(
+            function (
+                level,
+                index
+            ) {
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                card.className =
+                    "topic-card";
+
+
+                card.style.setProperty(
+                    "--topic-delay",
+                    `${index * 0.12}s`
+                );
+
+
+                const completed =
+                    Boolean(
+                        level.completed
+                    );
+
+
+                const unlocked =
+                    Boolean(
+                        level.unlocked
+                    );
+
+
+                if (
+                    completed
+                ) {
+
+                    card.classList.add(
+                        "completed"
+                    );
+
+                }
+
+                else if (
+                    unlocked
+                ) {
+
+                    card.classList.add(
+                        "active"
+                    );
+
+                }
+
+                else {
+
+                    card.classList.add(
+                        "locked"
+                    );
+
+                }
+
+
+                const number =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                number.className =
+                    "topic-number";
+
+
+                number.textContent =
+                    completed
+                        ? "✓"
+                        : (
+                            index + 1
+                        );
+
+
+                const levelLabel =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                levelLabel.className =
+                    "topic-level";
+
+
+                levelLabel.textContent =
+                    `Level ${index + 1}`;
+
+
+                const topic =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                topic.className =
+                    "topic-name";
+
+
+                topic.textContent =
+                    level.topic ||
+                    "Learning Topic";
+
+
+                const status =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                status.className =
+                    "topic-status";
+
+
+                if (
+                    completed
+                ) {
+
+                    status.textContent =
+                        "✓ Completed";
+
+                }
+
+                else if (
+                    unlocked
+                ) {
+
+                    status.textContent =
+                        "● Ready to Learn";
+
+                }
+
+                else {
+
+                    status.textContent =
+                        "🔒 Locked";
+
+                }
+
+
+                card.appendChild(
+                    number
+                );
+
+
+                card.appendChild(
+                    levelLabel
+                );
+
+
+                card.appendChild(
+                    topic
+                );
+
+
+                card.appendChild(
+                    status
+                );
+
+
+                /*
+                 * Clicking a topic follows the
+                 * same existing level-opening flow.
+                 */
+
+                card.addEventListener(
+                    "click",
+                    function () {
+
+                        if (
+                            unlocked
+                        ) {
+
+                            openLevel(
+                                level
+                            );
+
+                        }
+
+                        else {
+
+                            alert(
+                                "🔒 Complete the previous level first!"
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                if (
+                    unlocked
+                ) {
+
+                    card.style.cursor =
+                        "pointer";
+
+                }
+
+                else {
+
+                    card.style.cursor =
+                        "not-allowed";
+
+                }
+
+
+                grid.appendChild(
+                    card
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       DISPLAY RACE
+       ========================================================= */
+
+    function displayRace(
+        levels
+    ) {
+
+        const raceLanes =
+            document.getElementById(
+                "raceLanes"
+            );
+
+
+        const runner =
+            document.getElementById(
+                "runner"
+            );
+
+
+        if (
+            !levels ||
+            levels.length === 0
+        ) {
+
+            raceLanes.innerHTML = `
+
+                <div class="error">
+
+                    No levels available for this subject yet.
+
+                </div>
+
+            `;
+
+
+            runner.style.display =
+                "none";
+
+
+            return;
+
+        }
+
+
+        const raceLevels =
+            levels.slice(
+                0,
+                5
+            );
+
+
+        raceLanes.innerHTML =
+            "";
+
+
+        let completedCount =
+            0;
+
+
+        raceLevels.forEach(
+            function (
+                level,
+                index
+            ) {
+
+                const completed =
+                    Boolean(
+                        level.completed
+                    );
+
+
+                const unlocked =
+                    Boolean(
+                        level.unlocked
+                    );
+
+
+                if (
+                    completed
+                ) {
+
+                    completedCount++;
+
+                }
+
+
+                const lane =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                lane.className =
+                    "lane";
+
+
+                if (
+                    unlocked
+                ) {
+
+                    lane.classList.add(
+                        "clickable"
+                    );
+
+                }
+
+                else {
+
+                    lane.classList.add(
+                        "locked"
+                    );
+
+                }
+
+
+                const road =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                road.className =
+                    "lane-road";
+
+
+                lane.appendChild(
+                    road
+                );
+
+
+                const checkpoint =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                checkpoint.className =
+                    "checkpoint";
+
+
+                if (
+                    completed
+                ) {
+
+                    checkpoint.classList.add(
+                        "completed"
+                    );
+
+                }
+
+                else if (
+                    unlocked
+                ) {
+
+                    checkpoint.classList.add(
+                        "unlocked"
+                    );
+
+                }
+
+                else {
+
+                    checkpoint.classList.add(
+                        "locked"
+                    );
+
+                }
+
+
+                const checkpointIcon =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                if (
+                    completed
+                ) {
+
+                    checkpointIcon.textContent =
+                        "✓";
+
+                }
+
+                else if (
+                    unlocked
+                ) {
+
+                    checkpointIcon.textContent =
+                        levelIcons[
+                            index
+                        ] ||
+                        "🔓";
+
+                }
+
+                else {
+
+                    checkpointIcon.textContent =
+                        "🔒";
+
+                }
+
+
+                checkpoint.appendChild(
+                    checkpointIcon
+                );
+
+
+                if (
+                    index % 2 === 0
+                ) {
+
+                    checkpoint.style.left =
+                        "17%";
+
+                }
+
+                else {
+
+                    checkpoint.style.left =
+                        "83%";
+
+                }
+
+
+                lane.appendChild(
+                    checkpoint
+                );
+
+
+                const info =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                info.className =
+                    "level-info";
+
+
+                if (
+                    index % 2 === 0
+                ) {
+
+                    info.classList.add(
+                        "right"
+                    );
+
+                }
+
+                else {
+
+                    info.classList.add(
+                        "left"
+                    );
+
+                }
+
+
+                const title =
+                    document.createElement(
+                        "h3"
+                    );
+
+
+                title.textContent =
+                    `Level ${
+                        level.level_number
+                    } - ${
+                        level.level_name ||
+                        ""
+                    }`;
+
+
+                const topic =
+                    document.createElement(
+                        "p"
+                    );
+
+
+                topic.textContent =
+                    level.topic ||
+                    "Learning challenge";
+
+
+                const reward =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                reward.className =
+                    "reward";
+
+
+                reward.textContent =
+                    `⭐ +${
+                        level.xp_reward ??
+                        level.xp ??
+                        0
+                    } XP   •   🪙 +${
+                        level.coin_reward ??
+                        level.coins ??
+                        0
+                    }`;
+
+
+                info.appendChild(
+                    title
+                );
+
+
+                info.appendChild(
+                    topic
+                );
+
+
+                info.appendChild(
+                    reward
+                );
+
+
+                lane.appendChild(
+                    info
+                );
+
+
+                lane.addEventListener(
+                    "click",
+                    function () {
+
+                        if (
+                            !unlocked
+                        ) {
+
+                            alert(
+                                "🔒 Complete the previous level first!"
+                            );
+
+
+                            return;
+
+                        }
+
+
+                        openLevel(
+                            level
+                        );
+
+                    }
+                );
+
+
+                raceLanes.appendChild(
+                    lane
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           PROGRESS
+           ===================================================== */
+
+        document.getElementById(
+            "progressValue"
+        ).textContent =
+            `${completedCount} / ${raceLevels.length}`;
+
+
+        document.getElementById(
+            "currentStage"
+        ).textContent =
+            completedCount >=
+                raceLevels.length
+
+                ? "FINISH"
+
+                : `Level ${
+                    Math.min(
+                        completedCount + 1,
+                        raceLevels.length
+                    )
+                }`;
+
+
+        if (
+            completedCount >=
+            raceLevels.length
+        ) {
+
+            document.getElementById(
+                "raceStatusValue"
+            ).textContent =
+                "Finished 🏆";
+
+
+            document.getElementById(
+                "finishCard"
+            ).innerHTML = `
+
+                🏆
+
+                <strong>
+                    Race Completed!
+                </strong>
+
+                You finished all
+                ${raceLevels.length}
+                levels.
+
+            `;
+
+        }
+
+        else {
+
+            document.getElementById(
+                "raceStatusValue"
+            ).textContent =
+                "Running 🏃";
+
+
+            document.getElementById(
+                "finishCard"
+            ).innerHTML = `
+
+                🏁
+
+                Complete the current challenge
+                to move your runner forward.
+
+            `;
+
+        }
+
+
+        /* =====================================================
+           RUNNER POSITION
+           ===================================================== */
+
+        runner.style.display =
+            "flex";
+
+
+        const runnerIndex =
+            Math.min(
+                completedCount,
+                runnerPositions.length - 1
+            );
+
+
+        runner.style.left =
+            `${runnerPositions[
+                runnerIndex
+            ]}%`;
+
+
+        const track =
+            document.getElementById(
+                "raceTrack"
+            );
+
+
+        const lanes =
+            raceLanes.querySelectorAll(
+                ".lane"
+            );
+
+
+        if (
+            lanes.length
+        ) {
+
+            const targetIndex =
+                Math.min(
+                    Math.max(
+                        completedCount,
+                        0
+                    ),
+                    lanes.length - 1
+                );
+
+
+            const targetLane =
+                lanes[
+                    targetIndex
+                ];
+
+
+            setTimeout(
+                function () {
+
+                    const trackRect =
+                        track.getBoundingClientRect();
+
+
+                    const laneRect =
+                        targetLane.getBoundingClientRect();
+
+
+                    const center =
+                        (
+                            laneRect.top -
+                            trackRect.top
+                        ) +
+                        (
+                            laneRect.height /
+                            2
+                        );
+
+
+                    runner.style.top =
+                        `${center}px`;
+
+                },
+                100
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       OPEN LEVEL
+       ========================================================= */
+
+    function openLevel(
+        level
+    ) {
+
+        console.log(
+            "Selected level:",
+            level
+        );
+
+
+        if (
+            !level ||
+            !level.unlocked
+        ) {
+
+            alert(
+                "🔒 Complete the previous level first!"
+            );
+
+
+            return;
+
+        }
+
+
+        if (
+            !level.id
+        ) {
+
+            alert(
+                "Level ID is missing."
+            );
+
+
+            return;
+
+        }
+
+
+        localStorage.setItem(
+            "current_subject_id",
+            String(
+                subjectId
+            )
+        );
+
+
+        window.location.assign(
+            "level.html?level_id=" +
+            encodeURIComponent(
+                level.id
+            )
+        );
+
+    }
+
+
+    /* =========================================================
+       BACK
+       ========================================================= */
+
+    function goBack() {
+
+        window.location.assign(
+            "dashboard.html"
+        );
+
+    }
+
+
+    document.getElementById(
+        "backBtn"
+    ).addEventListener(
+        "click",
+        goBack
+    );
+
+
+    /* =========================================================
+       INITIALIZE
+       ========================================================= */
+
+    createBackgroundSymbols();
+
+    loadWorld();
+
+
+    window.addEventListener(
+        "resize",
+        function () {
+
+            createBackgroundSymbols();
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>

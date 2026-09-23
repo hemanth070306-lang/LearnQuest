@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LearnQuest - Python Master Castle</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #533483);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: auto;
+            padding: 30px 0 60px;
+        }
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            background: white;
+            color: #222;
+        }
+
+        .hero {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .castle {
+            font-size: 90px;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            margin: 10px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+        }
+
+        .code {
+            background: #111;
+            color: #00ff88;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .question {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .option {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background: white;
+            color: #222;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .complete {
+            display: none;
+            margin: 20px auto 0;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 10px;
+            background: #ffd600;
+            color: #222;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .reward {
+            text-align: center;
+            color: #00ff88;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 25px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <div class="top">
+
+        <h2>🎮 LearnQuest</h2>
+
+        <button
+            class="back"
+            onclick="goBack()">
+
+            ← Python World
+
+        </button>
+
+    </div>
+
+
+    <div class="hero">
+
+        <div class="castle">
+            🏰
+        </div>
+
+        <h1>
+            Python Master Castle
+        </h1>
+
+        <p>
+            Final Python Challenge
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            🧠 Final Mission
+        </h2>
+
+        <p>
+            Let's combine variables, conditions,
+            loops and functions.
+        </p>
+
+        <div class="code">
+
+            def check_number(number):<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;if number % 2 == 0:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Even"<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;else:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return "Odd"
+
+        </div>
+
+        <p>
+            This function checks whether a number is
+            even or odd.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            🎯 Final Challenge
+        </h2>
+
+        <p class="question">
+            What does the <b>return</b> statement do
+            inside a Python function?
+        </p>
+
+
+        <button
+            class="option"
+            onclick="checkAnswer(this, false)">
+
+            A. Repeats the function
+
+        </button>
+
+
+        <button
+            class="option"
+            onclick="checkAnswer(this, true)">
+
+            B. Sends a value back from the function
+
+        </button>
+
+
+        <button
+            class="option"
+            onclick="checkAnswer(this, false)">
+
+            C. Creates a loop
+
+        </button>
+
+
+        <button
+            class="option"
+            onclick="checkAnswer(this, false)">
+
+            D. Deletes the function
+
+        </button>
+
+
+        <div
+            id="result"
+            class="result">
+        </div>
+
+
+        <button
+            id="completeButton"
+            class="complete"
+            onclick="completeLevel()">
+
+            🏆 Complete Python Journey
+
+        </button>
+
+    </div>
+
+
+    <div
+        id="reward"
+        class="reward">
+    </div>
+
+</div>
+
+
+<script>
+
+let answered = false;
+
+
+function checkAnswer(button, correct) {
+
+    if (answered) {
+        return;
+    }
+
+    const result =
+        document.getElementById("result");
+
+
+    if (correct) {
+
+        answered = true;
+
+        result.textContent =
+            "🎉 Correct! You have mastered the challenge.";
+
+        result.style.color =
+            "#00ff88";
+
+        button.style.background =
+            "#00c853";
+
+        button.style.color =
+            "white";
+
+        document.getElementById(
+            "completeButton"
+        ).style.display = "block";
+
+    }
+
+    else {
+
+        result.textContent =
+            "❌ Not quite. Try again!";
+
+        result.style.color =
+            "#ff5252";
+
+        button.style.background =
+            "#ff4757";
+
+        button.style.color =
+            "white";
+
+    }
+
+}
+
+
+async function completeLevel() {
+
+    const button =
+        document.getElementById(
+            "completeButton"
+        );
+
+    const reward =
+        document.getElementById("reward");
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Saving your achievement...";
+
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:5000/complete-level",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                credentials: "include",
+
+                body: JSON.stringify({
+                    level: 5,
+                    subject: "Python"
+                })
+            }
+        );
+
+
+        const data =
+            await response.json();
+
+
+        if (response.ok) {
+
+            reward.innerHTML =
+                "🏆 PYTHON MASTER! 🏆<br><br>" +
+                "⭐ +" + data.reward.xp + " XP<br>" +
+                "🪙 +" + data.reward.coins + " Coins<br><br>" +
+                "🎉 Python World Completed!";
+
+
+            button.textContent =
+                "🗺️ View Python World";
+
+
+            button.disabled = false;
+
+
+            button.onclick = function() {
+
+                window.location.href =
+                    "world.html";
+
+            };
+
+        }
+
+        else {
+
+            reward.textContent =
+                "❌ " + data.message;
+
+            reward.style.color =
+                "#ff5252";
+
+            button.disabled = false;
+
+            button.textContent =
+                "🏆 Complete Python Journey";
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        reward.textContent =
+            "❌ Cannot connect to LearnQuest server.";
+
+        reward.style.color =
+            "#ff5252";
+
+        button.disabled = false;
+
+        button.textContent =
+            "🏆 Complete Python Journey";
+
+    }
+
+}
+
+
+function goBack() {
+
+    window.location.href =
+        "world.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

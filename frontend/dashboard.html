@@ -1,0 +1,5672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>LearnQuest - Dashboard</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            min-height: 100vh;
+
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #060811,
+                    #10152b 50%,
+                    #060811
+                );
+
+        }
+
+
+        button,
+        input {
+
+            font: inherit;
+
+        }
+
+
+        .container {
+
+            width: 92%;
+
+            max-width: 1180px;
+
+            margin: auto;
+
+            padding:
+                28px
+                0
+                60px;
+
+        }
+
+
+        /* =====================================================
+           HEADER
+           ===================================================== */
+
+        .header {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                16px;
+
+            margin-bottom:
+                28px;
+
+        }
+
+
+        .logo {
+
+            font-size:
+                28px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        .top-actions {
+
+            display:
+                flex;
+
+            gap:
+                10px;
+
+            align-items:
+                center;
+
+        }
+
+
+        .settings-btn,
+        .logout {
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
+
+            border-radius:
+                10px;
+
+            cursor:
+                pointer;
+
+            color:
+                #fff;
+
+            padding:
+                10px
+                15px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.07
+                );
+
+        }
+
+
+        .logout {
+
+            background:
+                #b83b49;
+
+            border-color:
+                #c9505e;
+
+            font-weight:
+                800;
+
+        }
+
+
+        /* =====================================================
+           WELCOME
+           ===================================================== */
+
+        .welcome {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.055
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.09
+                );
+
+            border-radius:
+                18px;
+
+            padding:
+                24px;
+
+            margin-bottom:
+                22px;
+
+        }
+
+
+        .welcome h1 {
+
+            margin:
+                0 0 8px;
+
+            font-size:
+                30px;
+
+        }
+
+
+        .welcome p {
+
+            margin:
+                0;
+
+            color:
+                #aeb5ca;
+
+        }
+
+
+        /* =====================================================
+           STATS
+           ===================================================== */
+
+        .stats {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    1fr
+                );
+
+            gap:
+                16px;
+
+            margin-bottom:
+                30px;
+
+        }
+
+
+        .card {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.055
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.09
+                );
+
+            border-radius:
+                18px;
+
+            padding:
+                20px;
+
+            text-align:
+                center;
+
+        }
+
+
+        .icon {
+
+            font-size:
+                34px;
+
+        }
+
+
+        .value {
+
+            font-size:
+                30px;
+
+            font-weight:
+                900;
+
+            margin-top:
+                7px;
+
+        }
+
+
+        /* =====================================================
+           COINS BUTTON
+           ===================================================== */
+
+        .coins-card {
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+        }
+
+
+        .more-coins-btn {
+
+            margin-top:
+                12px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    216,
+                    102,
+                    0.28
+                );
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(
+                        255,
+                        199,
+                        51,
+                        0.16
+                    ),
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        0.04
+                    )
+                );
+
+            color:
+                #ffd866;
+
+            padding:
+                9px
+                14px;
+
+            border-radius:
+                10px;
+
+            cursor:
+                pointer;
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .more-coins-btn:hover {
+
+            transform:
+                translateY(
+                    -2px
+                );
+
+            border-color:
+                rgba(
+                    255,
+                    220,
+                    100,
+                    0.55
+                );
+
+            box-shadow:
+                0 0 22px
+                rgba(
+                    255,
+                    200,
+                    55,
+                    0.16
+                );
+
+        }
+
+
+        /* =====================================================
+           SUBJECTS
+           ===================================================== */
+
+        .subjects {
+
+            margin-top:
+                24px;
+
+        }
+
+
+        .subjects h2 {
+
+            margin:
+                0 0 18px;
+
+        }
+
+
+        .subject-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    1fr
+                );
+
+            gap:
+                15px;
+
+        }
+
+
+        .subject {
+
+            position:
+                relative;
+
+            background:
+                #fff;
+
+            color:
+                #222;
+
+            border-radius:
+                16px;
+
+            padding:
+                24px
+                15px;
+
+            text-align:
+                center;
+
+            cursor:
+                pointer;
+
+            font-weight:
+                800;
+
+            transition:
+                0.25s;
+
+            overflow:
+                hidden;
+
+        }
+
+
+        .subject:hover {
+
+            transform:
+                translateY(
+                    -6px
+                );
+
+            box-shadow:
+                0 12px
+                28px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.28
+                );
+
+        }
+
+
+        .subject-icon {
+
+            font-size:
+                42px;
+
+            margin-bottom:
+                9px;
+
+        }
+
+
+        .subject-name {
+
+            font-size:
+                17px;
+
+        }
+
+
+        .subject-status {
+
+            margin-top:
+                7px;
+
+            font-size:
+                11px;
+
+            color:
+                #696d77;
+
+        }
+
+
+        .active-subject::after {
+
+            content:
+                "ACTIVE • VERSION 1.0";
+
+            position:
+                absolute;
+
+            top:
+                10px;
+
+            right:
+                10px;
+
+            padding:
+                4px
+                7px;
+
+            background:
+                #eeeaff;
+
+            color:
+                #4b2cc8;
+
+            border-radius:
+                7px;
+
+            font-size:
+                8px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        /* =====================================================
+           VERSION 2.0
+           ===================================================== */
+
+        .future-section {
+
+            margin-top:
+                24px;
+
+            padding:
+                20px;
+
+            border-radius:
+                18px;
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.16
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+        }
+
+
+        .future-heading {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+
+            margin-bottom:
+                14px;
+
+        }
+
+
+        .future-heading h3 {
+
+            margin:
+                0;
+
+        }
+
+
+        .version-badge {
+
+            padding:
+                6px
+                10px;
+
+            border-radius:
+                8px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.05
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+            color:
+                #9ca3b8;
+
+            font-size:
+                10px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        .future-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    1fr
+                );
+
+            gap:
+                12px;
+
+        }
+
+
+        .future-card {
+
+            min-height:
+                52px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                10px;
+
+            border-radius:
+                12px;
+
+            color:
+                #8b90a0;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.035
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        /* =====================================================
+           SETTINGS
+           ===================================================== */
+
+        .settings-panel {
+
+            display:
+                none;
+
+            position:
+                fixed;
+
+            top:
+                72px;
+
+            right:
+                5%;
+
+            width:
+                305px;
+
+            max-width:
+                calc(
+                    100% - 28px
+                );
+
+            background:
+                #11192b;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.14
+                );
+
+            border-radius:
+                16px;
+
+            padding:
+                19px;
+
+            z-index:
+                5000;
+
+            box-shadow:
+                0 20px
+                55px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.45
+                );
+
+        }
+
+
+        .settings-panel.show {
+
+            display:
+                block;
+
+        }
+
+
+        .settings-title {
+
+            margin:
+                0 0 14px;
+
+        }
+
+
+        .setting-row {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+
+            padding:
+                13px 0;
+
+            border-top:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+        }
+
+
+        .setting-name {
+
+            font-weight:
+                800;
+
+            font-size:
+                13px;
+
+        }
+
+
+        .setting-description {
+
+            color:
+                #8f96ab;
+
+            font-size:
+                11px;
+
+            margin-top:
+                4px;
+
+            line-height:
+                1.4;
+
+        }
+
+
+        .toggle {
+
+            position:
+                relative;
+
+            width:
+                48px;
+
+            height:
+                26px;
+
+            flex-shrink:
+                0;
+
+        }
+
+
+        .toggle input {
+
+            display:
+                none;
+
+        }
+
+
+        .slider {
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+            background:
+                #555d72;
+
+            border-radius:
+                999px;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        .slider:before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                20px;
+
+            height:
+                20px;
+
+            top:
+                3px;
+
+            left:
+                3px;
+
+            background:
+                #fff;
+
+            border-radius:
+                50%;
+
+            transition:
+                0.2s;
+
+        }
+
+
+        .toggle input:checked + .slider {
+
+            background:
+                #2ed573;
+
+        }
+
+
+        .toggle input:checked + .slider:before {
+
+            transform:
+                translateX(
+                    22px
+                );
+
+        }
+
+
+        .music-note {
+
+            position:
+                fixed;
+
+            left:
+                16px;
+
+            bottom:
+                16px;
+
+            z-index:
+                4000;
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.45
+                );
+
+            padding:
+                7px
+                11px;
+
+            border-radius:
+                18px;
+
+            color:
+                #cfd4e3;
+
+            font-size:
+                11px;
+
+        }
+
+
+        /* =====================================================
+           COIN POP
+           ===================================================== */
+
+        .coin-pop {
+
+            position:
+                fixed;
+
+            z-index:
+                9000;
+
+            pointer-events:
+                none;
+
+            font-size:
+                25px;
+
+            animation:
+                coinPop
+                0.7s
+                ease-out
+                forwards;
+
+        }
+
+
+        @keyframes coinPop {
+
+            from {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(
+                        0
+                    )
+                    scale(
+                        1
+                    );
+
+            }
+
+
+            to {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(
+                        -60px
+                    )
+                    scale(
+                        1.35
+                    );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           COIN GAME OVERLAY
+           ===================================================== */
+
+        .coin-game-overlay {
+
+            display:
+                none;
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            z-index:
+                8000;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                18px;
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.78
+                );
+
+            backdrop-filter:
+                blur(
+                    8px
+                );
+
+        }
+
+
+        .coin-game-overlay.show {
+
+            display:
+                flex;
+
+        }
+
+
+        .coin-game {
+
+            width:
+                min(
+                    900px,
+                    96vw
+                );
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #0d1630,
+                    #040711
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
+
+            border-radius:
+                24px;
+
+            padding:
+                18px;
+
+            box-shadow:
+                0 30px
+                100px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.60
+                );
+
+        }
+
+
+        .coin-game-header {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap:
+                14px;
+
+            flex-wrap:
+                wrap;
+
+            margin-bottom:
+                12px;
+
+        }
+
+
+        .coin-game-title {
+
+            font-size:
+                23px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        .coin-game-stats {
+
+            display:
+                flex;
+
+            gap:
+                9px;
+
+            flex-wrap:
+                wrap;
+
+            align-items:
+                center;
+
+        }
+
+
+        .game-stat {
+
+            padding:
+                7px
+                10px;
+
+            border-radius:
+                10px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.05
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .game-close-btn {
+
+            width:
+                38px;
+
+            height:
+                38px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
+
+            border-radius:
+                10px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.05
+                );
+
+            color:
+                #fff;
+
+            cursor:
+                pointer;
+
+            font-size:
+                20px;
+
+        }
+
+
+        /* =====================================================
+           GAME STAGE
+           ===================================================== */
+
+        .game-stage {
+
+            position:
+                relative;
+
+            height:
+                390px;
+
+            overflow:
+                hidden;
+
+            border-radius:
+                18px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #13204b 0%,
+                    #0b1230 55%,
+                    #060913 100%
+                );
+
+            outline:
+                none;
+
+        }
+
+
+        .game-stage:focus {
+
+            box-shadow:
+                0 0 0 2px
+                rgba(
+                    117,
+                    92,
+                    255,
+                    0.45
+                );
+
+        }
+
+
+        /* =====================================================
+           GAME CLOUDS
+           ===================================================== */
+
+        .game-cloud {
+
+            position:
+                absolute;
+
+            top:
+                var(--top);
+
+            left:
+                -250px;
+
+            width:
+                var(--width);
+
+            height:
+                36px;
+
+            border-radius:
+                30px;
+
+            background:
+                rgba(
+                    240,
+                    246,
+                    255,
+                    0.20
+                );
+
+            filter:
+                blur(
+                    1px
+                );
+
+            animation:
+                gameCloud
+                var(--speed)
+                linear
+                infinite;
+
+            animation-delay:
+                var(--delay);
+
+        }
+
+
+        .game-cloud::before,
+        .game-cloud::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            background:
+                inherit;
+
+            border-radius:
+                50%;
+
+        }
+
+
+        .game-cloud::before {
+
+            width:
+                62px;
+
+            height:
+                62px;
+
+            left:
+                20px;
+
+            bottom:
+                7px;
+
+        }
+
+
+        .game-cloud::after {
+
+            width:
+                76px;
+
+            height:
+                76px;
+
+            right:
+                24px;
+
+            bottom:
+                5px;
+
+        }
+
+
+        @keyframes gameCloud {
+
+            from {
+
+                transform:
+                    translateX(
+                        0
+                    );
+
+            }
+
+
+            to {
+
+                transform:
+                    translateX(
+                        calc(
+                            100vw +
+                            600px
+                        )
+                    );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           GAME GROUND
+           ===================================================== */
+
+        .game-ground {
+
+            position:
+                absolute;
+
+            left:
+                0;
+
+            right:
+                0;
+
+            bottom:
+                0;
+
+            height:
+                72px;
+
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        0.17
+                    )
+                    0 45px,
+                    transparent
+                    45px 90px
+                ),
+                linear-gradient(
+                    180deg,
+                    #182039,
+                    #0a0f1d
+                );
+
+            border-top:
+                2px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+        }
+
+
+        /* =====================================================
+           PLAYER
+           ===================================================== */
+
+        .game-player {
+
+            position:
+                absolute;
+
+            right:
+                72px;
+
+            bottom:
+                70px;
+
+            width:
+                54px;
+
+            height:
+                54px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                38px;
+
+            z-index:
+                5;
+
+            transition:
+                transform
+                0.16s
+                ease;
+
+            transform:
+                scaleX(
+                    -1
+                );
+
+            filter:
+                drop-shadow(
+                    0 6px
+                    14px
+                    rgba(
+                        255,
+                        115,
+                        70,
+                        0.28
+                    )
+                );
+
+        }
+
+
+        .game-player.jump {
+
+            transform:
+                scaleX(
+                    1
+                )
+                translateY(
+                    -125px
+                );
+
+        }
+
+
+        /* =====================================================
+           COINS
+           ===================================================== */
+
+        .game-coin {
+
+            position:
+                absolute;
+
+            width:
+                34px;
+
+            height:
+                34px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                28px;
+
+            z-index:
+                4;
+
+            filter:
+                drop-shadow(
+                    0 0 10px
+                    rgba(
+                        255,
+                        220,
+                        75,
+                        0.75
+                    )
+                );
+
+            animation:
+                gameCoinBob
+                0.7s
+                ease-in-out
+                infinite
+                alternate;
+
+        }
+
+
+        @keyframes gameCoinBob {
+
+            from {
+
+                transform:
+                    translateY(
+                        -3px
+                    )
+                    rotate(
+                        -4deg
+                    );
+
+            }
+
+
+            to {
+
+                transform:
+                    translateY(
+                        3px
+                    )
+                    rotate(
+                        4deg
+                    );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           OBSTACLE
+           ===================================================== */
+
+        .game-obstacle {
+
+            position:
+                absolute;
+
+            width:
+                58px;
+
+            height:
+                44px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                31px;
+
+            z-index:
+                4;
+
+        }
+
+
+        /* =====================================================
+           PARTICLES
+           ===================================================== */
+
+        .game-particle {
+
+            position:
+                absolute;
+
+            width:
+                4px;
+
+            height:
+                4px;
+
+            border-radius:
+                50%;
+
+            background:
+                #fff;
+
+            opacity:
+                .55;
+
+            animation:
+                particleSweep
+                var(--speed)
+                linear
+                infinite;
+
+            animation-delay:
+                var(--delay);
+
+        }
+
+
+        @keyframes particleSweep {
+
+            from {
+
+                transform:
+                    translateX(
+                        0
+                    );
+
+                opacity:
+                    0;
+
+            }
+
+
+            20% {
+
+                opacity:
+                    .65;
+
+            }
+
+
+            to {
+
+                transform:
+                    translateX(
+                        300px
+                    );
+
+                opacity:
+                    0;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           GAME TEXT
+           ===================================================== */
+
+        .game-instruction {
+
+            text-align:
+                center;
+
+            margin-top:
+                9px;
+
+            color:
+                #9098b0;
+
+            font-size:
+                12px;
+
+        }
+
+
+        .game-message {
+
+            min-height:
+                21px;
+
+            text-align:
+                center;
+
+            margin-top:
+                8px;
+
+            font-weight:
+                800;
+
+            color:
+                #ffd866;
+
+        }
+
+
+        .game-actions {
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                10px;
+
+            margin-top:
+                12px;
+
+        }
+
+
+        .game-action-btn {
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.11
+                );
+
+            border-radius:
+                11px;
+
+            padding:
+                11px
+                17px;
+
+            cursor:
+                pointer;
+
+            color:
+                #fff;
+
+            font-weight:
+                800;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.05
+                );
+
+        }
+
+
+        .game-action-btn.primary {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6d58ff,
+                    #4f38c4
+                );
+
+        }
+
+
+        .game-action-btn.coin {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #d7aa2d,
+                    #996915
+                );
+
+        }
+
+
+        .game-action-btn:disabled {
+
+            opacity:
+                .6;
+
+            cursor:
+                not-allowed;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (
+            max-width: 800px
+        ) {
+
+            .subject-grid,
+            .future-grid {
+
+                grid-template-columns:
+                    repeat(
+                        2,
+                        1fr
+                    );
+
+            }
+
+
+            .stats {
+
+                grid-template-columns:
+                    1fr
+                    1fr;
+
+            }
+
+        }
+
+
+        @media (
+            max-width: 520px
+        ) {
+
+            .container {
+
+                width:
+                    94%;
+
+                padding-top:
+                    20px;
+
+            }
+
+
+            .stats,
+            .subject-grid,
+            .future-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .welcome h1 {
+
+                font-size:
+                    24px;
+
+            }
+
+
+            .header {
+
+                align-items:
+                    flex-start;
+
+            }
+
+
+            .game-stage {
+
+                height:
+                    340px;
+
+            }
+
+
+            .game-player {
+
+                right:
+                    45px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         MUSIC NOTE
+         ===================================================== -->
+
+    <div
+        id="musicNote"
+        class="music-note"
+    >
+        🎵 Music ready
+    </div>
+
+
+
+    <!-- =====================================================
+         SETTINGS
+         ===================================================== -->
+
+    <div
+        id="settingsPanel"
+        class="settings-panel"
+    >
+
+        <h3
+            class="settings-title"
+            id="settingsTitle"
+        >
+            ⚙️ Settings
+        </h3>
+
+
+        <div class="setting-row">
+
+            <div>
+
+                <div
+                    class="setting-name"
+                    id="musicSettingName"
+                >
+                    🎵 Background Music
+                </div>
+
+
+                <div
+                    class="setting-description"
+                    id="musicSettingDescription"
+                >
+                    Keep music playing while you learn.
+                </div>
+
+            </div>
+
+
+            <label class="toggle">
+
+                <input
+                    type="checkbox"
+                    id="musicToggle"
+                    checked
+                >
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+
+        <div class="setting-row">
+
+            <div>
+
+                <div
+                    class="setting-name"
+                    id="soundSettingName"
+                >
+                    🔔 Click / Coin Sound
+                </div>
+
+
+                <div
+                    class="setting-description"
+                    id="soundSettingDescription"
+                >
+                    Play a small sound when you click and collect coins.
+                </div>
+
+            </div>
+
+
+            <label class="toggle">
+
+                <input
+                    type="checkbox"
+                    id="soundToggle"
+                    checked
+                >
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         DASHBOARD
+         ===================================================== -->
+
+    <div class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <div class="logo">
+
+                🎮 LearnQuest
+
+            </div>
+
+
+            <div class="top-actions">
+
+                <button
+                    class="settings-btn"
+                    id="settingsBtn"
+                    type="button"
+                >
+                    ⚙️
+                </button>
+
+
+                <button
+                    class="logout"
+                    id="logoutBtn"
+                    type="button"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- WELCOME -->
+
+        <div class="welcome">
+
+            <h1>
+
+                <span id="welcomeText">
+                    Welcome
+                </span>,
+
+                <span id="studentName">
+                    Student
+                </span>
+
+                👋
+
+            </h1>
+
+
+            <p id="adventureText">
+
+                Ready to continue your learning adventure? 🚀
+
+            </p>
+
+        </div>
+
+
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+
+            <div class="card">
+
+                <div class="icon">
+                    ⭐
+                </div>
+
+
+                <div id="xpLabel">
+                    XP
+                </div>
+
+
+                <div
+                    class="value"
+                    id="xp"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+
+            <div class="card coins-card">
+
+                <div class="icon">
+                    🪙
+                </div>
+
+
+                <div id="coinsLabel">
+                    Coins
+                </div>
+
+
+                <div
+                    class="value"
+                    id="coins"
+                >
+                    20
+                </div>
+
+
+                <button
+                    class="more-coins-btn"
+                    id="moreCoinsBtn"
+                    type="button"
+                >
+                    ☁️ More Coins
+                </button>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <div class="icon">
+                    🔥
+                </div>
+
+
+                <div id="streakLabel">
+                    Streak
+                </div>
+
+
+                <div
+                    class="value"
+                    id="streak"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- SUBJECTS -->
+
+        <div class="subjects">
+
+            <h2 id="chooseSubject">
+
+                📚 Choose Your Subject
+
+            </h2>
+
+
+            <div class="subject-grid">
+
+
+                <!-- PYTHON -->
+
+                <div
+                    class="subject active-subject"
+                    data-subject="Python"
+                    role="button"
+                    tabindex="0"
+                >
+
+                    <div class="subject-icon">
+                        🐍
+                    </div>
+
+
+                    <div
+                        class="subject-name"
+                        data-en="Python"
+                        data-hi="पाइथन"
+                        data-te="పైథాన్"
+                    >
+                        Python
+                    </div>
+
+
+                    <div class="subject-status">
+                        🏎️ Learning Race • Active
+                    </div>
+
+                </div>
+
+
+
+                <!-- JAVA -->
+
+                <div
+                    class="subject active-subject"
+                    data-subject="Java"
+                    role="button"
+                    tabindex="0"
+                >
+
+                    <div class="subject-icon">
+                        ☕
+                    </div>
+
+
+                    <div
+                        class="subject-name"
+                        data-en="Java"
+                        data-hi="जावा"
+                        data-te="జావా"
+                    >
+                        Java
+                    </div>
+
+
+                    <div class="subject-status">
+                        🏎️ Learning Race • Active
+                    </div>
+
+                </div>
+
+
+
+                <!-- MACHINE LEARNING -->
+
+                <div
+                    class="subject active-subject"
+                    data-subject="Machine Learning"
+                    role="button"
+                    tabindex="0"
+                >
+
+                    <div class="subject-icon">
+                        🤖
+                    </div>
+
+
+                    <div
+                        class="subject-name"
+                        data-en="Machine Learning"
+                        data-hi="मशीन लर्निंग"
+                        data-te="మెషిన్ లెర్నింగ్"
+                    >
+                        Machine Learning
+                    </div>
+
+
+                    <div class="subject-status">
+                        🏎️ Learning Race • Active
+                    </div>
+
+                </div>
+
+
+
+                <!-- NLP -->
+
+                <div
+                    class="subject active-subject"
+                    data-subject="NLP"
+                    role="button"
+                    tabindex="0"
+                >
+
+                    <div class="subject-icon">
+                        🧠
+                    </div>
+
+
+                    <div
+                        class="subject-name"
+                        data-en="NLP"
+                        data-hi="NLP"
+                        data-te="NLP"
+                    >
+                        NLP
+                    </div>
+
+
+                    <div class="subject-status">
+                        🏎️ Learning Race • Active
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- VERSION 2.0 -->
+
+            <div class="future-section">
+
+                <div class="future-heading">
+
+                    <h3>
+                        🔒 More Subjects
+                    </h3>
+
+
+                    <div class="version-badge">
+                        VERSION 2.0
+                    </div>
+
+                </div>
+
+
+                <div class="future-grid">
+
+                    <div class="future-card">
+                        🔒 💻 C Programming
+                    </div>
+
+                    <div class="future-card">
+                        🔒 🗄️ Data Structures
+                    </div>
+
+                    <div class="future-card">
+                        🔒 📐 Aptitude
+                    </div>
+
+                    <div class="future-card">
+                        🔒 🧩 Reasoning
+                    </div>
+
+                    <div class="future-card">
+                        🔒 🇬🇧 English
+                    </div>
+
+                    <div class="future-card">
+                        🔒 📊 Data Science
+                    </div>
+
+                    <div class="future-card">
+                        🔒 🌐 Web Development
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         COIN RUNNER
+         ===================================================== -->
+
+    <div
+        class="coin-game-overlay"
+        id="coinGameOverlay"
+        aria-hidden="true"
+    >
+
+        <div
+            class="coin-game"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="coinGameTitle"
+        >
+
+
+            <div class="coin-game-header">
+
+                <div>
+
+                    <div
+                        class="coin-game-title"
+                        id="coinGameTitle"
+                    >
+                        ☁️ Coin Runner
+                    </div>
+
+
+                    <div
+                        style="
+                            color:#858ca5;
+                            font-size:12px;
+                            margin-top:3px;
+                        "
+                    >
+                        Jump over clouds and collect coins.
+                    </div>
+
+                </div>
+
+
+
+                <div class="coin-game-stats">
+
+
+                    <div class="game-stat">
+
+                        🪙 Collected:
+
+                        <span id="gameCollected">
+                            0
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="game-stat">
+
+                        🏆 Best:
+
+                        <span id="gameBest">
+                            0
+                        </span>
+
+                    </div>
+
+
+
+                    <button
+                        id="closeCoinGame"
+                        class="game-close-btn"
+                        type="button"
+                        aria-label="Close game"
+                    >
+                        ×
+                    </button>
+
+
+                </div>
+
+            </div>
+
+
+
+            <div
+                class="game-stage"
+                id="coinGameStage"
+                tabindex="0"
+                aria-label="Coin runner game. Tap or press Space or Arrow Up to jump."
+            >
+
+
+                <!-- CLOUDS -->
+
+                <div
+                    class="game-cloud"
+                    style="
+                        --top:10%;
+                        --width:170px;
+                        --speed:17s;
+                        --delay:-3s;
+                    "
+                ></div>
+
+
+                <div
+                    class="game-cloud"
+                    style="
+                        --top:24%;
+                        --width:220px;
+                        --speed:22s;
+                        --delay:-11s;
+                    "
+                ></div>
+
+
+                <div
+                    class="game-cloud"
+                    style="
+                        --top:7%;
+                        --width:140px;
+                        --speed:26s;
+                        --delay:-19s;
+                    "
+                ></div>
+
+
+
+                <!-- PARTICLES -->
+
+                <div
+                    class="game-particle"
+                    style="
+                        left:74%;
+                        top:24%;
+                        --speed:11s;
+                        --delay:-2s;
+                    "
+                ></div>
+
+
+                <div
+                    class="game-particle"
+                    style="
+                        left:86%;
+                        top:34%;
+                        --speed:14s;
+                        --delay:-7s;
+                    "
+                ></div>
+
+
+                <div
+                    class="game-particle"
+                    style="
+                        left:63%;
+                        top:18%;
+                        --speed:12s;
+                        --delay:-9s;
+                    "
+                ></div>
+
+
+                <div
+                    class="game-particle"
+                    style="
+                        left:92%;
+                        top:18%;
+                        --speed:16s;
+                        --delay:-4s;
+                    "
+                ></div>
+
+
+
+                <!-- GROUND -->
+
+                <div class="game-ground"></div>
+
+
+
+                <!-- PLAYER -->
+
+                <div
+                    class="game-player"
+                    id="gamePlayer"
+                >
+                    🏃
+                </div>
+
+
+
+                <!-- DYNAMIC COINS -->
+
+                <div id="gameCoins"></div>
+
+
+
+                <!-- OBSTACLES -->
+
+                <div id="gameObstacles"></div>
+
+
+            </div>
+
+
+
+            <div class="game-instruction">
+
+                Tap the game area or press Space / ↑ to jump.
+
+            </div>
+
+
+            <div
+                class="game-message"
+                id="gameMessage"
+            >
+
+                Collect as many coins as you can!
+
+            </div>
+
+
+            <div
+                class="game-actions"
+                id="gameActions"
+                style="display:none;"
+            >
+
+                <button
+                    id="tryAgainBtn"
+                    class="game-action-btn primary"
+                    type="button"
+                >
+                    🔄 Try Again
+                </button>
+
+
+                <button
+                    id="claimCoinsBtn"
+                    class="game-action-btn coin"
+                    type="button"
+                >
+                    🪙 Claim Coins
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         EXISTING SCRIPTS
+         ===================================================== -->
+
+    <script src="js/i18n.js"></script>
+
+    <script src="js/dashboard.js"></script>
+
+
+
+    <script>
+
+
+        /* =====================================================
+           CONFIG
+           ===================================================== */
+
+        const API_BASE =
+            "http://127.0.0.1:5000";
+
+
+        const MUSIC_KEY =
+            "learnquest_music";
+
+
+        const SOUND_KEY =
+            "learnquest_sound";
+
+
+        const GAME_STATE_KEY =
+            "learnquest_coin_runner_state";
+
+
+        let audioContext =
+            null;
+
+
+        let currentUser =
+            null;
+
+
+
+        /* =====================================================
+           LANGUAGE
+           ===================================================== */
+
+        function getLanguage() {
+
+            return (
+                localStorage.getItem(
+                    "selected_language"
+                ) || "en"
+            );
+
+        }
+
+
+
+        /* =====================================================
+           SOUND SETTINGS
+           ===================================================== */
+
+        function soundEnabled() {
+
+            return (
+                localStorage.getItem(
+                    SOUND_KEY
+                ) !== "off"
+            );
+
+        }
+
+
+        function musicEnabled() {
+
+            return (
+                localStorage.getItem(
+                    MUSIC_KEY
+                ) !== "off"
+            );
+
+        }
+
+
+
+        /* =====================================================
+           TING SOUND
+           ===================================================== */
+
+        function pingSound(
+            longer = false
+        ) {
+
+            if (
+                !soundEnabled()
+            ) {
+
+                return;
+
+            }
+
+
+            try {
+
+                const AudioCtx =
+                    window.AudioContext ||
+                    window.webkitAudioContext;
+
+
+                if (
+                    !AudioCtx
+                ) {
+
+                    return;
+
+                }
+
+
+                const ctx =
+                    new AudioCtx();
+
+
+                const oscillator =
+                    ctx.createOscillator();
+
+
+                const gain =
+                    ctx.createGain();
+
+
+                const start =
+                    ctx.currentTime;
+
+
+                const duration =
+                    longer
+                        ? 0.22
+                        : 0.12;
+
+
+                oscillator.type =
+                    "sine";
+
+
+                oscillator.frequency.setValueAtTime(
+                    longer
+                        ? 700
+                        : 760,
+                    start
+                );
+
+
+                oscillator.frequency.exponentialRampToValueAtTime(
+                    longer
+                        ? 1200
+                        : 1100,
+                    start +
+                    duration
+                );
+
+
+                gain.gain.setValueAtTime(
+                    0.11,
+                    start
+                );
+
+
+                gain.gain.exponentialRampToValueAtTime(
+                    0.001,
+                    start +
+                    duration
+                );
+
+
+                oscillator.connect(
+                    gain
+                );
+
+
+                gain.connect(
+                    ctx.destination
+                );
+
+
+                oscillator.start(
+                    start
+                );
+
+
+                oscillator.stop(
+                    start +
+                    duration
+                );
+
+
+            }
+
+            catch (
+                error
+            ) {
+
+                console.log(
+                    "Sound error:",
+                    error
+                );
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           COIN POP
+           ===================================================== */
+
+        function showCoinPop() {
+
+            const coin =
+                document.createElement(
+                    "div"
+                );
+
+
+            coin.className =
+                "coin-pop";
+
+
+            coin.textContent =
+                "🪙";
+
+
+            coin.style.left =
+                "50%";
+
+
+            coin.style.top =
+                "45%";
+
+
+            document.body.appendChild(
+                coin
+            );
+
+
+            setTimeout(
+                function () {
+
+                    coin.remove();
+
+                },
+                700
+            );
+
+        }
+
+
+
+        /* =====================================================
+           LOCAL GAME STATE
+           ===================================================== */
+
+        function readGameState() {
+
+            try {
+
+                const saved =
+                    JSON.parse(
+                        localStorage.getItem(
+                            GAME_STATE_KEY
+                        ) || "{}"
+                    );
+
+
+                const balance =
+                    Number(
+                        saved.balance
+                    );
+
+
+                const best =
+                    Number(
+                        saved.best
+                    );
+
+
+                return {
+
+                    balance:
+                        Number.isFinite(
+                            balance
+                        )
+                            ? Math.max(
+                                0,
+                                Math.floor(
+                                    balance
+                                )
+                            )
+                            : 20,
+
+                    best:
+                        Number.isFinite(
+                            best
+                        )
+                            ? Math.max(
+                                0,
+                                Math.floor(
+                                    best
+                                )
+                            )
+                            : 0
+
+                };
+
+            }
+
+            catch (
+                error
+            ) {
+
+                return {
+
+                    balance:
+                        20,
+
+                    best:
+                        0
+
+                };
+
+            }
+
+        }
+
+
+
+        function saveGameState(
+            balance,
+            best
+        ) {
+
+            localStorage.setItem(
+
+                GAME_STATE_KEY,
+
+                JSON.stringify({
+
+                    balance:
+                        Math.max(
+                            0,
+                            Math.floor(
+                                Number(
+                                    balance
+                                ) || 0
+                            )
+                        ),
+
+                    best:
+                        Math.max(
+                            0,
+                            Math.floor(
+                                Number(
+                                    best
+                                ) || 0
+                            )
+                        )
+
+                })
+
+            );
+
+        }
+
+
+
+        /* =====================================================
+           DASHBOARD COINS DISPLAY
+           ===================================================== */
+
+        function setCoinsDisplay(
+            value
+        ) {
+
+            const safe =
+                Math.max(
+                    0,
+                    Math.floor(
+                        Number(
+                            value
+                        ) || 0
+                    )
+                );
+
+
+            document.getElementById(
+                "coins"
+            ).textContent =
+                String(
+                    safe
+                );
+
+
+            return safe;
+
+        }
+
+
+
+        /* =====================================================
+           LOAD REAL USER DATA
+           ===================================================== */
+
+        async function loadDashboardData() {
+
+            try {
+
+                const response =
+                    await fetch(
+
+                        `${API_BASE}/dashboard`,
+
+                        {
+
+                            method:
+                                "GET",
+
+                            credentials:
+                                "include",
+
+                            cache:
+                                "no-store"
+
+                        }
+
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    !response.ok
+                ) {
+
+                    throw new Error(
+                        data.message ||
+                        "Please login first."
+                    );
+
+                }
+
+
+                currentUser =
+                    data.user;
+
+
+                if (
+                    !currentUser
+                ) {
+
+                    throw new Error(
+                        "User information was not returned."
+                    );
+
+                }
+
+
+                document.getElementById(
+                    "studentName"
+                ).textContent =
+                    currentUser.name ||
+                    "Student";
+
+
+                document.getElementById(
+                    "xp"
+                ).textContent =
+                    Math.max(
+                        0,
+                        Number(
+                            currentUser.xp
+                        ) || 0
+                    );
+
+
+                document.getElementById(
+                    "coins"
+                ).textContent =
+                    Math.max(
+                        0,
+                        Number(
+                            currentUser.coins
+                        ) || 0
+                    );
+
+
+                document.getElementById(
+                    "streak"
+                ).textContent =
+                    Math.max(
+                        0,
+                        Number(
+                            currentUser.streak
+                        ) || 0
+                    );
+
+
+                /*
+                 * IMPORTANT:
+                 * Server balance is the real account balance.
+                 * Keep local game-state in sync with it.
+                 */
+
+                const serverCoins =
+                    Math.max(
+                        0,
+                        Number(
+                            currentUser.coins
+                        ) || 0
+                    );
+
+
+                const stored =
+                    readGameState();
+
+
+                saveGameState(
+                    serverCoins,
+                    Math.max(
+                        stored.best,
+                        0
+                    )
+                );
+
+
+                setCoinsDisplay(
+                    serverCoins
+                );
+
+            }
+
+
+            catch (
+                error
+            ) {
+
+                console.error(
+                    "Dashboard load error:",
+                    error
+                );
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           LANGUAGE TEXT
+           ===================================================== */
+
+        function applyLanguage() {
+
+            const language =
+                getLanguage();
+
+
+            const text = {
+
+                en: {
+
+                    welcome:
+                        "Welcome",
+
+                    adventure:
+                        "Ready to continue your learning adventure? 🚀",
+
+                    coins:
+                        "Coins",
+
+                    streak:
+                        "Streak",
+
+                    choose:
+                        "📚 Choose Your Subject",
+
+                    logout:
+                        "Logout"
+
+                },
+
+
+                hi: {
+
+                    welcome:
+                        "स्वागत है",
+
+                    adventure:
+                        "क्या आप अपनी सीखने की यात्रा जारी रखने के लिए तैयार हैं? 🚀",
+
+                    coins:
+                        "सिक्के",
+
+                    streak:
+                        "स्ट्रीक",
+
+                    choose:
+                        "📚 अपना विषय चुनें",
+
+                    logout:
+                        "लॉगआउट"
+
+                },
+
+
+                te: {
+
+                    welcome:
+                        "స్వాగతం",
+
+                    adventure:
+                        "మీ అభ్యాస ప్రయాణాన్ని కొనసాగించడానికి సిద్ధంగా ఉన్నారా? 🚀",
+
+                    coins:
+                        "నాణేలు",
+
+                    streak:
+                        "స్ట్రీక్",
+
+                    choose:
+                        "📚 మీ అంశాన్ని ఎంచుకోండి",
+
+                    logout:
+                        "లాగౌట్"
+
+                }
+
+            };
+
+
+            const t =
+                text[
+                    language
+                ] ||
+                text.en;
+
+
+            document.getElementById(
+                "welcomeText"
+            ).textContent =
+                t.welcome;
+
+
+            document.getElementById(
+                "adventureText"
+            ).textContent =
+                t.adventure;
+
+
+            document.getElementById(
+                "coinsLabel"
+            ).textContent =
+                t.coins;
+
+
+            document.getElementById(
+                "streakLabel"
+            ).textContent =
+                t.streak;
+
+
+            document.getElementById(
+                "chooseSubject"
+            ).textContent =
+                t.choose;
+
+
+            document.getElementById(
+                "logoutBtn"
+            ).textContent =
+                t.logout;
+
+
+            document
+                .querySelectorAll(
+                    ".subject-name"
+                )
+                .forEach(
+                    function (
+                        element
+                    ) {
+
+                        element.textContent =
+
+                            element.getAttribute(
+                                "data-" +
+                                language
+                            )
+
+                            ||
+
+                            element.getAttribute(
+                                "data-en"
+                            )
+
+                            ||
+
+                            element.textContent;
+
+                    }
+                );
+
+        }
+
+
+
+        /* =====================================================
+           SETTINGS TEXT
+           ===================================================== */
+
+        function updateSettingsText() {
+
+            const language =
+                getLanguage();
+
+
+            const labels = {
+
+                en: {
+
+                    title:
+                        "⚙️ Settings",
+
+                    music:
+                        "🎵 Background Music",
+
+                    musicDesc:
+                        "Keep music playing while you learn.",
+
+                    sound:
+                        "🔔 Click / Coin Sound",
+
+                    soundDesc:
+                        "Play a small sound when you click and collect coins."
+
+                },
+
+
+                hi: {
+
+                    title:
+                        "⚙️ सेटिंग्स",
+
+                    music:
+                        "🎵 बैकग्राउंड म्यूज़िक",
+
+                    musicDesc:
+                        "सीखते समय म्यूज़िक चालू रखें।",
+
+                    sound:
+                        "🔔 क्लिक / कॉइन साउंड",
+
+                    soundDesc:
+                        "क्लिक और कॉइन मिलने पर छोटी ध्वनि चलाएं।"
+
+                },
+
+
+                te: {
+
+                    title:
+                        "⚙️ సెట్టింగ్స్",
+
+                    music:
+                        "🎵 బ్యాక్‌గ్రౌండ్ మ్యూజిక్",
+
+                    musicDesc:
+                        "మీరు నేర్చుకునే సమయంలో మ్యూజిక్ కొనసాగుతుంది.",
+
+                    sound:
+                        "🔔 క్లిక్ / కాయిన్ సౌండ్",
+
+                    soundDesc:
+                        "క్లిక్ చేసినప్పుడు మరియు కాయిన్లు వచ్చినప్పుడు సౌండ్ ప్లే అవుతుంది."
+
+                }
+
+            };
+
+
+            const t =
+                labels[
+                    language
+                ] ||
+                labels.en;
+
+
+            document.getElementById(
+                "settingsTitle"
+            ).textContent =
+                t.title;
+
+
+            document.getElementById(
+                "musicSettingName"
+            ).textContent =
+                t.music;
+
+
+            document.getElementById(
+                "musicSettingDescription"
+            ).textContent =
+                t.musicDesc;
+
+
+            document.getElementById(
+                "soundSettingName"
+            ).textContent =
+                t.sound;
+
+
+            document.getElementById(
+                "soundSettingDescription"
+            ).textContent =
+                t.soundDesc;
+
+        }
+
+
+
+        /* =====================================================
+           SUBJECT OPEN
+           ===================================================== */
+
+        function openSubject(
+            subject
+        ) {
+
+            pingSound();
+
+            showCoinPop();
+
+
+            const subjectIds = {
+
+                "Python":
+                    1,
+
+                "Java":
+                    2,
+
+                "C Programming":
+                    3,
+
+                "Data Structures":
+                    4,
+
+                "Machine Learning":
+                    5,
+
+                "NLP":
+                    6,
+
+                "Aptitude":
+                    7,
+
+                "Reasoning":
+                    8,
+
+                "English":
+                    9,
+
+                "Data Science":
+                    10,
+
+                "Web Development":
+                    11
+
+            };
+
+
+            const id =
+                subjectIds[
+                    subject
+                ];
+
+
+            if (
+                !id
+            ) {
+
+                return;
+
+            }
+
+
+            window.location.href =
+                `world.html?subject_id=${id}`;
+
+        }
+
+
+
+        document
+            .querySelectorAll(
+                ".active-subject"
+            )
+            .forEach(
+                function (
+                    card
+                ) {
+
+                    card.addEventListener(
+                        "click",
+                        function () {
+
+                            openSubject(
+                                card.dataset.subject
+                            );
+
+                        }
+                    );
+
+
+                    card.addEventListener(
+                        "keydown",
+                        function (
+                            event
+                        ) {
+
+                            if (
+                                event.key ===
+                                    "Enter" ||
+                                event.key ===
+                                    " "
+                            ) {
+
+                                event.preventDefault();
+
+
+                                openSubject(
+                                    card.dataset.subject
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+
+
+        /* =====================================================
+           LOGOUT
+           ===================================================== */
+
+        async function logout() {
+
+            try {
+
+                await fetch(
+
+                    `${API_BASE}/logout`,
+
+                    {
+
+                        method:
+                            "POST",
+
+                        credentials:
+                            "include"
+
+                    }
+
+                );
+
+            }
+
+            catch (
+                error
+            ) {
+
+                console.error(
+                    "Logout error:",
+                    error
+                );
+
+            }
+
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+
+        /* =====================================================
+           AMBIENT MUSIC
+           ===================================================== */
+
+        function startAmbientMusic() {
+
+            if (
+                !musicEnabled() ||
+                audioContext
+            ) {
+
+                return;
+
+            }
+
+
+            try {
+
+                const AudioCtx =
+                    window.AudioContext ||
+                    window.webkitAudioContext;
+
+
+                if (
+                    !AudioCtx
+                ) {
+
+                    return;
+
+                }
+
+
+                audioContext =
+                    new AudioCtx();
+
+
+                const masterGain =
+                    audioContext.createGain();
+
+
+                masterGain.gain.value =
+                    0.018;
+
+
+                masterGain.connect(
+                    audioContext.destination
+                );
+
+
+                const notes = [
+
+                    261.63,
+                    329.63,
+                    392.00,
+                    329.63
+
+                ];
+
+
+                let noteIndex =
+                    0;
+
+
+                function playNote() {
+
+                    if (
+                        !musicEnabled() ||
+                        !audioContext
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const oscillator =
+                        audioContext.createOscillator();
+
+
+                    const gain =
+                        audioContext.createGain();
+
+
+                    const now =
+                        audioContext.currentTime;
+
+
+                    oscillator.type =
+                        "sine";
+
+
+                    oscillator.frequency.value =
+                        notes[
+                            noteIndex %
+                            notes.length
+                        ];
+
+
+                    gain.gain.setValueAtTime(
+                        0.0001,
+                        now
+                    );
+
+
+                    gain.gain.exponentialRampToValueAtTime(
+                        0.08,
+                        now + 0.05
+                    );
+
+
+                    gain.gain.exponentialRampToValueAtTime(
+                        0.0001,
+                        now + 0.8
+                    );
+
+
+                    oscillator.connect(
+                        gain
+                    );
+
+
+                    gain.connect(
+                        masterGain
+                    );
+
+
+                    oscillator.start(
+                        now
+                    );
+
+
+                    oscillator.stop(
+                        now + 0.85
+                    );
+
+
+                    noteIndex++;
+
+                }
+
+
+                playNote();
+
+
+                window.learnQuestMusicTimer =
+                    setInterval(
+                        playNote,
+                        900
+                    );
+
+
+                document.getElementById(
+                    "musicNote"
+                ).textContent =
+                    "🎵 Music ON";
+
+            }
+
+            catch (
+                error
+            ) {
+
+                console.log(
+                    "Music error:",
+                    error
+                );
+
+            }
+
+        }
+
+
+
+        function stopAmbientMusic() {
+
+            if (
+                window.learnQuestMusicTimer
+            ) {
+
+                clearInterval(
+                    window.learnQuestMusicTimer
+                );
+
+
+                window.learnQuestMusicTimer =
+                    null;
+
+            }
+
+
+            if (
+                audioContext
+            ) {
+
+                audioContext
+                    .suspend()
+                    .catch(
+                        () => {}
+                    );
+
+            }
+
+
+            document.getElementById(
+                "musicNote"
+            ).textContent =
+                "🔇 Music OFF";
+
+        }
+
+
+
+        /* =====================================================
+           SETTINGS SETUP
+           ===================================================== */
+
+        function setupSettings() {
+
+            const musicToggle =
+                document.getElementById(
+                    "musicToggle"
+                );
+
+
+            const soundToggle =
+                document.getElementById(
+                    "soundToggle"
+                );
+
+
+            musicToggle.checked =
+                musicEnabled();
+
+
+            soundToggle.checked =
+                soundEnabled();
+
+
+            document.getElementById(
+                "settingsBtn"
+            ).addEventListener(
+                "click",
+                function (
+                    event
+                ) {
+
+                    event.stopPropagation();
+
+                    toggleSettings();
+
+                    pingSound();
+
+                }
+            );
+
+
+            document.getElementById(
+                "logoutBtn"
+            ).addEventListener(
+                "click",
+                function () {
+
+                    pingSound();
+
+                    logout();
+
+                }
+            );
+
+
+            musicToggle.addEventListener(
+                "change",
+                function () {
+
+                    localStorage.setItem(
+                        MUSIC_KEY,
+                        this.checked
+                            ? "on"
+                            : "off"
+                    );
+
+
+                    if (
+                        this.checked
+                    ) {
+
+                        startAmbientMusic();
+
+                    }
+
+                    else {
+
+                        stopAmbientMusic();
+
+                    }
+
+                }
+            );
+
+
+            soundToggle.addEventListener(
+                "change",
+                function () {
+
+                    localStorage.setItem(
+                        SOUND_KEY,
+                        this.checked
+                            ? "on"
+                            : "off"
+                    );
+
+
+                    if (
+                        this.checked
+                    ) {
+
+                        pingSound();
+
+                    }
+
+                }
+            );
+
+
+            document.addEventListener(
+                "click",
+                function (
+                    event
+                ) {
+
+                    const panel =
+                        document.getElementById(
+                            "settingsPanel"
+                        );
+
+
+                    const button =
+                        document.getElementById(
+                            "settingsBtn"
+                        );
+
+
+                    if (
+
+                        panel.classList.contains(
+                            "show"
+                        )
+
+                        &&
+
+                        !panel.contains(
+                            event.target
+                        )
+
+                        &&
+
+                        !button.contains(
+                            event.target
+                        )
+
+                    ) {
+
+                        panel.classList.remove(
+                            "show"
+                        );
+
+                    }
+
+                }
+            );
+
+
+            document.addEventListener(
+                "click",
+                function firstClick() {
+
+                    if (
+                        musicEnabled()
+                    ) {
+
+                        startAmbientMusic();
+
+                    }
+
+
+                    document.removeEventListener(
+                        "click",
+                        firstClick
+                    );
+
+                },
+                {
+                    once:
+                        true
+                }
+            );
+
+
+        }
+
+
+
+        /* =====================================================
+           COIN RUNNER
+           ===================================================== */
+
+        (function setupCoinRunner() {
+
+
+            const overlay =
+                document.getElementById(
+                    "coinGameOverlay"
+                );
+
+
+            const stage =
+                document.getElementById(
+                    "coinGameStage"
+                );
+
+
+            const player =
+                document.getElementById(
+                    "gamePlayer"
+                );
+
+
+            const coinsLayer =
+                document.getElementById(
+                    "gameCoins"
+                );
+
+
+            const obstaclesLayer =
+                document.getElementById(
+                    "gameObstacles"
+                );
+
+
+            const collectedEl =
+                document.getElementById(
+                    "gameCollected"
+                );
+
+
+            const bestEl =
+                document.getElementById(
+                    "gameBest"
+                );
+
+
+            const messageEl =
+                document.getElementById(
+                    "gameMessage"
+                );
+
+
+            const actionsEl =
+                document.getElementById(
+                    "gameActions"
+                );
+
+
+            const tryAgainBtn =
+                document.getElementById(
+                    "tryAgainBtn"
+                );
+
+
+            const claimBtn =
+                document.getElementById(
+                    "claimCoinsBtn"
+                );
+
+
+            const closeBtn =
+                document.getElementById(
+                    "closeCoinGame"
+                );
+
+
+            const moreCoinsBtn =
+                document.getElementById(
+                    "moreCoinsBtn"
+                );
+
+
+            let running =
+                false;
+
+
+            let gameOver =
+                false;
+
+
+            let collected =
+                0;
+
+
+            let best =
+                0;
+
+
+            let animationId =
+                null;
+
+
+            let lastFrame =
+                0;
+
+
+            let lastCoinTime =
+                0;
+
+
+            let lastObstacleTime =
+                0;
+
+
+            let difficulty =
+                1;
+
+
+            let playerJumping =
+                false;
+
+
+            let claimedThisRound =
+                false;
+
+
+
+            function renderBest() {
+
+                const state =
+                    readGameState();
+
+
+                best =
+                    Math.max(
+                        best,
+                        state.best
+                    );
+
+
+                bestEl.textContent =
+                    String(
+                        best
+                    );
+
+            }
+
+
+
+            function clearEntities() {
+
+                coinsLayer.innerHTML =
+                    "";
+
+
+                obstaclesLayer.innerHTML =
+                    "";
+
+            }
+
+
+
+            function stopGame() {
+
+                running =
+                    false;
+
+
+                if (
+                    animationId
+                ) {
+
+                    cancelAnimationFrame(
+                        animationId
+                    );
+
+
+                    animationId =
+                        null;
+
+                }
+
+            }
+
+
+
+            function resetGame() {
+
+                stopGame();
+
+                clearEntities();
+
+
+                running =
+                    true;
+
+
+                gameOver =
+                    false;
+
+
+                collected =
+                    0;
+
+
+                difficulty =
+                    1;
+
+
+                lastFrame =
+                    performance.now();
+
+
+                lastCoinTime =
+                    lastFrame;
+
+
+                lastObstacleTime =
+                    lastFrame;
+
+
+                playerJumping =
+                    false;
+
+
+                claimedThisRound =
+                    false;
+
+
+                player.classList.remove(
+                    "jump"
+                );
+
+
+                collectedEl.textContent =
+                    "0";
+
+
+                messageEl.textContent =
+                    "Collect as many coins as you can!";
+
+
+                messageEl.style.color =
+                    "#ffd866";
+
+
+                actionsEl.style.display =
+                    "none";
+
+
+                claimBtn.disabled =
+                    false;
+
+
+                claimBtn.textContent =
+                    "🪙 Claim Coins";
+
+
+                renderBest();
+
+
+                spawnStartingCoins();
+
+
+                animationId =
+                    requestAnimationFrame(
+                        loop
+                    );
+
+            }
+
+
+
+            function openGame() {
+
+                renderBest();
+
+
+                overlay.classList.add(
+                    "show"
+                );
+
+
+                overlay.setAttribute(
+                    "aria-hidden",
+                    "false"
+                );
+
+
+                resetGame();
+
+
+                setTimeout(
+                    function () {
+
+                        stage.focus();
+
+                    },
+                    60
+                );
+
+            }
+
+
+
+            function closeGame() {
+
+                stopGame();
+
+
+                overlay.classList.remove(
+                    "show"
+                );
+
+
+                overlay.setAttribute(
+                    "aria-hidden",
+                    "true"
+                );
+
+            }
+
+
+
+            function spawnStartingCoins() {
+
+                const positions = [
+
+                    {
+                        x:
+                            90,
+
+                        y:
+                            175
+                    },
+
+                    {
+                        x:
+                            210,
+
+                        y:
+                            125
+                    },
+
+                    {
+                        x:
+                            345,
+
+                        y:
+                            205
+                    },
+
+                    {
+                        x:
+                            500,
+
+                        y:
+                            145
+                    },
+
+                    {
+                        x:
+                            640,
+
+                        y:
+                            195
+                    }
+
+                ];
+
+
+                positions.forEach(
+                    function (
+                        pos,
+                        index
+                    ) {
+
+                        createCoin(
+
+                            pos.x,
+
+                            pos.y,
+
+                            5 +
+                            index *
+                            0.2
+
+                        );
+
+                    }
+                );
+
+            }
+
+
+
+            function createCoin(
+                x,
+                y,
+                speed
+            ) {
+
+                const coin =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                coin.className =
+                    "game-coin";
+
+
+                coin.textContent =
+                    "🪙";
+
+
+                coin.dataset.x =
+                    String(
+                        x
+                    );
+
+
+                coin.dataset.y =
+                    String(
+                        y
+                    );
+
+
+                coin.dataset.speed =
+                    String(
+                        speed
+                    );
+
+
+                coin.style.left =
+                    `${x}px`;
+
+
+                coin.style.top =
+                    `${y}px`;
+
+
+                coinsLayer.appendChild(
+                    coin
+                );
+
+            }
+
+
+
+            function createObstacle(
+                x,
+                y,
+                speed
+            ) {
+
+                const obstacle =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                obstacle.className =
+                    "game-obstacle";
+
+
+                obstacle.textContent =
+                    "☁️";
+
+
+                obstacle.dataset.x =
+                    String(
+                        x
+                    );
+
+
+                obstacle.dataset.y =
+                    String(
+                        y
+                    );
+
+
+                obstacle.dataset.speed =
+                    String(
+                        speed
+                    );
+
+
+                obstacle.style.left =
+                    `${x}px`;
+
+
+                obstacle.style.top =
+                    `${y}px`;
+
+
+                obstaclesLayer.appendChild(
+                    obstacle
+                );
+
+            }
+
+
+
+            function jump() {
+
+                if (
+                    !running ||
+                    gameOver ||
+                    playerJumping
+                ) {
+
+                    return;
+
+                }
+
+
+                playerJumping =
+                    true;
+
+
+                player.classList.add(
+                    "jump"
+                );
+
+
+                pingSound();
+
+
+                setTimeout(
+                    function () {
+
+                        player.classList.remove(
+                            "jump"
+                        );
+
+                    },
+                    360
+                );
+
+
+                setTimeout(
+                    function () {
+
+                        playerJumping =
+                            false;
+
+                    },
+                    400
+                );
+
+            }
+
+
+
+            function rectanglesOverlap(
+                a,
+                b
+            ) {
+
+                return !(
+                    a.right <
+                        b.left ||
+
+                    a.left >
+                        b.right ||
+
+                    a.bottom <
+                        b.top ||
+
+                    a.top >
+                        b.bottom
+                );
+
+            }
+
+
+
+            function playerRect() {
+
+                const r =
+                    player.getBoundingClientRect();
+
+
+                return {
+
+                    left:
+                        r.left +
+                        8,
+
+                    right:
+                        r.right -
+                        8,
+
+                    top:
+                        r.top +
+                        6,
+
+                    bottom:
+                        r.bottom -
+                        3
+
+                };
+
+            }
+
+
+
+            function animateEntities(
+                delta
+            ) {
+
+                const stageRect =
+                    stage.getBoundingClientRect();
+
+
+                const pRect =
+                    playerRect();
+
+
+                coinsLayer
+                    .querySelectorAll(
+                        ".game-coin"
+                    )
+                    .forEach(
+                        function (
+                            coin
+                        ) {
+
+                            let x =
+                                Number(
+                                    coin.dataset.x
+                                ) ||
+                                0;
+
+
+                            const speed =
+                                Number(
+                                    coin.dataset.speed
+                                ) ||
+                                5;
+
+
+                            x +=
+                                speed *
+                                delta /
+                                16;
+
+
+                            coin.dataset.x =
+                                String(
+                                    x
+                                );
+
+
+                            coin.style.left =
+                                `${x}px`;
+
+
+                            const cRect =
+                                coin.getBoundingClientRect();
+
+
+                            if (
+                                rectanglesOverlap(
+                                    pRect,
+                                    cRect
+                                )
+                            ) {
+
+                                collected +=
+                                    1;
+
+
+                                collectedEl.textContent =
+                                    String(
+                                        collected
+                                    );
+
+
+                                coin.remove();
+
+
+                                pingSound(
+                                    true
+                                );
+
+
+                                return;
+
+                            }
+
+
+                            if (
+                                cRect.left >
+                                stageRect.right +
+                                80
+                            ) {
+
+                                coin.remove();
+
+                            }
+
+                        }
+                    );
+
+
+                obstaclesLayer
+                    .querySelectorAll(
+                        ".game-obstacle"
+                    )
+                    .forEach(
+                        function (
+                            obstacle
+                        ) {
+
+                            let x =
+                                Number(
+                                    obstacle.dataset.x
+                                ) ||
+                                0;
+
+
+                            const speed =
+                                Number(
+                                    obstacle.dataset.speed
+                                ) ||
+                                6;
+
+
+                            x +=
+                                speed *
+                                delta /
+                                16;
+
+
+                            obstacle.dataset.x =
+                                String(
+                                    x
+                                );
+
+
+                            obstacle.style.left =
+                                `${x}px`;
+
+
+                            const oRect =
+                                obstacle.getBoundingClientRect();
+
+
+                            if (
+                                rectanglesOverlap(
+                                    pRect,
+                                    oRect
+                                )
+                                &&
+                                !playerJumping
+                            ) {
+
+                                endGame();
+
+
+                                return;
+
+                            }
+
+
+                            if (
+                                oRect.left >
+                                stageRect.right +
+                                100
+                            ) {
+
+                                obstacle.remove();
+
+                            }
+
+                        }
+                    );
+
+            }
+
+
+
+            function spawnDynamicObjects(
+                now
+            ) {
+
+                if (
+                    now -
+                    lastCoinTime >
+                    Math.max(
+                        700,
+                        1200 -
+                        difficulty *
+                        35
+                    )
+                ) {
+
+                    const yValues = [
+
+                        85,
+                        125,
+                        165,
+                        205
+
+                    ];
+
+
+                    const y =
+                        yValues[
+                            Math.floor(
+                                Math.random() *
+                                yValues.length
+                            )
+                        ];
+
+
+                    createCoin(
+
+                        -40,
+
+                        y,
+
+                        5.2 +
+                        difficulty *
+                        0.13
+
+                    );
+
+
+                    lastCoinTime =
+                        now;
+
+                }
+
+
+                if (
+                    now -
+                    lastObstacleTime >
+                    Math.max(
+                        1000,
+                        1750 -
+                        difficulty *
+                        40
+                    )
+                ) {
+
+                    const y =
+                        stage.clientHeight -
+                        118;
+
+
+                    createObstacle(
+
+                        -70,
+
+                        y,
+
+                        5.8 +
+                        difficulty *
+                        0.18
+
+                    );
+
+
+                    lastObstacleTime =
+                        now;
+
+                }
+
+
+                difficulty =
+                    Math.min(
+                        12,
+                        difficulty +
+                        0.0018
+                    );
+
+            }
+
+
+
+            function loop(
+                now
+            ) {
+
+                if (
+                    !running ||
+                    gameOver
+                ) {
+
+                    return;
+
+                }
+
+
+                const delta =
+                    Math.min(
+                        40,
+                        now -
+                        lastFrame ||
+                        16
+                    );
+
+
+                lastFrame =
+                    now;
+
+
+                spawnDynamicObjects(
+                    now
+                );
+
+
+                animateEntities(
+                    delta
+                );
+
+
+                animationId =
+                    requestAnimationFrame(
+                        loop
+                    );
+
+            }
+
+
+
+            function endGame() {
+
+                if (
+                    !running ||
+                    gameOver
+                ) {
+
+                    return;
+
+                }
+
+
+                running =
+                    false;
+
+
+                gameOver =
+                    true;
+
+
+                if (
+                    animationId
+                ) {
+
+                    cancelAnimationFrame(
+                        animationId
+                    );
+
+
+                    animationId =
+                        null;
+
+                }
+
+
+                best =
+                    Math.max(
+                        best,
+                        collected
+                    );
+
+
+                const state =
+                    readGameState();
+
+
+                saveGameState(
+
+                    state.balance,
+
+                    best
+
+                );
+
+
+                bestEl.textContent =
+                    String(
+                        best
+                    );
+
+
+                messageEl.textContent =
+                    `Game Over! You collected ${collected} coin${collected === 1 ? "" : "s"}.`;
+
+
+                messageEl.style.color =
+                    "#ff8f83";
+
+
+                actionsEl.style.display =
+                    "flex";
+
+
+                claimBtn.disabled =
+                    collected <=
+                    0;
+
+
+                claimBtn.textContent =
+                    collected > 0
+                        ? `🪙 Claim ${collected} Coins`
+                        : "🪙 Claim Coins";
+
+            }
+
+
+
+            async function refreshServerCoins() {
+
+                const response =
+                    await fetch(
+                        `${API_BASE}/dashboard`,
+                        {
+                            method:
+                                "GET",
+
+                            credentials:
+                                "include",
+
+                            cache:
+                                "no-store"
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    !response.ok
+                ) {
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to refresh account balance."
+                    );
+
+                }
+
+
+                const freshCoins =
+                    Number(
+                        data?.user?.coins
+                    );
+
+
+                if (
+                    !Number.isFinite(
+                        freshCoins
+                    )
+                ) {
+
+                    throw new Error(
+                        "Server did not return a valid coin balance."
+                    );
+
+                }
+
+
+                currentUser =
+                    data.user;
+
+
+                const safe =
+                    Math.max(
+                        0,
+                        Math.floor(
+                            freshCoins
+                        )
+                    );
+
+
+                document.getElementById(
+                    "coins"
+                ).textContent =
+                    String(
+                        safe
+                    );
+
+
+                return safe;
+
+            }
+
+
+
+            async function claimCoins() {
+
+                if (
+                    claimedThisRound ||
+                    collected <=
+                        0
+                ) {
+
+                    return;
+
+                }
+
+
+                const amount =
+                    Math.min(
+                        50,
+                        Math.max(
+                            1,
+                            Math.floor(
+                                collected
+                            )
+                        )
+                    );
+
+
+                const stored =
+                    readGameState();
+
+
+                claimBtn.disabled =
+                    true;
+
+
+                claimBtn.textContent =
+                    `⏳ Claiming ${amount}...`;
+
+
+                messageEl.textContent =
+                    "Adding your coins to the account...";
+
+
+                messageEl.style.color =
+                    "#ffd866";
+
+
+                try {
+
+                    /*
+                     * REAL DATABASE UPDATE
+                     */
+
+                    const response =
+                        await fetch(
+
+                            `${API_BASE}/claim-coins`,
+
+                            {
+
+                                method:
+                                    "POST",
+
+                                headers: {
+
+                                    "Content-Type":
+                                        "application/json",
+
+                                    "Accept":
+                                        "application/json"
+
+                                },
+
+                                credentials:
+                                    "include",
+
+                                body:
+                                    JSON.stringify({
+
+                                        amount:
+                                            amount
+
+                                    })
+
+                            }
+
+                        );
+
+
+                    let data =
+                        {};
+
+
+                    try {
+
+                        data =
+                            await response.json();
+
+                    }
+
+                    catch (
+                        error
+                    ) {
+
+                        data =
+                            {};
+
+                    }
+
+
+                    if (
+                        !response.ok
+                    ) {
+
+                        throw new Error(
+
+                            data.message ||
+
+                            `Claim failed. Server returned HTTP ${response.status}.`
+
+                        );
+
+                    }
+
+
+                    /*
+                     * Use the real value returned by Flask.
+                     */
+
+                    let newBalance =
+                        Number(
+                            data.coins
+                        );
+
+
+                    /*
+                     * If backend didn't return coins,
+                     * ask /dashboard for the real value.
+                     */
+
+                    if (
+                        !Number.isFinite(
+                            newBalance
+                        )
+                    ) {
+
+                        newBalance =
+                            await refreshServerCoins();
+
+                    }
+
+                    else {
+
+                        newBalance =
+                            Math.max(
+                                0,
+                                Math.floor(
+                                    newBalance
+                                )
+                            );
+
+
+                        /*
+                         * Confirm MySQL balance.
+                         */
+
+                        try {
+
+                            newBalance =
+                                await refreshServerCoins();
+
+                        }
+
+                        catch (
+                            refreshError
+                        ) {
+
+                            console.log(
+                                "Balance refresh warning:",
+                                refreshError
+                            );
+
+                        }
+
+                    }
+
+
+                    saveGameState(
+
+                        newBalance,
+
+                        Math.max(
+                            stored.best,
+                            collected
+                        )
+
+                    );
+
+
+                    setCoinsDisplay(
+                        newBalance
+                    );
+
+
+                    claimedThisRound =
+                        true;
+
+
+                    claimBtn.disabled =
+                        true;
+
+
+                    claimBtn.textContent =
+                        `✅ +${amount} Coins Claimed`;
+
+
+                    messageEl.textContent =
+                        `+${amount} coins added successfully! Current balance: ${newBalance}.`;
+
+
+                    messageEl.style.color =
+                        "#6cf0bb";
+
+
+                    pingSound(
+                        true
+                    );
+
+
+                    if (
+                        navigator.vibrate
+                    ) {
+
+                        navigator.vibrate(
+
+                            [
+                                80,
+                                60,
+                                120
+                            ]
+
+                        );
+
+                    }
+
+                }
+
+                catch (
+                    error
+                ) {
+
+                    console.error(
+                        "Claim coins error:",
+                        error
+                    );
+
+
+                    claimBtn.disabled =
+                        false;
+
+
+                    claimBtn.textContent =
+                        `🪙 Claim ${amount} Coins`;
+
+
+                    messageEl.textContent =
+                        error.message ||
+                        "Could not claim coins.";
+
+
+                    messageEl.style.color =
+                        "#ff8f83";
+
+                }
+
+            }
+
+
+
+            /* =================================================
+               GAME EVENTS
+               ================================================= */
+
+            moreCoinsBtn.addEventListener(
+                "click",
+                function () {
+
+                    pingSound();
+
+                    openGame();
+
+                }
+            );
+
+
+            closeBtn.addEventListener(
+                "click",
+                function () {
+
+                    pingSound();
+
+                    closeGame();
+
+                }
+            );
+
+
+            tryAgainBtn.addEventListener(
+                "click",
+                function () {
+
+                    pingSound();
+
+                    resetGame();
+
+                }
+            );
+
+
+            claimBtn.addEventListener(
+                "click",
+                claimCoins
+            );
+
+
+            stage.addEventListener(
+                "pointerdown",
+                function (
+                    event
+                ) {
+
+                    event.preventDefault();
+
+                    stage.focus();
+
+                    jump();
+
+                }
+            );
+
+
+            stage.addEventListener(
+                "keydown",
+                function (
+                    event
+                ) {
+
+                    if (
+
+                        event.code ===
+                            "Space"
+
+                        ||
+
+                        event.code ===
+                            "ArrowUp"
+
+                    ) {
+
+                        event.preventDefault();
+
+                        jump();
+
+                    }
+
+                }
+            );
+
+
+            document.addEventListener(
+                "keydown",
+                function (
+                    event
+                ) {
+
+                    if (
+
+                        event.key ===
+                            "Escape"
+
+                        &&
+
+                        overlay.classList.contains(
+                            "show"
+                        )
+
+                    ) {
+
+                        closeGame();
+
+                    }
+
+                }
+            );
+
+
+            overlay.addEventListener(
+                "click",
+                function (
+                    event
+                ) {
+
+                    if (
+                        event.target ===
+                        overlay
+                    ) {
+
+                        closeGame();
+
+                    }
+
+                }
+            );
+
+
+            renderBest();
+
+
+        })();
+
+
+
+        /* =====================================================
+           INITIALIZE
+           ===================================================== */
+
+        applyLanguage();
+
+        updateSettingsText();
+
+        setupSettings();
+
+        loadDashboardData();
+
+    </script>
+
+
+</body>
+
+</html>

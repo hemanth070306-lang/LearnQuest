@@ -1,0 +1,6313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>LearnQuest-Login</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        html,
+        body {
+
+            width: 100%;
+            min-height: 100%;
+
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                #02040a;
+
+            color:
+                #ffffff;
+
+            overflow:
+                hidden;
+
+        }
+
+
+        /* =====================================================
+           OUTER BACKGROUND
+           ===================================================== */
+
+        .page-background {
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            overflow:
+                hidden;
+
+            background:
+
+                radial-gradient(
+                    circle at 18% 18%,
+                    rgba(
+                        55,
+                        95,
+                        255,
+                        0.18
+                    ),
+                    transparent 28%
+                ),
+
+                radial-gradient(
+                    circle at 78% 20%,
+                    rgba(
+                        150,
+                        70,
+                        255,
+                        0.15
+                    ),
+                    transparent 28%
+                ),
+
+                radial-gradient(
+                    circle at 45% 85%,
+                    rgba(
+                        0,
+                        220,
+                        180,
+                        0.10
+                    ),
+                    transparent 30%
+                ),
+
+                linear-gradient(
+                    180deg,
+                    #010208 0%,
+                    #040816 52%,
+                    #010207 100%
+                );
+
+            z-index:
+                0;
+
+        }
+
+
+        /* =====================================================
+           STAR FIELD
+           ===================================================== */
+
+        .stars {
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+        }
+
+
+        .star {
+
+            position:
+                absolute;
+
+            width:
+                3px;
+
+            height:
+                3px;
+
+            border-radius:
+                50%;
+
+            background:
+                #ffffff;
+
+            box-shadow:
+                0 0 6px #ffffff,
+                0 0 15px
+                rgba(
+                    120,
+                    175,
+                    255,
+                    0.9
+                );
+
+            opacity:
+                0.18;
+
+            animation:
+                starTwinkle
+                var(--star-speed)
+                ease-in-out
+                infinite;
+
+            animation-delay:
+                var(--star-delay);
+
+        }
+
+
+        .star.small {
+
+            width:
+                2px;
+
+            height:
+                2px;
+
+        }
+
+
+        .star.big {
+
+            width:
+                4px;
+
+            height:
+                4px;
+
+            box-shadow:
+                0 0 7px #ffffff,
+                0 0 18px
+                rgba(
+                    150,
+                    190,
+                    255,
+                    1
+                );
+
+        }
+
+
+        .star.stay-bright {
+
+            animation:
+                starBecomeBright
+                var(--bright-speed)
+                ease-in
+                forwards;
+
+        }
+
+
+        @keyframes starTwinkle {
+
+            0%,
+            100% {
+
+                opacity:
+                    0.15;
+
+                transform:
+                    scale(
+                        0.7
+                    );
+
+            }
+
+            50% {
+
+                opacity:
+                    0.95;
+
+                transform:
+                    scale(
+                        1.4
+                    );
+
+            }
+
+        }
+
+
+        @keyframes starBecomeBright {
+
+            0% {
+
+                opacity:
+                    0.08;
+
+                transform:
+                    scale(
+                        0.7
+                    );
+
+            }
+
+            45% {
+
+                opacity:
+                    0.5;
+
+                transform:
+                    scale(
+                        1
+                    );
+
+            }
+
+            72% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(
+                        1.65
+                    );
+
+            }
+
+            100% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(
+                        1.2
+                    );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           FLOATING TECH SYMBOLS
+           ===================================================== */
+
+        .floating-code {
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+            pointer-events:
+                none;
+
+        }
+
+
+        .code {
+
+            position:
+                absolute;
+
+            font-family:
+                Consolas,
+                "Courier New",
+                monospace;
+
+            font-weight:
+                800;
+
+            font-size:
+                var(--code-size);
+
+            color:
+                var(--code-color);
+
+            opacity:
+                0.18;
+
+            text-shadow:
+                0 0 8px currentColor,
+                0 0 17px currentColor;
+
+            animation:
+                codeFloat
+                var(--code-speed)
+                linear
+                infinite;
+
+            animation-delay:
+                var(--code-delay);
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        @keyframes codeFloat {
+
+            0% {
+
+                transform:
+                    translateY(
+                        110vh
+                    )
+                    translateX(0)
+                    rotate(
+                        -5deg
+                    );
+
+                opacity:
+                    0;
+
+            }
+
+            12% {
+
+                opacity:
+                    0.18;
+
+            }
+
+            50% {
+
+                transform:
+                    translateY(
+                        45vh
+                    )
+                    translateX(
+                        30px
+                    )
+                    rotate(
+                        4deg
+                    );
+
+            }
+
+            90% {
+
+                opacity:
+                    0.14;
+
+            }
+
+            100% {
+
+                transform:
+                    translateY(
+                        -20vh
+                    )
+                    translateX(
+                        -25px
+                    )
+                    rotate(
+                        8deg
+                    );
+
+                opacity:
+                    0;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           PAGE
+           ===================================================== */
+
+        .page {
+
+            position:
+                relative;
+
+            z-index:
+                3;
+
+            min-height:
+                100vh;
+
+            width:
+                100%;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                18px;
+
+        }
+
+
+        /* =====================================================
+           MAIN GAME BOARD
+           ===================================================== */
+
+        .game-board {
+
+            position:
+                relative;
+
+            width:
+                min(
+                    1280px,
+                    97vw
+                );
+
+            height:
+                min(
+                    720px,
+                    94vh
+                );
+
+            min-height:
+                600px;
+
+            overflow:
+                hidden;
+
+            border-radius:
+                30px;
+
+            background:
+                rgba(
+                    3,
+                    6,
+                    15,
+                    0.42
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.10
+                );
+
+            box-shadow:
+                0 30px 100px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.48
+                );
+
+            backdrop-filter:
+                blur(
+                    4px
+                );
+
+        }
+
+
+        /* =====================================================
+           CENTER TOP LEARNQUEST
+           ===================================================== */
+
+        .topbar {
+
+            position:
+                absolute;
+
+            top:
+                0;
+
+            left:
+                0;
+
+            right:
+                0;
+
+            height:
+                78px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(
+                        2,
+                        4,
+                        11,
+                        0.58
+                    ),
+                    rgba(
+                        2,
+                        4,
+                        11,
+                        0.25
+                    )
+                );
+
+            border-bottom:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            backdrop-filter:
+                blur(
+                    8px
+                );
+
+            z-index:
+                50;
+
+        }
+
+
+        .logo {
+
+            font-size:
+                29px;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                0.6px;
+
+            text-shadow:
+                0 0 12px
+                rgba(
+                    125,
+                    106,
+                    255,
+                    0.42
+                );
+
+        }
+
+
+        .top-tag {
+
+            position:
+                absolute;
+
+            right:
+                22px;
+
+            font-size:
+                9px;
+
+            letter-spacing:
+                2px;
+
+            color:
+                #8a91aa;
+
+        }
+
+
+        /* =====================================================
+           SCENE
+           ===================================================== */
+
+        .scene {
+
+            position:
+                absolute;
+
+            left:
+                0;
+
+            top:
+                78px;
+
+            right:
+                0;
+
+            bottom:
+                0;
+
+            overflow:
+                hidden;
+
+            background:
+                transparent;
+
+        }
+
+
+        /* =====================================================
+           FLOOR
+           ===================================================== */
+
+        .floor {
+
+            position:
+                absolute;
+
+            left:
+                0;
+
+            right:
+                0;
+
+            bottom:
+                0;
+
+            height:
+                38%;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(
+                        8,
+                        11,
+                        20,
+                        0.45
+                    ),
+                    rgba(
+                        2,
+                        3,
+                        10,
+                        0.62
+                    )
+                );
+
+        }
+
+
+        /* =====================================================
+           TABLE SHADOW
+           ===================================================== */
+
+        .table-shadow {
+
+            position:
+                absolute;
+
+            left:
+                2%;
+
+            right:
+                auto;
+
+            top:
+                60%;
+
+            width:
+                48%;
+
+            height:
+                130px;
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.38
+                );
+
+            filter:
+                blur(
+                    25px
+                );
+
+            border-radius:
+                50%;
+
+            z-index:
+                2;
+
+        }
+
+
+        /* =====================================================
+           TABLE
+           MOVED TO LEFT HALF
+           ===================================================== */
+
+        .table {
+
+            position:
+                absolute;
+
+            left:
+                3%;
+
+            right:
+                auto;
+
+            width:
+                48%;
+
+            top:
+                54%;
+
+            height:
+                145px;
+
+            z-index:
+                5;
+
+        }
+
+
+        .table-top {
+
+            position:
+                absolute;
+
+            left:
+                0;
+
+            right:
+                0;
+
+            top:
+                0;
+
+            height:
+                72px;
+
+            border-radius:
+                18px 18px 10px 10px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(
+                        65,
+                        49,
+                        34,
+                        0.78
+                    ),
+                    rgba(
+                        33,
+                        24,
+                        17,
+                        0.72
+                    )
+                );
+
+            border:
+                2px solid
+                rgba(
+                    179,
+                    124,
+                    67,
+                    0.30
+                );
+
+            box-shadow:
+                inset
+                0 8px 20px
+                rgba(
+                    255,
+                    210,
+                    130,
+                    0.04
+                ),
+                0 14px 35px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.30
+                );
+
+        }
+
+
+        .table-top::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            left:
+                15px;
+
+            right:
+                15px;
+
+            bottom:
+                7px;
+
+            height:
+                3px;
+
+            border-radius:
+                20px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(
+                        80,
+                        205,
+                        255,
+                        0.65
+                    ),
+                    rgba(
+                        180,
+                        110,
+                        255,
+                        0.65
+                    ),
+                    transparent
+                );
+
+            box-shadow:
+                0 0 12px
+                rgba(
+                    100,
+                    170,
+                    255,
+                    0.45
+                );
+
+        }
+
+
+        .table-front {
+
+            position:
+                absolute;
+
+            left:
+                2%;
+
+            right:
+                2%;
+
+            top:
+                65px;
+
+            height:
+                38px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(
+                        43,
+                        30,
+                        21,
+                        0.82
+                    ),
+                    rgba(
+                        23,
+                        15,
+                        11,
+                        0.78
+                    )
+                );
+
+            border:
+                1px solid
+                rgba(
+                    163,
+                    112,
+                    65,
+                    0.18
+                );
+
+        }
+
+
+        .table-leg {
+
+            position:
+                absolute;
+
+            top:
+                101px;
+
+            width:
+                28px;
+
+            height:
+                78px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(
+                        25,
+                        18,
+                        13,
+                        0.82
+                    ),
+                    rgba(
+                        50,
+                        35,
+                        25,
+                        0.85
+                    ),
+                    rgba(
+                        21,
+                        14,
+                        9,
+                        0.82
+                    )
+                );
+
+            border-radius:
+                0 0 8px 8px;
+
+        }
+
+
+        .table-leg.left {
+
+            left:
+                9%;
+
+            transform:
+                skewX(
+                    4deg
+                );
+
+        }
+
+
+        .table-leg.right {
+
+            right:
+                9%;
+
+            transform:
+                skewX(
+                    -4deg
+                );
+
+        }
+
+
+        /* =====================================================
+           STORY MESSAGE
+           ===================================================== */
+
+        .story-message {
+
+            position:
+                absolute;
+
+            top:
+                17%;
+
+            left:
+                28%;
+
+            transform:
+                translateX(
+                    -50%
+                );
+
+            width:
+                52%;
+
+            min-width:
+                270px;
+
+            max-width:
+                620px;
+
+            padding:
+                12px
+                18px;
+
+            border-radius:
+                13px;
+
+            background:
+                rgba(
+                    2,
+                    6,
+                    15,
+                    0.48
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+            backdrop-filter:
+                blur(
+                    8px
+                );
+
+            text-align:
+                center;
+
+            z-index:
+                35;
+
+        }
+
+
+        .story-main {
+
+            font-size:
+                14px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .story-sub {
+
+            margin-top:
+                4px;
+
+            color:
+                #9098b0;
+
+            font-size:
+                10px;
+
+        }
+
+
+        /* =====================================================
+           CHARACTERS
+           ===================================================== */
+
+        .character {
+
+            position:
+                absolute;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            user-select:
+                none;
+
+        }
+
+
+        .character-label {
+
+            margin-top:
+                5px;
+
+            padding:
+                5px
+                8px;
+
+            border-radius:
+                8px;
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.62
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+            font-size:
+                9px;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                0.6px;
+
+        }
+
+
+        /* =====================================================
+           HUMAN / NLP
+           ===================================================== */
+
+        .human {
+
+            left:
+                26%;
+
+            top:
+                43%;
+
+            z-index:
+                20;
+
+            color:
+                #53e7b8;
+
+            animation:
+                humanStory
+                12s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .human-figure {
+
+            position:
+                relative;
+
+            width:
+                140px;
+
+            height:
+                145px;
+
+        }
+
+
+        .human-icon {
+
+            position:
+                absolute;
+
+            left:
+                0;
+
+            top:
+                0;
+
+            font-size:
+                112px;
+
+            filter:
+                drop-shadow(
+                    0 0 17px
+                    rgba(
+                        74,
+                        236,
+                        188,
+                        0.55
+                    )
+                );
+
+        }
+
+
+        /* Java cup held by Human */
+
+        .human-cup {
+
+            position:
+                absolute;
+
+            left:
+                87px;
+
+            top:
+                54px;
+
+            font-size:
+                47px;
+
+            z-index:
+                4;
+
+            transform:
+                rotate(
+                    -12deg
+                );
+
+            filter:
+                drop-shadow(
+                    0 0 11px
+                    rgba(
+                        255,
+                        124,
+                        100,
+                        0.75
+                    )
+                );
+
+        }
+
+
+        .human .character-label {
+
+            color:
+                #53e7b8;
+
+        }
+
+
+        @keyframes humanStory {
+
+            0%,
+            20% {
+
+                transform:
+                    translateY(
+                        0
+                    );
+
+            }
+
+            24% {
+
+                transform:
+                    translateY(
+                        8px
+                    )
+                    rotate(
+                        -7deg
+                    );
+
+            }
+
+            27% {
+
+                transform:
+                    translateY(
+                        13px
+                    )
+                    rotate(
+                        7deg
+                    );
+
+            }
+
+            32% {
+
+                transform:
+                    translateY(
+                        0
+                    )
+                    rotate(
+                        0
+                    );
+
+            }
+
+            66% {
+
+                transform:
+                    translateY(
+                        0
+                    );
+
+            }
+
+            71% {
+
+                transform:
+                    translateY(
+                        -8px
+                    );
+
+            }
+
+            76% {
+
+                transform:
+                    translateY(
+                        0
+                    );
+
+            }
+
+            100% {
+
+                transform:
+                    translateY(
+                        0
+                    );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           ROBOT / MACHINE LEARNING
+           ===================================================== */
+
+        .robot {
+
+            left:
+                58%;
+
+            top:
+                43%;
+
+            z-index:
+                18;
+
+            color:
+                #b77fff;
+
+            animation:
+                robotStory
+                12s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .robot .character-icon {
+
+            font-size:
+                84px;
+
+            filter:
+                drop-shadow(
+                    0 0 16px
+                    rgba(
+                        184,
+                        122,
+                        255,
+                        0.7
+                    )
+                );
+
+        }
+
+
+        .robot .character-label {
+
+            color:
+                #b77fff;
+
+        }
+
+
+        /* =====================================================
+           ROBOT DEAD STATE
+           ===================================================== */
+
+        .robot::after {
+
+            content:
+                "💀";
+
+            position:
+                absolute;
+
+            left:
+                50px;
+
+            top:
+                63px;
+
+            font-size:
+                27px;
+
+            opacity:
+                0;
+
+            animation:
+                robotDeadSkull
+                12s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        @keyframes robotStory {
+
+            0%,
+            34% {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateX(
+                        80px
+                    );
+
+            }
+
+            39% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateX(
+                        0
+                    );
+
+            }
+
+            55% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateX(
+                        0
+                    );
+
+            }
+
+            63% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateX(
+                        -175px
+                    );
+
+            }
+
+            72% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateX(
+                        -195px
+                    );
+
+            }
+
+            80% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateX(
+                        -195px
+                    )
+                    translateY(
+                        15px
+                    )
+                    rotate(
+                        10deg
+                    );
+
+            }
+
+            86% {
+
+                opacity:
+                    0.55;
+
+                transform:
+                    translateX(
+                        -195px
+                    )
+                    translateY(
+                        28px
+                    )
+                    rotate(
+                        78deg
+                    )
+                    scale(
+                        0.84
+                    );
+
+            }
+
+            93%,
+            100% {
+
+                opacity:
+                    0.25;
+
+                transform:
+                    translateX(
+                        -195px
+                    )
+                    translateY(
+                        32px
+                    )
+                    rotate(
+                        90deg
+                    )
+                    scale(
+                        0.78
+                    );
+
+            }
+
+        }
+
+
+        @keyframes robotDeadSkull {
+
+            0%,
+            84% {
+
+                opacity:
+                    0;
+
+                transform:
+                    scale(
+                        0.4
+                    );
+
+            }
+
+            88% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(
+                        1.15
+                    );
+
+            }
+
+            94%,
+            100% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(
+                        1
+                    );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           PYTHON SNAKE
+           ===================================================== */
+
+        .snake {
+
+            left:
+                -13%;
+
+            top:
+                48%;
+
+            z-index:
+                25;
+
+            color:
+                #51caff;
+
+            animation:
+                snakeBattle
+                12s
+                linear
+                infinite;
+
+        }
+
+
+        .snake .character-icon {
+
+            font-size:
+                86px;
+
+            transform:
+                scaleX(
+                    -1
+                );
+
+            filter:
+                drop-shadow(
+                    0 0 15px
+                    rgba(
+                        70,
+                        200,
+                        255,
+                        0.75
+                    )
+                );
+
+        }
+
+
+        .snake .character-label {
+
+            color:
+                #51caff;
+
+        }
+
+
+        @keyframes snakeBattle {
+
+            0% {
+
+                left:
+                    -13%;
+
+                top:
+                    48%;
+
+                opacity:
+                    1;
+
+                transform:
+                    rotate(
+                        0deg
+                    );
+
+            }
+
+            15% {
+
+                left:
+                    7%;
+
+                top:
+                    48%;
+
+            }
+
+            23% {
+
+                left:
+                    19%;
+
+                top:
+                    48%;
+
+            }
+
+            28% {
+
+                left:
+                    27%;
+
+                top:
+                    48%;
+
+                transform:
+                    rotate(
+                        -5deg
+                    );
+
+            }
+
+            31% {
+
+                left:
+                    29%;
+
+                top:
+                    48%;
+
+                transform:
+                    rotate(
+                        4deg
+                    );
+
+            }
+
+            35% {
+
+                left:
+                    36%;
+
+                top:
+                    48%;
+
+            }
+
+            43% {
+
+                left:
+                    47%;
+
+                top:
+                    48%;
+
+            }
+
+            50% {
+
+                left:
+                    58%;
+
+                top:
+                    48%;
+
+            }
+
+            55% {
+
+                left:
+                    65%;
+
+                top:
+                    49%;
+
+                transform:
+                    rotate(
+                        -8deg
+                    );
+
+            }
+
+            60% {
+
+                left:
+                    67%;
+
+                top:
+                    51%;
+
+                transform:
+                    rotate(
+                        20deg
+                    );
+
+            }
+
+            66% {
+
+                left:
+                    66%;
+
+                top:
+                    65%;
+
+                transform:
+                    rotate(
+                        78deg
+                    )
+                    scale(
+                        0.9
+                    );
+
+                opacity:
+                    0.78;
+
+            }
+
+            73% {
+
+                left:
+                    65%;
+
+                top:
+                    69%;
+
+                transform:
+                    rotate(
+                        112deg
+                    )
+                    scale(
+                        0.70
+                    );
+
+                opacity:
+                    0.30;
+
+            }
+
+            80%,
+            100% {
+
+                left:
+                    64%;
+
+                top:
+                    70%;
+
+                transform:
+                    rotate(
+                        120deg
+                    )
+                    scale(
+                        0.65
+                    );
+
+                opacity:
+                    0;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           BITE EFFECT
+           ===================================================== */
+
+        .bite {
+
+            position:
+                absolute;
+
+            z-index:
+                32;
+
+            font-size:
+                29px;
+
+            opacity:
+                0;
+
+            animation:
+                biteEffect
+                12s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .human-bite {
+
+            left:
+                27%;
+
+            top:
+                44%;
+
+        }
+
+
+        .robot-bite {
+
+            left:
+                63%;
+
+            top:
+                45%;
+
+        }
+
+
+        @keyframes biteEffect {
+
+            0%,
+            22% {
+
+                opacity:
+                    0;
+
+                transform:
+                    scale(
+                        0.4
+                    );
+
+            }
+
+            24% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(
+                        1.45
+                    );
+
+            }
+
+            28% {
+
+                opacity:
+                    0;
+
+                transform:
+                    scale(
+                        1
+                    );
+
+            }
+
+            57% {
+
+                opacity:
+                    0;
+
+            }
+
+            59% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(
+                        1.4
+                    )
+                    rotate(
+                        12deg
+                    );
+
+            }
+
+            64% {
+
+                opacity:
+                    0;
+
+                transform:
+                    scale(
+                        1
+                    );
+
+            }
+
+            100% {
+
+                opacity:
+                    0;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           REVIVE
+           ===================================================== */
+
+        .revive {
+
+            position:
+                absolute;
+
+            left:
+                38%;
+
+            top:
+                41%;
+
+            z-index:
+                31;
+
+            text-align:
+                center;
+
+            opacity:
+                0;
+
+            animation:
+                reviveEffect
+                12s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .revive-effect {
+
+            font-size:
+                44px;
+
+            filter:
+                drop-shadow(
+                    0 0 15px
+                    rgba(
+                        40,
+                        255,
+                        175,
+                        0.85
+                    )
+                );
+
+            animation:
+                revivePulse
+                0.9s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .revive-text {
+
+            margin-top:
+                3px;
+
+            font-size:
+                10px;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                2px;
+
+            color:
+                #5af0bc;
+
+        }
+
+
+        @keyframes reviveEffect {
+
+            0%,
+            67% {
+
+                opacity:
+                    0;
+
+                transform:
+                    scale(
+                        0.3
+                    );
+
+            }
+
+            71% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(
+                        1.25
+                    );
+
+            }
+
+            78% {
+
+                opacity:
+                    1;
+
+                transform:
+                    scale(
+                        1
+                    );
+
+            }
+
+            84%,
+            100% {
+
+                opacity:
+                    0;
+
+            }
+
+        }
+
+
+        @keyframes revivePulse {
+
+            0%,
+            100% {
+
+                transform:
+                    scale(
+                        1
+                    );
+
+            }
+
+            50% {
+
+                transform:
+                    scale(
+                        1.18
+                    );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           BATTERY
+           ===================================================== */
+
+        .battery {
+
+            position:
+                absolute;
+
+            left:
+                66%;
+
+            top:
+                58%;
+
+            z-index:
+                35;
+
+            font-size:
+                31px;
+
+            opacity:
+                0;
+
+            animation:
+                batteryStory
+                12s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        @keyframes batteryStory {
+
+            0%,
+            76% {
+
+                opacity:
+                    0;
+
+                transform:
+                    translate(
+                        0,
+                        0
+                    );
+
+            }
+
+            79% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translate(
+                        0,
+                        0
+                    );
+
+            }
+
+            85% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translate(
+                        -75px,
+                        -65px
+                    )
+                    rotate(
+                        20deg
+                    );
+
+            }
+
+            92%,
+            100% {
+
+                opacity:
+                    0;
+
+                transform:
+                    translate(
+                        -125px,
+                        -90px
+                    )
+                    rotate(
+                        45deg
+                    );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           WIN MESSAGE
+           ===================================================== */
+
+        .win-message {
+
+            position:
+                absolute;
+
+            left:
+                50%;
+
+            bottom:
+                14%;
+
+            transform:
+                translateX(
+                    -50%
+                )
+                scale(
+                    0.82
+                );
+
+            z-index:
+                40;
+
+            padding:
+                13px
+                25px;
+
+            border-radius:
+                14px;
+
+            background:
+                rgba(
+                    10,
+                    105,
+                    76,
+                    0.24
+                );
+
+            border:
+                1px solid
+                rgba(
+                    67,
+                    235,
+                    180,
+                    0.58
+                );
+
+            color:
+                #63f1c2;
+
+            font-size:
+                17px;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                2px;
+
+            white-space:
+                nowrap;
+
+            opacity:
+                0;
+
+            animation:
+                winStory
+                12s
+                ease-in-out
+                infinite;
+
+            box-shadow:
+                0 0 25px
+                rgba(
+                    45,
+                    220,
+                    165,
+                    0.12
+                );
+
+        }
+
+
+        @keyframes winStory {
+
+            0%,
+            84% {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateX(
+                        -50%
+                    )
+                    scale(
+                        0.82
+                    );
+
+            }
+
+            89% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateX(
+                        -50%
+                    )
+                    scale(
+                        1.10
+                    );
+
+            }
+
+            95%,
+            100% {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateX(
+                        -50%
+                    )
+                    scale(
+                        1
+                    );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           BOTTOM LEFT TAGLINE
+           ===================================================== */
+
+        .learning-tagline {
+
+            position:
+                absolute;
+
+            left:
+                24px;
+
+            bottom:
+                22px;
+
+            z-index:
+                44;
+
+            font-size:
+                clamp(
+                    24px,
+                    3vw,
+                    39px
+                );
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                1px;
+
+            color:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.94
+                );
+
+            text-shadow:
+                0 0 10px
+                rgba(
+                    110,
+                    95,
+                    255,
+                    0.35
+                ),
+                0 0 25px
+                rgba(
+                    65,
+                    175,
+                    255,
+                    0.12
+                );
+
+            pointer-events:
+                none;
+
+        }
+
+
+        .learning-tagline span {
+
+            display:
+                block;
+
+            margin-top:
+                8px;
+
+            color:
+                #8fdfca;
+
+            font-size:
+                0.45em;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                3px;
+
+        }
+
+
+        /* =====================================================
+           LOGIN PANEL
+           ===================================================== */
+
+        .login-panel {
+
+            position:
+                absolute;
+
+            right:
+                24px;
+
+            top:
+                50%;
+
+            transform:
+                translateY(
+                    -50%
+                );
+
+            width:
+                350px;
+
+            padding:
+                30px;
+
+            border-radius:
+                24px;
+
+            background:
+                rgba(
+                    5,
+                    8,
+                    18,
+                    0.82
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
+
+            backdrop-filter:
+                blur(
+                    18px
+                );
+
+            box-shadow:
+                0 20px 60px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.45
+                );
+
+            z-index:
+                60;
+
+        }
+
+
+        .login-panel h1 {
+
+            margin:
+                0 0 6px;
+
+            font-size:
+                31px;
+
+        }
+
+
+        .login-panel h2 {
+
+            margin:
+                0 0 21px;
+
+            font-size:
+                17px;
+
+            font-weight:
+                500;
+
+            color:
+                #b7bdd0;
+
+        }
+
+
+        .login-description {
+
+            margin:
+                0 0 21px;
+
+            color:
+                #858ca5;
+
+            font-size:
+                12px;
+
+            line-height:
+                1.55;
+
+        }
+
+
+        /* =====================================================
+           INPUTS
+           ===================================================== */
+
+        .input-group {
+
+            margin-bottom:
+                15px;
+
+        }
+
+
+        .input-group label {
+
+            display:
+                block;
+
+            margin-bottom:
+                6px;
+
+            font-size:
+                12px;
+
+            color:
+                #aeb5ca;
+
+        }
+
+
+        .input-group input {
+
+            width:
+                100%;
+
+            height:
+                56px;
+
+            padding:
+                0
+                15px;
+
+            border-radius:
+                12px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.11
+                );
+
+            outline:
+                none;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            color:
+                white;
+
+            font-size:
+                15px;
+
+            transition:
+                0.25s ease;
+
+        }
+
+
+        .input-group input:focus {
+
+            border-color:
+                #7562ff;
+
+            background:
+                rgba(
+                    117,
+                    98,
+                    255,
+                    0.09
+                );
+
+            box-shadow:
+                0 0 0 3px
+                rgba(
+                    117,
+                    98,
+                    255,
+                    0.10
+                );
+
+        }
+
+
+        .input-group input::placeholder {
+
+            color:
+                #626a80;
+
+        }
+
+
+        /* =====================================================
+           CREATE ACCOUNT
+           ===================================================== */
+
+        .create-account-row {
+
+            margin-top:
+                15px;
+
+            text-align:
+                center;
+
+            font-size:
+                12px;
+
+            color:
+                #7e869d;
+
+        }
+
+
+        .create-account-btn {
+
+            border:
+                none;
+
+            background:
+                transparent;
+
+            color:
+                #9d8fff;
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+            padding:
+                2px 4px;
+
+        }
+
+
+        .create-account-btn:hover {
+
+            color:
+                #c0b7ff;
+
+            text-decoration:
+                underline;
+
+        }
+
+
+        /* =====================================================
+           CREATE ACCOUNT MODAL
+           ===================================================== */
+
+        .register-overlay {
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            z-index:
+                500;
+
+            display:
+                none;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                20px;
+
+            background:
+                rgba(0, 0, 0, 0.78);
+
+            backdrop-filter:
+                blur(8px);
+
+        }
+
+
+        .register-card {
+
+            width:
+                min(390px, 94vw);
+
+            padding:
+                28px;
+
+            border-radius:
+                22px;
+
+            background:
+                rgba(7, 10, 20, 0.97);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.12);
+
+            box-shadow:
+                0 25px 80px
+                rgba(0, 0, 0, 0.55);
+
+        }
+
+
+        .register-card h2 {
+
+            margin:
+                0 0 7px;
+
+            font-size:
+                25px;
+
+        }
+
+
+        .register-card p {
+
+            margin:
+                0 0 20px;
+
+            color:
+                #858ca3;
+
+            font-size:
+                12px;
+
+            line-height:
+                1.5;
+
+        }
+
+
+        .register-field {
+
+            margin-bottom:
+                13px;
+
+        }
+
+
+        .register-field label {
+
+            display:
+                block;
+
+            margin-bottom:
+                6px;
+
+            color:
+                #aeb5ca;
+
+            font-size:
+                12px;
+
+        }
+
+
+        .register-field input {
+
+            width:
+                100%;
+
+            height:
+                51px;
+
+            padding:
+                0 13px;
+
+            border-radius:
+                11px;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.10);
+
+            outline:
+                none;
+
+            background:
+                rgba(255, 255, 255, 0.045);
+
+            color:
+                white;
+
+            font-size:
+                14px;
+
+        }
+
+
+        .register-field input:focus {
+
+            border-color:
+                #7562ff;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(117, 98, 255, 0.10);
+
+        }
+
+
+        .register-actions {
+
+            display:
+                flex;
+
+            gap:
+                10px;
+
+            margin-top:
+                17px;
+
+        }
+
+
+        .register-submit,
+        .register-cancel {
+
+            flex:
+                1;
+
+            height:
+                49px;
+
+            border-radius:
+                11px;
+
+            font-size:
+                14px;
+
+            font-weight:
+                800;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        .register-submit {
+
+            border:
+                none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #755cff,
+                    #5036ca
+                );
+
+            color:
+                white;
+
+        }
+
+
+        .register-cancel {
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.10);
+
+            background:
+                rgba(255, 255, 255, 0.045);
+
+            color:
+                #bbc1d0;
+
+        }
+
+
+        .register-bottom {
+
+            margin-top:
+                15px;
+
+            text-align:
+                center;
+
+            font-size:
+                11px;
+
+            color:
+                #696f84;
+
+        }
+
+
+        .register-message {
+
+            min-height:
+                20px;
+
+            margin-top:
+                10px;
+
+            text-align:
+                center;
+
+            font-size:
+                12px;
+
+        }
+
+
+        /* =====================================================
+           LOGIN BUTTON
+           ===================================================== */
+
+        .login-btn {
+
+            width:
+                100%;
+
+            height:
+                56px;
+
+            border:
+                none;
+
+            border-radius:
+                12px;
+
+            margin-top:
+                5px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #755cff,
+                    #5036ca
+                );
+
+            color:
+                white;
+
+            font-size:
+                16px;
+
+            font-weight:
+                900;
+
+            cursor:
+                pointer;
+
+            box-shadow:
+                0 13px 32px
+                rgba(
+                    89,
+                    65,
+                    220,
+                    0.28
+                );
+
+            transition:
+                0.25s ease;
+
+        }
+
+
+        .login-btn:hover {
+
+            transform:
+                translateY(
+                    -2px
+                );
+
+            box-shadow:
+                0 17px 38px
+                rgba(
+                    89,
+                    65,
+                    220,
+                    0.38
+                );
+
+        }
+
+
+        .login-btn:active {
+
+            transform:
+                translateY(
+                    0
+                );
+
+        }
+
+
+        #message {
+
+            min-height:
+                21px;
+
+            margin:
+                13px 0 0;
+
+            text-align:
+                center;
+
+            font-size:
+                13px;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (
+            max-width: 980px
+        ) {
+
+            body {
+
+                overflow:
+                    auto;
+
+            }
+
+
+            .page {
+
+                align-items:
+                    flex-start;
+
+                padding:
+                    12px;
+
+            }
+
+
+            .game-board {
+
+                width:
+                    100%;
+
+                height:
+                    auto;
+
+                min-height:
+                    1030px;
+
+            }
+
+
+            .scene {
+
+                height:
+                    620px;
+
+                bottom:
+                    auto;
+
+            }
+
+
+            .table {
+
+                left:
+                    4%;
+
+                width:
+                    49%;
+
+            }
+
+
+            .table-shadow {
+
+                left:
+                    3%;
+
+                width:
+                    50%;
+
+                right:
+                    auto;
+
+            }
+
+
+            .login-panel {
+
+                top:
+                    auto;
+
+                bottom:
+                    24px;
+
+                right:
+                    50%;
+
+                transform:
+                    translateX(
+                        50%
+                    );
+
+                width:
+                    min(
+                        370px,
+                        90%
+                    );
+
+            }
+
+
+            .learning-tagline {
+
+                left:
+                    20px;
+
+                bottom:
+                    25px;
+
+            }
+
+        }
+
+
+        @media (
+            max-width: 600px
+        ) {
+
+            .topbar {
+
+                height:
+                    62px;
+
+            }
+
+
+            .logo {
+
+                font-size:
+                    22px;
+
+            }
+
+
+            .top-tag {
+
+                display:
+                    none;
+
+            }
+
+
+            .scene {
+
+                top:
+                    62px;
+
+                height:
+                    565px;
+
+            }
+
+
+            .story-message {
+
+                left:
+                    50%;
+
+                width:
+                    82%;
+
+                min-width:
+                    205px;
+
+                max-width:
+                    360px;
+
+                padding:
+                    10px
+                    12px;
+
+            }
+
+
+            .story-main {
+
+                font-size:
+                    11px;
+
+            }
+
+
+            .story-sub {
+
+                font-size:
+                    9px;
+
+            }
+
+
+            .table {
+
+                left:
+                    4%;
+
+                width:
+                    48%;
+
+                top:
+                    55%;
+
+                height:
+                    125px;
+
+            }
+
+
+            .table-top {
+
+                height:
+                    62px;
+
+            }
+
+
+            .table-front {
+
+                top:
+                    56px;
+
+                height:
+                    32px;
+
+            }
+
+
+            .table-leg {
+
+                top:
+                    86px;
+
+                height:
+                    60px;
+
+            }
+
+
+            .human {
+
+                left:
+                    21%;
+
+                top:
+                    44%;
+
+            }
+
+
+            .human-figure {
+
+                width:
+                    105px;
+
+                height:
+                    108px;
+
+            }
+
+
+            .human-icon {
+
+                font-size:
+                    82px;
+
+            }
+
+
+            .human-cup {
+
+                left:
+                    63px;
+
+                top:
+                    37px;
+
+                font-size:
+                    34px;
+
+            }
+
+
+            .robot {
+
+                left:
+                    63%;
+
+                top:
+                    44%;
+
+            }
+
+
+            .robot .character-icon {
+
+                font-size:
+                    60px;
+
+            }
+
+
+            .snake .character-icon {
+
+                font-size:
+                    60px;
+
+            }
+
+
+            .character-label {
+
+                font-size:
+                    7px;
+
+            }
+
+
+            .learning-tagline {
+
+                left:
+                    15px;
+
+                bottom:
+                    18px;
+
+                font-size:
+                    21px;
+
+            }
+
+
+            .learning-tagline span {
+
+                font-size:
+                    0.40em;
+
+                letter-spacing:
+                    2px;
+
+            }
+
+
+            .login-panel {
+
+                padding:
+                    23px;
+
+            }
+
+
+            .login-panel h1 {
+
+                font-size:
+                    27px;
+
+            }
+
+
+            .login-panel h2 {
+
+                font-size:
+                    15px;
+
+            }
+
+
+            .login-description {
+
+                font-size:
+                    11px;
+
+            }
+
+        }
+
+
+        @media (
+            prefers-reduced-motion: reduce
+        ) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration:
+                    0.01ms
+                    !important;
+
+                animation-iteration-count:
+                    1
+                    !important;
+
+            }
+
+        }
+
+    
+
+
+        /* =====================================================
+           BACKGROUND MUSIC CONTROL
+           ===================================================== */
+
+        .music-toggle {
+
+            position:
+                absolute;
+
+            left:
+                22px;
+
+            top:
+                50%;
+
+            transform:
+                translateY(-50%);
+
+            min-width:
+                100px;
+
+            height:
+                36px;
+
+            padding:
+                0 11px;
+
+            border-radius:
+                10px;
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.10
+                );
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.05
+                );
+
+            color:
+                #bfc5d8;
+
+            font-size:
+                10px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                0.5px;
+
+            cursor:
+                pointer;
+
+            z-index:
+                5;
+
+            transition:
+                0.25s ease;
+
+            backdrop-filter:
+                blur(8px);
+
+        }
+
+
+        .music-toggle:hover {
+
+            background:
+                rgba(
+                    117,
+                    92,
+                    255,
+                    0.10
+                );
+
+            border-color:
+                rgba(
+                    140,
+                    125,
+                    255,
+                    0.42
+                );
+
+            color:
+                #ffffff;
+
+        }
+
+
+        .music-toggle.music-on {
+
+            color:
+                #72efc5;
+
+            border-color:
+                rgba(
+                    83,
+                    231,
+                    184,
+                    0.35
+                );
+
+            background:
+                rgba(
+                    83,
+                    231,
+                    184,
+                    0.07
+                );
+
+            box-shadow:
+                0 0 16px
+                rgba(
+                    83,
+                    231,
+                    184,
+                    0.10
+                );
+
+        }
+
+
+        @media (
+            max-width: 600px
+        ) {
+
+            .music-toggle {
+
+                left:
+                    14px;
+
+                min-width:
+                    82px;
+
+                height:
+                    32px;
+
+                font-size:
+                    9px;
+
+            }
+
+        }
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     BACKGROUND
+     ========================================================= -->
+
+<div class="page-background">
+
+
+    <div
+        class="stars"
+        id="stars"
+    ></div>
+
+
+    <div
+        class="floating-code"
+        id="floatingCode"
+    ></div>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     PAGE
+     ========================================================= -->
+
+<div class="page">
+
+
+    <div class="game-board">
+
+
+        <!-- =================================================
+             TOP BAR
+             ================================================= -->
+
+        <div class="topbar">
+
+            <div class="logo">
+
+                🎮 LearnQuest
+
+            </div>
+
+
+            <button
+                type="button"
+                class="music-toggle"
+                id="musicToggle"
+                aria-pressed="false"
+                title="Turn background music on or off"
+            >
+
+                🔇 Music OFF
+
+            </button>
+
+
+            <div class="top-tag">
+
+                LEARNING BATTLEFIELD
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SCENE
+             ================================================= -->
+
+        <div class="scene">
+
+
+            <div class="floor"></div>
+
+
+            <!-- TABLE SHADOW -->
+
+            <div class="table-shadow"></div>
+
+
+            <!-- =================================================
+                 TABLE
+                 ================================================= -->
+
+            <div class="table">
+
+
+                <div class="table-top"></div>
+
+
+                <div class="table-front"></div>
+
+
+                <div class="table-leg left"></div>
+
+
+                <div class="table-leg right"></div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 STORY MESSAGE
+                 ================================================= -->
+
+            <div class="story-message">
+
+
+                <div
+                    class="story-main"
+                    id="storyMain"
+                >
+
+                    🧍 NLP Human is enjoying Java ☕
+
+                </div>
+
+
+                <div
+                    class="story-sub"
+                    id="storySub"
+                >
+
+                    The battle is about to begin...
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 HUMAN + JAVA CUP
+                 ================================================= -->
+
+            <div class="character human">
+
+
+                <div class="human-figure">
+
+
+                    <div class="human-icon">
+
+                        🧍
+
+                    </div>
+
+
+                    <div class="human-cup">
+
+                        ☕
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="character-label">
+
+                    NLP • HUMAN
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MACHINE LEARNING ROBOT
+                 ================================================= -->
+
+            <div class="character robot">
+
+
+                <div class="character-icon">
+
+                    🤖
+
+                </div>
+
+
+                <div class="character-label">
+
+                    ML • ROBOT
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PYTHON SNAKE
+                 ================================================= -->
+
+            <div class="character snake">
+
+
+                <div class="character-icon">
+
+                    🐍
+
+                </div>
+
+
+                <div class="character-label">
+
+                    PYTHON
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 HUMAN BITE
+                 ================================================= -->
+
+            <div class="bite human-bite">
+
+                ⚡🩸
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ROBOT BITE
+                 ================================================= -->
+
+            <div class="bite robot-bite">
+
+                ⚡💥
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ROBOT REVIVE
+                 ================================================= -->
+
+            <div class="revive">
+
+
+                <div class="revive-effect">
+
+                    💚✨
+
+                </div>
+
+
+                <div class="revive-text">
+
+                    REVIVE
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 BATTERY
+                 ================================================= -->
+
+            <div class="battery">
+
+                🔋
+
+            </div>
+
+
+
+            <!-- =================================================
+                 WIN MESSAGE
+                 ================================================= -->
+
+            <div class="win-message">
+
+                🏆 NLP HUMAN WINS
+
+            </div>
+
+
+
+            <!-- =================================================
+                 BOTTOM LEFT TAGLINE
+                 ================================================= -->
+
+            <div class="learning-tagline">
+
+                PLAY AND LEARN EASILY WITH US
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             LOGIN PANEL
+             ================================================= -->
+
+        <div class="login-panel">
+
+
+            <h1>
+
+                Welcome Back
+
+            </h1>
+
+
+            <h2>
+
+                Continue your learning race 🚀
+
+            </h2>
+
+
+            <p class="login-description">
+
+                Login to enter your Learning World,
+                complete levels and reach the finish line.
+
+            </p>
+
+
+
+            <!-- =================================================
+                 EXISTING FORM
+                 ================================================= -->
+
+            <form id="loginForm">
+
+
+                <div class="input-group">
+
+
+                    <label for="email">
+
+                        Email
+
+                    </label>
+
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                        autocomplete="email"
+                    >
+
+
+                </div>
+
+
+
+                <div class="input-group">
+
+
+                    <label for="password">
+
+                        Password
+
+                    </label>
+
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required
+                        autocomplete="current-password"
+                    >
+
+
+                </div>
+
+
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+
+                    Login 🚀
+
+                </button>
+
+
+            </form>
+
+
+            <div class="create-account-row">
+
+                Don't have an account?
+
+                <button
+                    type="button"
+                    class="create-account-btn"
+                    id="openRegisterBtn"
+                >
+                    Create Account
+                </button>
+
+            </div>
+
+
+            <p id="message"></p>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     CREATE ACCOUNT MODAL
+     ========================================================= -->
+
+<div
+    class="register-overlay"
+    id="registerOverlay"
+>
+
+    <div class="register-card">
+
+        <h2>
+            Create Account
+        </h2>
+
+        <p>
+            Create your LearnQuest account to start the learning adventure.
+        </p>
+
+
+        <form id="registerForm">
+
+            <div class="register-field">
+
+                <label for="registerName">
+                    Name
+                </label>
+
+                <input
+                    type="text"
+                    id="registerName"
+                    placeholder="Enter your name"
+                    required
+                    autocomplete="name"
+                >
+
+            </div>
+
+
+            <div class="register-field">
+
+                <label for="registerEmail">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="registerEmail"
+                    placeholder="Enter your email"
+                    required
+                    autocomplete="email"
+                >
+
+            </div>
+
+
+            <div class="register-field">
+
+                <label for="registerPassword">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="registerPassword"
+                    placeholder="Create a password"
+                    required
+                    autocomplete="new-password"
+                >
+
+            </div>
+
+
+            <div
+                class="register-message"
+                id="registerMessage"
+            ></div>
+
+
+            <div class="register-actions">
+
+                <button
+                    type="button"
+                    class="register-cancel"
+                    id="closeRegisterBtn"
+                >
+                    Back to Login
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="register-submit"
+                >
+                    Create Account
+                </button>
+
+            </div>
+
+        </form>
+
+
+        <div class="register-bottom">
+
+            Already have an account?
+            Use the login form.
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     EXISTING LOGIN LOGIC
+     ========================================================= -->
+
+<script src="js/login.js"></script>
+
+
+
+<script>
+
+
+    /* =========================================================
+       STAR CREATION
+       ========================================================= */
+
+    function createStars() {
+
+        const container =
+            document.getElementById(
+                "stars"
+            );
+
+
+        container.innerHTML =
+            "";
+
+
+        const width =
+            window.innerWidth;
+
+
+        const count =
+            width < 600
+                ? 55
+                : 95;
+
+
+        for (
+            let i = 0;
+            i < count;
+            i++
+        ) {
+
+
+            const star =
+                document.createElement(
+                    "div"
+                );
+
+
+            star.className =
+                "star";
+
+
+            const sizeRandom =
+                Math.random();
+
+
+            if (
+                sizeRandom <
+                0.25
+            ) {
+
+                star.classList.add(
+                    "small"
+                );
+
+            }
+
+
+            if (
+                sizeRandom >
+                0.88
+            ) {
+
+                star.classList.add(
+                    "big"
+                );
+
+            }
+
+
+            star.style.left =
+                Math.random() *
+                100 +
+                "%";
+
+
+            star.style.top =
+                Math.random() *
+                90 +
+                "%";
+
+
+            if (
+                Math.random() <
+                0.25
+            ) {
+
+                star.classList.add(
+                    "stay-bright"
+                );
+
+
+                star.style.setProperty(
+                    "--bright-speed",
+                    (
+                        2 +
+                        Math.random() *
+                        4
+                    ) +
+                    "s"
+                );
+
+            }
+
+            else {
+
+                star.style.setProperty(
+                    "--star-speed",
+                    (
+                        1.5 +
+                        Math.random() *
+                        3.5
+                    ) +
+                    "s"
+                );
+
+
+                star.style.setProperty(
+                    "--star-delay",
+                    -(
+                        Math.random() *
+                        4
+                    ) +
+                    "s"
+                );
+
+
+                star.style.opacity =
+                    (
+                        0.15 +
+                        Math.random() *
+                        0.65
+                    );
+
+            }
+
+
+            container.appendChild(
+                star
+            );
+
+        }
+
+    }
+
+
+
+    /* =========================================================
+       FLOATING CODE SYMBOLS
+       ========================================================= */
+
+    const codeItems = [
+
+        {
+            text:
+                "🐍",
+
+            color:
+                "#4dcaff"
+
+        },
+
+        {
+            text:
+                "Python",
+
+            color:
+                "#4dcaff"
+
+        },
+
+        {
+            text:
+                "def",
+
+            color:
+                "#4dcaff"
+
+        },
+
+        {
+            text:
+                "print()",
+
+            color:
+                "#4dcaff"
+
+        },
+
+        {
+            text:
+                "☕",
+
+            color:
+                "#ff7969"
+
+        },
+
+        {
+            text:
+                "Java",
+
+            color:
+                "#ff7969"
+
+        },
+
+        {
+            text:
+                "class",
+
+            color:
+                "#ff7969"
+
+        },
+
+        {
+            text:
+                "public",
+
+            color:
+                "#ff7969"
+
+        },
+
+        {
+            text:
+                "🤖",
+
+            color:
+                "#b67cff"
+
+        },
+
+        {
+            text:
+                "ML",
+
+            color:
+                "#b67cff"
+
+        },
+
+        {
+            text:
+                "AI",
+
+            color:
+                "#b67cff"
+
+        },
+
+        {
+            text:
+                "model",
+
+            color:
+                "#b67cff"
+
+        },
+
+        {
+            text:
+                "🧠",
+
+            color:
+                "#43e7b4"
+
+        },
+
+        {
+            text:
+                "NLP",
+
+            color:
+                "#43e7b4"
+
+        },
+
+        {
+            text:
+                "token",
+
+            color:
+                "#43e7b4"
+
+        },
+
+        {
+            text:
+                "TF-IDF",
+
+            color:
+                "#43e7b4"
+
+        },
+
+        {
+            text:
+                "{ }",
+
+            color:
+                "#d4d8e4"
+
+        },
+
+        {
+            text:
+                "[ ]",
+
+            color:
+                "#d4d8e4"
+
+        },
+
+        {
+            text:
+                "< />",
+
+            color:
+                "#d4d8e4"
+
+        },
+
+        {
+            text:
+                "1010",
+
+            color:
+                "#9096aa"
+
+        }
+
+    ];
+
+
+
+    function createFloatingCode() {
+
+        const container =
+            document.getElementById(
+                "floatingCode"
+            );
+
+
+        container.innerHTML =
+            "";
+
+
+        const count =
+            window.innerWidth < 600
+                ? 18
+                : 28;
+
+
+        for (
+            let i = 0;
+            i < count;
+            i++
+        ) {
+
+
+            const item =
+                codeItems[
+                    Math.floor(
+                        Math.random() *
+                        codeItems.length
+                    )
+                ];
+
+
+            const element =
+                document.createElement(
+                    "div"
+                );
+
+
+            element.className =
+                "code";
+
+
+            element.textContent =
+                item.text;
+
+
+            element.style.setProperty(
+                "--code-color",
+                item.color
+            );
+
+
+            element.style.setProperty(
+                "--code-size",
+                (
+                    14 +
+                    Math.random() *
+                    21
+                ) +
+                "px"
+            );
+
+
+            const speed =
+                15 +
+                Math.random() *
+                24;
+
+
+            element.style.setProperty(
+                "--code-speed",
+                speed +
+                "s"
+            );
+
+
+            element.style.setProperty(
+                "--code-delay",
+                -(
+                    Math.random() *
+                    speed
+                ) +
+                "s"
+            );
+
+
+            element.style.left =
+                Math.random() *
+                100 +
+                "%";
+
+
+            element.style.top =
+                100 +
+                Math.random() *
+                15 +
+                "%";
+
+
+            container.appendChild(
+                element
+            );
+
+        }
+
+    }
+
+
+
+    /* =========================================================
+       STORY TEXT
+       ========================================================= */
+
+    function updateStory() {
+
+        const main =
+            document.getElementById(
+                "storyMain"
+            );
+
+
+        const sub =
+            document.getElementById(
+                "storySub"
+            );
+
+
+        const time =
+            (
+                Date.now()
+                % 12000
+            ) /
+            1000;
+
+
+        if (
+            time < 2.0
+        ) {
+
+            main.textContent =
+                "🧍 NLP Human is enjoying Java ☕";
+
+            sub.textContent =
+                "Everything looks peaceful...";
+
+        }
+
+        else if (
+            time < 3.6
+        ) {
+
+            main.textContent =
+                "⚠️ Python is approaching";
+
+            sub.textContent =
+                "The snake has entered the battlefield.";
+
+        }
+
+        else if (
+            time < 5.1
+        ) {
+
+            main.textContent =
+                "🐍 Python bites the Human!";
+
+            sub.textContent =
+                "NLP Human needs help.";
+
+        }
+
+        else if (
+            time < 6.5
+        ) {
+
+            main.textContent =
+                "🤖 Machine Learning arrives!";
+
+            sub.textContent =
+                "The robot moves to protect the human.";
+
+        }
+
+        else if (
+            time < 8
+        ) {
+
+            main.textContent =
+                "🐍 Python bites the ML Robot!";
+
+            sub.textContent =
+                "The snake collapses and dies.";
+
+        }
+
+        else if (
+            time < 9.8
+        ) {
+
+            main.textContent =
+                "💚 ML Robot revives NLP Human";
+
+            sub.textContent =
+                "The human is back on his feet.";
+
+        }
+
+        else if (
+            time < 11
+        ) {
+
+            main.textContent =
+                "🔋 Human removes the Robot battery";
+
+            sub.textContent =
+                "Machine Learning shuts down.";
+
+        }
+
+        else {
+
+            main.textContent =
+                "🏆 NLP HUMAN WINS!";
+
+            sub.textContent =
+                "LearnQuest battle completed.";
+
+        }
+
+    }
+
+
+
+    /* =========================================================
+       CREATE ACCOUNT UI
+       ========================================================= */
+
+    const openRegisterBtn =
+        document.getElementById(
+            "openRegisterBtn"
+        );
+
+
+    const closeRegisterBtn =
+        document.getElementById(
+            "closeRegisterBtn"
+        );
+
+
+    const registerOverlay =
+        document.getElementById(
+            "registerOverlay"
+        );
+
+
+    const registerForm =
+        document.getElementById(
+            "registerForm"
+        );
+
+
+    const registerMessage =
+        document.getElementById(
+            "registerMessage"
+        );
+
+
+    function openRegister() {
+
+        registerOverlay.style.display =
+            "flex";
+
+        registerMessage.textContent =
+            "";
+
+        registerMessage.style.color =
+            "#8d94aa";
+
+        document.getElementById(
+            "registerName"
+        ).focus();
+
+    }
+
+
+    function closeRegister() {
+
+        registerOverlay.style.display =
+            "none";
+
+        registerForm.reset();
+
+        registerMessage.textContent =
+            "";
+
+    }
+
+
+    openRegisterBtn.addEventListener(
+        "click",
+        openRegister
+    );
+
+
+    closeRegisterBtn.addEventListener(
+        "click",
+        closeRegister
+    );
+
+
+    registerOverlay.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                event.target ===
+                registerOverlay
+            ) {
+
+                closeRegister();
+
+            }
+
+        }
+    );
+
+
+    registerForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            const name =
+                document.getElementById(
+                    "registerName"
+                ).value.trim();
+
+
+            const email =
+                document.getElementById(
+                    "registerEmail"
+                ).value.trim();
+
+
+            const password =
+                document.getElementById(
+                    "registerPassword"
+                ).value;
+
+
+            if (!name || !email || !password) {
+
+                registerMessage.textContent =
+                    "Name, email and password are required.";
+
+                registerMessage.style.color =
+                    "#ff6b6b";
+
+                return;
+
+            }
+
+
+            registerMessage.textContent =
+                "Creating your account...";
+
+            registerMessage.style.color =
+                "#9d91ff";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "http://127.0.0.1:5000/register",
+                        {
+                            method:
+                                "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            credentials:
+                                "include",
+
+                            body:
+                                JSON.stringify({
+                                    name:
+                                        name,
+
+                                    email:
+                                        email,
+
+                                    password:
+                                        password,
+
+                                    preferred_language:
+                                        "en"
+                                })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (response.ok) {
+
+                    registerMessage.textContent =
+                        "Account created successfully. You can login now.";
+
+                    registerMessage.style.color =
+                        "#5ce7b4";
+
+
+                    document.getElementById(
+                        "email"
+                    ).value =
+                        email;
+
+
+                    document.getElementById(
+                        "password"
+                    ).value =
+                        password;
+
+
+                    setTimeout(
+                        function () {
+
+                            closeRegister();
+
+                            document.getElementById(
+                                "email"
+                            ).focus();
+
+                        },
+                        900
+                    );
+
+                }
+
+                else {
+
+                    registerMessage.textContent =
+                        data.message ||
+                        "Unable to create account.";
+
+                    registerMessage.style.color =
+                        "#ff6b6b";
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Registration error:",
+                    error
+                );
+
+
+                registerMessage.textContent =
+                    "Cannot connect to LearnQuest server.";
+
+                registerMessage.style.color =
+                    "#ff6b6b";
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       INITIALIZE
+       ========================================================= */
+
+    createStars();
+
+    createFloatingCode();
+
+
+    setInterval(
+        updateStory,
+        250
+    );
+
+
+    window.addEventListener(
+        "resize",
+        function () {
+
+            createStars();
+
+            createFloatingCode();
+
+        }
+    );
+
+
+</script>
+
+
+
+
+
+<script>
+
+    /* =========================================================
+       LEARNQUEST BACKGROUND MUSIC
+       Same UI / same page — only music engine improved.
+       ========================================================= */
+
+    let musicContext = null;
+
+    let musicMaster = null;
+
+    let musicTimer = null;
+
+    let musicNextTime = 0;
+
+    let musicStep = 0;
+
+    let musicEnabled = false;
+
+    let musicInteractionStarted = false;
+
+
+    const musicToggle =
+        document.getElementById(
+            "musicToggle"
+        );
+
+
+    /* ---------------------------------------------------------
+       GAME MUSIC SETTINGS
+       --------------------------------------------------------- */
+
+    const MUSIC_BPM = 104;
+
+    const MUSIC_STEP_DURATION =
+        60 / MUSIC_BPM / 2;
+
+    const MUSIC_LOOK_AHEAD = 0.55;
+
+    const MUSIC_VOLUME = 0.56;
+
+
+    /* ---------------------------------------------------------
+       NOTE FREQUENCIES
+       --------------------------------------------------------- */
+
+    const notes = {
+
+        C3: 130.81,
+        D3: 146.83,
+        E3: 164.81,
+        F3: 174.61,
+        G3: 196.00,
+        A3: 220.00,
+        B3: 246.94,
+
+        C4: 261.63,
+        D4: 293.66,
+        E4: 329.63,
+        F4: 349.23,
+        G4: 392.00,
+        A4: 440.00,
+        B4: 493.88,
+
+        C5: 523.25,
+        D5: 587.33,
+        E5: 659.25,
+        F5: 698.46,
+        G5: 783.99,
+        A5: 880.00,
+        B5: 987.77,
+
+        C6: 1046.50,
+        D6: 1174.66,
+        E6: 1318.51,
+        G6: 1567.98,
+        A6: 1760.00
+
+    };
+
+
+    /* ---------------------------------------------------------
+       8-BAR GAME CHORD PROGRESSION
+       --------------------------------------------------------- */
+
+    const chordProgression = [
+
+        [
+            notes.C3,
+            notes.G3,
+            notes.C4,
+            notes.E4
+        ],
+
+        [
+            notes.A3,
+            notes.E4,
+            notes.A4,
+            notes.C5
+        ],
+
+        [
+            notes.F3,
+            notes.C4,
+            notes.F4,
+            notes.A4
+        ],
+
+        [
+            notes.G3,
+            notes.D4,
+            notes.G4,
+            notes.B4
+        ],
+
+        [
+            notes.C3,
+            notes.G3,
+            notes.C4,
+            notes.E4
+        ],
+
+        [
+            notes.F3,
+            notes.C4,
+            notes.F4,
+            notes.A4
+        ],
+
+        [
+            notes.A3,
+            notes.E4,
+            notes.A4,
+            notes.C5
+        ],
+
+        [
+            notes.G3,
+            notes.D4,
+            notes.G4,
+            notes.B4
+        ]
+
+    ];
+
+
+    /* ---------------------------------------------------------
+       MELODY
+       --------------------------------------------------------- */
+
+    const melody = [
+
+        notes.E5,
+        notes.G5,
+        notes.A5,
+        notes.G5,
+        notes.E5,
+        notes.D5,
+        notes.C5,
+        notes.D5,
+
+        notes.E5,
+        notes.A5,
+        notes.C6,
+        notes.A5,
+        notes.G5,
+        notes.E5,
+        notes.D5,
+        notes.E5,
+
+        notes.A5,
+        notes.G5,
+        notes.E5,
+        notes.D5,
+        notes.F5,
+        notes.A5,
+        notes.G5,
+        notes.F5,
+
+        notes.D5,
+        notes.G5,
+        notes.B5,
+        notes.A5,
+        notes.G5,
+        notes.E5,
+        notes.D5,
+        notes.C5
+
+    ];
+
+
+    /* ---------------------------------------------------------
+       COUNTER MELODY
+       --------------------------------------------------------- */
+
+    const counterMelody = [
+
+        notes.C5,
+        notes.D5,
+        notes.E5,
+        notes.D5,
+        notes.C5,
+        notes.B4,
+        notes.A4,
+        notes.B4,
+
+        notes.C5,
+        notes.E5,
+        notes.A5,
+        notes.E5,
+        notes.D5,
+        notes.C5,
+        notes.B4,
+        notes.C5,
+
+        notes.F5,
+        notes.E5,
+        notes.C5,
+        notes.B4,
+        notes.D5,
+        notes.F5,
+        notes.E5,
+        notes.D5,
+
+        notes.B4,
+        notes.D5,
+        notes.G5,
+        notes.F5,
+        notes.D5,
+        notes.C5,
+        notes.B4,
+        notes.G4
+
+    ];
+
+
+    /* ---------------------------------------------------------
+       UPDATE MUSIC BUTTON
+       --------------------------------------------------------- */
+
+    function updateMusicButton() {
+
+        if (!musicToggle) {
+            return;
+        }
+
+
+        if (musicEnabled) {
+
+            musicToggle.textContent =
+                "🔊 Music ON";
+
+            musicToggle.classList.add(
+                "music-on"
+            );
+
+            musicToggle.setAttribute(
+                "aria-pressed",
+                "true"
+            );
+
+        }
+
+        else {
+
+            musicToggle.textContent =
+                "🔇 Music OFF";
+
+            musicToggle.classList.remove(
+                "music-on"
+            );
+
+            musicToggle.setAttribute(
+                "aria-pressed",
+                "false"
+            );
+
+        }
+
+    }
+
+
+    /* ---------------------------------------------------------
+       CREATE AUDIO CONTEXT
+       --------------------------------------------------------- */
+
+    function createMusicContext() {
+
+        if (musicContext) {
+            return;
+        }
+
+
+        const AudioContextClass =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+
+        if (!AudioContextClass) {
+            return;
+        }
+
+
+        musicContext =
+            new AudioContextClass();
+
+
+        musicMaster =
+            musicContext.createGain();
+
+
+        musicMaster.gain.value =
+            MUSIC_VOLUME;
+
+
+        musicMaster.connect(
+            musicContext.destination
+        );
+
+    }
+
+
+    /* ---------------------------------------------------------
+       PLAY TONE
+       --------------------------------------------------------- */
+
+    function playTone(
+        frequency,
+        startTime,
+        duration,
+        waveform,
+        volume
+    ) {
+
+        if (
+            !musicContext ||
+            !musicMaster ||
+            !frequency
+        ) {
+            return;
+        }
+
+
+        const oscillator =
+            musicContext.createOscillator();
+
+
+        const gain =
+            musicContext.createGain();
+
+
+        oscillator.type =
+            waveform;
+
+
+        oscillator.frequency.setValueAtTime(
+            frequency,
+            startTime
+        );
+
+
+        gain.gain.setValueAtTime(
+            0.0001,
+            startTime
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            Math.max(
+                0.0001,
+                volume
+            ),
+            startTime + 0.018
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.0001,
+            startTime + duration
+        );
+
+
+        oscillator.connect(
+            gain
+        );
+
+        gain.connect(
+            musicMaster
+        );
+
+
+        oscillator.start(
+            startTime
+        );
+
+
+        oscillator.stop(
+            startTime + duration + 0.04
+        );
+
+    }
+
+
+    /* ---------------------------------------------------------
+       PLAY NOISE
+       --------------------------------------------------------- */
+
+    function playNoise(
+        startTime,
+        duration,
+        volume
+    ) {
+
+        if (
+            !musicContext ||
+            !musicMaster
+        ) {
+            return;
+        }
+
+
+        const bufferSize =
+            Math.floor(
+                musicContext.sampleRate *
+                duration
+            );
+
+
+        const buffer =
+            musicContext.createBuffer(
+                1,
+                bufferSize,
+                musicContext.sampleRate
+            );
+
+
+        const data =
+            buffer.getChannelData(
+                0
+            );
+
+
+        for (
+            let i = 0;
+            i < bufferSize;
+            i++
+        ) {
+
+            data[i] =
+                Math.random() * 2 - 1;
+
+        }
+
+
+        const source =
+            musicContext.createBufferSource();
+
+
+        const filter =
+            musicContext.createBiquadFilter();
+
+
+        const gain =
+            musicContext.createGain();
+
+
+        filter.type =
+            "highpass";
+
+
+        filter.frequency.setValueAtTime(
+            900,
+            startTime
+        );
+
+
+        gain.gain.setValueAtTime(
+            0.0001,
+            startTime
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            Math.max(
+                0.0001,
+                volume
+            ),
+            startTime + 0.003
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.0001,
+            startTime + duration
+        );
+
+
+        source.buffer =
+            buffer;
+
+
+        source.connect(
+            filter
+        );
+
+        filter.connect(
+            gain
+        );
+
+        gain.connect(
+            musicMaster
+        );
+
+
+        source.start(
+            startTime
+        );
+
+        source.stop(
+            startTime + duration
+        );
+
+    }
+
+
+    /* ---------------------------------------------------------
+       KICK
+       --------------------------------------------------------- */
+
+    function playKick(
+        startTime,
+        strength = 0.22
+    ) {
+
+        if (
+            !musicContext ||
+            !musicMaster
+        ) {
+            return;
+        }
+
+
+        const oscillator =
+            musicContext.createOscillator();
+
+
+        const gain =
+            musicContext.createGain();
+
+
+        oscillator.type =
+            "sine";
+
+
+        oscillator.frequency.setValueAtTime(
+            125,
+            startTime
+        );
+
+
+        oscillator.frequency.exponentialRampToValueAtTime(
+            45,
+            startTime + 0.16
+        );
+
+
+        gain.gain.setValueAtTime(
+            0.0001,
+            startTime
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            strength,
+            startTime + 0.006
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.0001,
+            startTime + 0.20
+        );
+
+
+        oscillator.connect(
+            gain
+        );
+
+        gain.connect(
+            musicMaster
+        );
+
+
+        oscillator.start(
+            startTime
+        );
+
+        oscillator.stop(
+            startTime + 0.22
+        );
+
+    }
+
+
+    /* ---------------------------------------------------------
+       SNARE
+       --------------------------------------------------------- */
+
+    function playSnare(
+        startTime
+    ) {
+
+        playNoise(
+            startTime,
+            0.10,
+            0.12
+        );
+
+
+        playTone(
+            190,
+            startTime,
+            0.075,
+            "square",
+            0.025
+        );
+
+    }
+
+
+    /* ---------------------------------------------------------
+       HAT
+       --------------------------------------------------------- */
+
+    function playHat(
+        startTime,
+        strong = false
+    ) {
+
+        playNoise(
+            startTime,
+            strong ? 0.045 : 0.028,
+            strong ? 0.055 : 0.032
+        );
+
+    }
+
+
+    /* ---------------------------------------------------------
+       CHORD
+       --------------------------------------------------------- */
+
+    function playChord(
+        chord,
+        startTime,
+        duration
+    ) {
+
+        if (!chord) {
+            return;
+        }
+
+
+        playTone(
+            chord[0],
+            startTime,
+            duration,
+            "sine",
+            0.035
+        );
+
+        playTone(
+            chord[1],
+            startTime,
+            duration,
+            "triangle",
+            0.028
+        );
+
+        playTone(
+            chord[2],
+            startTime,
+            duration,
+            "triangle",
+            0.026
+        );
+
+        playTone(
+            chord[3],
+            startTime,
+            duration,
+            "sine",
+            0.022
+        );
+
+    }
+
+
+    /* ---------------------------------------------------------
+       SCHEDULE ONE MUSIC STEP
+       --------------------------------------------------------- */
+
+    function scheduleMusicStep(
+        time,
+        step
+    ) {
+
+        const stepInBar =
+            step % 8;
+
+
+        const bar =
+            Math.floor(
+                step / 8
+            ) % chordProgression.length;
+
+
+        const chord =
+            chordProgression[bar];
+
+
+        /* ---------------------------------------------
+           Chord pulse
+           --------------------------------------------- */
+
+        if (
+            stepInBar === 0
+        ) {
+
+            playChord(
+                chord,
+                time,
+                MUSIC_STEP_DURATION * 7.7
+            );
+
+            playKick(
+                time,
+                0.25
+            );
+
+        }
+
+
+        /* ---------------------------------------------
+           Bass groove
+           --------------------------------------------- */
+
+        if (
+            stepInBar === 0 ||
+            stepInBar === 4
+        ) {
+
+            playTone(
+                chord[0],
+                time,
+                MUSIC_STEP_DURATION * 1.9,
+                "sawtooth",
+                0.075
+            );
+
+        }
+
+
+        if (
+            stepInBar === 2 ||
+            stepInBar === 6
+        ) {
+
+            playTone(
+                chord[1],
+                time,
+                MUSIC_STEP_DURATION * 1.35,
+                "sawtooth",
+                0.045
+            );
+
+        }
+
+
+        /* ---------------------------------------------
+           Main melody
+           --------------------------------------------- */
+
+        const melodyIndex =
+            step % melody.length;
+
+
+        playTone(
+            melody[melodyIndex],
+            time,
+            MUSIC_STEP_DURATION * 0.80,
+            "triangle",
+            0.075
+        );
+
+
+        /* ---------------------------------------------
+           Counter melody on selected steps
+           --------------------------------------------- */
+
+        if (
+            step % 2 === 1
+        ) {
+
+            const counterIndex =
+                Math.floor(
+                    step / 2
+                ) % counterMelody.length;
+
+
+            playTone(
+                counterMelody[counterIndex],
+                time,
+                MUSIC_STEP_DURATION * 0.58,
+                "sine",
+                0.038
+            );
+
+        }
+
+
+        /* ---------------------------------------------
+           Drums
+           --------------------------------------------- */
+
+        if (
+            stepInBar === 0
+        ) {
+
+            playKick(
+                time,
+                0.24
+            );
+
+        }
+
+
+        if (
+            stepInBar === 4
+        ) {
+
+            playKick(
+                time,
+                0.18
+            );
+
+        }
+
+
+        if (
+            stepInBar === 2 ||
+            stepInBar === 6
+        ) {
+
+            playSnare(
+                time
+            );
+
+        }
+
+
+        playHat(
+            time,
+            stepInBar === 0 ||
+            stepInBar === 4
+        );
+
+
+        if (
+            stepInBar === 2 ||
+            stepInBar === 6
+        ) {
+
+            playHat(
+                time + MUSIC_STEP_DURATION / 2
+            );
+
+        }
+
+    }
+
+
+    /* ---------------------------------------------------------
+       SCHEDULE MUSIC AHEAD OF TIME
+       --------------------------------------------------------- */
+
+    function scheduleMusic() {
+
+        if (
+            !musicEnabled ||
+            !musicContext
+        ) {
+            return;
+        }
+
+
+        while (
+            musicNextTime <
+            musicContext.currentTime +
+            MUSIC_LOOK_AHEAD
+        ) {
+
+            scheduleMusicStep(
+                musicNextTime,
+                musicStep
+            );
+
+
+            musicNextTime +=
+                MUSIC_STEP_DURATION;
+
+
+            musicStep =
+                (
+                    musicStep + 1
+                ) % 256;
+
+        }
+
+    }
+
+
+    /* ---------------------------------------------------------
+       START MUSIC
+       --------------------------------------------------------- */
+
+    async function startGameMusic() {
+
+        createMusicContext();
+
+
+        if (!musicContext) {
+            return;
+        }
+
+
+        try {
+
+            if (
+                musicContext.state ===
+                "suspended"
+            ) {
+
+                await musicContext.resume();
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.log(
+                "Music resume error:",
+                error
+            );
+
+        }
+
+
+        if (
+            musicMaster
+        ) {
+
+            const now =
+                musicContext.currentTime;
+
+
+            musicMaster.gain.cancelScheduledValues(
+                now
+            );
+
+
+            musicMaster.gain.setValueAtTime(
+                0.0001,
+                now
+            );
+
+
+            musicMaster.gain.exponentialRampToValueAtTime(
+                MUSIC_VOLUME,
+                now + 0.30
+            );
+
+        }
+
+
+        musicEnabled =
+            true;
+
+
+        musicStep =
+            0;
+
+
+        musicNextTime =
+            musicContext.currentTime +
+            0.08;
+
+
+        if (musicTimer) {
+
+            clearInterval(
+                musicTimer
+            );
+
+        }
+
+
+        musicTimer =
+            setInterval(
+                scheduleMusic,
+                70
+            );
+
+
+        scheduleMusic();
+
+        updateMusicButton();
+
+    }
+
+
+    /* ---------------------------------------------------------
+       STOP MUSIC
+       --------------------------------------------------------- */
+
+    function stopGameMusic() {
+
+        musicEnabled =
+            false;
+
+
+        if (musicTimer) {
+
+            clearInterval(
+                musicTimer
+            );
+
+            musicTimer =
+                null;
+
+        }
+
+
+        if (
+            musicMaster &&
+            musicContext
+        ) {
+
+            const now =
+                musicContext.currentTime;
+
+
+            musicMaster.gain.cancelScheduledValues(
+                now
+            );
+
+
+            musicMaster.gain.setValueAtTime(
+                Math.max(
+                    0.0001,
+                    musicMaster.gain.value
+                ),
+                now
+            );
+
+
+            musicMaster.gain.exponentialRampToValueAtTime(
+                0.0001,
+                now + 0.35
+            );
+
+        }
+
+
+        updateMusicButton();
+
+    }
+
+
+    /* ---------------------------------------------------------
+       TOGGLE MUSIC
+       --------------------------------------------------------- */
+
+    async function toggleGameMusic() {
+
+        if (
+            musicEnabled
+        ) {
+
+            stopGameMusic();
+
+        }
+
+        else {
+
+            musicInteractionStarted =
+                true;
+
+            await startGameMusic();
+
+        }
+
+    }
+
+
+    /* ---------------------------------------------------------
+       MUSIC BUTTON
+       --------------------------------------------------------- */
+
+    if (musicToggle) {
+
+        musicToggle.addEventListener(
+            "click",
+            async function (event) {
+
+                event.stopPropagation();
+
+                await toggleGameMusic();
+
+            }
+        );
+
+    }
+
+
+    /* ---------------------------------------------------------
+       FIRST USER INTERACTION
+
+       Browsers normally block autoplay with sound until the
+       user interacts with the page. The first real interaction
+       therefore starts the music automatically.
+       --------------------------------------------------------- */
+
+    function startMusicAfterInteraction(
+        event
+    ) {
+
+        if (
+            event &&
+            event.target &&
+            event.target.closest &&
+            event.target.closest(
+                "#musicToggle"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            musicInteractionStarted ||
+            musicEnabled
+        ) {
+
+            return;
+
+        }
+
+
+        musicInteractionStarted =
+            true;
+
+
+        startGameMusic();
+
+    }
+
+
+    [
+        "pointerdown",
+        "keydown",
+        "touchstart"
+    ].forEach(
+        function (eventName) {
+
+            document.addEventListener(
+                eventName,
+                startMusicAfterInteraction,
+                {
+                    once: true,
+                    passive: true
+                }
+            );
+
+        }
+    );
+
+
+    /* ---------------------------------------------------------
+       INITIAL MUSIC BUTTON STATE
+       --------------------------------------------------------- */
+
+    updateMusicButton();
+
+</script>
+</body>
+
+</html>

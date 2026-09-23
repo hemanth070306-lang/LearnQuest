@@ -1,0 +1,2948 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>LearnQuest - Level</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            min-height: 100vh;
+
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    #243b55,
+                    transparent 40%
+                ),
+                linear-gradient(
+                    135deg,
+                    #0f2027,
+                    #203a43,
+                    #2c5364
+                );
+
+        }
+
+
+        /* =====================================================
+           HEADER
+           ===================================================== */
+
+        .header {
+
+            padding:
+                20px
+                50px;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.25
+                );
+
+            backdrop-filter:
+                blur(
+                    10px
+                );
+
+        }
+
+
+        .logo {
+
+            font-size:
+                28px;
+
+            font-weight:
+                bold;
+
+        }
+
+
+        .language {
+
+            font-size:
+                14px;
+
+            opacity:
+                0.85;
+
+        }
+
+
+        /* =====================================================
+           CONTAINER
+           ===================================================== */
+
+        .container {
+
+            width:
+                90%;
+
+            max-width:
+                1000px;
+
+            margin:
+                40px
+                auto;
+
+        }
+
+
+        /* =====================================================
+           LEVEL HEADER
+           ===================================================== */
+
+        .level-header {
+
+            text-align:
+                center;
+
+            margin-bottom:
+                30px;
+
+        }
+
+
+        .level-number {
+
+            font-size:
+                60px;
+
+            font-weight:
+                bold;
+
+            margin-bottom:
+                10px;
+
+        }
+
+
+        .level-name {
+
+            font-size:
+                30px;
+
+            margin-bottom:
+                10px;
+
+        }
+
+
+        .topic {
+
+            font-size:
+                20px;
+
+            opacity:
+                0.85;
+
+        }
+
+
+        /* =====================================================
+           CARDS
+           ===================================================== */
+
+        .card {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.10
+                );
+
+            backdrop-filter:
+                blur(
+                    12px
+                );
+
+            border-radius:
+                20px;
+
+            padding:
+                30px;
+
+            margin-bottom:
+                25px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.25
+                );
+
+        }
+
+
+        .card h2 {
+
+            margin-bottom:
+                20px;
+
+        }
+
+
+        /* =====================================================
+           INFO GRID
+           ===================================================== */
+
+        .info-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    1fr
+                );
+
+            gap:
+                15px;
+
+        }
+
+
+        .info-box {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+            padding:
+                20px;
+
+            border-radius:
+                15px;
+
+            text-align:
+                center;
+
+        }
+
+
+        .info-title {
+
+            font-size:
+                14px;
+
+            opacity:
+                0.7;
+
+            margin-bottom:
+                8px;
+
+        }
+
+
+        .info-value {
+
+            font-size:
+                20px;
+
+            font-weight:
+                bold;
+
+        }
+
+
+        /* =====================================================
+           VIDEO
+           ===================================================== */
+
+        .video-container {
+
+            position:
+                relative;
+
+            width:
+                100%;
+
+            padding-bottom:
+                56.25%;
+
+            overflow:
+                hidden;
+
+            border-radius:
+                15px;
+
+            background:
+                black;
+
+        }
+
+
+        .video-container iframe {
+
+            position:
+                absolute;
+
+            width:
+                100%;
+
+            height:
+                100%;
+
+            border:
+                none;
+
+            left:
+                0;
+
+            top:
+                0;
+
+        }
+
+
+        .video-message {
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            text-align:
+                center;
+
+            padding:
+                30px;
+
+            font-size:
+                18px;
+
+            opacity:
+                0.8;
+
+        }
+
+
+        /* =====================================================
+           QUEST
+           ===================================================== */
+
+        .quest-text {
+
+            font-size:
+                18px;
+
+            line-height:
+                1.6;
+
+        }
+
+
+        /* =====================================================
+           BUTTONS
+           ===================================================== */
+
+        .buttons {
+
+            display:
+                flex;
+
+            gap:
+                15px;
+
+            justify-content:
+                center;
+
+            margin-top:
+                25px;
+
+        }
+
+
+        button {
+
+            border:
+                none;
+
+            padding:
+                15px
+                25px;
+
+            border-radius:
+                12px;
+
+            font-size:
+                16px;
+
+            font-weight:
+                bold;
+
+            cursor:
+                pointer;
+
+            transition:
+                0.25s ease;
+
+        }
+
+
+        button:hover {
+
+            transform:
+                translateY(
+                    -3px
+                );
+
+        }
+
+
+        button:disabled {
+
+            opacity:
+                0.55;
+
+            cursor:
+                not-allowed;
+
+            transform:
+                none;
+
+        }
+
+
+        .quiz-btn {
+
+            background:
+                #00c853;
+
+            color:
+                white;
+
+        }
+
+
+        .back-btn {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.15
+                );
+
+            color:
+                white;
+
+        }
+
+
+        /* =====================================================
+           MESSAGE
+           ===================================================== */
+
+        #message {
+
+            margin-top:
+                15px;
+
+            text-align:
+                center;
+
+            font-size:
+                14px;
+
+            min-height:
+                22px;
+
+        }
+
+
+        /* =====================================================
+           COIN CONFIRM OVERLAY
+           ===================================================== */
+
+        .modal-overlay {
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            display:
+                none;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                20px;
+
+            background:
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.78
+                );
+
+            backdrop-filter:
+                blur(
+                    8px
+                );
+
+            z-index:
+                5000;
+
+        }
+
+
+        .modal {
+
+            width:
+                min(
+                    430px,
+                    94vw
+                );
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #172033,
+                    #0d1320
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
+
+            border-radius:
+                24px;
+
+            padding:
+                30px;
+
+            text-align:
+                center;
+
+            box-shadow:
+                0 30px 80px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.55
+                );
+
+            animation:
+                modalAppear
+                0.25s
+                ease-out;
+
+        }
+
+
+        @keyframes modalAppear {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(
+                        15px
+                    )
+                    scale(
+                        0.97
+                    );
+
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(
+                        0
+                    )
+                    scale(
+                        1
+                    );
+
+            }
+
+        }
+
+
+        .modal-coin {
+
+            font-size:
+                50px;
+
+            margin-bottom:
+                10px;
+
+        }
+
+
+        .modal h2 {
+
+            margin-bottom:
+                12px;
+
+        }
+
+
+        .modal p {
+
+            color:
+                #afb7cb;
+
+            line-height:
+                1.6;
+
+            margin-bottom:
+                12px;
+
+        }
+
+
+        .coin-balance {
+
+            display:
+                inline-block;
+
+            margin:
+                5px
+                0
+                12px;
+
+            padding:
+                10px
+                16px;
+
+            border-radius:
+                12px;
+
+            background:
+                rgba(
+                    255,
+                    199,
+                    63,
+                    0.10
+                );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    199,
+                    63,
+                    0.22
+                );
+
+            color:
+                #ffd45b;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .modal-actions {
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            gap:
+                12px;
+
+            flex-wrap:
+                wrap;
+
+            margin-top:
+                20px;
+
+        }
+
+
+        .confirm-btn {
+
+            background:
+                #00c853;
+
+            color:
+                white;
+
+        }
+
+
+        .cancel-btn {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.10
+                );
+
+            color:
+                white;
+
+        }
+
+
+        /* =====================================================
+           NO COINS STATE
+           ===================================================== */
+
+        .no-coins {
+
+            color:
+                #ff8f83 !important;
+
+            font-weight:
+                700;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (
+            max-width: 700px
+        ) {
+
+            .header {
+
+                padding:
+                    20px;
+
+            }
+
+
+            .container {
+
+                width:
+                    94%;
+
+            }
+
+
+            .info-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .buttons {
+
+                flex-direction:
+                    column;
+
+            }
+
+
+            .buttons button {
+
+                width:
+                    100%;
+
+            }
+
+
+            .level-number {
+
+                font-size:
+                    45px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <div class="header">
+
+
+        <div class="logo">
+
+            🎮 LearnQuest
+
+        </div>
+
+
+        <div
+            id="languageDisplay"
+            class="language"
+        >
+
+            English
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <div class="container">
+
+
+        <!-- =================================================
+             LEVEL HEADER
+             ================================================= -->
+
+        <div class="level-header">
+
+
+            <div
+                class="level-number"
+                id="levelNumber"
+            >
+
+                Level
+
+            </div>
+
+
+            <div
+                class="level-name"
+                id="levelName"
+            >
+
+                Loading...
+
+            </div>
+
+
+            <div
+                class="topic"
+                id="topic"
+            >
+
+                Loading...
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             LEVEL INFORMATION
+             ================================================= -->
+
+        <div class="card">
+
+
+            <h2 id="levelInfoTitle">
+
+                Level Information
+
+            </h2>
+
+
+            <div class="info-grid">
+
+
+                <div class="info-box">
+
+                    <div
+                        class="info-title"
+                        id="topicLabel"
+                    >
+
+                        Topic
+
+                    </div>
+
+
+                    <div
+                        class="info-value"
+                        id="topicValue"
+                    >
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="info-box">
+
+                    <div
+                        class="info-title"
+                        id="difficultyLabel"
+                    >
+
+                        Difficulty
+
+                    </div>
+
+
+                    <div
+                        class="info-value"
+                        id="difficultyValue"
+                    >
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="info-box">
+
+                    <div
+                        class="info-title"
+                        id="xpLabel"
+                    >
+
+                        XP Reward
+
+                    </div>
+
+
+                    <div
+                        class="info-value"
+                        id="xpValue"
+                    >
+
+                        -
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             VIDEO
+             ================================================= -->
+
+        <div class="card">
+
+
+            <h2 id="videoTitle">
+
+                🎬 Learning Video
+
+            </h2>
+
+
+            <div
+                class="video-container"
+                id="videoContainer"
+            >
+
+                <div
+                    class="video-message"
+                    id="videoMessage"
+                >
+
+                    Loading video...
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             LEARNING QUEST
+             ================================================= -->
+
+        <div class="card">
+
+
+            <h2 id="questTitle">
+
+                ⚔️ Learning Quest
+
+            </h2>
+
+
+            <p
+                class="quest-text"
+                id="questText"
+            >
+
+                Watch the learning video and understand
+                the concept before starting the quiz.
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             BUTTONS
+             ================================================= -->
+
+        <div class="buttons">
+
+
+            <button
+                class="quiz-btn"
+                id="quizButton"
+                type="button"
+            >
+
+                🚀 Start Level Quiz
+
+            </button>
+
+
+            <button
+                class="back-btn"
+                id="backButton"
+                type="button"
+            >
+
+                ← Back to Learning World
+
+            </button>
+
+
+        </div>
+
+
+        <div id="message"></div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         COIN CONFIRM MODAL
+         ===================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="coinModal"
+    >
+
+
+        <div class="modal">
+
+
+            <div class="modal-coin">
+                🪙
+            </div>
+
+
+            <h2
+                id="modalTitle"
+            >
+
+                Start Level
+
+            </h2>
+
+
+            <p
+                id="modalMessage"
+            >
+
+                10 coins are required to start this level.
+
+            </p>
+
+
+            <div
+                class="coin-balance"
+                id="coinBalance"
+            >
+
+                🪙 Your Coins: 0
+
+            </div>
+
+
+            <p
+                id="modalWarning"
+            >
+
+                Confirming will deduct 10 coins.
+
+            </p>
+
+
+            <div class="modal-actions">
+
+
+                <button
+                    class="confirm-btn"
+                    id="confirmStartBtn"
+                    type="button"
+                >
+
+                    🚀 Start &amp; Deduct 10 Coins
+
+                </button>
+
+
+                <button
+                    class="cancel-btn"
+                    id="cancelStartBtn"
+                    type="button"
+                >
+
+                    Cancel
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <script>
+
+
+        /* =====================================================
+           CONFIG
+           ===================================================== */
+
+        const API_BASE =
+            "http://127.0.0.1:5000";
+
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const levelId =
+            params.get(
+                "level_id"
+            );
+
+
+        const selectedLanguage =
+            localStorage.getItem(
+                "selected_language"
+            ) || "en";
+
+
+        const languageNames = {
+
+            en:
+                "English",
+
+            hi:
+                "हिन्दी",
+
+            te:
+                "తెలుగు"
+
+        };
+
+
+        document.getElementById(
+            "languageDisplay"
+        ).textContent =
+            languageNames[
+                selectedLanguage
+            ] || "English";
+
+
+
+        /* =====================================================
+           LEVEL NAMES
+           ===================================================== */
+
+        const levelNames = {
+
+            1: {
+
+                en:
+                    "Beginner",
+
+                hi:
+                    "शुरुआती",
+
+                te:
+                    "ప్రారంభికుడు"
+
+            },
+
+            2: {
+
+                en:
+                    "Explorer",
+
+                hi:
+                    "अन्वेषक",
+
+                te:
+                    "అన్వేషకుడు"
+
+            },
+
+            3: {
+
+                en:
+                    "Challenger",
+
+                hi:
+                    "चैलेंजर",
+
+                te:
+                    "ఛాలెంజర్"
+
+            },
+
+            4: {
+
+                en:
+                    "Problem Solver",
+
+                hi:
+                    "समस्या समाधानकर्ता",
+
+                te:
+                    "సమస్య పరిష్కర్త"
+
+            },
+
+            5: {
+
+                en:
+                    "Master",
+
+                hi:
+                    "मास्टर",
+
+                te:
+                    "మాస్టర్"
+
+            }
+
+        };
+
+
+
+        /* =====================================================
+           TOPIC TRANSLATIONS
+           ===================================================== */
+
+        const topicTranslations = {
+
+            "Python Variables": {
+
+                hi:
+                    "Python वेरिएबल्स",
+
+                te:
+                    "Python వేరియబుల్స్"
+
+            },
+
+            "Python Data Types": {
+
+                hi:
+                    "Python डेटा टाइप्स",
+
+                te:
+                    "Python డేటా టైప్స్"
+
+            },
+
+            "Python Operators": {
+
+                hi:
+                    "Python ऑपरेटर्स",
+
+                te:
+                    "Python ఆపరేటర్స్"
+
+            },
+
+            "Python Loops": {
+
+                hi:
+                    "Python लूप्स",
+
+                te:
+                    "Python లూప్స్"
+
+            },
+
+            "Python Functions": {
+
+                hi:
+                    "Python फंक्शन्स",
+
+                te:
+                    "Python ఫంక్షన్స్"
+
+            },
+
+            "Java Variables": {
+
+                hi:
+                    "Java वेरिएबल्स",
+
+                te:
+                    "Java వేరియబుల్స్"
+
+            },
+
+            "Java Data Types": {
+
+                hi:
+                    "Java डेटा टाइप्स",
+
+                te:
+                    "Java డేటా టైప్స్"
+
+            },
+
+            "Java Operators": {
+
+                hi:
+                    "Java ऑपरेटर्स",
+
+                te:
+                    "Java ఆపరేటర్స్"
+
+            },
+
+            "Java Loops": {
+
+                hi:
+                    "Java लूप्स",
+
+                te:
+                    "Java లూప్స్"
+
+            },
+
+            "Java Methods": {
+
+                hi:
+                    "Java मेथड्स",
+
+                te:
+                    "Java మెథడ్స్"
+
+            },
+
+            "Machine Learning Basics": {
+
+                hi:
+                    "मशीन लर्निंग बेसिक्स",
+
+                te:
+                    "మిషన్ లెర్నింగ్ బేసిక్స్"
+
+            },
+
+            "Data Preprocessing": {
+
+                hi:
+                    "डेटा प्रीप्रोसेसिंग",
+
+                te:
+                    "డేటా ప్రీప్రాసెసింగ్"
+
+            },
+
+            "Linear Regression": {
+
+                hi:
+                    "लीनियर रिग्रेशन",
+
+                te:
+                    "లీనియర్ రిగ్రెషన్"
+
+            },
+
+            "Classification": {
+
+                hi:
+                    "क्लासिफिकेशन",
+
+                te:
+                    "క్లాసిఫికేషన్"
+
+            },
+
+            "Model Evaluation": {
+
+                hi:
+                    "मॉडल मूल्यांकन",
+
+                te:
+                    "మోడల్ ఎవాల్యుయేషన్"
+
+            },
+
+            "NLP Basics": {
+
+                hi:
+                    "NLP बेसिक्स",
+
+                te:
+                    "NLP బేసిక్స్"
+
+            },
+
+            "Text Preprocessing": {
+
+                hi:
+                    "टेक्स्ट प्रीप्रोसेसिंग",
+
+                te:
+                    "టెక్స్ట్ ప్రీప్రాసెసింగ్"
+
+            },
+
+            "Tokenization": {
+
+                hi:
+                    "टोकनाइज़ेशन",
+
+                te:
+                    "టోకెనైజేషన్"
+
+            },
+
+            "POS Tagging": {
+
+                hi:
+                    "POS टैगिंग",
+
+                te:
+                    "POS ట్యాగింగ్"
+
+            },
+
+            "Named Entity Recognition": {
+
+                hi:
+                    "नामित इकाई पहचान",
+
+                te:
+                    "నేమ్డ్ ఎంటిటీ రికగ్నిషన్"
+
+            }
+
+        };
+
+
+
+        /* =====================================================
+           DIFFICULTY TRANSLATIONS
+           ===================================================== */
+
+        const difficultyTranslations = {
+
+            Beginner: {
+
+                hi:
+                    "शुरुआती",
+
+                te:
+                    "ప్రారంభ స్థాయి"
+
+            },
+
+            Easy: {
+
+                hi:
+                    "आसान",
+
+                te:
+                    "సులభం"
+
+            },
+
+            Medium: {
+
+                hi:
+                    "मध्यम",
+
+                te:
+                    "మధ్యస్థం"
+
+            },
+
+            Hard: {
+
+                hi:
+                    "कठिन",
+
+                te:
+                    "కష్టం"
+
+            },
+
+            Advanced: {
+
+                hi:
+                    "उन्नत",
+
+                te:
+                    "అధునాతన"
+
+            }
+
+        };
+
+
+
+        function translatedTopic(
+            topic
+        ) {
+
+            if (
+                selectedLanguage ===
+                "en"
+            ) {
+
+                return topic;
+
+            }
+
+
+            return (
+                topicTranslations[
+                    topic
+                ] &&
+                topicTranslations[
+                    topic
+                ][
+                    selectedLanguage
+                ]
+            ) || topic;
+
+        }
+
+
+
+        function translatedDifficulty(
+            difficulty
+        ) {
+
+            if (
+                selectedLanguage ===
+                "en"
+            ) {
+
+                return difficulty;
+
+            }
+
+
+            return (
+                difficultyTranslations[
+                    difficulty
+                ] &&
+                difficultyTranslations[
+                    difficulty
+                ][
+                    selectedLanguage
+                ]
+            ) || difficulty;
+
+        }
+
+
+
+        /* =====================================================
+           SAFE RESPONSE READER
+           ===================================================== */
+
+        async function readResponseSafely(
+            response
+        ) {
+
+            const contentType =
+                response.headers.get(
+                    "content-type"
+                ) || "";
+
+
+            const rawText =
+                await response.text();
+
+
+            if (
+                contentType
+                    .toLowerCase()
+                    .includes(
+                        "application/json"
+                    )
+            ) {
+
+                try {
+
+                    return {
+                        isJson:
+                            true,
+
+                        data:
+                            JSON.parse(
+                                rawText
+                            ),
+
+                        raw:
+                            rawText
+
+                    };
+
+                }
+
+                catch (
+                    jsonError
+                ) {
+
+                    console.error(
+                        "JSON parsing failed:",
+                        jsonError
+                    );
+
+                    return {
+
+                        isJson:
+                            false,
+
+                        data:
+                            null,
+
+                        raw:
+                            rawText
+
+                    };
+
+                }
+
+            }
+
+
+            return {
+
+                isJson:
+                    false,
+
+                data:
+                    null,
+
+                raw:
+                    rawText
+
+            };
+
+        }
+
+
+
+        /* =====================================================
+           FRIENDLY SERVER ERROR
+           ===================================================== */
+
+        function getServerErrorMessage(
+            response,
+            parsed
+        ) {
+
+            if (
+                parsed &&
+                parsed.data &&
+                parsed.data.message
+            ) {
+
+                return parsed.data.message;
+
+            }
+
+
+            if (
+                parsed &&
+                parsed.raw &&
+                parsed.raw
+                    .toLowerCase()
+                    .includes(
+                        "<!doctype"
+                    )
+            ) {
+
+                return (
+                    "LearnQuest backend is not running the required level-start API. " +
+                    "Please make sure the current routes.py is running on port 5000."
+                );
+
+            }
+
+
+            return (
+                `Server returned HTTP ${response.status}.`
+            );
+
+        }
+
+
+
+        /* =====================================================
+           VIDEO
+           ===================================================== */
+
+        function getVideoUrl(
+            level
+        ) {
+
+            if (
+                selectedLanguage ===
+                "hi"
+            ) {
+
+                return (
+                    level.video_url_hi ||
+                    level.video_url_en ||
+                    ""
+                );
+
+            }
+
+
+            if (
+                selectedLanguage ===
+                "te"
+            ) {
+
+                return (
+                    level.video_url_te ||
+                    level.video_url_en ||
+                    ""
+                );
+
+            }
+
+
+            return (
+                level.video_url_en ||
+                ""
+            );
+
+        }
+
+
+
+        function extractYouTubeId(
+            value
+        ) {
+
+            if (!value) {
+
+                return null;
+
+            }
+
+
+            try {
+
+                const url =
+                    new URL(
+                        value
+                    );
+
+
+                const host =
+                    url.hostname
+                        .toLowerCase();
+
+
+                if (
+                    host.includes(
+                        "youtu.be"
+                    )
+                ) {
+
+                    return (
+                        url.pathname
+                            .substring(
+                                1
+                            )
+                            .split(
+                                "?"
+                            )[0]
+                    );
+
+                }
+
+
+                if (
+                    host.includes(
+                        "youtube.com"
+                    )
+                ) {
+
+                    if (
+                        url.pathname.startsWith(
+                            "/embed/"
+                        )
+                    ) {
+
+                        return (
+                            url.pathname
+                                .split(
+                                    "/embed/"
+                                )[1]
+                                .split(
+                                    "?"
+                                )[0]
+                        );
+
+                    }
+
+
+                    return url.searchParams.get(
+                        "v"
+                    );
+
+                }
+
+            }
+
+            catch (
+                error
+            ) {
+
+                console.error(
+                    "Invalid video URL:",
+                    error
+                );
+
+            }
+
+
+            return null;
+
+        }
+
+
+
+        function displayVideo(
+            videoURL
+        ) {
+
+            const container =
+                document.getElementById(
+                    "videoContainer"
+                );
+
+
+            const videoId =
+                extractYouTubeId(
+                    videoURL
+                );
+
+
+            if (!videoId) {
+
+                const message =
+                    selectedLanguage ===
+                    "hi"
+
+                        ? "🎬 इस भाषा में वीडियो उपलब्ध नहीं है।"
+
+                        : selectedLanguage ===
+                          "te"
+
+                            ? "🎬 ఈ భాషలో వీడియో అందుబాటులో లేదు."
+
+                            : "🎬 Learning video is not available.";
+
+
+                container.innerHTML = `
+
+                    <div class="video-message">
+
+                        ${message}
+
+                    </div>
+
+                `;
+
+
+                return;
+
+            }
+
+
+            container.innerHTML = `
+
+                <iframe
+
+                    src="https://www.youtube.com/embed/${videoId}"
+
+                    title="LearnQuest Learning Video"
+
+                    allow="
+                        accelerometer;
+                        autoplay;
+                        clipboard-write;
+                        encrypted-media;
+                        gyroscope;
+                        picture-in-picture
+                    "
+
+                    allowfullscreen>
+
+                </iframe>
+
+            `;
+
+        }
+
+
+
+        /* =====================================================
+           LOAD LEVEL
+           ===================================================== */
+
+        async function loadLevel() {
+
+            if (!levelId) {
+
+                document.getElementById(
+                    "message"
+                ).textContent =
+                    "Level ID missing.";
+
+                return;
+
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_BASE}/level/${encodeURIComponent(
+                            levelId
+                        )}`,
+                        {
+                            method:
+                                "GET",
+
+                            credentials:
+                                "include"
+                        }
+                    );
+
+
+                const parsed =
+                    await readResponseSafely(
+                        response
+                    );
+
+
+                if (
+                    !parsed.isJson
+                ) {
+
+                    throw new Error(
+                        getServerErrorMessage(
+                            response,
+                            parsed
+                        )
+                    );
+
+                }
+
+
+                const data =
+                    parsed.data;
+
+
+                if (
+                    !response.ok
+                ) {
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to load level."
+                    );
+
+                }
+
+
+                const level =
+                    data.level ||
+                    data;
+
+
+                if (
+                    level.subject_id
+                ) {
+
+                    localStorage.setItem(
+                        "current_subject_id",
+                        String(
+                            level.subject_id
+                        )
+                    );
+
+                }
+
+
+                const number =
+                    Number(
+                        level.level_number
+                    );
+
+
+                document.getElementById(
+                    "levelNumber"
+                ).textContent =
+
+                    (
+                        selectedLanguage ===
+                        "hi"
+
+                            ? "स्तर"
+
+                            : selectedLanguage ===
+                              "te"
+
+                                ? "స్థాయి"
+
+                                : "Level"
+                    ) +
+
+                    " " +
+
+                    number;
+
+
+                document.getElementById(
+                    "levelName"
+                ).textContent =
+
+                    (
+                        levelNames[
+                            number
+                        ] &&
+                        levelNames[
+                            number
+                        ][
+                            selectedLanguage
+                        ]
+                    ) ||
+
+                    level.level_name ||
+
+                    "Level";
+
+
+                const topic =
+                    translatedTopic(
+                        level.topic ||
+                        ""
+                    );
+
+
+                document.getElementById(
+                    "topic"
+                ).textContent =
+                    "📖 " +
+                    topic;
+
+
+                document.getElementById(
+                    "topicValue"
+                ).textContent =
+                    topic;
+
+
+                document.getElementById(
+                    "difficultyValue"
+                ).textContent =
+                    translatedDifficulty(
+                        level.difficulty ||
+                        ""
+                    );
+
+
+                document.getElementById(
+                    "xpValue"
+                ).textContent =
+                    String(
+                        level.xp_reward ||
+                        0
+                    ) +
+
+                    " XP";
+
+
+                document.getElementById(
+                    "questText"
+                ).textContent =
+
+                    selectedLanguage ===
+                    "hi"
+
+                        ? "वीडियो देखें और अवधारणा समझें, फिर लेवल क्विज़ शुरू करें।"
+
+                        : selectedLanguage ===
+                          "te"
+
+                            ? "వీడియోను చూసి కాన్సెప్ట్‌ను అర్థం చేసుకుని, తర్వాత లెవెల్ క్విజ్ ప్రారంభించండి."
+
+                            : "Watch the learning video and understand the concept before starting the level quiz.";
+
+
+                document.getElementById(
+                    "message"
+                ).textContent =
+                    "";
+
+
+                displayVideo(
+                    getVideoUrl(
+                        level
+                    )
+                );
+
+
+                /*
+                 * Do NOT deduct coins automatically
+                 * when page loads.
+                 *
+                 * User must click Start Level Quiz,
+                 * then confirm in the modal.
+                 */
+
+
+            }
+
+            catch (
+                error
+            ) {
+
+                console.error(
+                    "Level loading error:",
+                    error
+                );
+
+
+                document.getElementById(
+                    "message"
+                ).textContent =
+                    error.message ||
+                    "Cannot connect to LearnQuest server.";
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           GET CURRENT COINS
+           ===================================================== */
+
+        async function getCurrentCoins() {
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_BASE}/dashboard`,
+                        {
+                            method:
+                                "GET",
+
+                            credentials:
+                                "include"
+                        }
+                    );
+
+
+                const parsed =
+                    await readResponseSafely(
+                        response
+                    );
+
+
+                if (
+                    !parsed.isJson ||
+                    !parsed.data
+                ) {
+
+                    return null;
+
+                }
+
+
+                if (
+                    !response.ok
+                ) {
+
+                    return null;
+
+                }
+
+
+                const user =
+                    parsed.data.user ||
+                    {};
+
+
+                const coins =
+                    Number(
+                        user.coins
+                    );
+
+
+                if (
+                    isFinite(
+                        coins
+                    )
+                ) {
+
+                    return coins;
+
+                }
+
+            }
+
+            catch (
+                error
+            ) {
+
+                console.error(
+                    "Coin balance error:",
+                    error
+                );
+
+            }
+
+
+            return null;
+
+        }
+
+
+
+        /* =====================================================
+           OPEN COIN MODAL
+           ===================================================== */
+
+        async function openCoinModal() {
+
+            const modal =
+                document.getElementById(
+                    "coinModal"
+                );
+
+
+            const balance =
+                document.getElementById(
+                    "coinBalance"
+                );
+
+
+            const confirmButton =
+                document.getElementById(
+                    "confirmStartBtn"
+                );
+
+
+            const message =
+                document.getElementById(
+                    "modalMessage"
+                );
+
+
+            confirmButton.disabled =
+                true;
+
+
+            balance.textContent =
+                selectedLanguage ===
+                "hi"
+
+                    ? "🪙 आपके कॉइन्स: ..."
+
+                    : selectedLanguage ===
+                      "te"
+
+                        ? "🪙 మీ కాయిన్లు: ..."
+
+                        : "🪙 Your Coins: ...";
+
+
+            message.textContent =
+
+                selectedLanguage ===
+                "hi"
+
+                    ? "इस लेवल को शुरू करने के लिए 10 कॉइन्स चाहिए।"
+
+                    : selectedLanguage ===
+                      "te"
+
+                        ? "ఈ లెవెల్ ప్రారంభించడానికి 10 కాయిన్లు అవసరం."
+
+                        : "10 coins are required to start this level.";
+
+
+            modal.style.display =
+                "flex";
+
+
+            const coins =
+                await getCurrentCoins();
+
+
+            if (
+                coins === null
+            ) {
+
+                balance.textContent =
+
+                    selectedLanguage ===
+                    "hi"
+
+                        ? "🪙 कॉइन बैलेंस उपलब्ध नहीं है"
+
+                        : selectedLanguage ===
+                          "te"
+
+                            ? "🪙 కాయిన్ బ్యాలెన్స్ అందుబాటులో లేదు"
+
+                            : "🪙 Coin balance unavailable";
+
+
+                document.getElementById(
+                    "modalWarning"
+                ).textContent =
+
+                    selectedLanguage ===
+                    "hi"
+
+                        ? "सर्वर से कॉइन बैलेंस नहीं मिला।"
+
+                        : selectedLanguage ===
+                          "te"
+
+                            ? "సర్వర్ నుండి కాయిన్ బ్యాలెన్స్ రాలేదు."
+
+                            : "Could not get your coin balance from the server.";
+
+
+                return;
+
+            }
+
+
+            balance.textContent =
+
+                selectedLanguage ===
+                "hi"
+
+                    ? `🪙 आपके कॉइन्स: ${coins}`
+
+                    : selectedLanguage ===
+                      "te"
+
+                        ? `🪙 మీ కాయిన్లు: ${coins}`
+
+                        : `🪙 Your Coins: ${coins}`;
+
+
+            if (
+                coins < 10
+            ) {
+
+                balance.classList.add(
+                    "no-coins"
+                );
+
+
+                confirmButton.disabled =
+                    true;
+
+
+                document.getElementById(
+                    "modalWarning"
+                ).textContent =
+
+                    selectedLanguage ===
+                    "hi"
+
+                        ? "इस लेवल को शुरू करने के लिए कम से कम 10 कॉइन्स चाहिए।"
+
+                        : selectedLanguage ===
+                          "te"
+
+                            ? "ఈ లెవెల్ ప్రారంభించడానికి కనీసం 10 కాయిన్లు అవసరం."
+
+                            : "You need at least 10 coins to start this level.";
+
+            }
+
+            else {
+
+                balance.classList.remove(
+                    "no-coins"
+                );
+
+
+                confirmButton.disabled =
+                    false;
+
+
+                document.getElementById(
+                    "modalWarning"
+                ).textContent =
+
+                    selectedLanguage ===
+                    "hi"
+
+                        ? "कन्फर्म करने पर 10 कॉइन्स कट जाएंगे।"
+
+                        : selectedLanguage ===
+                          "te"
+
+                            ? "కన్ఫర్మ్ చేస్తే 10 కాయిన్లు కట్ అవుతాయి."
+
+                            : "Confirming will deduct 10 coins.";
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           CLOSE COIN MODAL
+           ===================================================== */
+
+        function closeCoinModal() {
+
+            document.getElementById(
+                "coinModal"
+            ).style.display =
+                "none";
+
+        }
+
+
+
+        /* =====================================================
+           START LEVEL
+           ===================================================== */
+
+        async function startQuiz() {
+
+            if (!levelId) {
+
+                alert(
+                    "Level ID is missing."
+                );
+
+                return;
+
+            }
+
+
+            await openCoinModal();
+
+        }
+
+
+
+        /* =====================================================
+           CONFIRM START
+           ===================================================== */
+
+        async function confirmStartLevel() {
+
+            const confirmButton =
+                document.getElementById(
+                    "confirmStartBtn"
+                );
+
+
+            confirmButton.disabled =
+                true;
+
+
+            confirmButton.textContent =
+
+                selectedLanguage ===
+                "hi"
+
+                    ? "⏳ लेवल शुरू हो रहा है..."
+
+                    : selectedLanguage ===
+                      "te"
+
+                        ? "⏳ లెవెల్ ప్రారంభమవుతోంది..."
+
+                        : "⏳ Starting Level...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_BASE}/start-level/${encodeURIComponent(
+                            levelId
+                        )}`,
+                        {
+                            method:
+                                "POST",
+
+                            credentials:
+                                "include"
+                        }
+                    );
+
+
+                const parsed =
+                    await readResponseSafely(
+                        response
+                    );
+
+
+                /*
+                 * THIS prevents:
+                 * Unexpected token '<'
+                 */
+
+                if (
+                    !parsed.isJson
+                ) {
+
+                    throw new Error(
+                        getServerErrorMessage(
+                            response,
+                            parsed
+                        )
+                    );
+
+                }
+
+
+                const data =
+                    parsed.data;
+
+
+                if (
+                    !response.ok
+                ) {
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to start the level."
+                    );
+
+                }
+
+
+                console.log(
+                    "Level start result:",
+                    data
+                );
+
+
+                const coins =
+                    Number(
+                        data.coins
+                    );
+
+
+                if (
+                    isFinite(
+                        coins
+                    )
+                ) {
+
+                    try {
+
+                        const key =
+                            "learnquest_coin_runner_state";
+
+
+                        const raw =
+                            localStorage.getItem(
+                                key
+                            );
+
+
+                        let best =
+                            0;
+
+
+                        if (
+                            raw
+                        ) {
+
+                            const saved =
+                                JSON.parse(
+                                    raw
+                                );
+
+
+                            best =
+                                Number(
+                                    saved.best
+                                ) ||
+                                0;
+
+                        }
+
+
+                        localStorage.setItem(
+                            key,
+                            JSON.stringify({
+
+                                balance:
+                                    Math.max(
+                                        0,
+                                        coins
+                                    ),
+
+                                best:
+                                    Math.max(
+                                        0,
+                                        best
+                                    )
+
+                            })
+                        );
+
+                    }
+
+                    catch (
+                        storageError
+                    ) {
+
+                        console.log(
+                            "Coin display state update skipped:",
+                            storageError
+                        );
+
+                    }
+
+                }
+
+
+                const successMessage =
+
+                    selectedLanguage ===
+                    "hi"
+
+                        ? "🪙 10 कॉइन्स काट लिए गए।"
+
+                        : selectedLanguage ===
+                          "te"
+
+                            ? "🪙 10 కాయిన్లు కట్ అయ్యాయి."
+
+                            : "🪙 10 coins deducted.";
+
+
+                document.getElementById(
+                    "message"
+                ).textContent =
+                    successMessage;
+
+
+                closeCoinModal();
+
+
+                /*
+                 * Open quiz only AFTER
+                 * successful coin deduction.
+                 */
+
+                window.location.assign(
+                    "quiz.html?level_id=" +
+                    encodeURIComponent(
+                        levelId
+                    )
+                );
+
+            }
+
+            catch (
+                error
+            ) {
+
+                console.error(
+                    "Start level error:",
+                    error
+                );
+
+
+                document.getElementById(
+                    "modalWarning"
+                ).textContent =
+                    error.message ||
+                    "Cannot start the level.";
+
+
+                confirmButton.disabled =
+                    false;
+
+
+                confirmButton.textContent =
+
+                    selectedLanguage ===
+                    "hi"
+
+                        ? "🚀 10 कॉइन्स काटें और शुरू करें"
+
+                        : selectedLanguage ===
+                          "te"
+
+                            ? "🚀 10 కాయిన్లు కట్ చేసి ప్రారంభించండి"
+
+                            : "🚀 Start & Deduct 10 Coins";
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           BACK
+           ===================================================== */
+
+        function goBack() {
+
+            const subjectId =
+                localStorage.getItem(
+                    "current_subject_id"
+                );
+
+
+            if (
+                subjectId
+            ) {
+
+                window.location.assign(
+                    "world.html?subject_id=" +
+                    encodeURIComponent(
+                        subjectId
+                    )
+                );
+
+            }
+
+            else {
+
+                window.location.assign(
+                    "dashboard.html"
+                );
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           BUTTON EVENTS
+           ===================================================== */
+
+        document.getElementById(
+            "quizButton"
+        ).addEventListener(
+            "click",
+            startQuiz
+        );
+
+
+        document.getElementById(
+            "confirmStartBtn"
+        ).addEventListener(
+            "click",
+            confirmStartLevel
+        );
+
+
+        document.getElementById(
+            "cancelStartBtn"
+        ).addEventListener(
+            "click",
+            closeCoinModal
+        );
+
+
+        document.getElementById(
+            "backButton"
+        ).addEventListener(
+            "click",
+            goBack
+        );
+
+
+        document.getElementById(
+            "coinModal"
+        ).addEventListener(
+            "click",
+            function (
+                event
+            ) {
+
+                if (
+                    event.target ===
+                    this
+                ) {
+
+                    closeCoinModal();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           GLOBAL FUNCTIONS
+           ===================================================== */
+
+        window.startQuiz =
+            startQuiz;
+
+
+        window.goBack =
+            goBack;
+
+
+        window.confirmStartLevel =
+            confirmStartLevel;
+
+
+        /* =====================================================
+           LOAD
+           ===================================================== */
+
+        loadLevel();
+
+    </script>
+
+
+</body>
+
+</html>
