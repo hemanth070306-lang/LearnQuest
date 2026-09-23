@@ -27,8 +27,7 @@ sys.path.append(
 
 app = Flask(__name__)
 
-app.secret_key = "learnquest_secret_key_123"
-
+app.secret_key = os.getenv("SECRET_KEY")
 
 # =========================================================
 # ALLOWED FRONTEND ORIGINS
@@ -145,22 +144,13 @@ def add_cors_headers(
 # =========================================================
 
 db = mysql.connector.connect(
-
-    host="localhost",
-
-    user="root",
-
-    # IMPORTANT:
-    # Keep your existing MySQL password here.
-    # Do not change it unless your real password changed.
-    password="1234",
-
-    database="learnquest",
-
+    host=os.getenv("DB_HOST"),
+    port=int(os.getenv("DB_PORT", "3306")),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME", "learnquest"),
     charset="utf8"
-
 )
-
 
 # =========================================================
 # DATABASE RECONNECT

@@ -1,5 +1,5 @@
 from flask import request, jsonify, session
-from __main__ import app, db
+from app import app, db
 
 from nlp.preprocessing import preprocessing
 from nlp.topic_detector import detect_topic
