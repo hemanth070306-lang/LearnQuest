@@ -148,10 +148,15 @@ db = mysql.connector.connect(
     port=int(os.getenv("DB_PORT", "3306")),
     user=os.getenv("DB_USER"),
     password=os.getenv("DB_PASSWORD"),
-    database=os.getenv("DB_NAME", "learnquest"),
     charset="utf8"
 )
 
+cursor = db.cursor()
+cursor.execute("SHOW DATABASES")
+print("DATABASES VISIBLE TO RENDER:")
+for row in cursor.fetchall():
+    print(row[0])
+cursor.close()
 # =========================================================
 # DATABASE RECONNECT
 # =========================================================
