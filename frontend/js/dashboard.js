@@ -2,7 +2,7 @@ async function loadDashboard() {
 
     try {
 
-        const response = await fetch("http://127.0.0.1:5000/dashboard", {
+        const response = await fetch("https://learnquest-4wp2.onrender.com/dashboard", {
             method: "GET",
             credentials: "include"
         });
