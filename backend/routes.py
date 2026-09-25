@@ -1,5 +1,6 @@
 from flask import request, jsonify, session
 from app import app, db
+from psycopg2.extras import RealDictCursor
 
 from nlp.preprocessing import preprocessing
 from nlp.topic_detector import detect_topic
@@ -70,7 +71,6 @@ def register():
     )
 
     db.commit()
-
     cursor.close()
 
     return jsonify({
@@ -95,7 +95,9 @@ def login():
             "message": "Email and password are required."
         }), 400
 
-    cursor = db.cursor(dictionary=True)
+    cursor = db.cursor(
+        cursor_factory=RealDictCursor
+    )
 
     cursor.execute(
         """
@@ -130,8 +132,6 @@ def login():
             "message": "Invalid email or password."
         }), 401
 
-    # Store login session
-
     session["user_id"] = user["id"]
     session["user_name"] = user["name"]
 
@@ -165,7 +165,9 @@ def dashboard():
             "message": "Please login first."
         }), 401
 
-    cursor = db.cursor(dictionary=True)
+    cursor = db.cursor(
+        cursor_factory=RealDictCursor
+    )
 
     cursor.execute(
         """
@@ -227,7 +229,9 @@ def claim_coins():
             "message": "Invalid coin amount."
         }), 400
 
-    cursor = db.cursor(dictionary=True)
+    cursor = db.cursor(
+        cursor_factory=RealDictCursor
+    )
 
     cursor.execute(
         """
@@ -241,12 +245,18 @@ def claim_coins():
     user = cursor.fetchone()
 
     if user is None:
+
         cursor.close()
+
         return jsonify({
             "message": "User not found."
         }), 404
 
-    current_coins = max(0, int(user.get("coins") or 0))
+    current_coins = max(
+        0,
+        int(user.get("coins") or 0)
+    )
+
     new_coins = current_coins + amount
 
     cursor.execute(
@@ -284,7 +294,9 @@ def get_subjects():
             "message": "Please login first."
         }), 401
 
-    cursor = db.cursor(dictionary=True)
+    cursor = db.cursor(
+        cursor_factory=RealDictCursor
+    )
 
     cursor.execute(
         """
@@ -331,7 +343,9 @@ def complete_level():
             "message": "Invalid level."
         }), 400
 
-    cursor = db.cursor(dictionary=True)
+    cursor = db.cursor(
+        cursor_factory=RealDictCursor
+    )
 
     cursor.execute(
         """
@@ -376,7 +390,6 @@ def complete_level():
     )
 
     db.commit()
-
     cursor.close()
 
     return jsonify({
@@ -440,17 +453,9 @@ def learning_journal():
             "message": "Subject ID is required."
         }), 400
 
-    # -----------------------------------------------------
-    # NLP PREPROCESSING
-    # -----------------------------------------------------
-
     processed_words = preprocessing(
         journal_text
     )
-
-    # -----------------------------------------------------
-    # TOPIC DETECTION
-    # -----------------------------------------------------
 
     topic_result = detect_topic(
         journal_text
@@ -465,10 +470,6 @@ def learning_journal():
         "confidence",
         0
     )
-
-    # -----------------------------------------------------
-    # KNOWLEDGE GAP DETECTION
-    # -----------------------------------------------------
 
     gap_result = detect_knowledge_gap(
         journal_text
@@ -489,21 +490,10 @@ def learning_journal():
         "Continue learning and practice."
     )
 
-    # -----------------------------------------------------
-    # UNDERSTANDING STATUS
-    # -----------------------------------------------------
-
     if gap_detected:
-
         understanding_status = "Weak"
-
     else:
-
         understanding_status = "Good"
-
-    # -----------------------------------------------------
-    # SAVE TO DATABASE
-    # -----------------------------------------------------
 
     cursor = db.cursor()
 
@@ -542,12 +532,7 @@ def learning_journal():
     )
 
     db.commit()
-
     cursor.close()
-
-    # -----------------------------------------------------
-    # RETURN NLP RESULT
-    # -----------------------------------------------------
 
     return jsonify({
 
@@ -594,7 +579,9 @@ def get_levels(subject_id):
             "message": "Please login first."
         }), 401
 
-    cursor = db.cursor(dictionary=True)
+    cursor = db.cursor(
+        cursor_factory=RealDictCursor
+    )
 
     cursor.execute(
         """
@@ -621,7 +608,9 @@ def get_levels(subject_id):
 
     cursor.execute(
         """
-        SELECT l.level_number, p.completed
+        SELECT
+            l.level_number,
+            p.completed
         FROM levels l
         LEFT JOIN progress p
             ON p.level_id = l.id
@@ -629,7 +618,10 @@ def get_levels(subject_id):
         WHERE l.subject_id = %s
         ORDER BY l.level_number
         """,
-        (session["user_id"], subject_id)
+        (
+            session["user_id"],
+            subject_id
+        )
     )
 
     progress_rows = cursor.fetchall()
@@ -641,7 +633,10 @@ def get_levels(subject_id):
     }
 
     for level in levels:
-        level_number = int(level["level_number"])
+
+        level_number = int(
+            level["level_number"]
+        )
 
         level["completed"] = (
             level_number in completed_levels
@@ -649,7 +644,9 @@ def get_levels(subject_id):
 
         level["unlocked"] = (
             level_number == 1
-            or (level_number - 1) in completed_levels
+            or
+            (level_number - 1)
+            in completed_levels
         )
 
     cursor.close()
@@ -677,7 +674,9 @@ def get_quizzes(level_id):
             "message": "Please login first."
         }), 401
 
-    cursor = db.cursor(dictionary=True)
+    cursor = db.cursor(
+        cursor_factory=RealDictCursor
+    )
 
     cursor.execute(
         """
@@ -769,11 +768,9 @@ def submit_quiz():
 
     user_id = session["user_id"]
 
-    cursor = db.cursor(dictionary=True)
-
-    # -----------------------------------------------------
-    # GET QUIZ QUESTIONS AND CORRECT ANSWERS
-    # -----------------------------------------------------
+    cursor = db.cursor(
+        cursor_factory=RealDictCursor
+    )
 
     cursor.execute(
         """
@@ -799,10 +796,6 @@ def submit_quiz():
                 "No quiz available for this level."
         }), 404
 
-    # -----------------------------------------------------
-    # CALCULATE SCORE
-    # -----------------------------------------------------
-
     score = 0
     xp_earned = 0
 
@@ -826,10 +819,6 @@ def submit_quiz():
 
     total = len(quizzes)
 
-    # -----------------------------------------------------
-    # GET LEVEL REWARD
-    # -----------------------------------------------------
-
     cursor.execute(
         """
         SELECT
@@ -852,10 +841,6 @@ def submit_quiz():
                 "Level not found."
         }), 404
 
-    # -----------------------------------------------------
-    # LEVEL COMPLETION REWARD
-    # -----------------------------------------------------
-
     if score == total:
 
         xp_earned += level[
@@ -869,10 +854,6 @@ def submit_quiz():
     else:
 
         coins_earned = 0
-
-    # -----------------------------------------------------
-    # CHECK EXISTING PROGRESS
-    # -----------------------------------------------------
 
     cursor.execute(
         """
@@ -889,10 +870,6 @@ def submit_quiz():
     )
 
     existing_progress = cursor.fetchone()
-
-    # -----------------------------------------------------
-    # UPDATE EXISTING PROGRESS
-    # -----------------------------------------------------
 
     if existing_progress:
 
@@ -914,10 +891,6 @@ def submit_quiz():
                 existing_progress["id"]
             )
         )
-
-    # -----------------------------------------------------
-    # CREATE NEW PROGRESS
-    # -----------------------------------------------------
 
     else:
 
@@ -954,10 +927,6 @@ def submit_quiz():
             )
         )
 
-    # -----------------------------------------------------
-    # UPDATE USER XP AND COINS
-    # -----------------------------------------------------
-
     cursor.execute(
         """
         UPDATE users
@@ -976,10 +945,6 @@ def submit_quiz():
     db.commit()
 
     cursor.close()
-
-    # -----------------------------------------------------
-    # RETURN RESULT
-    # -----------------------------------------------------
 
     return jsonify({
 
@@ -1005,11 +970,13 @@ def submit_quiz():
 
 
 # =========================================================
-# =========================================================
-# START LEVEL - DEDUCT 10 COINS ON EVERY LEVEL OPEN
+# START LEVEL
 # =========================================================
 
-@app.route("/start-level/<int:level_id>", methods=["POST"])
+@app.route(
+    "/start-level/<int:level_id>",
+    methods=["POST"]
+)
 def start_level(level_id):
 
     if "user_id" not in session:
@@ -1020,11 +987,9 @@ def start_level(level_id):
 
     user_id = session["user_id"]
 
-    cursor = db.cursor(dictionary=True)
-
-    # -----------------------------------------------------
-    # VERIFY LEVEL EXISTS
-    # -----------------------------------------------------
+    cursor = db.cursor(
+        cursor_factory=RealDictCursor
+    )
 
     cursor.execute(
         """
@@ -1048,10 +1013,6 @@ def start_level(level_id):
             "message": "Level not found."
         }), 404
 
-    # -----------------------------------------------------
-    # GET CURRENT COINS
-    # -----------------------------------------------------
-
     cursor.execute(
         """
         SELECT coins
@@ -1071,25 +1032,24 @@ def start_level(level_id):
             "message": "User not found."
         }), 404
 
-    current_coins = int(user.get("coins") or 0)
-
-    # -----------------------------------------------------
-    # REQUIRE 10 COINS
-    # -----------------------------------------------------
+    current_coins = int(
+        user.get("coins") or 0
+    )
 
     if current_coins < 10:
 
         cursor.close()
 
         return jsonify({
-            "message": "You need at least 10 coins to open this level.",
-            "coins": current_coins,
-            "required_coins": 10
-        }), 400
+            "message":
+                "You need at least 10 coins to open this level.",
 
-    # -----------------------------------------------------
-    # DEDUCT 10 COINS ON EVERY LEVEL OPEN
-    # -----------------------------------------------------
+            "coins":
+                current_coins,
+
+            "required_coins":
+                10
+        }), 400
 
     new_coins = current_coins - 10
 
@@ -1127,7 +1087,10 @@ def start_level(level_id):
 # GET SINGLE LEVEL
 # =========================================================
 
-@app.route("/level/<int:level_id>", methods=["GET"])
+@app.route(
+    "/level/<int:level_id>",
+    methods=["GET"]
+)
 def get_single_level(level_id):
 
     if "user_id" not in session:
@@ -1136,7 +1099,9 @@ def get_single_level(level_id):
             "message": "Please login first."
         }), 401
 
-    cursor = db.cursor(dictionary=True)
+    cursor = db.cursor(
+        cursor_factory=RealDictCursor
+    )
 
     cursor.execute(
         """
@@ -1178,17 +1143,31 @@ def get_single_level(level_id):
             level
 
     }), 200
+
+
 # =========================================================
 # SET LANGUAGE
 # =========================================================
 
-@app.route("/set-language", methods=["POST"])
+@app.route(
+    "/set-language",
+    methods=["POST"]
+)
 def set_language():
-    data = request.get_json()
 
-    language = data.get("language", "en")
+    data = request.get_json() or {}
 
-    if language not in ["en", "hi", "te"]:
+    language = data.get(
+        "language",
+        "en"
+    )
+
+    if language not in [
+        "en",
+        "hi",
+        "te"
+    ]:
+
         return jsonify({
             "message": "Invalid language."
         }), 400
@@ -1196,6 +1175,11 @@ def set_language():
     session["language"] = language
 
     return jsonify({
-        "message": "Language selected successfully!",
-        "language": language
+
+        "message":
+            "Language selected successfully!",
+
+        "language":
+            language
+
     }), 200

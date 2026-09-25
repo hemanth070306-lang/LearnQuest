@@ -3,7 +3,7 @@ import os
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import mysql.connector
+import psycopg2
 
 
 # =========================================================
@@ -16,9 +16,7 @@ PROJECT_ROOT = os.path.dirname(
     )
 )
 
-sys.path.append(
-    PROJECT_ROOT
-)
+sys.path.append(PROJECT_ROOT)
 
 
 # =========================================================
@@ -27,7 +25,10 @@ sys.path.append(
 
 app = Flask(__name__)
 
-app.secret_key = os.getenv("SECRET_KEY")
+app.secret_key = os.getenv(
+    "SECRET_KEY"
+) or "learnquest-local-secret-2026"
+
 
 # =========================================================
 # ALLOWED FRONTEND ORIGINS
@@ -77,14 +78,6 @@ CORS(
 # =========================================================
 # HANDLE PREFLIGHT REQUESTS
 # =========================================================
-#
-# This is the important fix.
-#
-# Browser sends OPTIONS before POST /claim-coins
-# because dashboard uses JSON + credentials.
-#
-# We explicitly return HTTP 204.
-# =========================================================
 
 @app.before_request
 def handle_preflight():
@@ -102,14 +95,11 @@ def handle_preflight():
 # =========================================================
 
 @app.after_request
-def add_cors_headers(
-    response
-):
+def add_cors_headers(response):
 
     origin = request.headers.get(
         "Origin"
     )
-
 
     if origin in ALLOWED_ORIGINS:
 
@@ -117,11 +107,9 @@ def add_cors_headers(
             "Access-Control-Allow-Origin"
         ] = origin
 
-
         response.headers[
             "Access-Control-Allow-Credentials"
         ] = "true"
-
 
         response.headers[
             "Access-Control-Allow-Methods"
@@ -129,35 +117,48 @@ def add_cors_headers(
             "GET, POST, PUT, DELETE, OPTIONS"
         )
 
-
         response.headers[
             "Access-Control-Allow-Headers"
         ] = (
             "Content-Type, Accept, X-Requested-With"
         )
 
-
     return response
 
 
 # =========================================================
-# MYSQL CONNECTION
+# POSTGRESQL CONNECTION
 # =========================================================
 
-db = mysql.connector.connect(
-    host=os.getenv("DB_HOST"),
-    port=int(os.getenv("DB_PORT", "3306")),
-    user=os.getenv("DB_USER"),
-    password=os.getenv("DB_PASSWORD"),
-    charset="utf8"
-)
+def connect_database():
+
+    return psycopg2.connect(
+        host=os.getenv("DB_HOST"),
+        port=int(
+            os.getenv(
+                "DB_PORT",
+                "5432"
+            )
+        ),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        dbname=os.getenv("DB_NAME")
+    )
+
+
+# =========================================================
+# CONNECT TO DATABASE
+# =========================================================
+
+db = connect_database()
 
 cursor = db.cursor()
-cursor.execute("SHOW DATABASES")
-print("DATABASES VISIBLE TO RENDER:")
-for row in cursor.fetchall():
-    print(row[0])
-cursor.close()
+
+print(
+    "PostgreSQL database connected successfully!"
+)
+
+
 # =========================================================
 # DATABASE RECONNECT
 # =========================================================
@@ -165,13 +166,16 @@ cursor.close()
 @app.before_request
 def reconnect_database():
 
+    global db
+    global cursor
+
     try:
 
-        db.ping(
-            reconnect=True,
-            attempts=3,
-            delay=1
-        )
+        if db.closed:
+
+            db = connect_database()
+
+            cursor = db.cursor()
 
     except Exception as error:
 
@@ -185,11 +189,16 @@ def reconnect_database():
 # IMPORT ALL LEARNQUEST ROUTES
 # =========================================================
 
+if __name__ == "__main__":
+
+    sys.modules["app"] = sys.modules[__name__]
+
+
 import routes
 
 
 # =========================================================
-# TEST ROUTE
+# HOME ROUTE
 # =========================================================
 
 @app.route(
@@ -199,7 +208,7 @@ import routes
 def home():
 
     return (
-        "LearnQuest Backend + MySQL Connected!"
+        "LearnQuest Backend + PostgreSQL Connected!"
     )
 
 
