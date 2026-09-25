@@ -1,5 +1,5 @@
 from flask import request, jsonify, session
-from app import app, db
+from backend.app import app, db
 from psycopg2.extras import RealDictCursor
 
 from nlp.preprocessing import preprocessing
