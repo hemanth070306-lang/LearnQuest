@@ -37,7 +37,8 @@ app.secret_key = os.getenv(
 ALLOWED_ORIGINS = [
     "http://127.0.0.1:5500",
     "http://localhost:5500",
-    "https://learnquest-4wp2.onrender.com"
+    "https://learnquest-4wp2.onrender.com",
+    "https://learnquest001.onrender.com"
 ]
 
 
