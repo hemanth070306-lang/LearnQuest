@@ -25,6 +25,12 @@ sys.path.append(PROJECT_ROOT)
 
 app = Flask(__name__)
 
+# Session cookie settings for Render frontend + backend
+app.config.update(
+    SESSION_COOKIE_SAMESITE="None",
+    SESSION_COOKIE_SECURE=True
+)
+
 app.secret_key = os.getenv(
     "SECRET_KEY"
 ) or "learnquest-local-secret-2026"
