@@ -4,11 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>LearnQuest - Quiz</title>
 
@@ -21,11 +17,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(
-                135deg,
-                #f7f7ff,
-                #ffffff
-            );
+            background: linear-gradient(135deg, #f7f7ff, #ffffff);
             color: #222;
         }
 
@@ -44,7 +36,7 @@
         .header h1 {
             font-size: 42px;
             color: #5b45c9;
-            margin: 0 0 5px;
+            margin-bottom: 5px;
         }
 
         .header p {
@@ -53,12 +45,11 @@
         }
 
         .card {
-            background: #fff;
+            background: white;
             border-radius: 20px;
             padding: 25px;
             margin-bottom: 20px;
-            box-shadow:
-                0 8px 25px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
         }
 
         .settings {
@@ -70,15 +61,11 @@
             margin-top: 0;
         }
 
-        select,
-        input {
-            padding: 13px 16px;
-            border: 1px solid #bbb;
-            border-radius: 10px;
-            font-size: 16px;
-        }
-
         select {
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: 1px solid #bbb;
+            font-size: 17px;
             min-width: 175px;
         }
 
@@ -111,6 +98,11 @@
             color: #333;
         }
 
+        .danger-btn {
+            background: #d9534f;
+            color: white;
+        }
+
         .success-btn {
             background: #28a745;
             color: white;
@@ -130,17 +122,17 @@
             font-weight: bold;
         }
 
-        .status.error {
+        .error {
             color: red;
             background: #fff0f0;
         }
 
-        .status.success {
+        .success {
             color: #16833b;
             background: #ecfff2;
         }
 
-        .status.info {
+        .info {
             color: #4d3ab3;
             background: #f2efff;
         }
@@ -153,7 +145,7 @@
         }
 
         .quiz-top {
-            display: none;
+            display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 15px;
@@ -181,9 +173,10 @@
         .camera-box {
             display: none;
             text-align: center;
+            margin-bottom: 20px;
         }
 
-        .camera {
+        #camera {
             width: 220px;
             height: 165px;
             object-fit: cover;
@@ -240,8 +233,6 @@
         .option input {
             width: 18px;
             height: 18px;
-            padding: 0;
-            border: 0;
         }
 
         .question-controls {
@@ -257,22 +248,39 @@
             margin-top: 15px;
         }
 
+        .hint-box {
+            display: none;
+            background: #fff8d9;
+            border: 1px solid #f0d66d;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+
+        .hint-controls {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
         .submit-section {
             text-align: center;
             margin-top: 25px;
         }
 
-        .overlay {
+        .pause-overlay,
+        .completion-overlay,
+        .security-overlay,
+        .camera-permission-overlay {
+
             display: none;
             position: fixed;
             inset: 0;
             z-index: 9999;
-            background: rgba(
-                20,
-                15,
-                45,
-                0.94
-            );
+            background: rgba(20, 15, 45, 0.94);
             color: white;
             align-items: center;
             justify-content: center;
@@ -287,13 +295,7 @@
             color: #222;
             border-radius: 20px;
             padding: 35px;
-            box-shadow:
-                0 10px 40px rgba(
-                    0,
-                    0,
-                    0,
-                    0.3
-                );
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
         .overlay-box h2 {
@@ -301,10 +303,9 @@
             margin-top: 0;
         }
 
-        .score {
-            font-size: 50px;
-            font-weight: bold;
-            color: #5b45c9;
+        .camera-icon {
+            font-size: 55px;
+            margin-bottom: 10px;
         }
 
         .pause-time {
@@ -312,6 +313,12 @@
             font-weight: bold;
             color: #5b45c9;
             margin: 20px;
+        }
+
+        .score {
+            font-size: 50px;
+            font-weight: bold;
+            color: #5b45c9;
         }
 
         .completion-buttons {
@@ -324,6 +331,7 @@
 
         .video-note {
             color: #777;
+            text-align: center;
             font-size: 14px;
         }
 
@@ -383,10 +391,7 @@
 
     <!-- QUIZ SETTINGS -->
 
-    <div
-        class="card settings"
-        id="setupCard"
-    >
+    <div class="card settings" id="setupCard">
 
         <h2>⚙️ Quiz Settings</h2>
 
@@ -404,10 +409,7 @@
                 5 Minutes
             </option>
 
-            <option
-                value="7"
-                selected
-            >
+            <option value="7" selected>
                 7 Minutes
             </option>
 
@@ -429,7 +431,7 @@
         <div
             id="customTimeBox"
             class="hidden"
-            style="margin-top:15px"
+            style="margin-top:15px;"
         >
 
             <input
@@ -438,6 +440,13 @@
                 min="1"
                 max="60"
                 placeholder="Minutes"
+                style="
+                    padding:13px;
+                    border:1px solid #bbb;
+                    border-radius:10px;
+                    font-size:16px;
+                    width:150px;
+                "
             >
 
         </div>
@@ -449,6 +458,7 @@
         <button
             id="startBtn"
             class="primary-btn start-btn"
+            onclick="startSecureQuiz()"
         >
             🚀 Start Quiz
         </button>
@@ -461,7 +471,7 @@
     <div
         class="card hints-bar"
         id="hintsBar"
-        style="display:none"
+        style="display:none;"
     >
 
         💡 Hints remaining:
@@ -489,15 +499,12 @@
             📷 Camera Security
         </h3>
 
-
         <video
             id="camera"
-            class="camera"
             autoplay
             muted
             playsinline
         ></video>
-
 
         <p class="video-note">
             Camera must remain enabled while taking the quiz.
@@ -511,6 +518,7 @@
     <div
         class="card quiz-top"
         id="quizTop"
+        style="display:none;"
     >
 
         <div>
@@ -518,7 +526,6 @@
             <strong id="levelTitle">
                 LearnQuest Quiz
             </strong>
-
 
             <div id="topicText">
                 Topic
@@ -547,7 +554,7 @@
     <div
         class="card"
         id="navigationCard"
-        style="display:none"
+        style="display:none;"
     >
 
         <div class="question-controls">
@@ -555,6 +562,7 @@
             <button
                 id="previousBtn"
                 class="secondary-btn"
+                onclick="previousQuestion()"
             >
                 ⬅️ Previous
             </button>
@@ -563,6 +571,7 @@
             <button
                 id="nextBtn"
                 class="primary-btn"
+                onclick="nextQuestion()"
             >
                 Next ➡️
             </button>
@@ -594,7 +603,7 @@
     <div
         class="card"
         id="hintCard"
-        style="display:none"
+        style="display:none;"
     >
 
         <h3>
@@ -605,16 +614,12 @@
         <div id="hintText"></div>
 
 
-        <div
-            style="
-                margin-top:15px;
-                text-align:center;
-            "
-        >
+        <div class="hint-controls">
 
             <button
                 id="hintBtn"
                 class="secondary-btn"
+                onclick="showHint()"
             >
                 💡 Use Hint
             </button>
@@ -629,7 +634,7 @@
     <div
         class="card submit-section"
         id="submitSection"
-        style="display:none"
+        style="display:none;"
     >
 
         <p id="answeredText">
@@ -640,6 +645,7 @@
         <button
             id="submitBtn"
             class="success-btn"
+            onclick="submitQuiz(false)"
             disabled
         >
             🚀 Submit Quiz
@@ -653,49 +659,40 @@
 <!-- CAMERA PERMISSION OVERLAY -->
 
 <div
-    class="overlay"
+    class="camera-permission-overlay"
     id="cameraPermissionOverlay"
 >
 
     <div class="overlay-box">
 
-        <div
-            style="
-                font-size:55px;
-            "
-        >
+        <div class="camera-icon">
             📷
         </div>
-
 
         <h2>
             Camera Access Required
         </h2>
 
-
         <p>
             LearnQuest needs camera access before starting the quiz.
         </p>
-
 
         <p>
             Your camera must remain enabled during the quiz for security.
         </p>
 
-
         <div class="completion-buttons">
 
             <button
-                id="allowCameraBtn"
                 class="primary-btn"
+                onclick="allowCameraAndStart()"
             >
-                📷 Allow Camera &amp; Start
+                📷 Allow Camera & Start
             </button>
 
-
             <button
-                id="cancelCameraBtn"
                 class="secondary-btn"
+                onclick="cancelCameraStart()"
             >
                 Cancel
             </button>
@@ -710,7 +707,7 @@
 <!-- PAUSE OVERLAY -->
 
 <div
-    class="overlay"
+    class="pause-overlay"
     id="pauseOverlay"
 >
 
@@ -719,7 +716,6 @@
         <h2>
             ⏸️ Quiz Paused
         </h2>
-
 
         <p>
             You have used both hints.
@@ -747,7 +743,7 @@
 <!-- SECURITY OVERLAY -->
 
 <div
-    class="overlay"
+    class="security-overlay"
     id="securityOverlay"
 >
 
@@ -764,8 +760,8 @@
 
 
         <button
-            id="recoverBtn"
             class="primary-btn"
+            onclick="recoverSecurity()"
         >
             🔓 Continue Quiz
         </button>
@@ -778,7 +774,7 @@
 <!-- COMPLETION OVERLAY -->
 
 <div
-    class="overlay"
+    class="completion-overlay"
     id="completionOverlay"
 >
 
@@ -804,21 +800,17 @@
 
         <p>
             ⭐ XP Earned:
-
             <strong id="xpEarned">
                 0
             </strong>
-
         </p>
 
 
         <p>
             🪙 Coins Earned:
-
             <strong id="coinsEarned">
                 0
             </strong>
-
         </p>
 
 
@@ -827,15 +819,16 @@
             <button
                 id="nextLevelBtn"
                 class="primary-btn"
-                style="display:none"
+                onclick="goToNextLevel()"
+                style="display:none;"
             >
                 🔓 Next Level Unlocked
             </button>
 
 
             <button
-                id="worldBtn"
                 class="secondary-btn"
+                onclick="goBackToWorld()"
             >
                 🌍 Learning World
             </button>
@@ -847,10 +840,13 @@
 </div>
 
 
+<script src="js/i18n.js"></script>
+
+
 <script>
 
     /* =========================================================
-       CONFIG
+       CONFIGURATION
        ========================================================= */
 
     const API_BASE =
@@ -864,9 +860,7 @@
 
 
     const levelId =
-        urlParams.get(
-            "level_id"
-        );
+        urlParams.get("level_id");
 
 
     /* =========================================================
@@ -885,19 +879,14 @@
 
     let currentSubjectId = null;
 
-
     let language =
-        localStorage.getItem(
-            "selected_language"
-        ) || "en";
-
+        localStorage.getItem("selected_language") || "en";
 
     let quizStarted = false;
 
     let quizSubmitted = false;
 
     let isSubmitting = false;
-
 
     let cameraStream = null;
 
@@ -907,11 +896,9 @@
 
     let allowNavigation = false;
 
-
     let quizEndTime = null;
 
     let timerInterval = null;
-
 
     let pauseInterval = null;
 
@@ -919,11 +906,7 @@
 
     let pauseEndTime = null;
 
-
     let hintsUsed = 0;
-
-    let securityMonitorInterval = null;
-
 
     const MAX_HINTS = 2;
 
@@ -932,12 +915,126 @@
 
 
     /* =========================================================
-       HELPER
+       PAGE LOAD
        ========================================================= */
 
-    function $(id) {
+    async function initializeQuizPage() {
 
-        return document.getElementById(id);
+        if (!levelId) {
+
+            showStatus(
+                "No level selected. Please return to the Learning World.",
+                "error"
+            );
+
+            return;
+
+        }
+
+        setupTimeSelector();
+
+        setupSecurityListeners();
+
+        updateLanguageUI();
+
+        await loadQuiz();
+
+    }
+
+    initializeQuizPage();
+
+
+    /* =========================================================
+       TIME SELECTOR
+       ========================================================= */
+
+    function setupTimeSelector() {
+
+        const timeSelect =
+            document.getElementById(
+                "timeSelect"
+            );
+
+
+        const customTimeBox =
+            document.getElementById(
+                "customTimeBox"
+            );
+
+
+        timeSelect.addEventListener(
+            "change",
+            function () {
+
+                if (
+                    this.value === "custom"
+                ) {
+
+                    customTimeBox.classList.remove(
+                        "hidden"
+                    );
+
+                } else {
+
+                    customTimeBox.classList.add(
+                        "hidden"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       LANGUAGE
+       ========================================================= */
+
+    function updateLanguageUI() {
+
+        language =
+            localStorage.getItem(
+                "selected_language"
+            ) || "en";
+
+
+        document.documentElement.lang =
+            language === "te"
+                ? "te"
+                : language === "hi"
+                    ? "hi"
+                    : "en";
+
+
+        const subtitle =
+            document.getElementById(
+                "subtitle"
+            );
+
+
+        if (!subtitle) {
+            return;
+        }
+
+
+        if (language === "hi") {
+
+            subtitle.textContent =
+                "अपने ज्ञान को साबित करें और स्तर पूरा करें!";
+
+        } else if (language === "te") {
+
+            subtitle.textContent =
+                "మీ జ్ఞానాన్ని నిరూపించుకుని లెవెల్ పూర్తి చేయండి!";
+
+        } else {
+
+            subtitle.textContent =
+                "Prove your knowledge and complete the level!";
+
+        }
 
     }
 
@@ -952,7 +1049,9 @@
     ) {
 
         const box =
-            $("statusMessage");
+            document.getElementById(
+                "statusMessage"
+            );
 
 
         box.className =
@@ -968,188 +1067,14 @@
     function clearStatus() {
 
         const box =
-            $("statusMessage");
-
-
-        box.className =
-            "";
-
-
-        box.textContent =
-            "";
-
-    }
-
-
-    /* =========================================================
-       STORAGE KEY
-       ========================================================= */
-
-    function storageKey(name) {
-
-        return (
-            `learnquest_quiz_${levelId}_${name}`
-        );
-
-    }
-
-
-    /* =========================================================
-       ESCAPE HTML
-       ========================================================= */
-
-    function escapeHTML(value) {
-
-        return String(value ?? "")
-            .replace(
-                /&/g,
-                "&amp;"
-            )
-            .replace(
-                /</g,
-                "&lt;"
-            )
-            .replace(
-                />/g,
-                "&gt;"
-            )
-            .replace(
-                /"/g,
-                "&quot;"
-            )
-            .replace(
-                /'/g,
-                "&#039;"
+            document.getElementById(
+                "statusMessage"
             );
 
-    }
 
+        box.className = "";
 
-    /* =========================================================
-       LANGUAGE UI
-       ========================================================= */
-
-    function updateLanguageUI() {
-
-        language =
-            localStorage.getItem(
-                "selected_language"
-            ) || "en";
-
-
-        document.documentElement.lang =
-            language;
-
-
-        if (language === "hi") {
-
-            $("subtitle").textContent =
-                "अपने ज्ञान को साबित करें और स्तर पूरा करें!";
-
-        }
-
-        else if (language === "te") {
-
-            $("subtitle").textContent =
-                "మీ జ్ఞానాన్ని నిరూపించుకుని లెవెల్ పూర్తి చేయండి!";
-
-        }
-
-        else {
-
-            $("subtitle").textContent =
-                "Prove your knowledge and complete the level!";
-
-        }
-
-    }
-
-
-    /* =========================================================
-       QUESTION TEXT
-       ========================================================= */
-
-    function getQuestionText(
-        quiz
-    ) {
-
-        if (
-            language === "hi" &&
-            quiz.question_hi
-        ) {
-
-            return quiz.question_hi;
-
-        }
-
-
-        if (
-            language === "te" &&
-            quiz.question_te
-        ) {
-
-            return quiz.question_te;
-
-        }
-
-
-        return (
-            quiz.question_en ||
-            quiz.question ||
-            ""
-        );
-
-    }
-
-
-    /* =========================================================
-       OPTIONS
-       ========================================================= */
-
-    function getOptions(
-        quiz
-    ) {
-
-        if (
-            language === "hi"
-        ) {
-
-            return [
-
-                quiz.option_a_hi || "",
-                quiz.option_b_hi || "",
-                quiz.option_c_hi || "",
-                quiz.option_d_hi || ""
-
-            ];
-
-        }
-
-
-        if (
-            language === "te"
-        ) {
-
-            return [
-
-                quiz.option_a_te || "",
-                quiz.option_b_te || "",
-                quiz.option_c_te || "",
-                quiz.option_d_te || ""
-
-            ];
-
-        }
-
-
-        return [
-
-            quiz.option_a_en || "",
-            quiz.option_b_en || "",
-            quiz.option_c_en || "",
-            quiz.option_d_en || ""
-
-        ];
+        box.textContent = "";
 
     }
 
@@ -1165,25 +1090,13 @@
             clearStatus();
 
 
-            if (!levelId) {
-
-                showStatus(
-                    "No level selected. Please return to the Learning World.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
             /* ---------------------------------------------
                LOAD LEVEL
                --------------------------------------------- */
 
             const levelResponse =
                 await fetch(
-                    `${API_BASE}/level/${encodeURIComponent(levelId)}`,
+                    `${API_BASE}/level/${levelId}`,
                     {
                         method: "GET",
                         credentials: "include"
@@ -1219,12 +1132,12 @@
 
 
             /* ---------------------------------------------
-               LOAD QUIZZES
+               LOAD QUESTIONS
                --------------------------------------------- */
 
             const quizResponse =
                 await fetch(
-                    `${API_BASE}/quizzes/${encodeURIComponent(levelId)}`,
+                    `${API_BASE}/quizzes/${levelId}`,
                     {
                         method: "GET",
                         credentials: "include"
@@ -1244,26 +1157,53 @@
             const quizData =
                 await quizResponse.json();
 
+            console.log("QUIZ API RESPONSE:", quizData);
 
-            quizzes =
-                Array.isArray(
-                    quizData
-                )
-                    ? quizData
-                    : (
-                        quizData.quizzes ||
-                        quizData.questions ||
-                        []
-                    );
+            if (Array.isArray(quizData)) {
 
+                quizzes = quizData;
 
-            if (
-                !Array.isArray(quizzes) ||
-                quizzes.length === 0
+            } else if (
+                quizData &&
+                Array.isArray(quizData.quizzes)
             ) {
 
+                quizzes = quizData.quizzes;
+
+            } else if (
+                quizData &&
+                Array.isArray(quizData.questions)
+            ) {
+
+                quizzes = quizData.questions;
+
+            } else if (
+                quizData &&
+                quizData.data &&
+                Array.isArray(quizData.data)
+            ) {
+
+                quizzes = quizData.data;
+
+            } else {
+
+                quizzes = [];
+
+            }
+
+            console.log(
+                "LOADED QUIZ QUESTIONS:",
+                quizzes
+            );
+
+            if (quizzes.length === 0) {
+
                 throw new Error(
-                    "No quiz questions were returned by the server."
+                    "Quiz API returned 0 questions for Level " +
+                    levelId +
+                    ". Check the /quizzes/" +
+                    levelId +
+                    " endpoint on the Render backend."
                 );
 
             }
@@ -1274,7 +1214,9 @@
             currentQuestionIndex = 0;
 
 
-            $("totalQuestions").textContent =
+            document.getElementById(
+                "totalQuestions"
+            ).textContent =
                 quizzes.length;
 
 
@@ -1294,9 +1236,8 @@
 
             }
 
-        }
 
-        catch (error) {
+        } catch (error) {
 
             console.error(
                 "Quiz loading error:",
@@ -1306,13 +1247,14 @@
 
             showStatus(
                 error.message ||
-                "Cannot connect to LearnQuest server.",
+                "Unable to load the quiz from the LearnQuest server.",
                 "error"
             );
 
 
-            $("startBtn").disabled =
-                true;
+            document.getElementById(
+                "startBtn"
+            ).disabled = true;
 
         }
 
@@ -1320,16 +1262,26 @@
 
 
     /* =========================================================
-       LEVEL INFO
+       DISPLAY LEVEL INFO
        ========================================================= */
 
     function displayLevelInfo() {
 
         if (!currentLevel) {
-
             return;
-
         }
+
+
+        const title =
+            document.getElementById(
+                "levelTitle"
+            );
+
+
+        const topic =
+            document.getElementById(
+                "topicText"
+            );
 
 
         const levelNumber =
@@ -1338,13 +1290,23 @@
             "";
 
 
-        $("levelTitle").textContent =
-            `Level ${levelNumber} - ${currentLevel.level_name || ""}`;
+        const levelName =
+            currentLevel.level_name ||
+            "";
 
 
-        $("topicText").textContent =
-            currentLevel.topic
-                ? `📚 ${currentLevel.topic}`
+        const topicName =
+            currentLevel.topic ||
+            "";
+
+
+        title.textContent =
+            `Level ${levelNumber} - ${levelName}`;
+
+
+        topic.textContent =
+            topicName
+                ? `📚 ${topicName}`
                 : "";
 
     }
@@ -1357,41 +1319,40 @@
     function renderQuestions() {
 
         const container =
-            $("questionsContainer");
+            document.getElementById(
+                "questionsContainer"
+            );
 
 
-        container.innerHTML =
-            "";
+        container.innerHTML = "";
 
 
         quizzes.forEach(
-            function (
-                quiz,
-                index
-            ) {
+            function (quiz, index) {
 
-                const card =
+                const questionCard =
                     document.createElement(
                         "div"
                     );
 
 
-                card.className =
+                questionCard.className =
                     "card question-card";
 
 
-                card.id =
+                questionCard.id =
                     `question-${index}`;
 
 
+                const questionText =
+                    getQuestionText(quiz);
+
+
                 const options =
-                    getOptions(
-                        quiz
-                    );
+                    getOptions(quiz);
 
 
-                let optionsHTML =
-                    "";
+                let optionsHTML = "";
 
 
                 options.forEach(
@@ -1411,10 +1372,9 @@
                         }
 
 
-                        const letter =
+                        const optionLetter =
                             String.fromCharCode(
-                                65 +
-                                optionIndex
+                                65 + optionIndex
                             );
 
 
@@ -1422,18 +1382,18 @@
 
                             <label
                                 class="option"
-                                data-q="${index}"
-                                data-letter="${letter}"
+                                id="option-${index}-${optionLetter}"
+                                onclick="selectAnswer(${index}, '${optionLetter}')"
                             >
 
                                 <input
                                     type="radio"
-                                    name="q-${index}"
-                                    value="${letter}"
+                                    name="question-${index}"
+                                    value="${optionLetter}"
                                 >
 
                                 <strong>
-                                    ${letter}.
+                                    ${optionLetter}.
                                 </strong>
 
                                 <span>
@@ -1448,67 +1408,29 @@
                 );
 
 
-                card.innerHTML = `
+                questionCard.innerHTML = `
 
                     <div class="question-number">
-
-                        Question
-                        ${index + 1}
-
+                        Question ${index + 1}
                     </div>
-
 
                     <div class="question-text">
-
-                        ${escapeHTML(
-                            getQuestionText(
-                                quiz
-                            )
-                        )}
-
+                        ${escapeHTML(questionText)}
                     </div>
 
-
                     <div class="options">
-
                         ${optionsHTML}
-
                     </div>
 
                 `;
 
 
                 container.appendChild(
-                    card
+                    questionCard
                 );
 
             }
         );
-
-
-        container
-            .querySelectorAll(
-                ".option"
-            )
-            .forEach(
-                function (element) {
-
-                    element.addEventListener(
-                        "click",
-                        function () {
-
-                            selectAnswer(
-                                Number(
-                                    element.dataset.q
-                                ),
-                                element.dataset.letter
-                            );
-
-                        }
-                    );
-
-                }
-            );
 
 
         showQuestion(
@@ -1519,30 +1441,103 @@
 
 
     /* =========================================================
-       SHOW QUESTION
+       QUESTION TEXT
        ========================================================= */
 
-    function showQuestion(
-        index
-    ) {
+    function getQuestionText(quiz) {
 
-        if (!quizzes.length) {
+        if (
+            language === "hi" &&
+            quiz.question_hi
+        ) {
 
-            return;
-
-        }
-
-
-        if (index < 0) {
-
-            index = 0;
+            return quiz.question_hi;
 
         }
 
 
         if (
-            index >= quizzes.length
+            language === "te" &&
+            quiz.question_te
         ) {
+
+            return quiz.question_te;
+
+        }
+
+
+        return (
+            quiz.question_en ||
+            quiz.question ||
+            ""
+        );
+
+    }
+
+
+    /* =========================================================
+       OPTIONS
+       ========================================================= */
+
+    function getOptions(quiz) {
+
+        if (language === "hi") {
+
+            return [
+
+                quiz.option_a_hi || "",
+                quiz.option_b_hi || "",
+                quiz.option_c_hi || "",
+                quiz.option_d_hi || ""
+
+            ];
+
+        }
+
+
+        if (language === "te") {
+
+            return [
+
+                quiz.option_a_te || "",
+                quiz.option_b_te || "",
+                quiz.option_c_te || "",
+                quiz.option_d_te || ""
+
+            ];
+
+        }
+
+
+        return [
+
+            quiz.option_a_en || "",
+            quiz.option_b_en || "",
+            quiz.option_c_en || "",
+            quiz.option_d_en || ""
+
+        ];
+
+    }
+
+
+    /* =========================================================
+       SHOW QUESTION
+       ========================================================= */
+
+    function showQuestion(index) {
+
+        if (!quizzes.length) {
+            return;
+        }
+
+
+        if (index < 0) {
+            index = 0;
+        }
+
+
+        if (index >= quizzes.length) {
 
             index =
                 quizzes.length - 1;
@@ -1582,15 +1577,21 @@
         }
 
 
-        $("currentQuestionNumber").textContent =
+        document.getElementById(
+            "currentQuestionNumber"
+        ).textContent =
             index + 1;
 
 
-        $("previousBtn").disabled =
+        document.getElementById(
+            "previousBtn"
+        ).disabled =
             index === 0;
 
 
-        $("nextBtn").disabled =
+        document.getElementById(
+            "nextBtn"
+        ).disabled =
             index === quizzes.length - 1;
 
 
@@ -1639,61 +1640,64 @@
 
 
     /* =========================================================
-       UPDATE SELECTED OPTION
+       UPDATE OPTION UI
        ========================================================= */
 
     function updateSelectedOptionUI() {
 
         document
-            .querySelectorAll(
-                ".option"
-            )
+            .querySelectorAll(".option")
             .forEach(
-                function (element) {
+                function (option) {
 
-                    element.classList.remove(
+                    option.classList.remove(
+                        "selected"
+                    );
+
+                }
+            );
+
+
+        Object.keys(
+            selectedAnswers
+        ).forEach(
+            function (questionIndex) {
+
+                const letter =
+                    selectedAnswers[
+                        questionIndex
+                    ];
+
+
+                const element =
+                    document.getElementById(
+                        `option-${questionIndex}-${letter}`
+                    );
+
+
+                if (element) {
+
+                    element.classList.add(
                         "selected"
                     );
 
 
-                    const questionIndex =
-                        Number(
-                            element.dataset.q
+                    const radio =
+                        element.querySelector(
+                            "input"
                         );
 
 
-                    const letter =
-                        element.dataset.letter;
+                    if (radio) {
 
-
-                    if (
-                        selectedAnswers[
-                            questionIndex
-                        ] === letter
-                    ) {
-
-                        element.classList.add(
-                            "selected"
-                        );
-
-
-                        const radio =
-                            element.querySelector(
-                                "input"
-                            );
-
-
-                        if (radio) {
-
-                            radio.checked =
-                                true;
-
-                        }
+                        radio.checked = true;
 
                     }
 
                 }
-            );
+
+            }
+        );
 
     }
 
@@ -1704,54 +1708,11 @@
 
     function nextQuestion() {
 
-        console.log(
-            "NEXT clicked"
-        );
-
-
-        console.log({
-            quizStarted:
-                quizStarted,
-
-            quizPaused:
-                quizPaused,
-
-            securityLocked:
-                securityLocked,
-
-            currentQuestionIndex:
-                currentQuestionIndex
-
-        });
-
-
-        if (!quizStarted) {
-
-            console.log(
-                "NEXT blocked because quiz has not started."
-            );
-
-            return;
-
-        }
-
-
-        if (quizPaused) {
-
-            console.log(
-                "NEXT blocked because quiz is paused."
-            );
-
-            return;
-
-        }
-
-
-        if (securityLocked) {
-
-            console.log(
-                "NEXT blocked because quiz is security locked."
-            );
+        if (
+            !quizStarted ||
+            quizPaused ||
+            securityLocked
+        ) {
 
             return;
 
@@ -1763,27 +1724,8 @@
             quizzes.length - 1
         ) {
 
-            currentQuestionIndex++;
-
-            console.log(
-                "Moving to question:",
-                currentQuestionIndex + 1
-            );
-
-
             showQuestion(
-                currentQuestionIndex
-            );
-
-
-            saveQuizState();
-
-
-            window.scrollTo(
-                {
-                    top: 0,
-                    behavior: "smooth"
-                }
+                currentQuestionIndex + 1
             );
 
         }
@@ -1812,15 +1754,9 @@
             currentQuestionIndex > 0
         ) {
 
-            currentQuestionIndex--;
-
-
             showQuestion(
-                currentQuestionIndex
+                currentQuestionIndex - 1
             );
-
-
-            saveQuizState();
 
         }
 
@@ -1828,18 +1764,21 @@
 
 
     /* =========================================================
-       CHECK SUBMIT BUTTON
+       SUBMIT BUTTON
        ========================================================= */
 
     function checkSubmitButton() {
 
+        const submitBtn =
+            document.getElementById(
+                "submitBtn"
+            );
+
+
         const answered =
             quizzes.length > 0 &&
             quizzes.every(
-                function (
-                    _,
-                    index
-                ) {
+                function (_, index) {
 
                     return !!selectedAnswers[
                         index
@@ -1849,7 +1788,7 @@
             );
 
 
-        $("submitBtn").disabled =
+        submitBtn.disabled =
             !quizStarted ||
             quizPaused ||
             securityLocked ||
@@ -1863,59 +1802,10 @@
             ).length;
 
 
-        $("answeredText").textContent =
+        document.getElementById(
+            "answeredText"
+        ).textContent =
             `${answeredCount} / ${quizzes.length} questions answered.`;
-
-    }
-
-
-    /* =========================================================
-       GET SELECTED MINUTES
-       ========================================================= */
-
-    function getSelectedMinutes() {
-
-        const value =
-            $("timeSelect").value;
-
-
-        if (
-            value === "custom"
-        ) {
-
-            const custom =
-                parseInt(
-                    $("customTime").value,
-                    10
-                );
-
-
-            if (
-                !custom ||
-                custom < 1 ||
-                custom > 60
-            ) {
-
-                showStatus(
-                    "Please enter a time between 1 and 60 minutes.",
-                    "error"
-                );
-
-
-                return null;
-
-            }
-
-
-            return custom;
-
-        }
-
-
-        return parseInt(
-            value,
-            10
-        );
 
     }
 
@@ -1926,9 +1816,7 @@
 
     async function startSecureQuiz() {
 
-        if (
-            !quizzes.length
-        ) {
+        if (!quizzes.length) {
 
             showStatus(
                 "Quiz questions are not loaded yet.",
@@ -1941,13 +1829,13 @@
 
 
         if (quizStarted) {
-
             return;
-
         }
 
 
-        $("cameraPermissionOverlay").style.display =
+        document.getElementById(
+            "cameraPermissionOverlay"
+        ).style.display =
             "flex";
 
     }
@@ -1959,7 +1847,9 @@
 
     function cancelCameraStart() {
 
-        $("cameraPermissionOverlay").style.display =
+        document.getElementById(
+            "cameraPermissionOverlay"
+        ).style.display =
             "none";
 
     }
@@ -1971,7 +1861,9 @@
 
     async function allowCameraAndStart() {
 
-        $("cameraPermissionOverlay").style.display =
+        document.getElementById(
+            "cameraPermissionOverlay"
+        ).style.display =
             "none";
 
 
@@ -1981,15 +1873,12 @@
                 !document.fullscreenElement
             ) {
 
-                await document
-                    .documentElement
+                await document.documentElement
                     .requestFullscreen();
 
             }
 
-        }
-
-        catch (error) {
+        } catch (error) {
 
             console.log(
                 "Fullscreen request:",
@@ -2020,9 +1909,7 @@
 
 
         if (!minutes) {
-
             return;
-
         }
 
 
@@ -2031,69 +1918,66 @@
             minutes * 60 * 1000;
 
 
-        quizStarted =
-            true;
+        quizStarted = true;
 
+        quizSubmitted = false;
 
-        quizSubmitted =
-            false;
+        securityLocked = false;
 
-
-        securityLocked =
-            false;
-
-
-        quizPaused =
-            false;
-
-
-        allowNavigation =
-            false;
+        allowNavigation = false;
 
 
         localStorage.setItem(
-            storageKey(
-                "started"
-            ),
+            getStorageKey("end_time"),
+            String(quizEndTime)
+        );
+
+
+        localStorage.setItem(
+            getStorageKey("started"),
             "true"
         );
 
 
-        localStorage.setItem(
-            storageKey(
-                "end_time"
-            ),
-            String(
-                quizEndTime
-            )
-        );
-
-
-        $("setupCard").style.display =
+        document.getElementById(
+            "setupCard"
+        ).style.display =
             "none";
 
 
-        $("hintsBar").style.display =
+        document.getElementById(
+            "hintsBar"
+        ).style.display =
             "block";
 
 
-        $("cameraBox").style.display =
+        document.getElementById(
+            "cameraBox"
+        ).style.display =
             "block";
 
 
-        $("quizTop").style.display =
+        document.getElementById(
+            "quizTop"
+        ).style.display =
             "flex";
 
 
-        $("navigationCard").style.display =
+        document.getElementById(
+            "navigationCard"
+        ).style.display =
             "block";
 
 
-        $("hintCard").style.display =
+        document.getElementById(
+            "hintCard"
+        ).style.display =
             "block";
 
 
-        $("submitSection").style.display =
+        document.getElementById(
+            "submitSection"
+        ).style.display =
             "block";
 
 
@@ -2115,7 +1999,61 @@
 
 
     /* =========================================================
-       CAMERA PERMISSION
+       GET TIME
+       ========================================================= */
+
+    function getSelectedMinutes() {
+
+        const value =
+            document.getElementById(
+                "timeSelect"
+            ).value;
+
+
+        if (
+            value === "custom"
+        ) {
+
+            const custom =
+                parseInt(
+                    document.getElementById(
+                        "customTime"
+                    ).value,
+                    10
+                );
+
+
+            if (
+                !custom ||
+                custom < 1 ||
+                custom > 60
+            ) {
+
+                showStatus(
+                    "Please enter a time between 1 and 60 minutes.",
+                    "error"
+                );
+
+                return null;
+
+            }
+
+
+            return custom;
+
+        }
+
+
+        return parseInt(
+            value,
+            10
+        );
+
+    }
+
+
+    /* =========================================================
+       CAMERA
        ========================================================= */
 
     async function requestCameraPermission() {
@@ -2124,57 +2062,61 @@
 
             if (
                 cameraStream &&
-                cameraStream
-                    .getVideoTracks()
-                    .some(
-                        function (track) {
-
-                            return (
-                                track.readyState ===
-                                "live"
-                            );
-
-                        }
-                    )
+                cameraStream.getVideoTracks().length > 0
             ) {
 
-                cameraReady =
-                    true;
+                const track =
+                    cameraStream.getVideoTracks()[0];
 
 
-                return true;
+                if (
+                    track.readyState === "live"
+                ) {
+
+                    cameraReady = true;
+
+                    return true;
+
+                }
 
             }
 
 
             cameraStream =
-                await navigator
-                    .mediaDevices
-                    .getUserMedia(
-                        {
-                            video: {
-                                facingMode:
-                                    "user"
-                            },
+                await navigator.mediaDevices
+                    .getUserMedia({
 
-                            audio: false
-                        }
-                    );
+                        video: {
+                            facingMode: "user"
+                        },
+
+                        audio: false
+
+                    });
 
 
-            $("camera").srcObject =
+            const video =
+                document.getElementById(
+                    "camera"
+                );
+
+
+            video.srcObject =
                 cameraStream;
 
 
-            cameraReady =
-                true;
+            cameraReady = true;
+
+
+            document.getElementById(
+                "cameraBox"
+            ).style.display =
+                "block";
 
 
             return true;
 
-        }
-
-        catch (error) {
+        } catch (error) {
 
             console.error(
                 "Camera error:",
@@ -2182,9 +2124,7 @@
             );
 
 
-            cameraReady =
-                false;
-
+            cameraReady = false;
 
             return false;
 
@@ -2200,9 +2140,7 @@
     async function restoreSecureSession() {
 
         if (!quizStarted) {
-
             return;
-
         }
 
 
@@ -2218,7 +2156,6 @@
 
 
             startQuizTimer();
-
 
             return;
 
@@ -2242,47 +2179,27 @@
 
     function monitorCamera() {
 
-        if (
-            securityMonitorInterval
-        ) {
+        setInterval(
+            function () {
 
-            clearInterval(
-                securityMonitorInterval
-            );
+                if (
+                    quizStarted &&
+                    !quizSubmitted &&
+                    !cameraStream &&
+                    !securityLocked
+                ) {
 
-        }
+                    lockQuiz(
+                        "Camera connection was lost. Please enable the camera to continue."
+                    );
 
-
-        securityMonitorInterval =
-            setInterval(
-                function () {
-
-                    if (
-                        !quizStarted ||
-                        quizSubmitted
-                    ) {
-
-                        return;
-
-                    }
+                }
 
 
-                    if (
-                        !cameraStream ||
-                        !cameraStream
-                            .getVideoTracks()
-                            .length
-                    ) {
-
-                        lockQuiz(
-                            "Camera connection was lost. Please enable the camera to continue."
-                        );
-
-
-                        return;
-
-                    }
-
+                if (
+                    cameraStream &&
+                    cameraStream.getVideoTracks().length
+                ) {
 
                     const track =
                         cameraStream
@@ -2290,8 +2207,8 @@
 
 
                     if (
-                        track.readyState ===
-                        "ended"
+                        track.readyState === "ended" &&
+                        !quizSubmitted
                     ) {
 
                         lockQuiz(
@@ -2300,9 +2217,11 @@
 
                     }
 
-                },
-                3000
-            );
+                }
+
+            },
+            3000
+        );
 
     }
 
@@ -2357,31 +2276,28 @@
 
 
     /* =========================================================
-       LOCK QUIZ
+       LOCK
        ========================================================= */
 
-    function lockQuiz(
-        message
-    ) {
+    function lockQuiz(message) {
 
-        if (
-            quizSubmitted
-        ) {
-
+        if (quizSubmitted) {
             return;
-
         }
 
 
-        securityLocked =
-            true;
+        securityLocked = true;
 
 
-        $("securityMessage").textContent =
+        document.getElementById(
+            "securityMessage"
+        ).textContent =
             message;
 
 
-        $("securityOverlay").style.display =
+        document.getElementById(
+            "securityOverlay"
+        ).style.display =
             "flex";
 
 
@@ -2406,7 +2322,6 @@
                 "Camera permission is required."
             );
 
-
             return;
 
         }
@@ -2418,15 +2333,12 @@
                 !document.fullscreenElement
             ) {
 
-                await document
-                    .documentElement
+                await document.documentElement
                     .requestFullscreen();
 
             }
 
-        }
-
-        catch (error) {
+        } catch (error) {
 
             console.log(
                 "Fullscreen recovery:",
@@ -2436,11 +2348,12 @@
         }
 
 
-        securityLocked =
-            false;
+        securityLocked = false;
 
 
-        $("securityOverlay").style.display =
+        document.getElementById(
+            "securityOverlay"
+        ).style.display =
             "none";
 
 
@@ -2471,18 +2384,9 @@
             );
 
 
-        $("previousBtn").disabled =
-            currentQuestionIndex === 0;
-
-
-        $("nextBtn").disabled =
-            currentQuestionIndex ===
-            quizzes.length - 1;
-
+        checkSubmitButton();
 
         updateHintUI();
-
-        checkSubmitButton();
 
     }
 
@@ -2507,20 +2411,24 @@
             );
 
 
-        $("nextBtn").disabled =
-            true;
+        document.getElementById(
+            "nextBtn"
+        ).disabled = true;
 
 
-        $("previousBtn").disabled =
-            true;
+        document.getElementById(
+            "previousBtn"
+        ).disabled = true;
 
 
-        $("submitBtn").disabled =
-            true;
+        document.getElementById(
+            "submitBtn"
+        ).disabled = true;
 
 
-        $("hintBtn").disabled =
-            true;
+        document.getElementById(
+            "hintBtn"
+        ).disabled = true;
 
     }
 
@@ -2531,9 +2439,7 @@
 
     function startQuizTimer() {
 
-        if (
-            timerInterval
-        ) {
+        if (timerInterval) {
 
             clearInterval(
                 timerInterval
@@ -2542,34 +2448,22 @@
         }
 
 
-        if (!quizEndTime) {
-
-            return;
-
-        }
-
-
-        updateTimerDisplay(
-            Math.max(
-                0,
-                quizEndTime -
-                Date.now()
-            )
-        );
-
-
         timerInterval =
             setInterval(
                 function () {
 
                     if (
                         !quizStarted ||
-                        quizSubmitted ||
-                        quizPaused
+                        quizSubmitted
                     ) {
 
                         return;
 
+                    }
+
+
+                    if (quizPaused) {
+                        return;
                     }
 
 
@@ -2591,12 +2485,13 @@
                             null;
 
 
-                        $("timer").textContent =
+                        document.getElementById(
+                            "timer"
+                        ).textContent =
                             "00:00";
 
 
                         autoSubmitQuiz();
-
 
                         return;
 
@@ -2611,6 +2506,16 @@
                 1000
             );
 
+
+        if (quizEndTime) {
+
+            updateTimerDisplay(
+                quizEndTime -
+                Date.now()
+            );
+
+        }
+
     }
 
 
@@ -2618,37 +2523,46 @@
         milliseconds
     ) {
 
-        const totalSeconds =
+        let totalSeconds =
             Math.max(
                 0,
                 Math.floor(
-                    milliseconds /
-                    1000
+                    milliseconds / 1000
                 )
             );
 
 
         const minutes =
             Math.floor(
-                totalSeconds /
-                60
+                totalSeconds / 60
             );
 
 
         const seconds =
-            totalSeconds %
-            60;
+            totalSeconds % 60;
 
 
-        $("timer").textContent =
-            `${String(
-                minutes
-            ).padStart(2, "0")}:${String(
-                seconds
-            ).padStart(2, "0")}`;
+        const text =
+            String(minutes)
+                .padStart(2, "0")
+            +
+            ":"
+            +
+            String(seconds)
+                .padStart(2, "0");
 
 
-        $("timer").classList.remove(
+        const timer =
+            document.getElementById(
+                "timer"
+            );
+
+
+        timer.textContent =
+            text;
+
+
+        timer.classList.remove(
             "safe",
             "warning"
         );
@@ -2658,15 +2572,13 @@
             totalSeconds <= 60
         ) {
 
-            $("timer").classList.add(
+            timer.classList.add(
                 "warning"
             );
 
-        }
+        } else {
 
-        else {
-
-            $("timer").classList.add(
+            timer.classList.add(
                 "safe"
             );
 
@@ -2697,9 +2609,7 @@
         );
 
 
-        await submitQuiz(
-            true
-        );
+        await submitQuiz(true);
 
     }
 
@@ -2722,16 +2632,11 @@
         }
 
 
-        if (
-            !autoSubmit
-        ) {
+        if (!autoSubmit) {
 
             const allAnswered =
                 quizzes.every(
-                    function (
-                        _,
-                        index
-                    ) {
+                    function (_, index) {
 
                         return !!selectedAnswers[
                             index
@@ -2747,7 +2652,6 @@
                     "Please answer all questions before submitting."
                 );
 
-
                 return;
 
             }
@@ -2755,8 +2659,7 @@
         }
 
 
-        isSubmitting =
-            true;
+        isSubmitting = true;
 
 
         disableQuizControls();
@@ -2781,11 +2684,8 @@
                 i++
             ) {
 
-                answers[
-                    String(i)
-                ] =
-                    selectedAnswers[i] ||
-                    "";
+                answers[String(i)] =
+                    selectedAnswers[i] || "";
 
             }
 
@@ -2794,30 +2694,29 @@
                 await fetch(
                     `${API_BASE}/submit-quiz`,
                     {
-                        method:
-                            "POST",
+
+                        method: "POST",
 
                         headers: {
                             "Content-Type":
                                 "application/json"
                         },
 
-                        credentials:
-                            "include",
+                        credentials: "include",
 
-                        body:
-                            JSON.stringify(
-                                {
-                                    level_id:
-                                        parseInt(
-                                            levelId,
-                                            10
-                                        ),
+                        body: JSON.stringify({
 
-                                    answers:
-                                        answers
-                                }
-                            )
+                            level_id:
+                                parseInt(
+                                    levelId,
+                                    10
+                                ),
+
+                            answers:
+                                answers
+
+                        })
+
                     }
                 );
 
@@ -2830,19 +2729,14 @@
                 result =
                     await response.json();
 
-            }
+            } catch (error) {
 
-            catch (error) {
-
-                result =
-                    {};
+                result = {};
 
             }
 
 
-            if (
-                !response.ok
-            ) {
+            if (!response.ok) {
 
                 throw new Error(
                     result.message ||
@@ -2852,35 +2746,40 @@
             }
 
 
-            const total =
+            const serverTotal =
                 Number(
                     result.total ||
                     result.total_questions ||
                     quizzes.length
-                ) ||
-                quizzes.length;
+                );
 
 
             const rawScore =
                 Number(
-                    result.score ||
-                    0
+                    result.score || 0
                 );
 
+
+            /*
+             * Backend currently returns score as
+             * number of correct answers.
+             *
+             * This code also supports percentage
+             * if backend later returns 0-100.
+             */
 
             let correctCount;
 
 
             if (
-                rawScore <= total
+                serverTotal > 0 &&
+                rawScore <= serverTotal
             ) {
 
                 correctCount =
                     rawScore;
 
-            }
-
-            else {
+            } else {
 
                 correctCount =
                     Math.round(
@@ -2888,7 +2787,7 @@
                             rawScore /
                             100
                         ) *
-                        total
+                        serverTotal
                     );
 
             }
@@ -2898,18 +2797,18 @@
                 Math.max(
                     0,
                     Math.min(
-                        total,
+                        serverTotal,
                         correctCount
                     )
                 );
 
 
             const scorePercent =
-                total > 0
+                serverTotal > 0
                     ? Math.round(
                         (
                             correctCount /
-                            total
+                            serverTotal
                         ) * 100
                     )
                     : 0;
@@ -2931,63 +2830,46 @@
                 );
 
 
-            quizSubmitted =
-                true;
+            quizSubmitted = true;
+
+            isSubmitting = false;
+
+            allowNavigation = true;
 
 
-            isSubmitting =
-                false;
-
-
-            allowNavigation =
-                true;
-
-
-            if (
-                timerInterval
-            ) {
+            if (timerInterval) {
 
                 clearInterval(
                     timerInterval
                 );
 
-
-                timerInterval =
-                    null;
+                timerInterval = null;
 
             }
 
 
-            if (
-                correctCount ===
-                total &&
-                total > 0
-            ) {
+            /*
+             * IMPORTANT:
+             *
+             * Fetch the latest levels from backend.
+             *
+             * Backend has now become the source of truth
+             * for completed/unlocked levels.
+             */
 
-                await findNextLevel();
-
-            }
-
-            else {
-
-                nextLevel =
-                    null;
-
-            }
+            await findNextLevel();
 
 
             showCompletion(
                 scorePercent,
                 correctCount,
-                total,
+                serverTotal,
                 xp,
                 coins
             );
 
-        }
 
-
-        catch (error) {
+        } catch (error) {
 
             console.error(
                 "Quiz submission error:",
@@ -2995,16 +2877,9 @@
             );
 
 
-            isSubmitting =
-                false;
+            isSubmitting = false;
 
-
-            quizSubmitted =
-                false;
-
-
-            allowNavigation =
-                false;
+            quizSubmitted = false;
 
 
             enableQuizControls();
@@ -3016,9 +2891,7 @@
             );
 
 
-            if (
-                autoSubmit
-            ) {
+            if (autoSubmit) {
 
                 alert(
                     "Time ended, but the quiz could not be submitted because the LearnQuest server could not be reached."
@@ -3037,13 +2910,14 @@
 
     async function findNextLevel() {
 
-        nextLevel =
-            null;
+        nextLevel = null;
 
 
-        if (
-            !currentSubjectId
-        ) {
+        if (!currentSubjectId) {
+
+            console.log(
+                "No subject ID available for next level."
+            );
 
             return;
 
@@ -3056,18 +2930,17 @@
                 await fetch(
                     `${API_BASE}/levels/${currentSubjectId}`,
                     {
-                        method:
-                            "GET",
-
-                        credentials:
-                            "include"
+                        method: "GET",
+                        credentials: "include"
                     }
                 );
 
 
-            if (
-                !response.ok
-            ) {
+            if (!response.ok) {
+
+                console.log(
+                    "Could not fetch levels for next-level navigation."
+                );
 
                 return;
 
@@ -3079,8 +2952,7 @@
 
 
             const levels =
-                data.levels ||
-                [];
+                data.levels || [];
 
 
             const currentNumber =
@@ -3091,38 +2963,58 @@
                 );
 
 
+            /*
+             * Find exact next level.
+             */
+
             nextLevel =
                 levels.find(
-                    function (
-                        level
-                    ) {
+                    function (level) {
 
                         return (
                             Number(
                                 level.level_number
                             ) ===
-                            currentNumber + 1 &&
-                            Boolean(
-                                level.unlocked
-                            )
+                            currentNumber + 1
                         );
 
                     }
-                ) ||
-                null;
+                ) || null;
 
-        }
 
-        catch (error) {
+            /*
+             * Extra safety:
+             *
+             * The backend must say the next level
+             * is unlocked before we show the button.
+             */
+
+            if (
+                nextLevel &&
+                !Boolean(
+                    nextLevel.unlocked
+                )
+            ) {
+
+                nextLevel = null;
+
+            }
+
+
+            console.log(
+                "Next level:",
+                nextLevel
+            );
+
+
+        } catch (error) {
 
             console.error(
                 "Next level lookup error:",
                 error
             );
 
-
-            nextLevel =
-                null;
+            nextLevel = null;
 
         }
 
@@ -3141,22 +3033,48 @@
         coins
     ) {
 
+        allowNavigation = true;
+
+
         const perfectScore =
-            correctCount ===
-            totalQuestions &&
+            correctCount === totalQuestions &&
             totalQuestions > 0;
 
 
-        $("finalScore").textContent =
+        document.getElementById(
+            "finalScore"
+        ).textContent =
             `${scorePercent}%`;
 
 
-        $("xpEarned").textContent =
+        document.getElementById(
+            "xpEarned"
+        ).textContent =
             xp;
 
 
-        $("coinsEarned").textContent =
+        document.getElementById(
+            "coinsEarned"
+        ).textContent =
             coins;
+
+
+        const completionTitle =
+            document.getElementById(
+                "completionTitle"
+            );
+
+
+        const scoreText =
+            document.getElementById(
+                "scoreText"
+            );
+
+
+        const nextButton =
+            document.getElementById(
+                "nextLevelBtn"
+            );
 
 
         if (
@@ -3164,19 +3082,19 @@
             nextLevel
         ) {
 
-            $("completionTitle").textContent =
+            completionTitle.textContent =
                 "🎉 Level Completed!";
 
 
-            $("scoreText").textContent =
+            scoreText.textContent =
                 `${correctCount}/${totalQuestions} correct!`;
 
 
-            $("nextLevelBtn").style.display =
+            nextButton.style.display =
                 "inline-block";
 
 
-            $("nextLevelBtn").textContent =
+            nextButton.textContent =
                 "🔓 Next Level Unlocked";
 
 
@@ -3186,19 +3104,17 @@
                 totalQuestions
             );
 
-        }
+        } else {
 
-        else {
-
-            $("completionTitle").textContent =
+            completionTitle.textContent =
                 "🎉 Quiz Completed!";
 
 
-            $("scoreText").textContent =
+            scoreText.textContent =
                 `${correctCount}/${totalQuestions} correct.`;
 
 
-            $("nextLevelBtn").style.display =
+            nextButton.style.display =
                 "none";
 
 
@@ -3211,7 +3127,9 @@
         }
 
 
-        $("completionOverlay").style.display =
+        document.getElementById(
+            "completionOverlay"
+        ).style.display =
             "flex";
 
 
@@ -3221,7 +3139,7 @@
 
 
     /* =========================================================
-       VOICE
+       COMPLETION VOICE
        ========================================================= */
 
     function speakCompletion(
@@ -3231,10 +3149,7 @@
     ) {
 
         if (
-            !(
-                "speechSynthesis"
-                in window
-            )
+            !("speechSynthesis" in window)
         ) {
 
             return;
@@ -3248,62 +3163,38 @@
         let message;
 
 
-        if (
-            perfectScore
-        ) {
+        if (perfectScore) {
 
-            if (
-                language ===
-                "hi"
-            ) {
+            if (language === "hi") {
 
                 message =
                     `लेवल पूरा हो गया। ${correctCount} में से ${totalQuestions} सही उत्तर। अगला लेवल अनलॉक हो गया है।`;
 
-            }
-
-            else if (
-                language ===
-                "te"
-            ) {
+            } else if (language === "te") {
 
                 message =
                     `లెవెల్ పూర్తి అయింది. ${totalQuestions} లో ${correctCount} సరైన సమాధానాలు. నెక్స్ట్ లెవెల్ అన్‌లాక్ అయింది.`;
 
-            }
-
-            else {
+            } else {
 
                 message =
                     `Level completed. ${correctCount} out of ${totalQuestions} correct. Next level unlocked.`;
 
             }
 
-        }
+        } else {
 
-        else {
-
-            if (
-                language ===
-                "hi"
-            ) {
+            if (language === "hi") {
 
                 message =
                     `क्विज़ पूरा हुआ। ${correctCount} में से ${totalQuestions} सही उत्तर।`;
 
-            }
-
-            else if (
-                language ===
-                "te"
-            ) {
+            } else if (language === "te") {
 
                 message =
                     `క్విజ్ పూర్తి అయింది. ${totalQuestions} లో ${correctCount} సరైన సమాధానాలు.`;
 
-            }
-
-            else {
+            } else {
 
                 message =
                     `Quiz completed. ${correctCount} out of ${totalQuestions} correct.`;
@@ -3319,24 +3210,29 @@
             );
 
 
-        speech.rate =
-            0.9;
+        speech.rate = 0.9;
+
+        speech.pitch = 1;
+
+        speech.volume = 1;
 
 
-        speech.pitch =
-            1;
+        if (language === "hi") {
 
+            speech.lang =
+                "hi-IN";
 
-        speech.volume =
-            1;
+        } else if (language === "te") {
 
+            speech.lang =
+                "te-IN";
 
-        speech.lang =
-            language === "hi"
-                ? "hi-IN"
-                : language === "te"
-                    ? "te-IN"
-                    : "en-US";
+        } else {
+
+            speech.lang =
+                "en-US";
+
+        }
 
 
         window.speechSynthesis.speak(
@@ -3347,14 +3243,12 @@
 
 
     /* =========================================================
-       NEXT LEVEL
+       GO TO NEXT LEVEL
        ========================================================= */
 
     function goToNextLevel() {
 
-        if (
-            !nextLevel
-        ) {
+        if (!nextLevel) {
 
             goBackToWorld();
 
@@ -3363,8 +3257,7 @@
         }
 
 
-        allowNavigation =
-            true;
+        allowNavigation = true;
 
 
         const nextId =
@@ -3381,49 +3274,46 @@
         }
 
 
-        if (
-            currentSubjectId
-        ) {
+        /*
+         * Save subject again so world.html
+         * knows which subject to display.
+         */
+
+        if (currentSubjectId) {
 
             localStorage.setItem(
                 "current_subject_id",
-                String(
-                    currentSubjectId
-                )
+                currentSubjectId
             );
 
         }
 
 
-        window.location.assign(
-            `level.html?level_id=${encodeURIComponent(
-                nextId
-            )}`
-        );
+        /*
+         * Open next level directly.
+         */
+
+        window.location.href =
+            `level.html?level_id=${nextId}`;
 
     }
 
 
     /* =========================================================
-       WORLD
+       BACK TO WORLD
        ========================================================= */
 
     function goBackToWorld() {
 
-        allowNavigation =
-            true;
+        allowNavigation = true;
 
 
-        if (
-            cameraStream
-        ) {
+        if (cameraStream) {
 
             cameraStream
                 .getTracks()
                 .forEach(
-                    function (
-                        track
-                    ) {
+                    function (track) {
 
                         track.stop();
 
@@ -3437,19 +3327,13 @@
             currentSubjectId
         ) {
 
-            window.location.assign(
-                `world.html?subject_id=${encodeURIComponent(
-                    currentSubjectId
-                )}`
-            );
+            window.location.href =
+                `world.html?subject_id=${currentSubjectId}`;
 
-        }
+        } else {
 
-        else {
-
-            window.location.assign(
-                "world.html"
-            );
+            window.location.href =
+                "world.html";
 
         }
 
@@ -3463,28 +3347,45 @@
     function updateHintUI() {
 
         const remaining =
+            MAX_HINTS -
+            hintsUsed;
+
+
+        document.getElementById(
+            "hintsRemaining"
+        ).textContent =
             Math.max(
                 0,
-                MAX_HINTS -
-                hintsUsed
+                remaining
             );
 
 
-        $("hintsRemaining").textContent =
-            remaining;
+        const hintBtn =
+            document.getElementById(
+                "hintBtn"
+            );
 
 
-        $("hintBtn").disabled =
+        if (
+            hintsUsed >= MAX_HINTS ||
             !quizStarted ||
             quizPaused ||
-            securityLocked ||
-            hintsUsed >= MAX_HINTS;
+            securityLocked
+        ) {
+
+            hintBtn.disabled = true;
+
+        } else {
+
+            hintBtn.disabled = false;
+
+        }
 
     }
 
 
     /* =========================================================
-       HINT
+       SHOW HINT
        ========================================================= */
 
     function showHint() {
@@ -3508,13 +3409,11 @@
 
 
         if (!quiz) {
-
             return;
-
         }
 
 
-        let hint;
+        let hint = "";
 
 
         if (
@@ -3526,9 +3425,7 @@
                 quiz.hint ||
                 getGenericHint();
 
-        }
-
-        else {
+        } else {
 
             hint =
                 quiz.hint_2 ||
@@ -3540,11 +3437,15 @@
         hintsUsed++;
 
 
-        $("hintText").textContent =
+        document.getElementById(
+            "hintText"
+        ).textContent =
             hint;
 
 
-        $("hintCard").style.display =
+        document.getElementById(
+            "hintCard"
+        ).style.display =
             "block";
 
 
@@ -3588,9 +3489,7 @@
         }
 
 
-        return (
-            "Read the question carefully and compare each option with the conditions given."
-        );
+        return "Read the question carefully and compare each option with the conditions given.";
 
     }
 
@@ -3601,16 +3500,16 @@
 
     function triggerPause() {
 
-        quizPaused =
-            true;
+        quizPaused = true;
 
 
-        if (
-            quizEndTime
-        ) {
+        if (quizEndTime) {
 
             quizEndTime +=
                 PAUSE_DURATION;
+
+
+            saveQuizTimer();
 
         }
 
@@ -3621,25 +3520,21 @@
 
 
         localStorage.setItem(
-            storageKey(
-                "pause_end"
-            ),
-            String(
-                pauseEndTime
-            )
+            getStorageKey("pause_end"),
+            String(pauseEndTime)
         );
 
 
-        $("pauseOverlay").style.display =
+        document.getElementById(
+            "pauseOverlay"
+        ).style.display =
             "flex";
 
 
         disableQuizControls();
 
 
-        if (
-            pauseInterval
-        ) {
+        if (pauseInterval) {
 
             clearInterval(
                 pauseInterval
@@ -3671,14 +3566,11 @@
 
 
                         localStorage.removeItem(
-                            storageKey(
-                                "pause_end"
-                            )
+                            getStorageKey("pause_end")
                         );
 
 
                         finishPause();
-
 
                         return;
 
@@ -3701,14 +3593,18 @@
     }
 
 
+    /* =========================================================
+       PAUSE DISPLAY
+       ========================================================= */
+
     function updatePauseDisplay(
         milliseconds
     ) {
 
-        const totalSeconds =
+        const seconds =
             Math.max(
                 0,
-                Math.floor(
+                Math.ceil(
                     milliseconds /
                     1000
                 )
@@ -3717,41 +3613,42 @@
 
         const minutes =
             Math.floor(
-                totalSeconds /
-                60
+                seconds / 60
             );
 
 
-        const seconds =
-            totalSeconds %
-            60;
+        const secs =
+            seconds % 60;
 
 
-        $("pauseTime").textContent =
-            `${String(
-                minutes
-            ).padStart(2, "0")}:${String(
-                seconds
-            ).padStart(2, "0")}`;
+        document.getElementById(
+            "pauseTime"
+        ).textContent =
+            `${String(minutes).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
 
     }
 
 
+    /* =========================================================
+       FINISH PAUSE
+       ========================================================= */
+
     function finishPause() {
 
-        quizPaused =
-            false;
+        quizPaused = false;
+
+        hintsUsed = 0;
 
 
-        hintsUsed =
-            0;
-
-
-        $("pauseOverlay").style.display =
+        document.getElementById(
+            "pauseOverlay"
+        ).style.display =
             "none";
 
 
-        $("hintText").textContent =
+        document.getElementById(
+            "hintText"
+        ).textContent =
             "";
 
 
@@ -3772,25 +3669,19 @@
 
         const savedPause =
             localStorage.getItem(
-                storageKey(
+                getStorageKey(
                     "pause_end"
                 )
             );
 
 
-        if (
-            !savedPause
-        ) {
-
+        if (!savedPause) {
             return;
-
         }
 
 
         const end =
-            Number(
-                savedPause
-            );
+            Number(savedPause);
 
 
         if (
@@ -3799,34 +3690,29 @@
         ) {
 
             localStorage.removeItem(
-                storageKey(
+                getStorageKey(
                     "pause_end"
                 )
             );
 
 
-            quizPaused =
-                false;
+            quizPaused = false;
 
-
-            hintsUsed =
-                0;
-
+            hintsUsed = 0;
 
             return;
 
         }
 
 
-        quizPaused =
-            true;
+        quizPaused = true;
+
+        pauseEndTime = end;
 
 
-        pauseEndTime =
-            end;
-
-
-        $("pauseOverlay").style.display =
+        document.getElementById(
+            "pauseOverlay"
+        ).style.display =
             "flex";
 
 
@@ -3856,14 +3742,13 @@
 
 
                         localStorage.removeItem(
-                            storageKey(
+                            getStorageKey(
                                 "pause_end"
                             )
                         );
 
 
                         finishPause();
-
 
                         return;
 
@@ -3878,23 +3763,50 @@
                 1000
             );
 
+    }
 
-        updatePauseDisplay(
-            end -
-            Date.now()
+
+    /* =========================================================
+       STORAGE KEY
+       ========================================================= */
+
+    function getStorageKey(name) {
+
+        return (
+            `learnquest_quiz_${levelId}_${name}`
         );
 
     }
 
 
     /* =========================================================
-       SAVE QUIZ STATE
+       SAVE TIMER
+       ========================================================= */
+
+    function saveQuizTimer() {
+
+        if (quizEndTime) {
+
+            localStorage.setItem(
+                getStorageKey(
+                    "end_time"
+                ),
+                String(quizEndTime)
+            );
+
+        }
+
+    }
+
+
+    /* =========================================================
+       SAVE QUIZ
        ========================================================= */
 
     function saveQuizState() {
 
         localStorage.setItem(
-            storageKey(
+            getStorageKey(
                 "answers"
             ),
             JSON.stringify(
@@ -3904,7 +3816,7 @@
 
 
         localStorage.setItem(
-            storageKey(
+            getStorageKey(
                 "question"
             ),
             String(
@@ -3914,7 +3826,7 @@
 
 
         localStorage.setItem(
-            storageKey(
+            getStorageKey(
                 "hints"
             ),
             String(
@@ -3923,12 +3835,10 @@
         );
 
 
-        if (
-            quizEndTime
-        ) {
+        if (quizEndTime) {
 
             localStorage.setItem(
-                storageKey(
+                getStorageKey(
                     "end_time"
                 ),
                 String(
@@ -3939,12 +3849,10 @@
         }
 
 
-        if (
-            quizStarted
-        ) {
+        if (quizStarted) {
 
             localStorage.setItem(
-                storageKey(
+                getStorageKey(
                     "started"
                 ),
                 "true"
@@ -3956,14 +3864,14 @@
 
 
     /* =========================================================
-       RESTORE QUIZ STATE
+       RESTORE QUIZ
        ========================================================= */
 
     function restoreQuizState() {
 
         const savedStarted =
             localStorage.getItem(
-                storageKey(
+                getStorageKey(
                     "started"
                 )
             );
@@ -3971,7 +3879,7 @@
 
         const savedEndTime =
             localStorage.getItem(
-                storageKey(
+                getStorageKey(
                     "end_time"
                 )
             );
@@ -3979,7 +3887,7 @@
 
         const savedAnswers =
             localStorage.getItem(
-                storageKey(
+                getStorageKey(
                     "answers"
                 )
             );
@@ -3987,7 +3895,7 @@
 
         const savedQuestion =
             localStorage.getItem(
-                storageKey(
+                getStorageKey(
                     "question"
                 )
             );
@@ -3995,15 +3903,14 @@
 
         const savedHints =
             localStorage.getItem(
-                storageKey(
+                getStorageKey(
                     "hints"
                 )
             );
 
 
         if (
-            savedStarted !==
-                "true" ||
+            savedStarted !== "true" ||
             !savedEndTime
         ) {
 
@@ -4013,9 +3920,7 @@
 
 
         const end =
-            Number(
-                savedEndTime
-            );
+            Number(savedEndTime);
 
 
         if (
@@ -4030,92 +3935,88 @@
         }
 
 
-        quizStarted =
-            true;
+        quizStarted = true;
+
+        quizEndTime = end;
 
 
-        quizEndTime =
-            end;
+        if (savedAnswers) {
 
+            try {
 
-        try {
+                selectedAnswers =
+                    JSON.parse(
+                        savedAnswers
+                    );
 
-            selectedAnswers =
-                JSON.parse(
-                    savedAnswers ||
-                    "{}"
-                );
+            } catch (error) {
 
-        }
+                selectedAnswers = {};
 
-        catch (error) {
-
-            selectedAnswers =
-                {};
+            }
 
         }
 
 
-        currentQuestionIndex =
-            Number(
-                savedQuestion ||
-                0
-            );
+        if (savedQuestion) {
+
+            currentQuestionIndex =
+                Number(
+                    savedQuestion
+                ) || 0;
+
+        }
 
 
-        currentQuestionIndex =
-            Math.max(
-                0,
-                Math.min(
-                    quizzes.length -
-                    1,
-                    currentQuestionIndex
-                )
-            );
+        if (savedHints) {
+
+            hintsUsed =
+                Number(
+                    savedHints
+                ) || 0;
+
+        }
 
 
-        hintsUsed =
-            Number(
-                savedHints ||
-                0
-            );
-
-
-        hintsUsed =
-            Math.max(
-                0,
-                Math.min(
-                    MAX_HINTS,
-                    hintsUsed
-                )
-            );
-
-
-        $("setupCard").style.display =
+        document.getElementById(
+            "setupCard"
+        ).style.display =
             "none";
 
 
-        $("hintsBar").style.display =
+        document.getElementById(
+            "hintsBar"
+        ).style.display =
             "block";
 
 
-        $("cameraBox").style.display =
+        document.getElementById(
+            "cameraBox"
+        ).style.display =
             "block";
 
 
-        $("quizTop").style.display =
+        document.getElementById(
+            "quizTop"
+        ).style.display =
             "flex";
 
 
-        $("navigationCard").style.display =
+        document.getElementById(
+            "navigationCard"
+        ).style.display =
             "block";
 
 
-        $("hintCard").style.display =
+        document.getElementById(
+            "hintCard"
+        ).style.display =
             "block";
 
 
-        $("submitSection").style.display =
+        document.getElementById(
+            "submitSection"
+        ).style.display =
             "block";
 
 
@@ -4130,170 +4031,89 @@
 
     function clearQuizStorage() {
 
-        [
-            "answers",
-            "question",
-            "hints",
-            "end_time",
-            "started",
-            "pause_end"
-        ].forEach(
-            function (
-                key
-            ) {
+        localStorage.removeItem(
+            getStorageKey(
+                "answers"
+            )
+        );
 
-                localStorage.removeItem(
-                    storageKey(
-                        key
-                    )
-                );
 
-            }
+        localStorage.removeItem(
+            getStorageKey(
+                "question"
+            )
+        );
+
+
+        localStorage.removeItem(
+            getStorageKey(
+                "hints"
+            )
+        );
+
+
+        localStorage.removeItem(
+            getStorageKey(
+                "end_time"
+            )
+        );
+
+
+        localStorage.removeItem(
+            getStorageKey(
+                "started"
+            )
+        );
+
+
+        localStorage.removeItem(
+            getStorageKey(
+                "pause_end"
+            )
         );
 
     }
 
 
     /* =========================================================
-       BUTTON EVENTS
+       ESCAPE HTML
        ========================================================= */
 
-    $("timeSelect")
-        .addEventListener(
-            "change",
-            function () {
+    function escapeHTML(value) {
 
-                $("customTimeBox")
-                    .classList
-                    .toggle(
-                        "hidden",
-                        this.value !==
-                        "custom"
-                    );
+        if (
+            value === null ||
+            value === undefined
+        ) {
 
-            }
-        );
+            return "";
+
+        }
 
 
-    $("startBtn")
-        .addEventListener(
-            "click",
-            startSecureQuiz
-        );
+        return String(value)
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
 
-
-    $("allowCameraBtn")
-        .addEventListener(
-            "click",
-            allowCameraAndStart
-        );
-
-
-    $("cancelCameraBtn")
-        .addEventListener(
-            "click",
-            cancelCameraStart
-        );
-
-
-    $("previousBtn")
-        .addEventListener(
-            "click",
-            previousQuestion
-        );
-
-
-    $("nextBtn")
-        .addEventListener(
-            "click",
-            nextQuestion
-        );
-
-
-    $("hintBtn")
-        .addEventListener(
-            "click",
-            showHint
-        );
-
-
-    $("submitBtn")
-        .addEventListener(
-            "click",
-            function () {
-
-                submitQuiz(
-                    false
-                );
-
-            }
-        );
-
-
-    $("recoverBtn")
-        .addEventListener(
-            "click",
-            recoverSecurity
-        );
-
-
-    $("nextLevelBtn")
-        .addEventListener(
-            "click",
-            goToNextLevel
-        );
-
-
-    $("worldBtn")
-        .addEventListener(
-            "click",
-            goBackToWorld
-        );
-
-
-    /* =========================================================
-       SECURITY SETUP
-       ========================================================= */
-
-    setupSecurityListeners();
-
-
-    updateLanguageUI();
-
-
-    /* =========================================================
-       GLOBAL FUNCTIONS
-       ========================================================= */
-
-    window.startSecureQuiz =
-        startSecureQuiz;
-
-    window.cancelCameraStart =
-        cancelCameraStart;
-
-    window.allowCameraAndStart =
-        allowCameraAndStart;
-
-    window.recoverSecurity =
-        recoverSecurity;
-
-    window.showHint =
-        showHint;
-
-    window.previousQuestion =
-        previousQuestion;
-
-    window.nextQuestion =
-        nextQuestion;
-
-    window.submitQuiz =
-        submitQuiz;
-
-    window.goToNextLevel =
-        goToNextLevel;
-
-    window.goBackToWorld =
-        goBackToWorld;
+    }
 
 
     /* =========================================================
@@ -4314,8 +4134,7 @@
 
                 event.preventDefault();
 
-                event.returnValue =
-                    "";
+                event.returnValue = "";
 
             }
 
@@ -4331,16 +4150,12 @@
         "pagehide",
         function () {
 
-            if (
-                cameraStream
-            ) {
+            if (cameraStream) {
 
                 cameraStream
                     .getTracks()
                     .forEach(
-                        function (
-                            track
-                        ) {
+                        function (track) {
 
                             track.stop();
 
@@ -4349,29 +4164,23 @@
 
             }
 
-
-            if (
-                securityMonitorInterval
-            ) {
-
-                clearInterval(
-                    securityMonitorInterval
-                );
-
-            }
-
         }
     );
 
-
-    /* =========================================================
-       START LOADING
-       ========================================================= */
-
-    loadQuiz();
+    // Explicitly expose functions used by inline buttons.
+    window.startSecureQuiz = startSecureQuiz;
+    window.cancelCameraStart = cancelCameraStart;
+    window.allowCameraAndStart = allowCameraAndStart;
+    window.recoverSecurity = recoverSecurity;
+    window.showHint = showHint;
+    window.previousQuestion = previousQuestion;
+    window.nextQuestion = nextQuestion;
+    window.submitQuiz = submitQuiz;
+    window.goToNextLevel = goToNextLevel;
+    window.goBackToWorld = goBackToWorld;
 
 </script>
-<script src="js/sounds.js"></script>
+
 </body>
 
 </html>
